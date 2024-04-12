@@ -1,0 +1,115 @@
+﻿@page
+@model RazorWebUI.Areas.ITrainings.Pages.Admin.AttendanceModel
+@{
+}
+
+<div class="card card-default">
+    <div class="card-header">
+        <h3 class="card-title text-uppercase">
+            ATTENDANCE ON TRAINING
+        </h3>
+
+    </div>
+    <div class="card-header">
+        <h3 class="card-title text-uppercase">
+            @Model.DialyActivity.Title (@Model.DialyActivity.Date.ToString("dddd dd MMM, yyyy"))
+        </h3>
+
+    </div>
+
+    <div class="card-body">
+        <h6>KINDLY SELECT FROM THE DROPDOWN TO MARK THEIR ATTENDANCE AND SUBMIT AFTER SELECTING FOR ALL.</h6>
+        @if (TempData["response"] != null)
+        {
+            <div class="alert alert-primary" role="alert">
+                @TempData["response"]
+            </div>
+        }
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <input asp-for="TrainingId" type="hidden" value="@Model.Training.Id" />
+            <div class="table-responsive">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Name</th>
+                            <th>
+                                Email
+                            </th>
+                            <th>Phone</th>
+
+                            <th>Action</th>
+
+                        </tr>
+                    </thead>
+
+                    @{
+                        int sn = 0;
+                    }
+
+
+                    <tbody>
+                        @foreach (var item in Model.Datas.OrderBy(x => x.User.FirstName))
+                        {
+                            <tr>
+
+                                <td>
+                                    @{
+                                        sn++;
+                                    }
+                                    @sn
+                                </td>
+                                <td>
+                                    <a asp-page="/Admin/Info" asp-route-area="User" asp-route-id="@item.Id">
+                                        @item.User.FullnameX
+
+                                    </a>
+                                </td>
+                                <td>
+                                    @item.User.Email
+                                </td>
+                                <td>
+                                    @item.User.PhoneNumber
+                                </td>
+
+                                <td>
+                                    <div class="form-group">
+
+                                        @{
+                                            var selectedValue = item.AttendanceStatus.ToString() ?? "NILL";
+
+                                            var selectList = Enum.GetValues(typeof(Domain.Models.EnumStatus.AttendanceStatus)).Cast<Domain.Models.EnumStatus.AttendanceStatus>
+                                                ()
+                                                .Where(e => e != Domain.Models.EnumStatus.AttendanceStatus.NILL)
+                                                .Select(e => new SelectListItem
+                                                {
+                                                    Value = e.ToString(),
+                                                    Text = e.ToString(),
+                                                    Selected = e.ToString() == selectedValue
+                                                });
+                                        }
+                                        @Html.DropDownList($"AttendanceResult_{item.Id}", selectList, new { @class = "form-control", required = "required" })
+
+
+                                    </div>
+
+                                </td>
+
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-left: 20px;">Update Attendance</button>
+
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

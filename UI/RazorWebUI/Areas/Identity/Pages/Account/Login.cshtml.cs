@@ -125,10 +125,10 @@ namespace RazorWebUI.Areas.Identity.Pages.Account
                 }
                 if (passcheck == true && user.TwoFactorEnabled == true)
                 {
-                    if (user.UserStatus != Domain.Models.EnumStatus.UserStatus.Active)
-                    {
-                        return RedirectToPage("./Locked");
-                    }
+                    //if (user.UserStatus != Domain.Models.EnumStatus.UserStatus.Active)
+                    //{
+                    //    return RedirectToPage("/Account/Locked", new {area="Identity"});
+                    //}
                     var result = await _signInManager.PasswordSignInAsync(user.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                     if (result.Succeeded)
                     {
@@ -176,10 +176,10 @@ namespace RazorWebUI.Areas.Identity.Pages.Account
 
 
                     var Staff = await _userManager.IsInRoleAsync(user, "Staff");
-                    if (user.UserStatus != Domain.Models.EnumStatus.UserStatus.Active)
-                    {
-                        return RedirectToPage("/Account/Locked", new {area="Identity"});
-                    }
+                    //if (user.UserStatus != Domain.Models.EnumStatus.UserStatus.Active)
+                    //{
+                    //    return RedirectToPage("/Account/Locked", new {area="Identity"});
+                    //}
 
 
                     if (user.UpdateProfile == true)

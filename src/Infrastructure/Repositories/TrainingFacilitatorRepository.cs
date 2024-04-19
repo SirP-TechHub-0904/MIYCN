@@ -21,6 +21,17 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
+        public async Task<bool> AddFacilitator(TrainingFacilitator model)
+        {
+            var check = await _context.TrainingFacilitators.FirstOrDefaultAsync(x => x.TrainingId == model.TrainingId && x.UserId == model.UserId);
+            if (check == null)
+            {
+                await AddAsync(model);
+                return true;
+            }
+            return false;
+        }
+
         public async Task<FacilitatorInTrainingDTo> FacilitatorInTraining(long trainingId, string userId)
         {
             var participantDto = await _context.TrainingFacilitators

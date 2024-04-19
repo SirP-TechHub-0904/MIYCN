@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Queries.ModuleQueries
 {
-        public sealed class ListModuleQuery : IRequest<List<Module>>
+    public sealed class ListModuleQuery : IRequest<List<Module>>
     {
         public class ListModuleQueryHandler : IRequestHandler<ListModuleQuery, List<Module>>
         {

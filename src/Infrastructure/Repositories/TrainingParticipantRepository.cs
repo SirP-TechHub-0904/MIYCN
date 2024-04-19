@@ -21,6 +21,17 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
+        public async Task<bool> AddParticipant(TrainingParticipant model)
+        {
+           var check = await _context.TrainingParticipants.FirstOrDefaultAsync(x=>x.TrainingId == model.TrainingId && x.UserId == model.UserId);
+            if(check == null)
+            {
+                await AddAsync(model);
+                return true;
+            }
+            return false;
+        }
+
         public async Task<ParticipantInTrainingDTo> ParticipantInTraining(long trainingId, string userId)
         {
             var participantDto = await _context.TrainingParticipants

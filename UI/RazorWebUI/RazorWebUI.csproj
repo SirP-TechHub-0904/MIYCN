@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Tools\Pages\" />
     <Folder Include="Areas\User\Pages\Roles\" />
     <Folder Include="Services\" />
   </ItemGroup>

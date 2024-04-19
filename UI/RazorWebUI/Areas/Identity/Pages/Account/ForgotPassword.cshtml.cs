@@ -7,24 +7,30 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Application.Commands.EmailCommand;
+using Domain.Models;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using PostmarkEmailService;
+using XYZSMS.DTO;
 
 namespace RazorWebUI.Areas.Identity.Pages.Account
 {
     public class ForgotPasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly IEmailSender _emailSender;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly IMediator _mediator;
 
-        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
+
+        public ForgotPasswordModel(UserManager<AppUser> userManager, IMediator mediator)
         {
             _userManager = userManager;
-            _emailSender = emailSender;
+            _mediator = mediator;
         }
 
         /// <summary>
@@ -54,7 +60,7 @@ namespace RazorWebUI.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return RedirectToPage("./ForgotPasswordConfirmation");
@@ -70,11 +76,31 @@ namespace RazorWebUI.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+               
+                string messageDetails = $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>. <br><br>or<br><br>" +
+                    $"copy and paste the link below on your browser.<br><br>" +
+                    $""+ callbackUrl;
 
+
+                try
+                {
+                    //send email
+                    MessageDto msn = new MessageDto();
+                    msn.Email = user.Email;
+                    msn.Message = messageDetails;
+                    msn.Subject = "Reset Password";
+                    msn.Name = user.FirstName + " " + user.LastName;
+                    SendMessageCommand emailcommand = new SendMessageCommand(msn);
+                    PostmarkResponse responseemail = await _mediator.Send(emailcommand);
+                    if (responseemail.Status == PostmarkStatus.Success)
+                    {
+                        TempData["success"] = "Email sent successfully";
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
 

@@ -45,6 +45,8 @@ namespace Application.Extensions
             services.AddTransient<ITrainingParticipantRepository, TrainingParticipantRepository>();
             services.AddTransient<IProfileCategoryListRepository, ProfileCategoryListRepository>();
             services.AddTransient<IProfileCategoryRepository, ProfileCategoryRepository>();
+            services.AddTransient<ICertificateRepository, CertificateRepository>();
+            services.AddTransient<ISettingRepository, SettingRepository>();
 
             services.Configure<IdentityOptions>(options =>
             {

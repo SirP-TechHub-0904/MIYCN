@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Queries.ModuleQueries
 {
-        public sealed class GetByIdModuleQuery : IRequest<Module>
+    public sealed class GetByIdModuleQuery : IRequest<Module>
     {
         public GetByIdModuleQuery(long id)
         {

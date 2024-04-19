@@ -13,5 +13,7 @@ namespace Domain.Interfaces
     {
         Task<ParticipantInTrainingDTo> ParticipantInTraining(long trainingId, string userId);
         Task<List<ParticipantInTrainingDTo>> ParticipantInTraining(long trainingId);
+
+        Task<bool> AddParticipant(TrainingParticipant model);
     }
 }

@@ -29,5 +29,7 @@ namespace Infrastructure.Context
         public DbSet<Training> Trainings { get; set; }
         public DbSet<TrainingFacilitator> TrainingFacilitators { get; set; }
         public DbSet<TrainingParticipant> TrainingParticipants { get; set; }
+        public DbSet<Setting> Settings { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
     }
 }

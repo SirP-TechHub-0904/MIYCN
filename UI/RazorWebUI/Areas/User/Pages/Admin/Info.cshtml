@@ -126,14 +126,11 @@
                                 <dd class="col-sm-10"> @Html.DisplayFor(model => model.UserDatas.LgaOrigin) </dd>
                                 <dt class="col-sm-2"> @Html.DisplayNameFor(model => model.UserDatas.Country) </dt>
                                 <dd class="col-sm-10"> @Html.DisplayFor(model => model.UserDatas.Country) </dd>
-                                <dt class="col-sm-2"> @Html.DisplayNameFor(model => model.UserDatas.PassportFilePathUrl) </dt>
-                                <dd class="col-sm-10"> @Html.DisplayFor(model => model.UserDatas.PassportFilePathUrl) </dd>
-                                <dt class="col-sm-2"> @Html.DisplayNameFor(model => model.UserDatas.PassportFilePathKey) </dt>
-                                <dd class="col-sm-10"> @Html.DisplayFor(model => model.UserDatas.PassportFilePathKey) </dd>
-                                <dt class="col-sm-2"> @Html.DisplayNameFor(model => model.UserDatas.IdCardUrl) </dt>
-                                <dd class="col-sm-10"> @Html.DisplayFor(model => model.UserDatas.IdCardUrl) </dd>
-                                <dt class="col-sm-2"> @Html.DisplayNameFor(model => model.UserDatas.IdCardKey) </dt>
-                                <dd class="col-sm-10"> @Html.DisplayFor(model => model.UserDatas.IdCardKey) </dd>
+                                <dt class="col-sm-2"> Passport Photo </dt>
+                                <dd class="col-sm-10"> <img src="@Model.UserDatas.PassportFilePathUrl" style="max-height:120px;" /> </dd> 
+                                <dt class="col-sm-2">ID Card  </dt>
+                                <dd class="col-sm-10"> <img src="@Model.UserDatas.IdCardUrl" style="max-height:120px;" /></dd>
+                                
                                 <dt class="col-sm-2"> @Html.DisplayNameFor(model => model.UserDatas.BankName) </dt>
                                 <dd class="col-sm-10"> @Html.DisplayFor(model => model.UserDatas.BankName) </dd>
                                 <dt class="col-sm-2"> @Html.DisplayNameFor(model => model.UserDatas.BankAccount) </dt>

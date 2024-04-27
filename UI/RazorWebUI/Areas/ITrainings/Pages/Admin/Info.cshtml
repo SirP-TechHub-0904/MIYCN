@@ -102,11 +102,16 @@
                                 <div class="col-md-4 m-border">
                                     <a asp-page="./Test" class="btn btn-dark" style="width:100%;">Test (@Model.Training.TestCategory)</a>
                                 </div>
-
+                                <div class="col-md-4 m-border">
+                                    <a asp-page="./UpdateSetting" asp-route-trainingId="@Model.Training.Id" class="btn btn-info" style="width:100%;">Update Certificate Setting</a>
+                                </div>
+                                <div class="col-md-4 m-border">
+                                    <a asp-page="./ParticipantCertificate" asp-route-id="@Model.Training.Id" class="btn btn-success" style="width:100%;">Participant Certificate</a>
+                                </div>
                                 <div class="col-md-4 m-border">
                                     <a asp-page="/Index" class="btn btn-primary" style="width:100%;">Physical/Digital Designs</a>
                                 </div>
-                                
+
                             </div> 
                         </div> 
                     </div>

@@ -192,7 +192,17 @@
                                     @Html.DisplayFor(model => model.UserDatas.Country)
                                 </dd>
 
-                             
+
+                                <dt class="col-sm-2">
+                                    @Html.DisplayNameFor(model => model.UserDatas.PassportFilePathUrl)
+                                </dt>
+                                <dd class="col-sm-10">
+
+                                    <img src="@Model.UserDatas.PassportFilePathUrl" style="max-height:200px;" />
+
+                                </dd>
+
+
 
                                 <dt class="col-sm-2">
                                     @Html.DisplayNameFor(model => model.UserDatas.IdCardUrl)
@@ -227,7 +237,7 @@
                                 <dd class="col-sm-10">
                                     @Html.DisplayFor(model => model.UserDatas.AccountNumber)
                                 </dd>
-                               
+
                             </dl>
                             
                             <div>

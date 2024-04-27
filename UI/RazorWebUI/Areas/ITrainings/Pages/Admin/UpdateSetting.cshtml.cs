@@ -39,7 +39,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
                 UpdateSettingCommand Command = new UpdateSettingCommand(Setting, SignatureRight, SignatureLeft);
                 await _mediator.Send(Command);
                 TempData["success"] = "Success";
-                return RedirectToPage("./Index");
+                return RedirectToPage("./Info", new {id = Setting.TrainingId});
             }
             catch (Exception ex)
             {

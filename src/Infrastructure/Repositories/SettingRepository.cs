@@ -16,10 +16,10 @@ namespace Infrastructure.Repositories
     public sealed class SettingRepository : Repository<Setting>, ISettingRepository
     {
         private readonly AppDbContext _context;
-          public SettingRepository(AppDbContext context, IConfiguration config) : base(context)
+          public SettingRepository(AppDbContext context) : base(context)
         {
             _context = context;
-            _config = config;
+           
         }
 
         public async Task<Setting> GetSetting(long trainingId)
@@ -31,9 +31,14 @@ namespace Infrastructure.Repositories
                 setting.TrainingId = trainingId;
                 await _context.Settings.AddAsync(setting);
                 await _context.SaveChangesAsync();
+               return await _context.Settings.FirstOrDefaultAsync(x => x.TrainingId == trainingId);
+            }
+            else
+            {
+                return getSetting;
             }
 
-            return getSetting;
+           
         }
 
        

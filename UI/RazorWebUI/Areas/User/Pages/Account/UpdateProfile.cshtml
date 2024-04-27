@@ -177,7 +177,7 @@
                                     <label asp-for="Input.DateOfBirth" class="control-label">
                                         Date Of Birth (@if (Model.FullProfileDto.DateOfBirth != null)
                                         {
-                                            @Model.FullProfileDto.DateOfBirth.Value.Date.ToString("dd MMM, yyyy")
+                                            @Model.FullProfileDto.DateOfBirth.Value.Date.ToString("ddMM/yyyy")
 
                                         })
                                     </label>

@@ -4,7 +4,7 @@
 }
 <div class="card card-default">
     <div class="card-header">
-        <h3 class="card-title">UPDATE NEW TRAINING</h3>
+        <h3 class="card-title">UPDATE TRAINING</h3>
 
     </div>
     <!-- /.card-header -->
@@ -14,7 +14,7 @@
             <div class="col-md-12">
                 <form method="post" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+                    <input type="hidden" asp-for="Training.Id" />
 
                     <div class="form-group">
                         <label asp-for="Training.Title" class="control-label"></label>
@@ -67,7 +67,7 @@
 
 
                     <div class="form-group">
-                        <input type="submit" value="Add" class="btn btn-primary" />
+                        <input type="submit" value="Update" class="btn btn-primary" />
                         <a asp-page="./Index" class="btn bg-gradient-warning btn-sm" style="float:right;">Back</a>
 
                     </div>

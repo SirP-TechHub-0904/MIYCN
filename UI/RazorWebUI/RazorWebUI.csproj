@@ -53,6 +53,11 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Locked.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\User\Pages\Admin\UpdateUserPermission.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\User\Pages\Admin\UpdateUserPermission.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -9,34 +9,42 @@ using System.Threading.Tasks;
 
 namespace Application.Queries.IdentityQueries
 {
-    public class GetUserListByRoleDto : IRequest<IEnumerable<ProfileDto>>
+
+    public class GetUserListByRoleListDto : IRequest<IEnumerable<ProfileDto>>
     {
-        public GetUserListByRoleDto(string role)
+        public GetUserListByRoleListDto(IEnumerable<string> roles)
         {
-            Role = role;
+            Roles = roles.ToList();
         }
 
-        public string Role { get; set; }
+        public List<string> Roles { get; set; }
     }
 
-    public class GetUserListByRoleDtoHandler : IRequestHandler<GetUserListByRoleDto, IEnumerable<ProfileDto>>
+
+    public class GetUserListByRoleListDtoHandler : IRequestHandler<GetUserListByRoleListDto, IEnumerable<ProfileDto>>
     {
         private readonly UserManager<AppUser> _userManager;
 
-        public GetUserListByRoleDtoHandler(UserManager<AppUser> userManager)
+        public GetUserListByRoleListDtoHandler(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
         }
 
-        public async Task<IEnumerable<ProfileDto>> Handle(GetUserListByRoleDto request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ProfileDto>> Handle(GetUserListByRoleListDto request, CancellationToken cancellationToken)
         {
-             
+
 
             var UserDatas = _userManager.Users
         .Where(x => x.Email != "universaadmin@miycn.ng" && x.Email != "jinmcever@miycn.ng")
         .AsEnumerable()
-        .Where(x => x.Role.Contains(request.Role))
+        .Where(x => request.Roles.Any(role => x.Role.Split(',').Contains(role)))
         .ToList();
+
+
+            //var UserDatas = _userManager.Users
+            //    .Where(x => x.Email != "universaadmin@miycn.ng" && x.Email != "jinmcever@miycn.ng")
+            //    .Where(x => request.Roles.Contains(x.Role))
+            //    .AsEnumerable();
 
             var UserDatasList = UserDatas.Select(x => new ProfileDto
             {
@@ -47,7 +55,9 @@ namespace Application.Queries.IdentityQueries
                 Id = x.Id,
                 Category = x.Role
             });
-            return UserDatasList;
+
+            return await Task.FromResult(UserDatasList);
         }
     }
+
 }

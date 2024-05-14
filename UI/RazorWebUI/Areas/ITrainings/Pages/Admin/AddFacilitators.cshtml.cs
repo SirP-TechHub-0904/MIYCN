@@ -37,14 +37,15 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
             Training = await _mediator.Send(Command);
 
             //
-            GetUserListByRoleDto getflist = new GetUserListByRoleDto("Facilitator");
+            IEnumerable<string> roles = new List<string> { "Facilitator", "Staff" };
+            GetUserListByRoleListDto getflist = new GetUserListByRoleListDto(roles);
             var listfacilitators = await _mediator.Send(getflist);
 
             var dropdownlist = listfacilitators
     .Select(x => new DropdownUserDto
     {
         Id = x.Id,
-        Name = $"{x.Fullname} - {x.Email} - {x.Phone}" // Concatenate full name
+        Name = $"{x.Fullname} - {x.Email} - {x.Phone} - {x.Category}" // Concatenate full name
     })
     .ToList();
 

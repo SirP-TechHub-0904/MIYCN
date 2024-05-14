@@ -114,5 +114,131 @@ namespace Infrastructure.Repositories
                 return null;
             }
         }
+
+        public async Task RemoveTraining(long id)
+        {
+            try
+            {
+                var data = await _context.Certificates.Where(x=>x.TrainingId == id).ToListAsync();
+                foreach(var entity in data)
+                {
+                    _context.Certificates.Remove(entity);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            try
+            {
+                var data = await _context.DialyActivities.Where(x => x.TrainingId == id).ToListAsync();
+                foreach (var entity in data)
+                {
+                    _context.DialyActivities.Remove(entity);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            try
+            {
+                var data = await _context.Settings.Where(x => x.TrainingId == id).ToListAsync();
+                foreach (var entity in data)
+                {
+                    _context.Settings.Remove(entity);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            try
+            {
+                var data = await _context.Sponsors.Where(x => x.TrainingId == id).ToListAsync();
+                foreach (var entity in data)
+                {
+                    _context.Sponsors.Remove(entity);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            try
+            {
+                var data = await _context.TestCategories.Where(x => x.TrainingId == id).ToListAsync();
+                foreach (var entity in data)
+                {
+                    _context.TestCategories.Remove(entity);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+
+            try
+            {
+                var data = await _context.TrainingFacilitators.Where(x => x.TrainingId == id).ToListAsync();
+                foreach (var entity in data)
+                {
+                    _context.TrainingFacilitators.Remove(entity);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            try
+            {
+                var data = await _context.TrainingParticipants.Where(x => x.TrainingId == id).ToListAsync();
+                foreach (var entity in data)
+                {
+                    _context.TrainingParticipants.Remove(entity);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+
+            try
+            {
+                var data = await _context.Trainings.Where(x => x.Id == id).ToListAsync();
+                foreach (var entity in data)
+                {
+                    _context.Trainings.Remove(entity);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+             
+            await _context.SaveChangesAsync();
+        }
     }
 }

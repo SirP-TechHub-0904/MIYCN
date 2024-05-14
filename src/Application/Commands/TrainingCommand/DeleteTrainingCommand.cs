@@ -31,9 +31,11 @@ namespace Application.Commands.TrainingCommand
         public async Task Handle(DeleteTrainingCommand request, CancellationToken cancellationToken)
         {
 
-            var movie = await _repository.GetByIdAsync(request.Id);
+            var data = await _repository.GetByIdAsync(request.Id);
 
-            await _repository.RemoveAsync(movie);
+            await _repository.RemoveTraining(request.Id);
+
+
 
         }
     }

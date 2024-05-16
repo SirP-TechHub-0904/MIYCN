@@ -42,6 +42,7 @@ namespace Infrastructure.Repositories
                     {
                         UserId = userId,
                         TrainingId = training.Id,
+                        TrainingAddress = training.Address,
                         Type = "Facilitator",
                         FacilitatorPosition = facilitator.Position,
                         TrainingTitle = training.Title,
@@ -63,6 +64,7 @@ namespace Infrastructure.Repositories
                     {
                         UserId = userId,
                         TrainingId = training.Id,
+                        TrainingAddress = training.Address,
                         Type = "Participant",
                         TrainingTitle = training.Title,
                         TrainingDate = training.StartDate, // or any date property you prefer
@@ -90,6 +92,7 @@ namespace Infrastructure.Repositories
         {
             Id = x.Id,
             Title = x.Title,
+            Address = x.Address,
             State = x.State,
             LGA = x.LGA,
             Ward = x.Ward,

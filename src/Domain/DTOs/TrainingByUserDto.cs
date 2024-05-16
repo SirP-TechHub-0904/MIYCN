@@ -20,6 +20,7 @@ namespace Domain.DTOs
         public string? UserState { get; set; }
         public string? UserLGA { get; set; }
         public string? PlaceOfWork { get; set; }
+        public string? TrainingAddress { get; set; }
         public string? TrainingState { get; set; }
         public string? TrainingLGA { get; set; }
         public TrainingStatus TrainingStatus { get; set; }

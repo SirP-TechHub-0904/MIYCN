@@ -13,6 +13,7 @@ namespace Domain.DTOs
     {
         public long Id { get; set; }
         public string? Title { get; set; }
+        public string? Address { get; set; }
         public string? State { get; set; }
         public string? LGA { get; set; }
         public string? Ward { get; set; }

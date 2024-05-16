@@ -1,4 +1,5 @@
 ﻿using Application.Commands.EmailCommand;
+using Application.Commands.TrainingCommand;
 using Application.Queries.IdentityQueries;
 using Domain.Interfaces;
 using Domain.Models;
@@ -43,21 +44,9 @@ namespace Application.Commands.TrainingParticipantCommand
                 var result = await _trainingParticipantRepository.AddParticipant(request.TrainingParticipant);
                 if (result == true)
                 {
-                    var getTraining = await _trainingRepository.GetByIdAsync(request.TrainingParticipant.TrainingId);
-
-                    string messagedetails = $"Your have been added to a <b>{getTraining.Title}</b> as a Perticipant<br><br>" +
-                               $"Kindly check your dashboard for more details.<br><br>";
-
-                    GetUserByIdQuery getUser = new GetUserByIdQuery(request.TrainingParticipant.UserId);
-                    var userdata = await _mediator.Send(getUser);
-                    //send email
-                    MessageDto msn = new MessageDto();
-                    msn.Email = userdata.Email;
-                    msn.Message = messagedetails;
-                    msn.Subject = "MIYCN TRAINING";
-                    msn.Name = userdata.FullnameX;
-                    SendMessageCommand emailcommand = new SendMessageCommand(msn);
-                    PostmarkResponse responseemail = await _mediator.Send(emailcommand);
+                    SendTrainingNoticeCommand sendmailcommand = new SendTrainingNoticeCommand(request.TrainingParticipant.UserId,
+                            request.TrainingParticipant.TrainingId, "as a PARTICIPANT", "");
+                    await _mediator.Send(sendmailcommand);
                 }
 
             }

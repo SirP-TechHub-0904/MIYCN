@@ -138,54 +138,54 @@ namespace Application.Commands.IdentityCommand
                     {
                     }
                     var getUserForUpdate = await _userManager.FindByIdAsync(user.Id);
-                    try
-                    {
-                        string baseUrl = "https://miycnportal.ng/"; // replace with your application base URL
-                        string relativeUrl = "/Identity/Account/Login";
-                        Uri baseUri = new Uri(baseUrl);
-                        Uri loginUri = new Uri(baseUri, relativeUrl);
+                    //try
+                    //{
+                    //    string baseUrl = "https://miycnportal.ng/"; // replace with your application base URL
+                    //    string relativeUrl = "/Identity/Account/Login";
+                    //    Uri baseUri = new Uri(baseUrl);
+                    //    Uri loginUri = new Uri(baseUri, relativeUrl);
 
-                        // Now you can use the loginUri to create the link
-                        string linkcomplete = loginUri.AbsoluteUri;
+                    //    // Now you can use the loginUri to create the link
+                    //    string linkcomplete = loginUri.AbsoluteUri;
 
-                        string datavalue = $"<a href='{HtmlEncoder.Default.Encode(linkcomplete)}'>click here to login</a>.";
+                    //    string datavalue = $"<a href='{HtmlEncoder.Default.Encode(linkcomplete)}'>click here to login</a>.";
 
-                        string messagedetails = $"Login Email: {user.Email} <br>Temporal Password: {user.TempPass}<br>" +
-                            $"" + datavalue + "or copy the link before and paste in your browser to continue<br><br>" +
-                            linkcomplete + "<br>" +
-                            "<h4>INSTRUCTION</h4>" +
+                    //    string messagedetails = $"Login Email: {user.Email} <br>Temporal Password: {user.TempPass}<br>" +
+                    //        $"" + datavalue + "or copy the link before and paste in your browser to continue<br><br>" +
+                    //        linkcomplete + "<br>" +
+                    //        "<h4>INSTRUCTION</h4>" +
 
-                            $"<h6>Kindly login, reset your password and update your profile.</h6>";
+                    //        $"<h6>Kindly login, reset your password and update your profile.</h6>";
 
-                        //send email
-                        MessageDto msn = new MessageDto();
-                        msn.Email = user.Email;
-                        msn.Message = messagedetails;
-                        msn.Subject = "MIYCN REGISTRATION";
-                        msn.Name = user.FirstName + " " + user.LastName;
-                        SendMessageCommand emailcommand = new SendMessageCommand(msn);
-                        PostmarkResponse responseemail = await _mediator.Send(emailcommand);
-                        if (responseemail.Status == PostmarkStatus.Success)
-                        {
+                    //    //send email
+                    //    MessageDto msn = new MessageDto();
+                    //    msn.Email = user.Email;
+                    //    msn.Message = messagedetails;
+                    //    msn.Subject = "MIYCN REGISTRATION";
+                    //    msn.Name = user.FirstName + " " + user.LastName;
+                    //    SendMessageCommand emailcommand = new SendMessageCommand(msn);
+                    //    PostmarkResponse responseemail = await _mediator.Send(emailcommand);
+                    //    if (responseemail.Status == PostmarkStatus.Success)
+                    //    {
 
-                            regResponse.EmailSent = true;
-                            getUserForUpdate.EmailSent = true;
+                    //        regResponse.EmailSent = true;
+                    //        getUserForUpdate.EmailSent = true;
 
-                        }
+                    //    }
 
-                    }
-                    catch (Exception e)
-                    {
+                    //}
+                    //catch (Exception e)
+                    //{
 
-                    }
-                    try
-                    {
-                        SendSmsCommand smscommand = new SendSmsCommand(user.PhoneNumber, "Kindly check your email to complete your registration.");
-                        var smsresponse = await _mediator.Send(smscommand);
-                        regResponse.SmsSent = true;
-                        getUserForUpdate.SmsSent = true;
-                    }
-                    catch (Exception c) { }
+                    //}
+                    //try
+                    //{
+                    //    SendSmsCommand smscommand = new SendSmsCommand(user.PhoneNumber, "Kindly check your email to complete your registration.");
+                    //    var smsresponse = await _mediator.Send(smscommand);
+                    //    regResponse.SmsSent = true;
+                    //    getUserForUpdate.SmsSent = true;
+                    //}
+                    //catch (Exception c) { }
 
                     await _userManager.UpdateAsync(user);
                     regResponse.Message = "Registration Successfull";

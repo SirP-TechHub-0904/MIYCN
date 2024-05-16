@@ -1,4 +1,5 @@
 ﻿using Application.Commands.EmailCommand;
+using Application.Commands.TrainingCommand;
 using Application.Queries.IdentityQueries;
 using Domain.Interfaces;
 using Domain.Models;
@@ -9,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace Application.Commands.TrainingFacilitatorCommand
@@ -47,21 +49,23 @@ namespace Application.Commands.TrainingFacilitatorCommand
                     var result = await _trainingFacilitatorRepository.AddFacilitator(request.TrainingFacilitator);
                     if (result == true)
                     {
-                        var getTraining = await _trainingRepository.GetByIdAsync(request.TrainingFacilitator.TrainingId);
 
-                        string messagedetails = $"Your have been added to a <b>{getTraining.Title}</b> as a facilitator<br><br>" +
-                                   $"Kindly check your dashboard for more details.<br><br>";
+                        string titlex = "";
 
-                        GetUserByIdQuery getUser = new GetUserByIdQuery(request.TrainingFacilitator.UserId);
-                        var userdata = await _mediator.Send(getUser);
-                        //send email
-                        MessageDto msn = new MessageDto();
-                        msn.Email = userdata.Email;
-                        msn.Message = messagedetails;
-                        msn.Subject = "MIYCN TRAINING";
-                        msn.Name = userdata.FullnameX;
-                        SendMessageCommand emailcommand = new SendMessageCommand(msn);
-                        PostmarkResponse responseemail = await _mediator.Send(emailcommand);
+                        if(!request.TrainingFacilitator.Position.Contains("Admin") || !request.TrainingFacilitator.Position.Contains("Staff"))
+                        {
+                            titlex = "as a FACILITATOR";
+                        }
+                        else
+                        {
+                            titlex = "as a STAFF";
+                        }
+
+                         
+                        SendTrainingNoticeCommand sendmailcommand = new SendTrainingNoticeCommand(request.TrainingFacilitator.UserId,
+                            request.TrainingFacilitator.TrainingId, titlex, request.TrainingFacilitator.Position);
+                        await _mediator.Send(sendmailcommand);
+
                     }
                 }
                 catch (Exception ex) { }

@@ -29,6 +29,7 @@
     <div class="card-body">
         <form method="post">
             <input asp-for="TrainingId" type="hidden" value="@Model.Training.Id" />
+            <input asp-for="DialyActivityId" type="hidden" value="@Model.DialyActivity.Id" />
             <div class="table-responsive">
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
@@ -104,7 +105,7 @@
                 </table>
             </div>
             <button type="submit" class="btn btn-primary" style="margin-left: 20px;">Update Attendance</button>
-
+            <a asp-page="./Info" asp-route-id="@Model.Training.Id" class="btn btn-warning">Back</a>
         </form>
     </div>
 </div>

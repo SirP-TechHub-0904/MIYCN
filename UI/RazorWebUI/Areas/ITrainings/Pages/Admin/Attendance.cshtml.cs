@@ -31,6 +31,9 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 
         [BindProperty]
         public long TrainingId { get; set; }
+
+        [BindProperty]
+        public long DialyActivityId { get; set; }
         public async Task<IActionResult> OnGetAsync(long id)
         {
             if (id < 0)
@@ -123,7 +126,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 
             // Store the message in TempData
             TempData["response"] = message;
-            return RedirectToPage("./Attendance", new {id= TrainingId });
+            return RedirectToPage("./Attendance", new {id= DialyActivityId });
             // Your existing code continues here...
         }
 

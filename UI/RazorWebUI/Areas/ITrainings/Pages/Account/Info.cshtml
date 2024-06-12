@@ -30,6 +30,7 @@
                 <h6 class="card-title">TRAINING MANAGEMENT</h6>
 
                 <a asp-page="./Download" class="btn bg-gradient-warning btn-sm" style="float:right;">Download Report</a>
+                <a asp-page="./Index" class="btn bg-gradient-warning btn-sm" style="float:right;">Back</a>
 
             </div>
 
@@ -122,15 +123,74 @@
                                         <a asp-page="/Index" class="btn btn-primary" style="width:100%;">Physical/Digital Designs</a>
                                     </div>
                                 }
-                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <hr />
+            <div class="card-header">
+                <h3 class="card-title">PRE TEST AND POST TEST MANAGER</h3>
 
+            </div>
+            <!-- /.card-header -->
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="btn btn-primary" style="width:100%;">
+
+
+                                    <h3 style="font-weight:900;">PRE TEST</h3>
+                                    @if (Model.Training.EnablePreTest == true)
+                                    {
+ 
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                            
+                                            <a class="btn btn-default" asp-page="./Assessment" asp-route-xty="0" asp-route-tid="@Model.Training.Id"
+                                                style="width:100%;">Start Pre Test</a>
+                                            
+                                            </div>
+                                            <div class="col-sm-6"><a class="btn btn-default" 
+                                                                     asp-page="./Result" asp-route-tid="@Model.Training.Id"  asp-route-xty="0" style="width:100%;">View Result (%)</a></div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <h6>NOT ACTIVATED</h6>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="btn btn-success" style="width:100%;">
+                                    <h3 style="font-weight:900;">POST TEST</h3>
+                                    @if (Model.Training.EnablePostTest == true)
+                                    {
+                                     
+                                        <div class="row">
+                                            <div class="col-sm-6"><a class="btn btn-default" style="width:100%;" asp-page="./Assessment" asp-route-xty="2" asp-route-tid="@Model.Training.Id">Start Post Test</a></div>
+                                            <div class="col-sm-6"><a class="btn btn-default" style="width:100%;" asp-page="./Result" asp-route-tid="@Model.Training.Id"  asp-route-xty="2">View Result (0%)</a></div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <h6>NOT ACTIVATED</h6>
+                                    }
+                                </div>
+                            </div>
+                            </div>
+                    </div>
+                </div>
+
+
+                <!-- /.row -->
+            </div>
             <div class="card-footer">
                 <a href="javascript:history.back()" class="btn bg-gradient-warning btn-sm">Back</a>
-                <a asp-page="./Update" class="btn btn-danger btn-sm">Update</a>
+
             </div>
         </div>
     </div>

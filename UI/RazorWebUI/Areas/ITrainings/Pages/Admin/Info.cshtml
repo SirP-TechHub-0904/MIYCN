@@ -92,6 +92,34 @@
                                         <dd class="col-sm-10">
                                             @Html.DisplayFor(model => model.Training.TrainingStatus)
                                         </dd>
+
+                                        <dt class="col-sm-2">
+                                            @Html.DisplayNameFor(model => model.Training.EnablePreTest)
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            @Html.DisplayFor(model => model.Training.EnablePreTest)
+                                        </dd>
+
+                                        <dt class="col-sm-2">
+                                            @Html.DisplayNameFor(model => model.Training.PreTestInstruction)
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            @Html.DisplayFor(model => model.Training.PreTestInstruction)
+                                        </dd>
+
+                                        <dt class="col-sm-2">
+                                            @Html.DisplayNameFor(model => model.Training.EnablePostTest)
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            @Html.DisplayFor(model => model.Training.EnablePostTest)
+                                        </dd>
+
+                                        <dt class="col-sm-2">
+                                            @Html.DisplayNameFor(model => model.Training.PostTestInstruction)
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            @Html.DisplayFor(model => model.Training.PostTestInstruction)
+                                        </dd>
                                     </dl>
                                 </div>
                                 <div class="col-md-4 m-border">
@@ -127,7 +155,7 @@
 
             <div class="card-footer">
                 <a href="javascript:history.back()" class="btn bg-gradient-warning btn-sm">Back</a>
-                <a asp-page="./Update" class="btn btn-danger btn-sm">Update</a>
+                <a asp-page="./Update" asp-route-id="@Model.Training.Id" class="btn btn-danger btn-sm">Update</a>
             </div>
         </div>
     </div>

@@ -32,5 +32,14 @@ namespace Domain.Models
         public ICollection<TrainingParticipant> TrainingParticipants { get; set; }
         public ICollection<DialyActivity> DialyActivities {  get; set; }
         public ICollection<TestCategory> TestCategory { get; set; }
+        [Display(Name = "Enable Post Test")]
+        public bool EnablePostTest { get; set; }
+        [Display(Name = "Post Test Instruction")]
+        public string PostTestInstruction { get; set; }
+        [Display(Name = "Enable Pre Test")]
+        public bool EnablePreTest { get; set; }
+        [Display(Name = "Pre Test Instruction")]
+        public string PreTestInstruction { get; set; }
+
     }
 }

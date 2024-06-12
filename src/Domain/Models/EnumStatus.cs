@@ -30,6 +30,11 @@ namespace Domain.Models
             Facilitator = 2,
             Participant = 1,
         }
+        public enum TrainingTestType
+        {
+            PreTest = 0,
+            PostTest = 2, 
+        }
         public enum GenderStatus
         {
             Nill = 0,

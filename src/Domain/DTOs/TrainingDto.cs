@@ -33,5 +33,15 @@ namespace Domain.DTOs
         public int TrainingParticipants { get; set; }
         public int DialyActivities { get; set; }
         public int TestCategory { get; set; }
+
+        [Display(Name = "Enable Post Test")]
+        public bool EnablePostTest { get; set; }
+        [Display(Name = "Post Test Instruction")]
+        public string PostTestInstruction { get; set; }
+        [Display(Name = "Enable Pre Test")]
+        public bool EnablePreTest { get; set; }
+        [Display(Name = "Pre Test Instruction")]
+        public string PreTestInstruction { get; set; }
+
     }
 }

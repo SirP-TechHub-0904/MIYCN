@@ -24,6 +24,11 @@ namespace Domain.Models
             [Description("Deleted")]
             Deleted = 6,
         }
+        public enum EvaluationAnswerType
+        {
+            Options = 0,
+            Typing = 2
+        }
         public enum CertificateType
         {
             Nill = 0,

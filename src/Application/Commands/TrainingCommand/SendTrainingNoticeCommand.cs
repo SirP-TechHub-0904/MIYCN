@@ -51,7 +51,7 @@ namespace Application.Commands.TrainingCommand
 
                 var getTraining = await _trainingRepository.GetByIdAsync(request.TrainingId);
 
-                string messagedetails = $"<h4>NATIONAL TRAINING OF TRAINERS MIYCN REGISTRATION</h4> <br><br>" +
+                string messagedetails = $"<h4>{getTraining.Title}</h4> <br><br>" +
                     $"You have been selected to attend the MIYCN Training {request.Title} at <b>{getTraining.Address} from {getTraining.StartDate.ToString("dd MMM, yyyy")} to {getTraining.EndDate.ToString("dd MMM, yyyy")}. </b>" +
                     $"To participate, kindly complete your registration with the login details provided below:\r\n<br><br>";
 
@@ -78,10 +78,12 @@ namespace Application.Commands.TrainingCommand
 
                     string messagedetails2 = $"Login Email: {userdata.Email} <br>Temporal Password: {userdata.TempPass}<br>" +
                         $"" + datavalue + "or copy the link before and paste in your browser to continue<br><br>" +
-                        linkcomplete + "<br>" +
-                        "<h4>INSTRUCTION</h4>" +
+                        linkcomplete + "<br>" + 
 
-                        $"<h6>Kindly login with the temporal password, reset your password and update your profile.</h6>";
+                        $"<h6>Instruction: Kindly login with the temporal password, reset your password and update your profile.</h6>" +
+                        $"<h4>Kindly note that this training is organized by the Nutrition department of the federal ministry of health and social welfare</h4>"
+                        
+                        ;
 
                     //send email
                     MessageDto msn = new MessageDto();

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Queries.SponsorQueries
 {
-         public sealed class ListSponsorQuery : IRequest<List<Sponsor>>
+    public sealed class ListSponsorQuery : IRequest<List<Sponsor>>
     {
         public class ListSponsorQueryHandler : IRequestHandler<ListSponsorQuery, List<Sponsor>>
         {

@@ -130,6 +130,54 @@
             </div>
             <hr />
             <div class="card-header">
+                <h3 class="card-title">Dialy Activities</h3>
+
+            </div>
+            <!-- /.card-header -->
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="btn btn-warning" style="width:100%;">
+
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+                                            <a class="btn btn-default" asp-page="./DialyActivity" asp-route-id="@Model.Training.Id"
+                                               style="width:100%;">View Activity</a>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="btn btn-danger" style="width:100%;"> 
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+                                            <a class="btn btn-default" asp-page="./UserTimetable" asp-route-id="@Model.Training.Id"
+                                               style="width:100%;">Timetable</a>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <!-- /.row -->
+            </div>
+            <hr />
+            <div class="card-header">
                 <h3 class="card-title">PRE TEST AND POST TEST MANAGER</h3>
 
             </div>
@@ -146,16 +194,18 @@
                                     <h3 style="font-weight:900;">PRE TEST</h3>
                                     @if (Model.Training.EnablePreTest == true)
                                     {
- 
+
                                         <div class="row">
                                             <div class="col-sm-6">
-                                            
-                                            <a class="btn btn-default" asp-page="./Assessment" asp-route-xty="0" asp-route-tid="@Model.Training.Id"
-                                                style="width:100%;">Start Pre Test</a>
-                                            
+
+                                                <a class="btn btn-default" asp-page="./Assessment" asp-route-xty="0" asp-route-tid="@Model.Training.Id"
+                                                   style="width:100%;">Start Pre Test</a>
+
                                             </div>
-                                            <div class="col-sm-6"><a class="btn btn-default" 
-                                                                     asp-page="./Result" asp-route-tid="@Model.Training.Id"  asp-route-xty="0" style="width:100%;">View Result (%)</a></div>
+                                            <div class="col-sm-6">
+                                                <a class="btn btn-default"
+                                                   asp-page="./Result" asp-route-tid="@Model.Training.Id" asp-route-xty="0" style="width:100%;">View Result (%)</a>
+                                            </div>
                                         </div>
                                     }
                                     else
@@ -169,10 +219,10 @@
                                     <h3 style="font-weight:900;">POST TEST</h3>
                                     @if (Model.Training.EnablePostTest == true)
                                     {
-                                     
+
                                         <div class="row">
                                             <div class="col-sm-6"><a class="btn btn-default" style="width:100%;" asp-page="./Assessment" asp-route-xty="2" asp-route-tid="@Model.Training.Id">Start Post Test</a></div>
-                                            <div class="col-sm-6"><a class="btn btn-default" style="width:100%;" asp-page="./Result" asp-route-tid="@Model.Training.Id"  asp-route-xty="2">View Result (0%)</a></div>
+                                            <div class="col-sm-6"><a class="btn btn-default" style="width:100%;" asp-page="./Result" asp-route-tid="@Model.Training.Id" asp-route-xty="2">View Result (0%)</a></div>
                                         </div>
                                     }
                                     else
@@ -181,7 +231,7 @@
                                     }
                                 </div>
                             </div>
-                            </div>
+                        </div>
                     </div>
                 </div>
 

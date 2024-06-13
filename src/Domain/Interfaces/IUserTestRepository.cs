@@ -16,5 +16,8 @@ namespace Domain.Interfaces
         Task UserTestSubmit(List<(long questionId, int answer, string userId, long trainingId)> assessmentData);
 
         Task<UserTestResultDto> UserTestResult(long trainingId, string userId, int testType);
+
+        Task<List<UserTestListDto>> ListUserTestByTrainingId(long trainingId);
+
     }
 }

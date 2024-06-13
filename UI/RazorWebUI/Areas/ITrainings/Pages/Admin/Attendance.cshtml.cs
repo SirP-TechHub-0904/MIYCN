@@ -6,6 +6,7 @@ using Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Cryptography;
 using System.Text;
 using static Domain.Models.EnumStatus;
 
@@ -34,7 +35,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 
         [BindProperty]
         public long DialyActivityId { get; set; }
-        public async Task<IActionResult> OnGetAsync(long id)
+        public async Task<IActionResult> OnGetAsync(long id, long aid)
         {
             if (id < 0)
             {
@@ -44,16 +45,16 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 
 
 
-            GetByIdDialyActivityQuery ACommand = new GetByIdDialyActivityQuery(id);
+            GetByIdDialyActivityQuery ACommand = new GetByIdDialyActivityQuery(aid);
             DialyActivity = await _mediator.Send(ACommand);
 
-            GetByIdTrainingQuery Command = new GetByIdTrainingQuery(DialyActivity.TrainingId);
+            GetByIdTrainingQuery Command = new GetByIdTrainingQuery(id);
             Training = await _mediator.Send(Command);
 
-            ValidateUserToTrainingAttendanceCommand queryAttendance = new ValidateUserToTrainingAttendanceCommand(DialyActivity.TrainingId);
+            ValidateUserToTrainingAttendanceCommand queryAttendance = new ValidateUserToTrainingAttendanceCommand(id);
             await _mediator.Send(queryAttendance);
 
-            var query = new ListAttendanceByActivityIdQuery(id);
+            var query = new ListAttendanceByActivityIdQuery(aid);
             Datas = await _mediator.Send(query);
 
             return Page();
@@ -126,7 +127,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 
             // Store the message in TempData
             TempData["response"] = message;
-            return RedirectToPage("./Attendance", new {id= DialyActivityId });
+            return RedirectToPage("./Attendance", new {id= TrainingId, aid = DialyActivityId });
             // Your existing code continues here...
         }
 

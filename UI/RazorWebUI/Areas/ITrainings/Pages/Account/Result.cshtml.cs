@@ -1,3 +1,4 @@
+using Application.Queries.IdentityQueries;
 using Application.Queries.TrainingQueries;
 using Application.Queries.UserTestQueries;
 using Domain.DTOs;
@@ -24,14 +25,23 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Account
         public TrainingDto Training { get; set; }
         public string Title { get; set; }
         public string Instruction { get; set; }
+
+        public BasicProfileDto BasicProfileDto { get; set; }
         public async Task<IActionResult> OnGetAsync(long tid, string userId, int xty)
         {
             if (tid < 0)
             {
                 return NotFound();
             }
-
-            userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            }
+            else
+            {
+                GetUserByIdQuery userCommand = new GetUserByIdQuery(userId);
+                BasicProfileDto = await _mediator.Send(userCommand);
+            }
             TestResultQuery Command = new TestResultQuery(tid, userId, xty);
             UserTestResultDto = await _mediator.Send(Command);
 
@@ -40,7 +50,11 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Account
                 if (UserTestResultDto.UserTest.Count() == 0)
                 {
                     TempData["error"] = "No Assessment Found";
-                    return RedirectToPage("./info", new {id = tid});
+                    if (User.IsInRole("Participant"))
+                    {
+                        return RedirectToPage("./info", new { id = tid });
+                    }
+                    return RedirectToPage("/Admin/Test", new { id = tid });
                 }
             }
 

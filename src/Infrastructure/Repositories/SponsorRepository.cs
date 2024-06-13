@@ -2,6 +2,7 @@
 using Domain.Models;
 using Infrastructure.Context;
 using Infrastructure.GenericRepository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,12 @@ namespace Infrastructure.Repositories
         public SponsorRepository(AppDbContext context) : base(context)
         {
             _context = context;
+        }
+
+        public async Task<List<Sponsor>> GetAll(long id)
+        {
+            var list = await _context.Sponsors.Where(x=>x.TrainingId == id).ToListAsync();
+            return list;
         }
     }
 }

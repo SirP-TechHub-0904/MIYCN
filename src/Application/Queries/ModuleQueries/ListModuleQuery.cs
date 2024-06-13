@@ -22,7 +22,7 @@ namespace Application.Queries.ModuleQueries
 
             public async Task<List<Module>> Handle(ListModuleQuery request, CancellationToken cancellationToken)
             {
-                return await _repository.GetAllAsync();
+                return await _repository.GetAll();
 
             }
         }

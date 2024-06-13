@@ -108,6 +108,7 @@ namespace Infrastructure.Repositories
             Sponsors = x.Sponsors.Count(),
             TrainingFacilitators = x.TrainingFacilitators.Count(),
             TrainingParticipants = x.TrainingParticipants.Count(),
+            
             DialyActivities = x.DialyActivities.Count(),
             TestCategory = x.TestCategory.Count()
         })

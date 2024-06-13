@@ -49,6 +49,13 @@ namespace Application.Extensions
             services.AddTransient<ISettingRepository, SettingRepository>();
             services.AddTransient<ITrainingTestRepository, TrainingTestRepository>();
             services.AddTransient<IUserTestRepository, UserTestRepository>();
+            services.AddTransient<IEvaluationQuestionRepository, EvaluationQuestionRepository>();
+            services.AddTransient<IDialyUserEvaluationRepository, DialyUserEvaluationRepository>();
+            services.AddTransient<IEvaluationQuestionCategoryRepository, EvaluationQuestionCategoryRepository>();
+            services.AddTransient<IDialyEvaluationQuestionRepository, DialyEvaluationQuestionRepository>();
+            services.AddTransient<ITimeTableRepository, TimeTableRepository>();
+            services.AddTransient<IGalleryRepository, GalleryRepository>();
+            services.AddTransient<IDashboardRepository, DashboardRepository>();
 
             services.Configure<IdentityOptions>(options =>
             {

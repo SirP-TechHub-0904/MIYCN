@@ -5,6 +5,13 @@
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">
+            @if (Model.BasicProfileDto != null)
+            {
+                <span style="font-weight:900;">
+                    Name: @Model.BasicProfileDto.FullnameX
+                </span><br />
+            }
+
             @Model.Title ON @Model.Training.Title (@Model.Training.StartDate.ToString("ddd dd MMM, yyyy") -
             @Model.Training.EndDate.ToString("ddd dd MMM, yyyy"))
 
@@ -16,7 +23,18 @@
 
 
         </h3>
-        <a asp-page="./Info" asp-route-id="@Model.Training.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">Back</a>
+
+        @if (User.IsInRole("Participant"))
+        {
+            <a asp-page="./Info" asp-route-id="@Model.Training.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">Back</a>
+
+        }
+        else
+        {
+            <a asp-page="/Admin/Test" asp-route-id="@Model.Training.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">Back</a>
+
+        }
+
 
     </div>
 

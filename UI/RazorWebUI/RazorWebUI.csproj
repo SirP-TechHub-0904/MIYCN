@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Content Remove="Areas\Identity\Pages\Account\Locked.cshtml" />
+    <Content Remove="Areas\ITrainings\Pages\Account\UserModulePage.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +26,7 @@
 
   <ItemGroup>
     <None Include="Areas\Identity\Pages\Account\Locked.cshtml" />
+    <None Include="Areas\ITrainings\Pages\Account\UserModulePage.cshtml" />
     <None Include="Areas\ITrainings\Pages\Admin\Activities.cshtml" />
     <None Include="Areas\ITrainings\Pages\Admin\Facilitators.cshtml" />
     <None Include="Areas\ITrainings\Pages\Admin\Info.cshtml" />

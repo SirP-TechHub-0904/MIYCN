@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Queries.ModuleTopicQueries
 {
-         public sealed class ListModuleTopicQuery : IRequest<List<ModuleTopic>>
+    public sealed class ListModuleTopicQuery : IRequest<List<ModuleTopic>>
     {
         public class ListModuleTopicQueryHandler : IRequestHandler<ListModuleTopicQuery, List<ModuleTopic>>
         {
@@ -22,7 +22,7 @@ namespace Application.Queries.ModuleTopicQueries
 
             public async Task<List<ModuleTopic>> Handle(ListModuleTopicQuery request, CancellationToken cancellationToken)
             {
-                return await _repository.GetAllAsync();
+                return await _repository.GetAll();
 
             }
         }

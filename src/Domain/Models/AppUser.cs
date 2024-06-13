@@ -87,16 +87,24 @@ namespace Domain.Models
                 return FirstName + " " + MiddleName + " " + LastName;
             }
         }
-
+        [Display(Name = "Logs")]
         public string? Logs { get; set; }
+        [Display(Name = "Last Login")]
         public string? LastLogin { get; set; }
+        [Display(Name = "Update Profile")]
         public bool UpdateProfile { get; set; }
+        [Display(Name = "Update Experience")]
         public bool UpdateExperience { get; set; }
+        [Display(Name = "Update Education")]
         public bool UpdateEducation { get; set; }
+        [Display(Name = "Reset Password")]
         public bool ResetPassword { get; set; }
+        [Display(Name = "Temp Pass")]
         public string TempPass {  get; set; }
 
+        [Display(Name = "Sms Sent")]
         public bool SmsSent { get; set; }
+        [Display(Name = "Email Sent")]
         public bool EmailSent { get; set; }
     }
 

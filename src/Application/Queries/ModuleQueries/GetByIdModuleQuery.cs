@@ -34,7 +34,7 @@ namespace Application.Queries.ModuleQueries
                 request.ThrowIfNull(nameof(request));
 
 
-                Module data = await _repository.GetByIdAsync(request.Id);
+                Module data = await _repository.GetById(request.Id);
 
                 return data;
             }

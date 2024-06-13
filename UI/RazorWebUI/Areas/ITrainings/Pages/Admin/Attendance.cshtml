@@ -10,6 +10,16 @@
         </h3>
 
     </div>
+    <div class="card-body">
+        <h5 class="text-uppercase">Training Information</h5>
+        <h5 class="card-title">
+            @Model.Training.Title ( @Model.Training.StartDate.ToString("ddd dd MMM, yyyy") -
+            @Model.Training.EndDate.ToString("ddd dd MMM, yyyy"))
+            <br /><span style="font-size:13px;">
+                @Model.Training.Address
+            </span>
+        </h5>
+    </div>
     <div class="card-header">
         <h3 class="card-title text-uppercase">
             @Model.DialyActivity.Title (@Model.DialyActivity.Date.ToString("dddd dd MMM, yyyy"))

@@ -8,6 +8,7 @@
         <h3 class="card-title text-uppercase">
             TRAINING DIALY ACTIVITIES
         </h3>
+        <a asp-page="./Info" asp-route-id="@Model.Training.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">Bact to Training</a>
 
     </div>
     <!-- /.card-header -->
@@ -33,8 +34,7 @@
                             <th>Date</th>
                             <th>Time</th>
                             <th>Attendance (P/A/E)</th>
-                            <th>Action</th>
-
+                            
                         </tr>
                     </thead>
 
@@ -53,7 +53,7 @@
                                     @sn
                                 </td>
                                 <td>
-                                    <a asp-page="/Admin/Info" asp-route-area="User" asp-route-id="@item.Id">
+                                    <a asp-page="./ActivityDetails" asp-route-id="@item.Id">
                                         @item.Date.ToString("dddd")
 
                                     </a>
@@ -72,10 +72,12 @@
                                     {
                                         @if (item.Attendances.Count() > 0)
                                         {
+                                            var presentCount = item.Attendances.Count(x => x.AttendanceStatus == Domain.Models.EnumStatus.AttendanceStatus.Present);
+                                            var absentCount = item.Attendances.Count(x => x.AttendanceStatus == Domain.Models.EnumStatus.AttendanceStatus.Absent);
+                                            var excusedCount = item.Attendances.Count(x => x.AttendanceStatus == Domain.Models.EnumStatus.AttendanceStatus.Excused);
+
                                             <span>
-                                                @item.Attendances.Where(x => x.AttendanceStatus == Domain.Models.EnumStatus.AttendanceStatus.Present)/
-                                                @item.Attendances.Where(x => x.AttendanceStatus == Domain.Models.EnumStatus.AttendanceStatus.Absent) /
-                                                @item.Attendances.Where(x => x.AttendanceStatus == Domain.Models.EnumStatus.AttendanceStatus.Excused)
+                                                @presentCount / @absentCount / @excusedCount
                                             </span>
                                         }
                                     }
@@ -85,9 +87,8 @@
                                     }
                                 </td>
 
-                                <td>
-                                    <a asp-page="./Attendance" asp-route-id="@item.Id" class="btn btn-primary">Attendance</a>
-                                </td>
+                                 
+                                 
 
                             </tr>
                         }
@@ -128,12 +129,12 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="DialyActivity.StartTime" class="control-label"></label>
-                                <input asp-for="DialyActivity.StartTime" class="form-control" placeholder="00:00" />
+                                <input asp-for="DialyActivity.StartTime" class="form-control" placeholder="00:00" type="time"/>
                                 <span asp-validation-for="DialyActivity.StartTime" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="DialyActivity.FinishTime" class="control-label"></label>
-                                <input asp-for="DialyActivity.FinishTime" class="form-control" placeholder="00:00" />
+                                <input asp-for="DialyActivity.FinishTime" class="form-control" type="time" />
                                 <span asp-validation-for="DialyActivity.FinishTime" class="text-danger"></span>
                             </div>
                             <div class="form-group">

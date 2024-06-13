@@ -57,6 +57,15 @@ namespace Application.Commands.IdentityCommand
         public async Task<RegisterResponseDto> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
             RegisterResponseDto regResponse = new RegisterResponseDto();
+            var checkUserExist = await _userManager.Users.FirstOrDefaultAsync(x => x.Email == request.RegisterDto.Email);
+
+            if (checkUserExist != null)
+            {
+                regResponse.UserId = checkUserExist.Id;
+                regResponse.Role = checkUserExist.Role;
+                return regResponse;
+            }
+            
             try
             {
                 var user = new AppUser

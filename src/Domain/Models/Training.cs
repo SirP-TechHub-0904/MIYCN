@@ -35,11 +35,15 @@ namespace Domain.Models
         [Display(Name = "Enable Post Test")]
         public bool EnablePostTest { get; set; }
         [Display(Name = "Post Test Instruction")]
-        public string PostTestInstruction { get; set; }
+        public string? PostTestInstruction { get; set; }
         [Display(Name = "Enable Pre Test")]
         public bool EnablePreTest { get; set; }
         [Display(Name = "Pre Test Instruction")]
-        public string PreTestInstruction { get; set; }
+        public string? PreTestInstruction { get; set; }
+
+
+        [Display(Name = "Evaluation Instruction")]
+        public string? EvaluationInstruction { get; set; }
 
     }
 }

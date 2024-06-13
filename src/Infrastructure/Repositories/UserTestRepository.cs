@@ -35,6 +35,65 @@ namespace Infrastructure.Repositories
             return false;
         }
 
+        public async Task<List<UserTestListDto>> ListUserTestByTrainingId(long trainingId)
+        {
+            var userTests = await _context.UserTests
+                .Include(x => x.User)
+                .Include(x => x.TrainingTest)
+                .Where(x => x.TrainingId == trainingId && x.Submitted)
+                .ToListAsync();
+
+            var groupedUserTests = userTests.GroupBy(x => x.UserId);
+
+            var userTestListDtos = new List<UserTestListDto>();
+
+            foreach (var group in groupedUserTests)
+            {
+                var userId = group.Key;
+                var user = group.First().User;
+                bool PreTestTaken = true;
+                bool PostTestTaken = true;
+                // Calculate pre-test score
+                var preTests = group.Where(x => x.TrainingTest.TrainingTestType == TrainingTestType.PreTest).ToList();
+                var preTestScore = 0.0;
+                if (preTests.Count > 0)
+                {
+                    var correctPreAnswers = preTests.Count(x => x.Answer == x.TrainingTest.CorrectAnswer);
+                    preTestScore = (double)correctPreAnswers / preTests.Count * 100;
+                }
+                else
+                {
+                    PreTestTaken = false;
+                }
+
+                // Calculate post-test score
+                var postTests = group.Where(x => x.TrainingTest.TrainingTestType == TrainingTestType.PostTest).ToList();
+                var postTestScore = 0.0;
+                if (postTests.Count > 0)
+                {
+                    var correctPostAnswers = postTests.Count(x => x.Answer == x.TrainingTest.CorrectAnswer);
+                    postTestScore = (double)correctPostAnswers / postTests.Count * 100;
+                }
+                else
+                {
+                    PostTestTaken = false;
+                }
+
+                userTestListDtos.Add(new UserTestListDto
+                {
+                    UserId = userId,
+                    User = user,
+                    PreTestScore = preTestScore,
+                    PostTestScore = postTestScore,
+                    PostTestTaken = PostTestTaken,
+                    PreTestTaken = PreTestTaken
+                });
+            }
+
+            return userTestListDtos;
+        }
+
+
         public async Task<UserTestResultDto> UserTestResult(long trainingId, string userId, int testType)
         {
 

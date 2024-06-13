@@ -34,7 +34,8 @@ namespace Application.Commands.SmsCommand
         public async Task<string> Handle(SendSmsCommand request, CancellationToken cancellationToken)
         {
 
-            return await _smsClient.ComposeMessage("onwuka1", "nation", request.Recipients, "MIYCN", request.SmsMessage, "SendNow");
+            //return await _smsClient.ComposeMessage("onwuka1", "nation", request.Recipients, "MIYCN", request.SmsMessage, "SendNow");
+            return "";
         }
     }
 }

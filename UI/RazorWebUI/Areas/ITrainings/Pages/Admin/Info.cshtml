@@ -120,6 +120,12 @@
                                         <dd class="col-sm-10">
                                             @Html.DisplayFor(model => model.Training.PostTestInstruction)
                                         </dd>
+                                        <dt class="col-sm-2">
+                                            @Html.DisplayNameFor(model => model.Training.EvaluationInstruction)
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            @Html.Raw(Model.Training.PostTestInstruction)
+                                        </dd>
                                     </dl>
                                 </div>
                                 <div class="col-md-4 m-border">
@@ -129,13 +135,13 @@
                                     <a asp-page="./Facilitators" asp-route-id="@Model.Training.Id" class="btn btn-danger" style="width:100%;">Facilitators/Staff (@Model.Training.TrainingFacilitators)</a>
                                 </div>
                                 <div class="col-md-4 m-border">
-                                    <a asp-page="./Sponsors" class="btn btn-warning" style="width:100%;">Sponsors (@Model.Training.Sponsors)</a>
+                                    <a asp-page="/SponsorPage/Index" asp-route-id="@Model.Training.Id" class="btn btn-warning" style="width:100%;">Sponsors (@Model.Training.Sponsors)</a>
                                 </div>
                                 <div class="col-md-4 m-border">
                                     <a asp-page="./Activities" asp-route-id="@Model.Training.Id" class="btn btn-info" style="width:100%;">Activities (@Model.Training.DialyActivities)</a>
                                 </div>
                                 <div class="col-md-4 m-border">
-                                    <a asp-page="./Test" class="btn btn-dark" style="width:100%;">Test (@Model.Training.TestCategory)</a>
+                                    <a asp-page="./Test" asp-route-id="@Model.Training.Id" class="btn btn-dark" style="width:100%;">Test Result</a>
                                 </div>
                                 <div class="col-md-4 m-border">
                                     <a asp-page="./UpdateSetting" asp-route-trainingId="@Model.Training.Id" class="btn btn-info" style="width:100%;">Update Certificate Setting</a>
@@ -146,7 +152,12 @@
                                 <div class="col-md-4 m-border">
                                     <a asp-page="/Index" class="btn btn-primary" style="width:100%;">Physical/Digital Designs</a>
                                 </div>
-
+                                <div class="col-md-4 m-border">
+                                    <a asp-page="/TimetablePage/Index" asp-route-id="@Model.Training.Id" class="btn btn-danger" style="width:100%;">TimeTable</a>
+                                </div>
+                                <div class="col-md-4 m-border">
+                                    <a asp-page="/GalleryPage/Index" asp-route-id="@Model.Training.Id" class="btn btn-warning" style="width:100%;">Gallery</a>
+                                </div>
                             </div> 
                         </div> 
                     </div>

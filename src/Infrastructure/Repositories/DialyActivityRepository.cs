@@ -23,13 +23,17 @@ namespace Infrastructure.Repositories
         public async Task<List<DialyActivity>> GetActivityByTrainingId(long trainingId)
         {
             
-            var list = await _context.DialyActivities.Where(x=>x.TrainingId == trainingId).ToListAsync();
+            var list = await _context.DialyActivities
+                .Include(x => x.Attendances)
+                .Where(x=>x.TrainingId == trainingId).ToListAsync();
             return list;
         }
 
         public async Task<DialyActivity> GetActivityByTrainingIdAndDate(long trainingId, DateTime date)
         {
-            var data = await _context.DialyActivities.FirstOrDefaultAsync(x => x.TrainingId == trainingId && x.Date.Date == date.Date);
+            var data = await _context.DialyActivities
+                .Include(x=>x.Attendances)
+                .FirstOrDefaultAsync(x => x.TrainingId == trainingId && x.Date.Date == date.Date);
             return data;
         }
     }

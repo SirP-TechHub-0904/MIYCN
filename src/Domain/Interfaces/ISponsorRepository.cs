@@ -10,5 +10,6 @@ namespace Domain.Interfaces
 {
     public interface ISponsorRepository : IRepository<Sponsor>
     {
+        Task<List<Sponsor>> GetAll(long id);   
     }
 }

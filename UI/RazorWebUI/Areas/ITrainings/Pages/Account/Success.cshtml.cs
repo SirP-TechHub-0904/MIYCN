@@ -18,8 +18,9 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Account
         }
 
 
-        public TrainingDto Training { get; set; }
+        public Training Training { get; set; }
         public string Title { get; set; }
+        public long Id { get; set; }
         public async void OnGet(int exp, long id)
         {
             if (exp == 0)
@@ -32,9 +33,13 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Account
             {
                 Title = "POST TEST SUCCESSFUL";
             }
-
-            GetByIdAndCountTrainingQuery TCommand = new GetByIdAndCountTrainingQuery(id);
+            else if (exp == 3)
+            {
+                Title = "EVELUATION SUBMITTED SUCCESSFUL";
+            }
+            GetByIdTrainingQuery TCommand = new GetByIdTrainingQuery(id);
             Training = await _mediator.Send(TCommand);
+            Id = Training.Id;
         }
     }
 }

@@ -10,5 +10,7 @@ namespace Domain.Interfaces
 {
     public interface IModuleTopicRepository : IRepository<ModuleTopic>
     {
+        Task<ModuleTopic> GetById(long id);
+        Task<List<ModuleTopic>> GetAll();
     }
 }

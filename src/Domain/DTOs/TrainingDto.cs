@@ -43,5 +43,7 @@ namespace Domain.DTOs
         [Display(Name = "Pre Test Instruction")]
         public string PreTestInstruction { get; set; }
 
+        [Display(Name = "Evaluation Instruction")]
+        public string EvaluationInstruction { get; set; }
     }
 }

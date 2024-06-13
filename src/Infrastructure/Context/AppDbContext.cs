@@ -33,5 +33,11 @@ namespace Infrastructure.Context
         public DbSet<Certificate> Certificates { get; set; }
         public DbSet<TrainingTest> TrainingTests { get; set; }
         public DbSet<UserTest> UserTests { get; set; }
+        public DbSet<EvaluationQuestion> EvaluationQuestions { get; set; }
+        public DbSet<DialyUserEvaluation> DialyUserEvaluations { get; set; }
+        public DbSet<EvaluationQuestionCategory> EvaluationQuestionCategories { get; set; }
+        public DbSet<DialyEvaluationQuestion> DialyEvaluationQuestions { get; set; }
+        public DbSet<TimeTable> TimeTables { get; set; }
+        public DbSet<Gallery> Galleries { get; set; }
     }
 }

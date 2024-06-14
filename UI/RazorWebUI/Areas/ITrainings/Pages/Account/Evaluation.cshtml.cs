@@ -1,6 +1,7 @@
 using Application.Commands.DialyUserEvaluationCommand;
 using Application.Queries.CertificationQueries;
 using Application.Queries.DialyActivityQueries;
+using Application.Queries.DialyUserEvaluationQueries;
 using Application.Queries.TrainingQueries;
 using Application.Queries.TrainingTestQueries;
 using Application.Queries.UserTestQueries;
@@ -33,6 +34,9 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Account
         public long TrainingId { get; set; }
 
         [BindProperty]
+        public long DialyId { get; set; }
+
+        [BindProperty]
         public int Exampath { get; set; }
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -45,9 +49,16 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Account
             var query = new GetByIdDialyActivityQuery(id);
             DialyActivity = await _mediator.Send(query);
 
-            var gettraining = new GetByIdTrainingQuery(id);
+            var gettraining = new GetByIdTrainingQuery(DialyActivity.TrainingId);
             Training = await _mediator.Send(gettraining);
-             
+            //check
+            var checkeval = new CheckDialyUserEvaluationCommand(DialyActivity.Id, userId);
+            bool check = await _mediator.Send(checkeval);
+            if (check)
+            {
+                TempData["error"] = "Evaluation Already Taken";
+                return RedirectToPage("DialyActivity", new { id = Training.Id });
+            }
             return Page();
         }
 
@@ -56,6 +67,16 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Account
             StringBuilder formInfo = new StringBuilder();
             var eveluationData = new List<(long questionId, string answer, string userId, long dialyId)>();
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            //check
+            var checkeval = new CheckDialyUserEvaluationCommand(DialyId, userId);
+            bool check = await _mediator.Send(checkeval);
+            if(check) {
+                TempData["error"] = "Evaluation Already Taken";
+                return RedirectToPage("DialyActivity", new {id = TrainingId});
+            }
+
+
             foreach (var key in Request.Form.Keys)
             {
                 string value = Request.Form[key];
@@ -65,7 +86,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Account
                 {
                     if (long.TryParse(key.Substring("answer_".Length), out long questionId) && !string.IsNullOrWhiteSpace(value))
                     {
-                        eveluationData.Add((questionId, value, userId, TrainingId));
+                        eveluationData.Add((questionId, value, userId, DialyId));
                     }
                     else
                     {
@@ -80,8 +101,9 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Account
             var command = new UpdateDialyUserEvaluationListCommand(eveluationData);
             await _mediator.Send(command);
 
-            TempData["response"] = "Evaluation submitted successfully.";
-            return RedirectToPage("./Success", new { exp = 3, id = TrainingId });
+            TempData["success"] = "Evaluation submitted successfully.";
+            //return RedirectToPage("./Success", new { exp = 3, id = TrainingId });
+            return RedirectToPage("./DialyActivity", new { id = DialyId });
         }
 
     }

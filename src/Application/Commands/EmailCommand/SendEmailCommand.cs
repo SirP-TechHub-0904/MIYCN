@@ -87,8 +87,7 @@ namespace Application.Commands.EmailCommand
             };
 
 
-            return null;
-            //return await _postmarkService.SendMessageAsync(message);
+            return await _postmarkService.SendMessageAsync(message);
         }
     }
 }

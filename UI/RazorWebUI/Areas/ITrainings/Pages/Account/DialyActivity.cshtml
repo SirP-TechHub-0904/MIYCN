@@ -23,7 +23,7 @@
     <div class="card-body">
         <div class="card-body">
             <div class="table-responsive">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>S/N</th>
@@ -34,7 +34,7 @@
                             <th>Date</th>
                             <th>Time</th>
                             <th>Attendance (P/A/E)</th>
-                            <th></th>
+                            
                         </tr>
                     </thead>
 
@@ -57,6 +57,8 @@
                                         @item.Date.ToString("dddd")
 
                                     </a>
+                                    <a asp-page="./Evaluation" asp-route-id="@item.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">Evaluation</a>
+                                    
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Title)
@@ -96,11 +98,7 @@
                                         <span>0/0/0</span>
                                     }
                                 </td>
-                                <td>
-                                    <a asp-page="./Evaluation" asp-route-id="@item.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">Evaluation</a>
-
-                                </td>
-
+                                 
 
 
                             </tr>

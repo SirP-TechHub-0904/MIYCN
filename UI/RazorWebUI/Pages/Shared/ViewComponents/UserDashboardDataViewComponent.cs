@@ -21,5 +21,5 @@ namespace RazorWebUI.Pages.Shared.ViewComponents
             var basic = await _mediator.Send(command);
             return View(basic);
         }
-        }
+    }
 }

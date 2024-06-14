@@ -30,12 +30,15 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
             {
                 return NotFound();
             }
-            ListDialyUserEvaluationQuery Command = new ListDialyUserEvaluationQuery();
-            DialyUserEvaluation = await _mediator.Send(Command);
+           
 
             var query = new GetByIdDialyActivityQuery(aid);
             DialyActivity = await _mediator.Send(query);
 
+            ListDialyUserEvaluationQuery Command = new ListDialyUserEvaluationQuery();
+            DialyUserEvaluation = await _mediator.Send(Command);
+
+            DialyUserEvaluation = DialyUserEvaluation.Where(x=>x.DialyActivity.Date.Date == DialyActivity.Date.Date).ToList();
             GetByIdTrainingQuery TCommand = new GetByIdTrainingQuery(id);
             Training = await _mediator.Send(TCommand);
             return Page();

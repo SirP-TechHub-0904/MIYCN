@@ -25,6 +25,7 @@ namespace Infrastructure.Repositories
             
             var list = await _context.DialyActivities
                 .Include(x => x.Attendances)
+                .Include(x => x.Training)
                 .Where(x=>x.TrainingId == trainingId).ToListAsync();
             return list;
         }
@@ -33,6 +34,7 @@ namespace Infrastructure.Repositories
         {
             var data = await _context.DialyActivities
                 .Include(x=>x.Attendances)
+                .Include(x=>x.Training)
                 .FirstOrDefaultAsync(x => x.TrainingId == trainingId && x.Date.Date == date.Date);
             return data;
         }

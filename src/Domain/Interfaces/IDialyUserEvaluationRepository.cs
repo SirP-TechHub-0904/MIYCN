@@ -18,5 +18,7 @@ namespace Domain.Interfaces
         Task DialyUserEvaluationSubmit(List<(long questionId, string answer, string userId, long dialyId)> evaluationData);
 
         Task<DialyUserEvaluationResultDto> DialyUserEvaluationResult(long dialyId, string userId);
+
+        Task<List<DialyUserEvaluation>> GetAll();
     }
 }

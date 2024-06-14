@@ -101,5 +101,14 @@ namespace Infrastructure.Repositories
 
             //await _context.SaveChangesAsync();
         }
+
+        public async Task<List<DialyUserEvaluation>> GetAll()
+        {
+            var list = await _context.DialyUserEvaluations.Include(x=>x.User)
+                .Include(x=>x.DialyEvaluationQuestion)
+                .Include(x=>x.DialyActivity)
+                .ToListAsync();
+            return list;
+        }
     }
 }

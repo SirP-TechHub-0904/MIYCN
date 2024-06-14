@@ -22,7 +22,7 @@ namespace Application.Queries.DialyUserEvaluationQueries
 
             public async Task<List<DialyUserEvaluation>> Handle(ListDialyUserEvaluationQuery request, CancellationToken cancellationToken)
             {
-                return await _repository.GetAllAsync();
+                return await _repository.GetAll();
 
             }
         }

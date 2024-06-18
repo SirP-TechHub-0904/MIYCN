@@ -80,46 +80,93 @@ namespace Infrastructure.Repositories
 
         public async Task<List<FacilitatorInTrainingDTo>> FacilitatorInTraining(long trainingId)
         {
-            var participants = await _context.TrainingFacilitators
-                   .Where(tp => tp.TrainingId == trainingId)
-                   .Select(tp => new FacilitatorInTrainingDTo
-                   {
-                       Id = tp.User.Id,
-                       UniqueId = tp.User.UniqueId,
-                       AccountToken = tp.User.AccountToken,
-                       FirstName = tp.User.FirstName,
-                       MiddleName = tp.User.MiddleName,
-                       LastName = tp.User.LastName,
-                       DateOfBirth = tp.User.DateOfBirth,
-                       Date = tp.User.Date,
-                       Religion = tp.User.Religion,
-                       PhoneNumber = tp.User.PhoneNumber,
-                       Email = tp.User.Email,
-                       UserStatus = tp.User.UserStatus,
-                       Gender = tp.User.Gender,
-                       Role = tp.User.Role,
-                       CurrentState = tp.User.CurrentState,
-                       CurrentLga = tp.User.CurrentLga,
-                       Address = tp.User.Address,
-                       PlaceOfWork = tp.User.PlaceOfWork,
-                       StateOrigin = tp.User.StateOrigin,
-                       LgaOrigin = tp.User.LgaOrigin,
-                       Country = tp.User.Country,
-                       PassportFilePathUrl = tp.User.PassportFilePathUrl,
-                       PassportFilePathKey = tp.User.PassportFilePathKey,
-                       IdCardUrl = tp.User.IdCardUrl,
-                       IdCardKey = tp.User.IdCardKey,
-                       BankName = tp.User.BankName,
-                       BankAccount = tp.User.BankAccount,
-                       AccountNumber = tp.User.AccountNumber,
-                       Logs = tp.User.Logs,
-                       TrainingId = tp.TrainingId,
-                       Title = tp.Training.Title,
-                       State = tp.Training.State,
-                       LGA = tp.Training.LGA,
-                       Position = tp.Position
-                   })
-                   .ToListAsync();
+            //var participants = await _context.TrainingFacilitators
+            //       .Where(tp => tp.TrainingId == trainingId)
+            //       .Select(tp => new FacilitatorInTrainingDTo
+            //       {
+            //           Id = tp.User.Id,
+            //           UniqueId = tp.User.UniqueId,
+            //           AccountToken = tp.User.AccountToken,
+            //           FirstName = tp.User.FirstName,
+            //           MiddleName = tp.User.MiddleName,
+            //           LastName = tp.User.LastName,
+            //           DateOfBirth = tp.User.DateOfBirth,
+            //           Date = tp.User.Date,
+            //           Religion = tp.User.Religion,
+            //           PhoneNumber = tp.User.PhoneNumber,
+            //           Email = tp.User.Email,
+            //           UserStatus = tp.User.UserStatus,
+            //           Gender = tp.User.Gender,
+            //           Role = tp.User.Role,
+            //           CurrentState = tp.User.CurrentState,
+            //           CurrentLga = tp.User.CurrentLga,
+            //           Address = tp.User.Address,
+            //           PlaceOfWork = tp.User.PlaceOfWork,
+            //           StateOrigin = tp.User.StateOrigin,
+            //           LgaOrigin = tp.User.LgaOrigin,
+            //           Country = tp.User.Country,
+            //           PassportFilePathUrl = tp.User.PassportFilePathUrl,
+            //           PassportFilePathKey = tp.User.PassportFilePathKey,
+            //           IdCardUrl = tp.User.IdCardUrl,
+            //           IdCardKey = tp.User.IdCardKey,
+            //           BankName = tp.User.BankName,
+            //           BankAccount = tp.User.BankAccount,
+            //           AccountNumber = tp.User.AccountNumber,
+            //           Logs = tp.User.Logs,
+            //           TrainingId = tp.TrainingId,
+            //           Title = tp.Training.Title,
+            //           State = tp.Training.State,
+            //           LGA = tp.Training.LGA,
+            //           Position = tp.Position
+            //       })
+            //       .ToListAsync();
+            // Fetch the training facilitators
+            var trainingFacilitators = await _context.TrainingFacilitators
+                .Include(x=>x.Training)
+                .Include(x=>x.User)
+                .Where(tp => tp.TrainingId == trainingId && tp.User != null)
+                .ToListAsync();
+
+            // Map to FacilitatorInTrainingDTO
+            var participants = trainingFacilitators
+                .Select(tp => new FacilitatorInTrainingDTo
+                {
+                    Id = tp.User.Id,
+                    UniqueId = tp.User.UniqueId,
+                    AccountToken = tp.User.AccountToken,
+                    FirstName = tp.User.FirstName,
+                    MiddleName = tp.User.MiddleName,
+                    LastName = tp.User.LastName,
+                    DateOfBirth = tp.User.DateOfBirth,
+                    Date = tp.User.Date,
+                    Religion = tp.User.Religion,
+                    PhoneNumber = tp.User.PhoneNumber,
+                    Email = tp.User.Email,
+                    UserStatus = tp.User.UserStatus,
+                    Gender = tp.User.Gender,
+                    Role = tp.User.Role,
+                    CurrentState = tp.User.CurrentState,
+                    CurrentLga = tp.User.CurrentLga,
+                    Address = tp.User.Address,
+                    PlaceOfWork = tp.User.PlaceOfWork,
+                    StateOrigin = tp.User.StateOrigin,
+                    LgaOrigin = tp.User.LgaOrigin,
+                    Country = tp.User.Country,
+                    PassportFilePathUrl = tp.User.PassportFilePathUrl,
+                    PassportFilePathKey = tp.User.PassportFilePathKey,
+                    IdCardUrl = tp.User.IdCardUrl,
+                    IdCardKey = tp.User.IdCardKey,
+                    BankName = tp.User.BankName,
+                    BankAccount = tp.User.BankAccount,
+                    AccountNumber = tp.User.AccountNumber,
+                    Logs = tp.User.Logs,
+                    TrainingId = tp.TrainingId,
+                    Title = tp.Training.Title,
+                    State = tp.Training.State,
+                    LGA = tp.Training.LGA,
+                    Position = tp.Position
+                })
+                .ToList();
 
             return participants;
         }

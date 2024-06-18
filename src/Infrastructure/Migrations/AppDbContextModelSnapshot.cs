@@ -234,7 +234,10 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("AttendanceStatus")
+                    b.Property<int>("AttendanceSignInStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AttendanceSignOutStatus")
                         .HasColumnType("int");
 
                     b.Property<long>("DialyActivityId")
@@ -367,14 +370,14 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Answer")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<long>("DialyActivityId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("DialyEvaluationQuestionId")
                         .HasColumnType("bigint");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("Submitted")
                         .HasColumnType("bit");
@@ -894,6 +897,18 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("PreTestInstruction")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeSpan>("SignInStartTime")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("SignInStopTime")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("SignOutStartTime")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("SignOutStopTime")
+                        .HasColumnType("time");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");

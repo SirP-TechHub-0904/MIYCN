@@ -12,9 +12,9 @@ namespace Application.Queries.DialyUserEvaluationQueries
 {
     public sealed class DialyUserEvaluationResultQuery : IRequest<DialyUserEvaluationResultDto>
     {
-        public DialyUserEvaluationResultQuery(long dialyId, string userId)
+        public DialyUserEvaluationResultQuery(long dailyId, string userId)
         {
-            DialyId = dialyId;
+            DialyId = dailyId;
             UserId = userId; 
         }
 

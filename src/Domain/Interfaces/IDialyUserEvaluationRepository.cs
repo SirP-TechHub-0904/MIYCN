@@ -12,12 +12,12 @@ namespace Domain.Interfaces
  
     public interface IDialyUserEvaluationRepository : IRepository<DialyUserEvaluation>
     {
-        Task<bool> CheckIfUserTookEvaluation(string userid, long dialyId);
+        Task<bool> CheckIfUserTookEvaluation(string userid, long dailyId);
         Task<bool> CheckIfEvaluationHasBeenTaken(long eveluationQuestionId);
 
-        Task DialyUserEvaluationSubmit(List<(long questionId, string answer, string userId, long dialyId)> evaluationData);
+        Task DialyUserEvaluationSubmit(List<(long questionId, string answer, string userId, long dailyId)> evaluationData);
 
-        Task<DialyUserEvaluationResultDto> DialyUserEvaluationResult(long dialyId, string userId);
+        Task<DialyUserEvaluationResultDto> DialyUserEvaluationResult(long dailyId, string userId);
 
         Task<List<DialyUserEvaluation>> GetAll();
     }

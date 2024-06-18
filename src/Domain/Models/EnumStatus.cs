@@ -38,7 +38,7 @@ namespace Domain.Models
         public enum TrainingTestType
         {
             PreTest = 0,
-            PostTest = 2, 
+            PostTest = 2,
         }
         public enum GenderStatus
         {
@@ -46,12 +46,20 @@ namespace Domain.Models
             Female = 1,
             Male = 2,
         }
-        public enum AttendanceStatus
-        { 
-            Present = 1,
+        public enum AttendanceSignInStatus
+        {
+
+            Present = 3,
             Absent = 2,
-            Excused = 3,
-            NILL = 0
+            Null = 0
+        }
+
+        public enum AttendanceSignOutStatus
+        {
+
+            Present = 3,
+            Absent = 2,
+            Null = 0
         }
         public enum TestStatus
         {

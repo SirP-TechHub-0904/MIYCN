@@ -12,9 +12,9 @@ namespace Application.Queries.DialyUserEvaluationQueries
 {
     public sealed class CheckDialyUserEvaluationCommand : IRequest<bool>
     {
-        public CheckDialyUserEvaluationCommand(long dialyId, string userId)
+        public CheckDialyUserEvaluationCommand(long dailyId, string userId)
         {
-            DialyId = dialyId;
+            DialyId = dailyId;
             UserId = userId; 
         }
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240411130230_daily-activity")]
-    partial class dailyactivity
+    [Migration("20240618105226_add-signin")]
+    partial class addsignin
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,6 +70,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AssignedState")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BankAccount")
@@ -234,7 +237,10 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("AttendanceStatus")
+                    b.Property<int>("AttendanceSignInStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AttendanceSignOutStatus")
                         .HasColumnType("int");
 
                     b.Property<long>("DialyActivityId")
@@ -252,6 +258,47 @@ namespace Infrastructure.Migrations
                     b.ToTable("Attendances");
                 });
 
+            modelBuilder.Entity("Domain.Models.Certificate", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("CerificateId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CertificateType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("IssuerDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PassportKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PassportUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("TrainingId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TrainingId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Certificates");
+                });
+
             modelBuilder.Entity("Domain.Models.DialyActivity", b =>
                 {
                     b.Property<long>("Id")
@@ -263,6 +310,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<TimeSpan>("FinishTime")
                         .HasColumnType("time");
 
@@ -272,7 +322,7 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("TrainingId")
+                    b.Property<long>("TrainingId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -280,6 +330,73 @@ namespace Infrastructure.Migrations
                     b.HasIndex("TrainingId");
 
                     b.ToTable("DialyActivities");
+                });
+
+            modelBuilder.Entity("Domain.Models.DialyEvaluationQuestion", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("DialyActivityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("EvaluationAnswerType")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsModuleTopic")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Question")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DialyActivityId");
+
+                    b.ToTable("DialyEvaluationQuestions");
+                });
+
+            modelBuilder.Entity("Domain.Models.DialyUserEvaluation", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Answer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("DialyActivityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("DialyEvaluationQuestionId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("Submitted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DialyActivityId");
+
+                    b.HasIndex("DialyEvaluationQuestionId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("DialyUserEvaluations");
                 });
 
             modelBuilder.Entity("Domain.Models.Education", b =>
@@ -307,6 +424,53 @@ namespace Infrastructure.Migrations
                     b.ToTable("Educations");
                 });
 
+            modelBuilder.Entity("Domain.Models.EvaluationQuestion", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<int>("EvaluationAnswerType")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("EvaluationQuestionCategoryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("Publish")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EvaluationQuestionCategoryId");
+
+                    b.ToTable("EvaluationQuestions");
+                });
+
+            modelBuilder.Entity("Domain.Models.EvaluationQuestionCategory", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EvaluationQuestionCategories");
+                });
+
             modelBuilder.Entity("Domain.Models.Experience", b =>
                 {
                     b.Property<long>("Id")
@@ -327,6 +491,36 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Experiences");
+                });
+
+            modelBuilder.Entity("Domain.Models.Gallery", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("ImageDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("TrainingId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TrainingId");
+
+                    b.ToTable("Galleries");
                 });
 
             modelBuilder.Entity("Domain.Models.Module", b =>
@@ -475,6 +669,75 @@ namespace Infrastructure.Migrations
                     b.ToTable("ProfileCategoryLists");
                 });
 
+            modelBuilder.Entity("Domain.Models.Setting", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CertificateAttendanceTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CourseTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LeftOccupation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LeftOffSignature")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LeftPosition")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LeftSignatureKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LeftSignatureUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LeftTitleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RightOccupation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("RightOffSignature")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("RightPosition")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RightSignatureKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RightSignatureUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RightTitleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("TrainingId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TrainingTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TrainingId");
+
+                    b.ToTable("Settings");
+                });
+
             modelBuilder.Entity("Domain.Models.Sponsor", b =>
                 {
                     b.Property<long>("Id")
@@ -484,6 +747,12 @@ namespace Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LogoKey")
@@ -555,6 +824,43 @@ namespace Infrastructure.Migrations
                     b.ToTable("TestSheets");
                 });
 
+            modelBuilder.Entity("Domain.Models.TimeTable", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Activity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FacilitatorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<long?>("ModuleTopicId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("Publish")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("TrainingId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacilitatorId");
+
+                    b.HasIndex("ModuleTopicId");
+
+                    b.HasIndex("TrainingId");
+
+                    b.ToTable("TimeTables");
+                });
+
             modelBuilder.Entity("Domain.Models.Training", b =>
                 {
                     b.Property<long>("Id")
@@ -562,6 +868,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DialyEndTime")
                         .IsRequired()
@@ -571,10 +880,25 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("EnablePostTest")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("EnablePreTest")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("EvaluationInstruction")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LGA")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostTestInstruction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreTestInstruction")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
@@ -645,6 +969,72 @@ namespace Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("TrainingParticipants");
+                });
+
+            modelBuilder.Entity("Domain.Models.TrainingTest", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<int>("CorrectAnswer")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Publish")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrainingTestType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TrainingTests");
+                });
+
+            modelBuilder.Entity("Domain.Models.UserTest", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<int>("Answer")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Submitted")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("TrainingId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("TrainingTestId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TrainingId");
+
+                    b.HasIndex("TrainingTestId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserTests");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -770,11 +1160,86 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Domain.Models.Certificate", b =>
+                {
+                    b.HasOne("Domain.Models.Training", "Training")
+                        .WithMany()
+                        .HasForeignKey("TrainingId");
+
+                    b.HasOne("Domain.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Training");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Domain.Models.DialyActivity", b =>
                 {
-                    b.HasOne("Domain.Models.Training", null)
+                    b.HasOne("Domain.Models.Training", "Training")
                         .WithMany("DialyActivities")
-                        .HasForeignKey("TrainingId");
+                        .HasForeignKey("TrainingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Training");
+                });
+
+            modelBuilder.Entity("Domain.Models.DialyEvaluationQuestion", b =>
+                {
+                    b.HasOne("Domain.Models.DialyActivity", "DialyActivity")
+                        .WithMany()
+                        .HasForeignKey("DialyActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DialyActivity");
+                });
+
+            modelBuilder.Entity("Domain.Models.DialyUserEvaluation", b =>
+                {
+                    b.HasOne("Domain.Models.DialyActivity", "DialyActivity")
+                        .WithMany()
+                        .HasForeignKey("DialyActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Models.DialyEvaluationQuestion", "DialyEvaluationQuestion")
+                        .WithMany()
+                        .HasForeignKey("DialyEvaluationQuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("DialyActivity");
+
+                    b.Navigation("DialyEvaluationQuestion");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Models.EvaluationQuestion", b =>
+                {
+                    b.HasOne("Domain.Models.EvaluationQuestionCategory", "EvaluationQuestionCategory")
+                        .WithMany()
+                        .HasForeignKey("EvaluationQuestionCategoryId");
+
+                    b.Navigation("EvaluationQuestionCategory");
+                });
+
+            modelBuilder.Entity("Domain.Models.Gallery", b =>
+                {
+                    b.HasOne("Domain.Models.Training", "Training")
+                        .WithMany()
+                        .HasForeignKey("TrainingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Training");
                 });
 
             modelBuilder.Entity("Domain.Models.ModuleTopic", b =>
@@ -818,6 +1283,17 @@ namespace Infrastructure.Migrations
                     b.Navigation("ProfileCategory");
                 });
 
+            modelBuilder.Entity("Domain.Models.Setting", b =>
+                {
+                    b.HasOne("Domain.Models.Training", "Training")
+                        .WithMany()
+                        .HasForeignKey("TrainingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Training");
+                });
+
             modelBuilder.Entity("Domain.Models.Sponsor", b =>
                 {
                     b.HasOne("Domain.Models.Training", "Training")
@@ -857,6 +1333,29 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Domain.Models.TimeTable", b =>
+                {
+                    b.HasOne("Domain.Models.AppUser", "Facilitator")
+                        .WithMany()
+                        .HasForeignKey("FacilitatorId");
+
+                    b.HasOne("Domain.Models.ModuleTopic", "ModuleTopic")
+                        .WithMany()
+                        .HasForeignKey("ModuleTopicId");
+
+                    b.HasOne("Domain.Models.Training", "Training")
+                        .WithMany()
+                        .HasForeignKey("TrainingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Facilitator");
+
+                    b.Navigation("ModuleTopic");
+
+                    b.Navigation("Training");
+                });
+
             modelBuilder.Entity("Domain.Models.TrainingFacilitator", b =>
                 {
                     b.HasOne("Domain.Models.Training", "Training")
@@ -887,6 +1386,31 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("Training");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Models.UserTest", b =>
+                {
+                    b.HasOne("Domain.Models.Training", "Training")
+                        .WithMany()
+                        .HasForeignKey("TrainingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Models.TrainingTest", "TrainingTest")
+                        .WithMany()
+                        .HasForeignKey("TrainingTestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Training");
+
+                    b.Navigation("TrainingTest");
 
                     b.Navigation("User");
                 });

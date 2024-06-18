@@ -28,7 +28,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 
         public DialyActivity DialyActivity { get; set; }
 
-        public AttendanceStatus AttendanceStatus { get; set; }
+        public AttendanceSignInStatus AttendanceStatus { get; set; }
 
         [BindProperty]
         public long TrainingId { get; set; }
@@ -62,46 +62,40 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
          
 
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostSignInAsync()
         {
             StringBuilder formInfo = new StringBuilder();
-            var attendanceData = new List<(long attendanceId, AttendanceStatus status)>();
+            var attendanceData = new List<(long attendanceId, AttendanceSignInStatus status)>();
             // Initialize counters for each status
             int presentCount = 0;
             int absentCount = 0;
-            int excuseCount = 0;
-            int nillCount = 0;
+            
             foreach (var key in Request.Form.Keys)
             {
                 string value = Request.Form[key];
                 formInfo.AppendLine($"{key}: {value}");
 
                 // Check if the key starts with "AttendanceResult_"
-                if (key.StartsWith("AttendanceResult_"))
+                if (key.StartsWith("AttendanceSignInResult_"))
                 {
                     // Extract the attendance ID from the key
-                    if (long.TryParse(key.Substring("AttendanceResult_".Length), out long attendanceId))
+                    if (long.TryParse(key.Substring("AttendanceSignInResult_".Length), out long attendanceId))
                     {
                         // Get the enum value from the form
-                        if (Enum.TryParse(value, out Domain.Models.EnumStatus.AttendanceStatus status))
+                        if (Enum.TryParse(value, out Domain.Models.EnumStatus.AttendanceSignInStatus status))
                         {
                             // Add the extracted attendance ID and status to the list
                             attendanceData.Add((attendanceId, status));
                             // Increment the corresponding counter
                             switch (status)
                             {
-                                case AttendanceStatus.Present:
+                                case AttendanceSignInStatus.Present:
                                     presentCount++;
                                     break;
-                                case AttendanceStatus.Absent:
+                                case AttendanceSignInStatus.Absent:
                                     absentCount++;
                                     break;
-                                case AttendanceStatus.Excused:
-                                    excuseCount++;
-                                    break;
-                                default:
-                                    nillCount++;
-                                    break;
+                                
                             }
                         }
                         else
@@ -120,10 +114,10 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 
             // Now you have attendanceData populated with attendance IDs and statuses
             // Pass attendanceData to the command handler
-            var command = new UpdateAttendanceStatusCommand(attendanceData);
+            var command = new UpdateSignInAttendanceStatusCommand(attendanceData);
             await _mediator.Send(command);
             // Construct the TempData message with the counts
-            string message = $"{presentCount} present, {absentCount} absent, {excuseCount} excuse";
+            string message = $"{presentCount} signin, {absentCount} not available";
 
             // Store the message in TempData
             TempData["response"] = message;
@@ -132,6 +126,68 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
         }
 
 
+        public async Task<IActionResult> OnPostSignOutAsync()
+        {
+            StringBuilder formInfo = new StringBuilder();
+            var attendanceData = new List<(long attendanceId, AttendanceSignOutStatus status)>();
+            // Initialize counters for each status
+            int presentCount = 0;
+            int absentCount = 0;
+
+            foreach (var key in Request.Form.Keys)
+            {
+                string value = Request.Form[key];
+                formInfo.AppendLine($"{key}: {value}");
+
+                // Check if the key starts with "AttendanceResult_"
+                if (key.StartsWith("AttendanceSignOutResult_"))
+                {
+                    // Extract the attendance ID from the key
+                    if (long.TryParse(key.Substring("AttendanceSignOutResult_".Length), out long attendanceId))
+                    {
+                        // Get the enum value from the form
+                        if (Enum.TryParse(value, out Domain.Models.EnumStatus.AttendanceSignOutStatus status))
+                        {
+                            // Add the extracted attendance ID and status to the list
+                            attendanceData.Add((attendanceId, status));
+                            // Increment the corresponding counter
+                            switch (status)
+                            {
+                                case AttendanceSignOutStatus.Present:
+                                    presentCount++;
+                                    break;
+                                case AttendanceSignOutStatus.Absent:
+                                    absentCount++;
+                                    break;
+
+                            }
+                        }
+                        else
+                        {
+                            // Handle invalid enum value
+                            // Perhaps return an error response or log the issue
+                        }
+                    }
+                    else
+                    {
+                        // Handle invalid attendance ID
+                        // Perhaps return an error response or log the issue
+                    }
+                }
+            }
+
+            // Now you have attendanceData populated with attendance IDs and statuses
+            // Pass attendanceData to the command handler
+            var command = new UpdateSignOutAttendanceStatusCommand(attendanceData);
+            await _mediator.Send(command);
+            // Construct the TempData message with the counts
+            string message = $"{presentCount} signin, {absentCount} not available";
+
+            // Store the message in TempData
+            TempData["response"] = message;
+            return RedirectToPage("./Attendance", new { id = TrainingId, aid = DialyActivityId });
+            // Your existing code continues here...
+        }
 
     }
 }

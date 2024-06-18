@@ -22,17 +22,17 @@ namespace Application.Commands.DialyEvaluationQuestionCommand
     public class DeleteDialyEvaluationQuestionCommandHandler : IRequestHandler<DeleteDialyEvaluationQuestionCommand, bool>
     {
         private readonly IDialyEvaluationQuestionRepository _repository;
-        private readonly IDialyUserEvaluationRepository _dialyrepository;
+        private readonly IDialyUserEvaluationRepository _dailyrepository;
 
-        public DeleteDialyEvaluationQuestionCommandHandler(IDialyEvaluationQuestionRepository repository, IDialyUserEvaluationRepository dialyrepository)
+        public DeleteDialyEvaluationQuestionCommandHandler(IDialyEvaluationQuestionRepository repository, IDialyUserEvaluationRepository dailyrepository)
         {
             _repository = repository;
-            _dialyrepository = dialyrepository;
+            _dailyrepository = dailyrepository;
         }
 
         public async Task<bool> Handle(DeleteDialyEvaluationQuestionCommand request, CancellationToken cancellationToken)
         {
-            var check = await _dialyrepository.CheckIfEvaluationHasBeenTaken(request.Id);
+            var check = await _dailyrepository.CheckIfEvaluationHasBeenTaken(request.Id);
             if (check == false)
             {
                 var movie = await _repository.GetByIdAsync(request.Id);

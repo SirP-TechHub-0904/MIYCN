@@ -11,8 +11,11 @@
 
         @if (User.IsInRole("Admin") || User.IsInRole("mSuperAdmin"))
         {
-            <a asp-page="./AddFacilitators" asp-route-id="@Model.Training.Id" asp-route-rx="Facilitator" class="btn bg-gradient-warning btn-sm" style="float:right;">Register New Facilitators</a>
+            if (Model.Training.TrainingStatus != Domain.Models.EnumStatus.TrainingStatus.Completed)
+            {
 
+            <a asp-page="./AddFacilitators" asp-route-id="@Model.Training.Id" asp-route-rx="Facilitator" class="btn bg-gradient-warning btn-sm" style="float:right;">Register New Facilitators</a>
+            }
         }
         <a asp-page="./Info" asp-route-id="@Model.Training.Id" class="btn bg-gradient-primary btn-sm" style="float:right;">Back</a>
 

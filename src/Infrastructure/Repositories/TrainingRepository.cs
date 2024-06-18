@@ -74,7 +74,11 @@ namespace Infrastructure.Repositories
                         PlaceOfWork = facilitator.User.PlaceOfWork,
                         TrainingLGA = training.LGA,
                         TrainingState = training.State,
-                        TrainingStatus = training.TrainingStatus
+                        TrainingStatus = training.TrainingStatus,
+                        SignInStartTime = training.SignInStartTime,
+                        SignInStopTime = training.SignInStopTime,
+                        SignOutStartTime = training.SignOutStartTime,
+                        SignOutStopTime = training.SignOutStopTime,
                     });
                 }
 
@@ -93,6 +97,10 @@ namespace Infrastructure.Repositories
                         UserState = participant.User.CurrentState,
                         UserLGA = participant.User.CurrentLga,
                         PlaceOfWork = participant.User.PlaceOfWork,
+                        SignInStartTime = training.SignInStartTime,
+                        SignInStopTime = training.SignInStopTime,
+                        SignOutStartTime = training.SignOutStartTime,
+                        SignOutStopTime = training.SignOutStopTime,
                         TrainingLGA = training.LGA,
                         TrainingState = training.State,
                         TrainingStatus = training.TrainingStatus
@@ -125,6 +133,10 @@ namespace Infrastructure.Repositories
             TrainingStatus = x.TrainingStatus,
             DialyStartTime = x.DialyStartTime,
             DialyEndTime = x.DialyEndTime,
+            SignInStartTime = x.SignInStartTime,
+            SignInStopTime = x.SignInStopTime,
+            SignOutStartTime = x.SignOutStartTime,
+            SignOutStopTime = x.SignOutStopTime,
             Sponsors = x.Sponsors.Count(),
             TrainingFacilitators = x.TrainingFacilitators.Count(),
             TrainingParticipants = x.TrainingParticipants.Count(),

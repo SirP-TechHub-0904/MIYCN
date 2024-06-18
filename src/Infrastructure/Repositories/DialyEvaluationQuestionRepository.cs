@@ -20,9 +20,9 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<List<DialyEvaluationQuestion>> GetAllByDialyActivity(long dialyactivityId)
+        public async Task<List<DialyEvaluationQuestion>> GetAllByDialyActivity(long dailyactivityId)
         {
-            var list = await _context.DialyEvaluationQuestions.Where(x=>x.DialyActivityId == dialyactivityId).ToListAsync();
+            var list = await _context.DialyEvaluationQuestions.Where(x=>x.DialyActivityId == dailyactivityId).ToListAsync();
             return list;
         }
     }

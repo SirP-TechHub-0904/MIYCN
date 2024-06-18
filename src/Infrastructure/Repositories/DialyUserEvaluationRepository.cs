@@ -32,9 +32,9 @@ namespace Infrastructure.Repositories
             return true;
         }
 
-        public async Task<bool> CheckIfUserTookEvaluation(string userid, long dialyId)
+        public async Task<bool> CheckIfUserTookEvaluation(string userid, long dailyId)
         {
-            var data = await _context.DialyUserEvaluations.Where(x => x.DialyActivityId == dialyId && x.UserId == userid && x.Submitted == true
+            var data = await _context.DialyUserEvaluations.Where(x => x.DialyActivityId == dailyId && x.UserId == userid && x.Submitted == true
             ).FirstOrDefaultAsync();
             if (data != null)
             {
@@ -43,12 +43,12 @@ namespace Infrastructure.Repositories
             return false;
         }
 
-        public async Task<DialyUserEvaluationResultDto> DialyUserEvaluationResult(long dialyId, string userId)
+        public async Task<DialyUserEvaluationResultDto> DialyUserEvaluationResult(long dailyId, string userId)
         {
             DialyUserEvaluationResultDto result = new DialyUserEvaluationResultDto();
             var userresult = await _context.DialyUserEvaluations
                .Include(x => x.DialyEvaluationQuestion)
-               .Where(x => x.DialyActivityId == dialyId && x.UserId == userId).ToListAsync();
+               .Where(x => x.DialyActivityId == dailyId && x.UserId == userId).ToListAsync();
 
             result.UserTest = userresult;
 
@@ -58,7 +58,7 @@ namespace Infrastructure.Repositories
             return result;
         }
 
-        public async Task DialyUserEvaluationSubmit(List<(long questionId, string answer, string userId, long dialyId)> evaluationData)
+        public async Task DialyUserEvaluationSubmit(List<(long questionId, string answer, string userId, long dailyId)> evaluationData)
         {
             foreach (var (questionId, answer, userId, dailyId) in evaluationData)
             {
@@ -87,11 +87,11 @@ namespace Infrastructure.Repositories
             }
 
             await _context.SaveChangesAsync();
-            //foreach (var (questionId, answer, userId, dialyId) in evaluationData)
+            //foreach (var (questionId, answer, userId, dailyId) in evaluationData)
             //{
             //    DialyUserEvaluation nxtest = new DialyUserEvaluation();
             //    nxtest.UserId = userId;
-            //    nxtest.DialyActivityId = dialyId;
+            //    nxtest.DialyActivityId = dailyId;
             //    nxtest.Answer = answer;
             //    nxtest.DialyEvaluationQuestionId = questionId;
             //    nxtest.Submitted = true;

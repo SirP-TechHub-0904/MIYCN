@@ -65,7 +65,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Account
         public async Task<IActionResult> OnPostAsync()
         {
             StringBuilder formInfo = new StringBuilder();
-            var eveluationData = new List<(long questionId, string answer, string userId, long dialyId)>();
+            var eveluationData = new List<(long questionId, string answer, string userId, long dailyId)>();
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             //check

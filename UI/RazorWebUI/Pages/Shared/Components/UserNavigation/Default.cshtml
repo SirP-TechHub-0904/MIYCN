@@ -69,7 +69,6 @@
     </li>
     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("mSuperAdmin"))
     {
-        <li class="nav-header" style="background-color: #c8cacc;border-radius: 4px;font-weight: bolder;color: black;">PARTICIPANT MENU</li>
 
         <li class="nav-item">
             <a asp-page="/TestQuestions/Index" asp-area="ITrainings" class="nav-link">
@@ -204,6 +203,23 @@
 
 @if (User.Identity.IsAuthenticated && User.IsInRole("Participant") || User.IsInRole("Facilitator"))
 {
+
+
+    <li class="nav-header" style="background-color: #c8cacc;border-radius: 4px;font-weight: bolder;color: black;">
+        @if (User.IsInRole("Participant"))
+        {
+            <text>PARTICIPANT</text>
+        }
+        else if (User.IsInRole("Facilitator"))
+        {
+            <text>FACILITATOR</text>
+        }
+
+
+        MENU
+    </li>
+
+
     <li class="nav-item">
         <a asp-page="/Account/Index" asp-area="Dashboard" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -249,7 +265,7 @@
         <a asp-page="/User/Index" asp-area="Notification" class="nav-link">
             <i class="nav-icon fas fa-bell"></i>
             <p>
-                Notification (4)
+                Notification(4)
             </p>
         </a>
     </li>

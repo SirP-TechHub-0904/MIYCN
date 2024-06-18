@@ -14,9 +14,9 @@ namespace Application.Queries.CertificationQueries
 
         public long DialyActivityId { get; set; }
 
-        public ListDialyEvaluationQuestionQuery(long dialyActivityId)
+        public ListDialyEvaluationQuestionQuery(long dailyActivityId)
         {
-            DialyActivityId = dialyActivityId;
+            DialyActivityId = dailyActivityId;
         }
 
         public class ListDialyEvaluationQuestionQueryHandler : IRequestHandler<ListDialyEvaluationQuestionQuery, List<DialyEvaluationQuestion>>

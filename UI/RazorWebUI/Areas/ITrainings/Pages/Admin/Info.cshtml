@@ -114,7 +114,7 @@
                                             @Model.Training.EndDate.ToString("ddd dd MMM, yyyy")
                                         </dd>
                                         <dt class="col-sm-2">
-                                            Daily Start/Finish Time
+                                            Dialy Start/Finish Time
                                         </dt>
                                         <dd class="col-sm-10">
                                             @Model.Training.DialyStartTime -
@@ -127,40 +127,70 @@
                                         <dd class="col-sm-10">
                                             @Html.DisplayFor(model => model.Training.TrainingStatus)
                                         </dd>
+                                        @if (User.IsInRole("Admin") || User.IsInRole("mSuperAdmin"))
+                                        {
+                                            <dt class="col-sm-2">
+                                                @Html.DisplayNameFor(model => model.Training.EnablePreTest)
+                                            </dt>
+                                            <dd class="col-sm-10">
+                                                @Html.DisplayFor(model => model.Training.EnablePreTest)
+                                            </dd>
 
-                                        <dt class="col-sm-2">
-                                            @Html.DisplayNameFor(model => model.Training.EnablePreTest)
-                                        </dt>
-                                        <dd class="col-sm-10">
-                                            @Html.DisplayFor(model => model.Training.EnablePreTest)
-                                        </dd>
+                                            <dt class="col-sm-2">
+                                                @Html.DisplayNameFor(model => model.Training.PreTestInstruction)
+                                            </dt>
+                                            <dd class="col-sm-10">
+                                                @Html.DisplayFor(model => model.Training.PreTestInstruction)
+                                            </dd>
 
-                                        <dt class="col-sm-2">
-                                            @Html.DisplayNameFor(model => model.Training.PreTestInstruction)
-                                        </dt>
-                                        <dd class="col-sm-10">
-                                            @Html.DisplayFor(model => model.Training.PreTestInstruction)
-                                        </dd>
+                                            <dt class="col-sm-2">
+                                                @Html.DisplayNameFor(model => model.Training.EnablePostTest)
+                                            </dt>
+                                            <dd class="col-sm-10">
+                                                @Html.DisplayFor(model => model.Training.EnablePostTest)
+                                            </dd>
 
-                                        <dt class="col-sm-2">
-                                            @Html.DisplayNameFor(model => model.Training.EnablePostTest)
-                                        </dt>
-                                        <dd class="col-sm-10">
-                                            @Html.DisplayFor(model => model.Training.EnablePostTest)
-                                        </dd>
+                                            <dt class="col-sm-2">
+                                                @Html.DisplayNameFor(model => model.Training.PostTestInstruction)
+                                            </dt>
+                                            <dd class="col-sm-10">
+                                                @Html.DisplayFor(model => model.Training.PostTestInstruction)
+                                            </dd>
+                                            <dt class="col-sm-2">
+                                                @Html.DisplayNameFor(model => model.Training.EvaluationInstruction)
+                                            </dt>
+                                            <dd class="col-sm-10">
+                                                @Html.Raw(Model.Training.PostTestInstruction)
+                                            </dd>
 
-                                        <dt class="col-sm-2">
-                                            @Html.DisplayNameFor(model => model.Training.PostTestInstruction)
-                                        </dt>
-                                        <dd class="col-sm-10">
-                                            @Html.DisplayFor(model => model.Training.PostTestInstruction)
-                                        </dd>
-                                        <dt class="col-sm-2">
-                                            @Html.DisplayNameFor(model => model.Training.EvaluationInstruction)
-                                        </dt>
-                                        <dd class="col-sm-10">
-                                            @Html.Raw(Model.Training.PostTestInstruction)
-                                        </dd>
+                                            <dt class="col-sm-2">
+                                                @Html.DisplayNameFor(model => model.Training.SignInStartTime)
+                                            </dt>
+                                            <dd class="col-sm-10">
+                                                @Html.DisplayFor(model => model.Training.SignInStartTime)
+                                            </dd>
+
+                                            <dt class="col-sm-2">
+                                                @Html.DisplayNameFor(model => model.Training.SignInStopTime)
+                                            </dt>
+                                            <dd class="col-sm-10">
+                                                @Html.DisplayFor(model => model.Training.SignInStopTime)
+                                            </dd>
+
+                                            <dt class="col-sm-2">
+                                                @Html.DisplayNameFor(model => model.Training.SignOutStartTime)
+                                            </dt>
+                                            <dd class="col-sm-10">
+                                                @Html.DisplayFor(model => model.Training.SignOutStartTime)
+                                            </dd>
+
+                                            <dt class="col-sm-2">
+                                                @Html.DisplayNameFor(model => model.Training.SignOutStopTime)
+                                            </dt>
+                                            <dd class="col-sm-10">
+                                                @Html.DisplayFor(model => model.Training.SignOutStopTime)
+                                            </dd>
+                                        }
                                     </dl>
                                 </div>
                                 

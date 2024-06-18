@@ -11,9 +11,9 @@ namespace Application.Commands.DialyActivityCommand
 {
     public sealed class AddDialyActivityCommand : IRequest
     {
-        public AddDialyActivityCommand(DialyActivity dialyActivity)
+        public AddDialyActivityCommand(DialyActivity dailyActivity)
         {
-            DialyActivity = dialyActivity;
+            DialyActivity = dailyActivity;
         }
 
         public DialyActivity DialyActivity { get; set; }
@@ -23,19 +23,19 @@ namespace Application.Commands.DialyActivityCommand
 
     public class AddDialyActivityCommandHandler : IRequestHandler<AddDialyActivityCommand>
     {
-        private readonly IDialyActivityRepository _dialyActivityRepository;
+        private readonly IDialyActivityRepository _dailyActivityRepository;
 
-        public AddDialyActivityCommandHandler(IDialyActivityRepository dialyActivityRepository)
+        public AddDialyActivityCommandHandler(IDialyActivityRepository dailyActivityRepository)
         {
-            _dialyActivityRepository = dialyActivityRepository;
+            _dailyActivityRepository = dailyActivityRepository;
         }
 
         public async Task Handle(AddDialyActivityCommand request, CancellationToken cancellationToken)
         {
-            var check = await _dialyActivityRepository.GetActivityByTrainingIdAndDate(request.DialyActivity.TrainingId, request.DialyActivity.Date);
+            var check = await _dailyActivityRepository.GetActivityByTrainingIdAndDate(request.DialyActivity.TrainingId, request.DialyActivity.Date);
             if (check == null)
             {
-                await _dialyActivityRepository.AddAsync(request.DialyActivity);
+                await _dailyActivityRepository.AddAsync(request.DialyActivity);
             }
 
         }

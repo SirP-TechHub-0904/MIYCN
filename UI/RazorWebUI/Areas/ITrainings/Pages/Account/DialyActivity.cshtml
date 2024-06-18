@@ -33,8 +33,9 @@
                             </th>
                             <th>Date</th>
                             <th>Time</th>
-                            <th>Attendance (P/A/E)</th>
-                            
+                            <th>Sign In</th>
+                            <th>Sign Out</th>
+
                         </tr>
                     </thead>
 
@@ -58,7 +59,7 @@
 
                                     </a>
                                     <a asp-page="./Evaluation" asp-route-id="@item.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">Evaluation</a>
-                                    
+
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Title)
@@ -75,21 +76,22 @@
                                         @if (item.Attendances.Count() > 0)
                                         {
                                             var presentCount = item.Attendances.FirstOrDefault(x => x.UserId == Model.UserId);
-                                             
+
                                             <span>
-                                                @if (presentCount.AttendanceStatus == Domain.Models.EnumStatus.AttendanceStatus.Absent)
-                                                {
-                                                    <span><i class="fa fa-times"></i></span>
-                                                }
-                                                else if (presentCount.AttendanceStatus == Domain.Models.EnumStatus.AttendanceStatus.Present)
+                                                @if (presentCount.AttendanceSignInStatus == Domain.Models.EnumStatus.AttendanceSignInStatus.Present)
                                                 {
                                                     <span><i class="fa fa-check"></i></span>
                                                 }
-                                                else if (presentCount.AttendanceStatus == Domain.Models.EnumStatus.AttendanceStatus.Excused)
+                                                else if (presentCount.AttendanceSignInStatus == Domain.Models.EnumStatus.AttendanceSignInStatus.Absent)
                                                 {
-                                                    <span>E</span>
+                                                    <span><i class="fa fa-times"></i></span>
                                                 }
-                                                
+                                                else if (presentCount.AttendanceSignInStatus == Domain.Models.EnumStatus.AttendanceSignInStatus.Null)
+                                                {
+                                                    <span>---</span>
+                                                }
+
+
                                             </span>
                                         }
                                     }
@@ -98,7 +100,37 @@
                                         <span>0/0/0</span>
                                     }
                                 </td>
-                                 
+
+                                <td>
+                                    @if (item.Attendances != null)
+                                    {
+                                        @if (item.Attendances.Count() > 0)
+                                        {
+                                            var presentCount = item.Attendances.FirstOrDefault(x => x.UserId == Model.UserId);
+
+                                            <span>
+                                                @if (presentCount.AttendanceSignOutStatus == Domain.Models.EnumStatus.AttendanceSignOutStatus.Present)
+                                                {
+                                                    <span><i class="fa fa-check"></i></span>
+                                                }
+                                                else if (presentCount.AttendanceSignOutStatus == Domain.Models.EnumStatus.AttendanceSignOutStatus.Absent)
+                                                {
+                                                    <span><i class="fa fa-times"></i></span>
+                                                }
+                                                else if (presentCount.AttendanceSignOutStatus == Domain.Models.EnumStatus.AttendanceSignOutStatus.Null)
+                                                {
+                                                    <span>---</span>
+                                                }
+
+                                            </span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span>0/0/0</span>
+                                    }
+                                </td>
+
 
 
                             </tr>

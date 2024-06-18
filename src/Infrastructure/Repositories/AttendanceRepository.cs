@@ -12,7 +12,7 @@ using static Domain.Models.EnumStatus;
 
 namespace Infrastructure.Repositories
 {
-     public sealed class AttendanceRepository : Repository<Attendance>, IAttendanceRepository
+    public sealed class AttendanceRepository : Repository<Attendance>, IAttendanceRepository
     {
         private readonly AppDbContext _context;
 
@@ -24,8 +24,8 @@ namespace Infrastructure.Repositories
         public async Task<List<Attendance>> GetAttendanceByActivity(long activityId)
         {
             var list = await _context.Attendances
-                .Include(x=>x.User)
-                .Where(x=>x.DialyActivityId == activityId).ToListAsync();
+                .Include(x => x.User)
+                .Where(x => x.DialyActivityId == activityId).ToListAsync();
             return list;
         }
 
@@ -33,7 +33,7 @@ namespace Infrastructure.Repositories
         {
             var list = await _context.Attendances
                  .Include(x => x.User)
-                .Include(x=>x.DialyActivity).Where(x => x.DialyActivity.TrainingId == trainingId).ToListAsync();
+                .Include(x => x.DialyActivity).Where(x => x.DialyActivity.TrainingId == trainingId).ToListAsync();
             return list;
         }
 
@@ -52,8 +52,8 @@ namespace Infrastructure.Repositories
                 .Include(tp => tp.User)
                 .ToListAsync();
 
-            // Get the dialy activities associated with the training
-            var dialyActivities = await _context.DialyActivities
+            // Get the daily activities associated with the training
+            var dailyActivities = await _context.DialyActivities
                 .Where(da => da.TrainingId == trainingId)
                 .Include(da => da.Attendances)
                 .ToListAsync();
@@ -62,7 +62,7 @@ namespace Infrastructure.Repositories
             foreach (var participant in participants)
             {
                 // Check if the participant has already attended the activity on a previous date
-                foreach (var activity in dialyActivities)
+                foreach (var activity in dailyActivities)
                 {
                     // Skip activities whose date has already passed
                     //if (activity.Date <= DateTime.Today)
@@ -86,7 +86,7 @@ namespace Infrastructure.Repositories
                     {
                         UserId = participant.UserId,
                         DialyActivityId = activity.Id,
-                        AttendanceStatus = AttendanceStatus.NILL // or any other status
+                        AttendanceSignInStatus = AttendanceSignInStatus.Null // or any other status
                     });
                 }
             }
@@ -94,7 +94,7 @@ namespace Infrastructure.Repositories
             await _context.SaveChangesAsync(); // Save changes to the database
         }
 
-        public async Task UpdateAttendanceStatus(List<(long attendanceId, AttendanceStatus status)> attendanceData)
+        public async Task UpdateSignInAttendanceStatus(List<(long attendanceId, AttendanceSignInStatus status)> attendanceData)
         {
             foreach (var (attendanceId, status) in attendanceData)
             {
@@ -103,9 +103,9 @@ namespace Infrastructure.Repositories
                 if (attendance != null)
                 {
                     // Update the AttendanceStatus
-                    attendance.AttendanceStatus = status;
+                    attendance.AttendanceSignInStatus = status;
                     _context.Attach(attendance).State = EntityState.Modified;
-                     
+
                 }
                 else
                 {
@@ -118,6 +118,28 @@ namespace Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task UpdateSignOutAttendanceStatus(List<(long attendanceId, AttendanceSignOutStatus status)> attendanceData)
+        {
+            foreach (var (attendanceId, status) in attendanceData)
+            {
+                // Retrieve the Attendance record by its ID
+                var attendance = await _context.Attendances.FindAsync(attendanceId);
+                if (attendance != null)
+                {
+                    // Update the AttendanceStatus
+                    attendance.AttendanceSignOutStatus = status;
+                    _context.Attach(attendance).State = EntityState.Modified;
 
+                }
+                else
+                {
+                    // Handle the case where the provided attendanceId is not found
+                    throw new ArgumentException($"Attendance record with ID {attendanceId} not found.");
+                }
+            }
+
+            // Save changes to the database
+            await _context.SaveChangesAsync();
+        }
     }
 }

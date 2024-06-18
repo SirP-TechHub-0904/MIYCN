@@ -14,8 +14,13 @@ namespace Domain.Models
         [Display(Name = "User")]
         public string? UserId { get; set; }
         public AppUser User { get; set; }
-        [Display(Name = "Attendance Status")]
-        public AttendanceStatus AttendanceStatus { get; set; }
+        [Display(Name = "SignIn Status")]
+        public AttendanceSignInStatus AttendanceSignInStatus { get; set; }
+
+        [Display(Name = "SignOut Status")]
+        public AttendanceSignOutStatus AttendanceSignOutStatus { get; set; }
+
+
         [Display(Name = "Dialy Activity")]
         public long DialyActivityId { get; set; }
         [Display(Name = "Dialy Activity")]

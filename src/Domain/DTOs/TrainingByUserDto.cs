@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,5 +25,19 @@ namespace Domain.DTOs
         public string? TrainingState { get; set; }
         public string? TrainingLGA { get; set; }
         public TrainingStatus TrainingStatus { get; set; }
+
+
+        [Display(Name = "SignInStop Start Time")]
+        public TimeSpan SignInStartTime { get; set; }
+        [Display(Name = "SignIn Stop Time")]
+        public TimeSpan SignInStopTime { get; set; }
+
+
+
+
+        [Display(Name = "SignOutStop Start Time")]
+        public TimeSpan SignOutStartTime { get; set; }
+        [Display(Name = "SignOut Stop Time")]
+        public TimeSpan SignOutStopTime { get; set; }
     }
 }

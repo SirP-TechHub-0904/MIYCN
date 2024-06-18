@@ -11,12 +11,12 @@ namespace Application.Commands.DialyUserEvaluationCommand
 {
     public sealed class UpdateDialyUserEvaluationListCommand : IRequest
     {
-        public UpdateDialyUserEvaluationListCommand(List<(long questionId, string answer, string userId, long dialyId)> testeData)
+        public UpdateDialyUserEvaluationListCommand(List<(long questionId, string answer, string userId, long dailyId)> testeData)
         {
             TesteData = testeData;
         }
 
-        public List<(long questionId, string answer, string userId, long dialyId)> TesteData { get; set; }
+        public List<(long questionId, string answer, string userId, long dailyId)> TesteData { get; set; }
     }
 
     public class UpdateDialyUserEvaluationListCommandHandler : IRequestHandler<UpdateDialyUserEvaluationListCommand>

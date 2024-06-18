@@ -14,6 +14,7 @@ namespace Domain.Interfaces
         Task<List<Attendance>> GetAttendanceByActivity(long activityId);
         Task<List<Attendance>> GetAttendanceByTraining(long trainingId);
         Task ValidateUserToTrainingAttendance(long trainingId);
-        Task UpdateAttendanceStatus(List<(long attendanceId, AttendanceStatus status)> attendanceData);
+        Task UpdateSignInAttendanceStatus(List<(long attendanceId, AttendanceSignInStatus status)> attendanceData);
+        Task UpdateSignOutAttendanceStatus(List<(long attendanceId, AttendanceSignOutStatus status)> attendanceData);
     }
 }

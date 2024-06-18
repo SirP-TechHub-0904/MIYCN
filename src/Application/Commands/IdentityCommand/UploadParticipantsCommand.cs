@@ -67,23 +67,30 @@ namespace Application.Commands.IdentityCommand
 
                             };
                             RegisterDto fillregdto = new RegisterDto();
-                            // Remove punctuation marks using Regex
-                            if(emailList.Name != null) { 
-                            string cleanFullName = Regex.Replace(emailList.Name, @"[^\w\s]", "");
+                            if (emailList.Email != null)
+                            {
+                                if (emailList.Phone != null)
+                                {
+                                    // Remove punctuation marks using Regex
+                                    if (emailList.Name != null)
+                                    {
+                                        string cleanFullName = Regex.Replace(emailList.Name, @"[^\w\s]", "");
 
-                            // Split the cleaned full name into words
-                            string[] nameParts = cleanFullName.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                        // Split the cleaned full name into words
+                                        string[] nameParts = cleanFullName.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                            // Assign the first three names to the model
-                            fillregdto.FirstName = nameParts.Length > 0 ? nameParts[0] : string.Empty;
-                            fillregdto.MiddleName = nameParts.Length > 1 ? nameParts[1] : string.Empty;
-                            fillregdto.LastName = nameParts.Length > 2 ? nameParts[2] : string.Empty;
-                            fillregdto.PlaceOfWork = emailList.Office;
-                            fillregdto.Email = emailList.Email;
-                            fillregdto.Phone = emailList.Phone.Replace(" ", string.Empty);
-                            fillregdto.Position = emailList.Role;
+                                        // Assign the first three names to the model
+                                        fillregdto.FirstName = nameParts.Length > 0 ? nameParts[0] : string.Empty;
+                                        fillregdto.MiddleName = nameParts.Length > 1 ? nameParts[1] : string.Empty;
+                                        fillregdto.LastName = nameParts.Length > 2 ? nameParts[2] : string.Empty;
+                                        fillregdto.PlaceOfWork = emailList.Office;
+                                        fillregdto.Email = emailList.Email;
+                                        fillregdto.Phone = emailList.Phone.Replace(" ", string.Empty);
+                                        fillregdto.Position = emailList.Role;
 
-                            registerDto.Add(fillregdto);
+                                        registerDto.Add(fillregdto);
+                                    }
+                                }
                             }
                         }
                     }
@@ -91,11 +98,12 @@ namespace Application.Commands.IdentityCommand
             }
             try
             {
-                foreach(var item in registerDto) { 
-                AddUserByTrainingIdCommand regCommand = new AddUserByTrainingIdCommand(item, item.Position, request.TrainingId, null);
-                var response = await _mediator.Send(regCommand);
+                foreach (var item in registerDto)
+                {
+                    AddUserByTrainingIdCommand regCommand = new AddUserByTrainingIdCommand(item, item.Position, request.TrainingId, null);
+                    var response = await _mediator.Send(regCommand);
                 }
-                 return true;
+                return true;
             }
             catch (Exception ex)
             {
@@ -107,4 +115,4 @@ namespace Application.Commands.IdentityCommand
         }
     }
 
- }
+}

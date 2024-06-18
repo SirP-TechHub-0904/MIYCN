@@ -13,6 +13,7 @@ namespace Domain.Interfaces
     {
         Task<TrainingDto> GetTrainingByIdAndCounts(long id);
         Task<List<TrainingByUserDto>> GetAllTrainingsByUserId(string userId);
+        Task<List<Training>> GetAll(string? state);
 
         Task RemoveTraining(long id);
     }

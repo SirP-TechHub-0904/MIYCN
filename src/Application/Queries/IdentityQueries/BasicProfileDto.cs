@@ -33,6 +33,7 @@ namespace Application.Queries.IdentityQueries
 
         public bool SmsSent { get; set; }
         public bool EmailSent { get; set; }
+        public string? State { get; set; }
 
     }
 }

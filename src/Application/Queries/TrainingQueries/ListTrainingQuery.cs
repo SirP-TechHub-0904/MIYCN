@@ -11,6 +11,14 @@ namespace Application.Queries.TrainingQueries
 {
         public sealed class ListTrainingQuery : IRequest<List<Training>>
     {
+
+        public string State { get; set; }
+
+        public ListTrainingQuery(string state)
+        {
+            State = state;
+        }
+
         public class ListTrainingQueryHandler : IRequestHandler<ListTrainingQuery, List<Training>>
         {
             private readonly ITrainingRepository _repository;
@@ -22,7 +30,7 @@ namespace Application.Queries.TrainingQueries
 
             public async Task<List<Training>> Handle(ListTrainingQuery request, CancellationToken cancellationToken)
             {
-                return await _repository.GetAllAsync();
+                return await _repository.GetAll(request.State);
 
             }
         }

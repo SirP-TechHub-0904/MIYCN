@@ -9,6 +9,6 @@ namespace Domain.Interfaces
 {
     public interface IDashboardRepository  
     {
-        Task<AdminDashboardDto> AdminDashboardData();
+        Task<AdminDashboardDto> AdminDashboardData(string? state);
     }
 }

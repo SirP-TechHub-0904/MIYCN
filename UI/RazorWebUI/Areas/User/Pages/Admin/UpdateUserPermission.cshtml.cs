@@ -24,6 +24,12 @@ namespace RazorWebUI.Areas.User.Pages.Admin
 
         public UserRolesDto UserDatas { get; private set; }
 
+        [BindProperty]
+        public string UserId { get; set; }
+
+        [BindProperty]
+        public string State { get; set; }
+
         public async Task<ActionResult> OnGetAsync(string id)
         {
             if (id == null)
@@ -45,6 +51,26 @@ namespace RazorWebUI.Areas.User.Pages.Admin
             var command = new UpdateUserRoleCommand(userId, id, fullname);
             string userid = await _mediator.Send(command);
             return RedirectToPage("./UpdateUserPermission", new { id = userid });
+        }
+
+        public async Task<IActionResult> OnPostUpdateStateAsync()
+        {
+            if (string.IsNullOrEmpty(UserId) || string.IsNullOrEmpty(State))
+            {
+                TempData["error"] ="State must be provided";
+                var query = new GetUserPermissionListQuery(UserId);
+                UserDatas = await _mediator.Send(query);
+            }
+            var command = new UpdateUserStateCommand(State, UserId);
+            var result = await _mediator.Send(command);
+            if(result.Success) {
+                TempData["success"]  = "Successful";
+            }
+            else
+            {
+                TempData["error"] = "Failed";
+            }
+            return RedirectToPage("./UpdateUserPermission", new { id = UserId });
         }
 
     }

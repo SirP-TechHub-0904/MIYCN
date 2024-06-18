@@ -46,7 +46,7 @@ namespace Application.Commands.IdentityCommand
                 AddUserCommand regCommand = new AddUserCommand(request.RegisterDto, request.Role);
                 regResponse = await _mediator.Send(regCommand);
 
-                if (regResponse.Role == "Participant")
+                if (regResponse.Role.ToLower() == "participant")
                 {
                     TrainingParticipant tmodel = new TrainingParticipant();
                     tmodel.TrainingId = request.TrainingId;
@@ -65,7 +65,7 @@ namespace Application.Commands.IdentityCommand
 
                     }
                 }
-                else if (regResponse.Role == "Facilitator")
+                else if (regResponse.Role.ToLower() == "facilitator")
                 {
                     TrainingFacilitator fmodel = new TrainingFacilitator();
                     fmodel.TrainingId = request.TrainingId;

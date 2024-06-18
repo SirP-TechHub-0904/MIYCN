@@ -21,6 +21,26 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
+        public async Task<List<Training>> GetAll(string? state)
+        {
+            var trainings = await _context.Trainings.ToListAsync();
+ 
+            if (state == "all") {
+                
+            }
+            else
+            {
+                if(state != null) { 
+                trainings = trainings.Where(x => x.State.ToLower() == state.ToLower()).ToList();
+                }
+                else
+                {
+                    trainings = trainings.Where(x => x.State.ToLower() == "").ToList();
+                }
+            }
+            return trainings;
+        }
+
         public async Task<List<TrainingByUserDto>> GetAllTrainingsByUserId(string userId)
         {
             var trainings = await _context.Trainings

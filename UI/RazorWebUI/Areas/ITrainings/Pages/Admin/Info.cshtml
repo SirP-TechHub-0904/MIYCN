@@ -31,7 +31,42 @@
                 <a asp-page="./Download" class="btn bg-gradient-warning btn-sm" style="float:right;">Download Report</a>
 
             </div>
-
+            <div class="card-body">
+                <div class="row">
+                     
+                        <div class="col-md-4 m-border">
+                            <a asp-page="./Participants" asp-route-id="@Model.Training.Id" class="btn btn-primary" style="width:100%;">Participants (@Model.Training.TrainingParticipants)</a>
+                        </div>
+                        <div class="col-md-4 m-border">
+                            <a asp-page="./Facilitators" asp-route-id="@Model.Training.Id" class="btn btn-danger" style="width:100%;">Facilitators/Staff (@Model.Training.TrainingFacilitators)</a>
+                        </div>
+                        <div class="col-md-4 m-border">
+                            <a asp-page="/SponsorPage/Index" asp-route-id="@Model.Training.Id" class="btn btn-warning" style="width:100%;">Sponsors (@Model.Training.Sponsors)</a>
+                        </div>
+                        <div class="col-md-4 m-border">
+                            <a asp-page="./Activities" asp-route-id="@Model.Training.Id" class="btn btn-info" style="width:100%;">Activities (@Model.Training.DialyActivities)</a>
+                        </div>
+                        <div class="col-md-4 m-border">
+                            <a asp-page="./Test" asp-route-id="@Model.Training.Id" class="btn btn-dark" style="width:100%;">Test Result</a>
+                        </div>
+                        <div class="col-md-4 m-border">
+                            <a asp-page="./UpdateSetting" asp-route-trainingId="@Model.Training.Id" class="btn btn-info" style="width:100%;">Update Certificate Setting</a>
+                        </div>
+                        <div class="col-md-4 m-border">
+                            <a asp-page="./ParticipantCertificate" asp-route-id="@Model.Training.Id" class="btn btn-success" style="width:100%;">Participant Certificate</a>
+                        </div>
+                        <div class="col-md-4 m-border">
+                            <a asp-page="/Index" class="btn btn-primary" style="width:100%;">Physical/Digital Designs</a>
+                        </div>
+                        <div class="col-md-4 m-border">
+                            <a asp-page="/TimetablePage/Index" asp-route-id="@Model.Training.Id" class="btn btn-danger" style="width:100%;">TimeTable</a>
+                        </div>
+                        <div class="col-md-4 m-border">
+                            <a asp-page="/GalleryPage/Index" asp-route-id="@Model.Training.Id" class="btn btn-warning" style="width:100%;">Gallery</a>
+                        </div>
+                    
+                </div>
+            </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
@@ -128,36 +163,7 @@
                                         </dd>
                                     </dl>
                                 </div>
-                                <div class="col-md-4 m-border">
-                                    <a asp-page="./Participants" asp-route-id="@Model.Training.Id" class="btn btn-primary" style="width:100%;">Participants (@Model.Training.TrainingParticipants)</a>
-                                </div>
-                                <div class="col-md-4 m-border">
-                                    <a asp-page="./Facilitators" asp-route-id="@Model.Training.Id" class="btn btn-danger" style="width:100%;">Facilitators/Staff (@Model.Training.TrainingFacilitators)</a>
-                                </div>
-                                <div class="col-md-4 m-border">
-                                    <a asp-page="/SponsorPage/Index" asp-route-id="@Model.Training.Id" class="btn btn-warning" style="width:100%;">Sponsors (@Model.Training.Sponsors)</a>
-                                </div>
-                                <div class="col-md-4 m-border">
-                                    <a asp-page="./Activities" asp-route-id="@Model.Training.Id" class="btn btn-info" style="width:100%;">Activities (@Model.Training.DialyActivities)</a>
-                                </div>
-                                <div class="col-md-4 m-border">
-                                    <a asp-page="./Test" asp-route-id="@Model.Training.Id" class="btn btn-dark" style="width:100%;">Test Result</a>
-                                </div>
-                                <div class="col-md-4 m-border">
-                                    <a asp-page="./UpdateSetting" asp-route-trainingId="@Model.Training.Id" class="btn btn-info" style="width:100%;">Update Certificate Setting</a>
-                                </div>
-                                <div class="col-md-4 m-border">
-                                    <a asp-page="./ParticipantCertificate" asp-route-id="@Model.Training.Id" class="btn btn-success" style="width:100%;">Participant Certificate</a>
-                                </div>
-                                <div class="col-md-4 m-border">
-                                    <a asp-page="/Index" class="btn btn-primary" style="width:100%;">Physical/Digital Designs</a>
-                                </div>
-                                <div class="col-md-4 m-border">
-                                    <a asp-page="/TimetablePage/Index" asp-route-id="@Model.Training.Id" class="btn btn-danger" style="width:100%;">TimeTable</a>
-                                </div>
-                                <div class="col-md-4 m-border">
-                                    <a asp-page="/GalleryPage/Index" asp-route-id="@Model.Training.Id" class="btn btn-warning" style="width:100%;">Gallery</a>
-                                </div>
+                                
                             </div> 
                         </div> 
                     </div>
@@ -166,8 +172,11 @@
 
             <div class="card-footer">
                 <a href="javascript:history.back()" class="btn bg-gradient-warning btn-sm">Back</a>
-                <a asp-page="./Update" asp-route-id="@Model.Training.Id" class="btn btn-danger btn-sm">Update</a>
-            </div>
+                @if (User.IsInRole("Admin") || User.IsInRole("mSuperAdmin"))
+                {
+                    <a asp-page="./Update" asp-route-id="@Model.Training.Id" class="btn btn-danger btn-sm">Update</a>
+                }
+                </div>
         </div>
     </div>
 </div>

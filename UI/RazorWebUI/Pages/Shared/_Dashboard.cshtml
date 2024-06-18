@@ -305,7 +305,7 @@
     <div id="overlay" class="overlayspinner">
         <div class="spinner"></div>
     </div>
-    <form asp-area="Identity" id="logoutForm" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Account/Login", new { area = "Identity" })" method="get">
+    <form asp-area="Identity" id="logoutForm" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Account/Login", new { area = "Identity" })" method="post">
     </form>
     <div class="modal fade" tabindex="-1" role="dialog" data-bs-backdrop="static" data-keyboard="false" id="main-form-modal">
         <div class="modal-dialog modal-lg" role="document">

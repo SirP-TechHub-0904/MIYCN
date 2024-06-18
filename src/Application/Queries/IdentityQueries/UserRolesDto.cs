@@ -15,5 +15,6 @@ namespace Application.Queries.IdentityQueries
         public IList<string> RemainingUserRoles { get; set; }
         public AppUser UserInfo { get; set; }
         public string Fullname { get; set; }
+        public string Id { get; set; }
     }
 }

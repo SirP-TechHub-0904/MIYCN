@@ -13,7 +13,13 @@ namespace Application.Queries.DashboardQueries
 {
     public sealed class GetDashboardQuery : IRequest<AdminDashboardDto>
     {
-         
+        public GetDashboardQuery(string state)
+        {
+            State = state;
+        }
+
+        public string State { get; set; }
+
         public class GetDashboardQueryHandler : IRequestHandler<GetDashboardQuery, AdminDashboardDto>
         {
 
@@ -28,7 +34,7 @@ namespace Application.Queries.DashboardQueries
                 request.ThrowIfNull(nameof(request));
 
 
-                AdminDashboardDto data = await _repository.AdminDashboardData();
+                AdminDashboardDto data = await _repository.AdminDashboardData(request.State);
 
                 return data;
             }

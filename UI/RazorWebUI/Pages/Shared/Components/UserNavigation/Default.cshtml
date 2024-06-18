@@ -1,8 +1,8 @@
 ﻿
 
-<li class="nav-header" style="background-color: #c8cacc;border-radius: 4px;font-weight: bolder;color: black;">NAVIGATION</li>
-@if (User.Identity.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("mSuperAdmin") || User.IsInRole("Training"))
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("mSuperAdmin") || User.IsInRole("StateAdmin"))
 {
+    <li class="nav-header" style="background-color: #c8cacc;border-radius: 4px;font-weight: bolder;color: black;">ADMIN MENU</li>
 
     <li class="nav-item">
         <a href="#" class="nav-link">
@@ -69,6 +69,8 @@
     </li>
     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("mSuperAdmin"))
     {
+        <li class="nav-header" style="background-color: #c8cacc;border-radius: 4px;font-weight: bolder;color: black;">PARTICIPANT MENU</li>
+
         <li class="nav-item">
             <a asp-page="/TestQuestions/Index" asp-area="ITrainings" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
@@ -151,189 +153,189 @@
             </a>
         </li>
     }
-        <li class="nav-item">
-            <a asp-page="/Admin/Index" asp-area="Notification" class="nav-link">
-                <i class="nav-icon fas fa-bell"></i>
-                <p>
-                    Notification (4)
-                </p>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
-                <p>
-                    Tools
-                    <i class="right fas fa-angle-left"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-
-                <li class="nav-item">
-                    <a asp-page="/Category/Index" asp-area="SMS" class="nav-link">
-                        <i class="nav-icon fas fa-circle nav-icon"></i>
-                        <p class="uppercase">
-                            SMS Manager
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a asp-page="/SenderIdPage/Index" asp-area="SMS" class="nav-link">
-                        <i class="nav-icon fas fa-circle nav-icon"></i>
-                        <p class="uppercase">
-                            Emails Manager
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a asp-page="/Settings/Index" asp-area="Tools" class="nav-link">
-                        <i class="nav-icon fas fa-circle nav-icon"></i>
-                        <p class="uppercase">
-                            Emails Manager
-                        </p>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-
-    }
-
-    @if (User.Identity.IsAuthenticated && User.IsInRole("Participant") || User.IsInRole("Facilitator"))
-    {
-        <li class="nav-item">
-            <a asp-page="/Account/Index" asp-area="Dashboard" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                    Dashboard
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a asp-page="/Account/Index" asp-area="ITrainings" class="nav-link">
-                <i class="nav-icon fas fa-tree"></i>
-                <p>
-                    Trainings
-                </p>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a asp-page="/Account/ReadModule" asp-area="ITrainings" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
-                <p>
-                    Modules
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a asp-page="/User/Index" asp-area="Certificates" class="nav-link">
-                <i class="nav-icon fas fa-book"></i>
-                <p>
-                    Certificates
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a asp-page="/Account/Index" asp-area="User" class="nav-link">
-                <i class="nav-icon fas fa-user-check"></i>
-                <p>
-                    My Account
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a asp-page="/User/Index" asp-area="Notification" class="nav-link">
-                <i class="nav-icon fas fa-bell"></i>
-                <p>
-                    Notification (4)
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a asp-page="/User/Index" asp-area="Campain" class="nav-link">
-                <i class="nav-icon fas fa-image"></i>
-                <p>
-                    Awareness Campain
-                </p>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a asp-page="/Admin/Expenses" asp-area="ITrainings" class="nav-link">
-                <i class="nav-icon fas fa-edit"></i>
-                <p>
-                    Expenses
-                </p>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
-                <p>
-                    Tools
-                    <i class="right fas fa-angle-left"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-
-                <li class="nav-item">
-                    <a asp-page="/Category/Index" asp-area="SMS" class="nav-link">
-                        <i class="nav-icon fas fa-circle nav-icon"></i>
-                        <p class="uppercase">
-                            SMS Manager
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a asp-page="/SenderIdPage/Index" asp-area="SMS" class="nav-link">
-                        <i class="nav-icon fas fa-circle nav-icon"></i>
-                        <p class="uppercase">
-                            Emails Manager
-                        </p>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-    }
+    <li class="nav-item">
+        <a asp-page="/Admin/Index" asp-area="Notification" class="nav-link">
+            <i class="nav-icon fas fa-bell"></i>
+            <p>
+                Notification (4)
+            </p>
+        </a>
+    </li>
 
     <li class="nav-item">
         <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-user"></i>
+            <i class="nav-icon fas fa-th"></i>
             <p>
-                Account
+                Tools
                 <i class="right fas fa-angle-left"></i>
             </p>
         </a>
         <ul class="nav nav-treeview">
 
             <li class="nav-item">
-                <a asp-page="/Authv2/Auth/TwoFactorAuthentication" asp-area="V2" class="nav-link">
+                <a asp-page="/Category/Index" asp-area="SMS" class="nav-link">
                     <i class="nav-icon fas fa-circle nav-icon"></i>
                     <p class="uppercase">
-                        Two Factor Auth.
+                        SMS Manager
                     </p>
                 </a>
             </li>
             <li class="nav-item">
-                <a asp-page="/Account/Manage/ChangePassword" asp-area="Identity" class="nav-link">
+                <a asp-page="/SenderIdPage/Index" asp-area="SMS" class="nav-link">
                     <i class="nav-icon fas fa-circle nav-icon"></i>
                     <p class="uppercase">
-                        Change Password
+                        Emails Manager
                     </p>
                 </a>
             </li>
-
+            <li class="nav-item">
+                <a asp-page="/Settings/Index" asp-area="Tools" class="nav-link">
+                    <i class="nav-icon fas fa-circle nav-icon"></i>
+                    <p class="uppercase">
+                        Emails Manager
+                    </p>
+                </a>
+            </li>
         </ul>
     </li>
+
+
+}
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("Participant") || User.IsInRole("Facilitator"))
+{
     <li class="nav-item">
-        <a class="nav-link">
-            <i class="nav-icon fas fa-globe"></i>
+        <a asp-page="/Account/Index" asp-area="Dashboard" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
-                Website
+                Dashboard
             </p>
         </a>
     </li>
+    <li class="nav-item">
+        <a asp-page="/Account/Index" asp-area="ITrainings" class="nav-link">
+            <i class="nav-icon fas fa-tree"></i>
+            <p>
+                Trainings
+            </p>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a asp-page="/Account/ReadModule" asp-area="ITrainings" class="nav-link">
+            <i class="nav-icon fas fa-table"></i>
+            <p>
+                Modules
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a asp-page="/User/Index" asp-area="Certificates" class="nav-link">
+            <i class="nav-icon fas fa-book"></i>
+            <p>
+                Certificates
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a asp-page="/Account/Index" asp-area="User" class="nav-link">
+            <i class="nav-icon fas fa-user-check"></i>
+            <p>
+                My Account
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a asp-page="/User/Index" asp-area="Notification" class="nav-link">
+            <i class="nav-icon fas fa-bell"></i>
+            <p>
+                Notification (4)
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a asp-page="/User/Index" asp-area="Campain" class="nav-link">
+            <i class="nav-icon fas fa-image"></i>
+            <p>
+                Awareness Campain
+            </p>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a asp-page="/Admin/Expenses" asp-area="ITrainings" class="nav-link">
+            <i class="nav-icon fas fa-edit"></i>
+            <p>
+                Expenses
+            </p>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+                Tools
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+
+            <li class="nav-item">
+                <a asp-page="/Category/Index" asp-area="SMS" class="nav-link">
+                    <i class="nav-icon fas fa-circle nav-icon"></i>
+                    <p class="uppercase">
+                        SMS Manager
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-page="/SenderIdPage/Index" asp-area="SMS" class="nav-link">
+                    <i class="nav-icon fas fa-circle nav-icon"></i>
+                    <p class="uppercase">
+                        Emails Manager
+                    </p>
+                </a>
+            </li>
+        </ul>
+    </li>
+
+}
+
+<li class="nav-item">
+    <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-user"></i>
+        <p>
+            Account
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+
+        <li class="nav-item">
+            <a asp-page="/Authv2/Auth/TwoFactorAuthentication" asp-area="V2" class="nav-link">
+                <i class="nav-icon fas fa-circle nav-icon"></i>
+                <p class="uppercase">
+                    Two Factor Auth.
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-page="/Account/Manage/ChangePassword" asp-area="Identity" class="nav-link">
+                <i class="nav-icon fas fa-circle nav-icon"></i>
+                <p class="uppercase">
+                    Change Password
+                </p>
+            </a>
+        </li>
+
+    </ul>
+</li>
+<li class="nav-item">
+    <a class="nav-link">
+        <i class="nav-icon fas fa-globe"></i>
+        <p>
+            Website
+        </p>
+    </a>
+</li>

@@ -106,6 +106,8 @@ namespace Domain.Models
         public bool SmsSent { get; set; }
         [Display(Name = "Email Sent")]
         public bool EmailSent { get; set; }
+
+        public string? AssignedState { get; set; }
     }
 
 }

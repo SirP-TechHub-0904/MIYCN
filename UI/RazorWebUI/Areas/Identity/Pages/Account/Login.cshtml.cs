@@ -173,7 +173,7 @@ namespace RazorWebUI.Areas.Identity.Pages.Account
                     var adminrole = await _userManager.IsInRoleAsync(user, "Admin");
                     var useracc = await _userManager.IsInRoleAsync(user, "Facilitator");
                     var Participant = await _userManager.IsInRoleAsync(user, "Participant");
-                    var training = await _userManager.IsInRoleAsync(user, "Training");
+                    var training = await _userManager.IsInRoleAsync(user, "StateAdmin");
 
 
                     var Staff = await _userManager.IsInRoleAsync(user, "Staff");

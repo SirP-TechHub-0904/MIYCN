@@ -5,6 +5,7 @@ using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Claims;
 
 namespace RazorWebUI.Areas.Dashboard.Pages.Admin
 {
@@ -23,7 +24,21 @@ namespace RazorWebUI.Areas.Dashboard.Pages.Admin
 
         public async Task OnGetAsync()
         {
-            var query = new GetDashboardQuery();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            string state = "";
+            var usercommand = new GetUserByIdQuery(userId);
+            var userinfo = await _mediator.Send(usercommand);
+            if (userinfo != null)
+            {
+                state = userinfo.State;
+            }
+            if (User.IsInRole("Admin") || User.IsInRole("mSuperAdmin"))
+            {
+                state = "all";
+            }
+
+            var query = new GetDashboardQuery(state);
             Datas = await _mediator.Send(query);
         }
 

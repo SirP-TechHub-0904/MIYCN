@@ -65,7 +65,8 @@ namespace Application.Queries.IdentityQueries
                 UserRoles = userRoles.ToList(),
                 RemainingUserRoles = remainingRoles,
                 UserInfo = userInfo,
-                Fullname = userInfo.FullnameX
+                Fullname = userInfo.FullnameX,
+                Id = userInfo.Id
             };
         }
     }

@@ -4,6 +4,7 @@ using Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Claims;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 {
@@ -22,7 +23,20 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 
         public async Task OnGetAsync()
         {
-            var query = new ListTrainingQuery();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            string state = "";
+            var usercommand = new GetUserByIdQuery(userId);
+            var userinfo = await _mediator.Send(usercommand);
+            if(userinfo != null)
+            {
+                state = userinfo.State;
+            }
+            if(User.IsInRole("Admin") || User.IsInRole("mSuperAdmin"))
+            {
+                state = "all";
+            }
+            var query = new ListTrainingQuery(state);
             Datas = await _mediator.Send(query);
         }
 

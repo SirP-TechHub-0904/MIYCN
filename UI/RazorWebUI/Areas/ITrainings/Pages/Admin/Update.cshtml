@@ -94,31 +94,39 @@
                         <textarea asp-for="Training.EvaluationInstruction" class="form-control"></textarea>
                         <span asp-validation-for="Training.EvaluationInstruction" class="text-danger"></span>
                     </div>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("mSuperAdmin"))
+                    {
+
+                        <div class="form-group">
+                            <label asp-for="Training.SignInStartTime" class="control-label"></label>
+                            <input asp-for="Training.SignInStartTime" class="form-control" placeholder="00:00" type="time" />
+                            <span asp-validation-for="Training.SignInStartTime" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Training.SignInStopTime" class="control-label"></label>
+                            <input asp-for="Training.SignInStopTime" class="form-control" type="time" />
+                            <span asp-validation-for="Training.SignInStopTime" class="text-danger"></span>
+                        </div>
 
 
-                    <div class="form-group">
-                        <label asp-for="Training.SignInStartTime" class="control-label"></label>
-                        <input asp-for="Training.SignInStartTime" class="form-control" placeholder="00:00" type="time" />
-                        <span asp-validation-for="Training.SignInStartTime" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Training.SignInStopTime" class="control-label"></label>
-                        <input asp-for="Training.SignInStopTime" class="form-control" type="time" />
-                        <span asp-validation-for="Training.SignInStopTime" class="text-danger"></span>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label asp-for="Training.SignOutStartTime" class="control-label"></label>
-                        <input asp-for="Training.SignOutStartTime" class="form-control" placeholder="00:00" type="time" />
-                        <span asp-validation-for="Training.SignOutStartTime" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Training.SignOutStopTime" class="control-label"></label>
-                        <input asp-for="Training.SignOutStopTime" class="form-control" type="time" />
-                        <span asp-validation-for="Training.SignOutStopTime" class="text-danger"></span>
-                    </div>
-
+                        <div class="form-group">
+                            <label asp-for="Training.SignOutStartTime" class="control-label"></label>
+                            <input asp-for="Training.SignOutStartTime" class="form-control" placeholder="00:00" type="time" />
+                            <span asp-validation-for="Training.SignOutStartTime" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Training.SignOutStopTime" class="control-label"></label>
+                            <input asp-for="Training.SignOutStopTime" class="form-control" type="time" />
+                            <span asp-validation-for="Training.SignOutStopTime" class="text-danger"></span>
+                        </div>
+                    }
+                    else
+                    {
+                        <input type="hidden" asp-for="Training.SignInStartTime" />
+                        <input type="hidden" asp-for="Training.SignInStopTime" />
+                        <input type="hidden" asp-for="Training.SignOutStartTime" />
+                        <input type="hidden" asp-for="Training.SignOutStopTime" />
+                    }
 
                     <div class="form-group">
                         <input type="submit" value="Update" class="btn btn-primary" />

@@ -253,14 +253,7 @@
             </p>
         </a>
     </li>
-    <li class="nav-item">
-        <a asp-page="/Account/Index" asp-area="User" class="nav-link">
-            <i class="nav-icon fas fa-user-check"></i>
-            <p>
-                My Account
-            </p>
-        </a>
-    </li>
+ 
     <li class="nav-item">
         <a asp-page="/User/Index" asp-area="Notification" class="nav-link">
             <i class="nav-icon fas fa-bell"></i>
@@ -327,7 +320,14 @@
         </p>
     </a>
     <ul class="nav nav-treeview">
-
+        <li class="nav-item">
+            <a asp-page="/Account/Index" asp-area="User" class="nav-link">
+                <i class="nav-icon fas fa-user-check"></i>
+                <p>
+                    My Account
+                </p>
+            </a>
+        </li>
         <li class="nav-item">
             <a asp-page="/Authv2/Auth/TwoFactorAuthentication" asp-area="V2" class="nav-link">
                 <i class="nav-icon fas fa-circle nav-icon"></i>

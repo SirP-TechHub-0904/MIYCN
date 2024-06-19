@@ -181,7 +181,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
             var command = new UpdateSignOutAttendanceStatusCommand(attendanceData);
             await _mediator.Send(command);
             // Construct the TempData message with the counts
-            string message = $"{presentCount} signin, {absentCount} not available";
+            string message = $"{presentCount} signout, {absentCount} not available";
 
             // Store the message in TempData
             TempData["response"] = message;

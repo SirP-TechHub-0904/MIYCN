@@ -202,10 +202,9 @@
 
             <div class="card-footer">
                 <a href="javascript:history.back()" class="btn bg-gradient-warning btn-sm">Back</a>
-                @if (User.IsInRole("Admin") || User.IsInRole("mSuperAdmin"))
-                {
+               
                     <a asp-page="./Update" asp-route-id="@Model.Training.Id" class="btn btn-danger btn-sm">Update</a>
-                }
+                
                 </div>
         </div>
     </div>

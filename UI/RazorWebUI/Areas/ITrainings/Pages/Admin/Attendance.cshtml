@@ -145,28 +145,69 @@
                                                                     Text = e.ToString(),
                                                                     Selected = e.ToString() == selectedSignInValue
                                                                 });
-                                                        }
-                                                        @if (isSignInWithinTimeRange)
-                                                        {
-                                                            @*@Html.DropDownList($"AttendanceSignInResult_{item.Id}", selectSignInList, new { @class = "form-control", required = "required" })*@
 
-                                                            <div class="form-group">
-                                                                <div class="form-check form-check-inline">
-                                                                    <input class="form-check-input" id="AttendanceSignInResult_@item.Id" name="AttendanceSignInResult_@item.Id" required="required" type="radio" value="3" style=" width: 20px; height: 20px;">
-                                                                    <label class="form-check-label" for="AttendanceSignInResult_@item.Id">Present</label>
+
+                                                        }
+                                                        @if (!item.SignInSubmitted)
+                                                        {
+                                                            if (isSignInWithinTimeRange)
+                                                            {
+                                                                @*@Html.DropDownList($"AttendanceSignInResult_{item.Id}", selectSignInList, new { @class = "form-control", required = "required" })*@
+
+                                                                <div class="form-group">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" id="AttendanceSignInResult_@item.Id" name="AttendanceSignInResult_@item.Id" required="required" type="radio" value="3" style=" width: 20px; height: 20px;">
+                                                                        <label class="form-check-label" for="AttendanceSignInResult_@item.Id">Present</label>
+                                                                    </div>
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" id="AttendanceSignInResult_@item.Id" name="AttendanceSignInResult_@item.Id" required="required" type="radio" value="2" style=" width: 20px; height: 20px;">
+                                                                        <label class="form-check-label" for="AttendanceSignInResult_@item.Id">Absent</label>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="form-check form-check-inline">
-                                                                    <input class="form-check-input" id="AttendanceSignInResult_@item.Id" name="AttendanceSignInResult_@item.Id" required="required" type="radio" value="2" style=" width: 20px; height: 20px;">
-                                                                    <label class="form-check-label" for="AttendanceSignInResult_@item.Id">Absent</label>
-                                                                </div>
-                                                            </div>
+
+                                                            }
+                                                            else
+                                                            {
+                                                                <span>
+                                                                    @if (item.AttendanceSignInStatus == Domain.Models.EnumStatus.AttendanceSignInStatus.Present)
+                                                                    {
+                                                                        <span><i class="fa fa-check"></i></span>
+                                                                    }
+                                                                    else if (item.AttendanceSignInStatus == Domain.Models.EnumStatus.AttendanceSignInStatus.Absent)
+                                                                    {
+                                                                        <span><i class="fa fa-times"></i></span>
+                                                                    }
+                                                                    else if (item.AttendanceSignInStatus == Domain.Models.EnumStatus.AttendanceSignInStatus.Null)
+                                                                    {
+                                                                        <span>---</span>
+                                                                    }
+
+
+                                                                </span>
+                                                            }
+
+
 
                                                         }
                                                         else
                                                         {
-                                                            <h6>@item.AttendanceSignInStatus</h6>
-                                                        }
+                                                            <span>
+                                                                @if (item.AttendanceSignInStatus == Domain.Models.EnumStatus.AttendanceSignInStatus.Present)
+                                                                {
+                                                                    <span><i class="fa fa-check"></i></span>
+                                                                }
+                                                                else if (item.AttendanceSignInStatus == Domain.Models.EnumStatus.AttendanceSignInStatus.Absent)
+                                                                {
+                                                                    <span><i class="fa fa-times"></i></span>
+                                                                }
+                                                                else if (item.AttendanceSignInStatus == Domain.Models.EnumStatus.AttendanceSignInStatus.Null)
+                                                                {
+                                                                    <span>---</span>
+                                                                }
 
+
+                                                            </span>
+                                                        }
                                                     </div>
 
                                                 </td>
@@ -255,26 +296,62 @@
                                                                     Selected = e.ToString() == selectedSignOutValue
                                                                 });
                                                         }
-                                                        @if (isSignOutWithinTimeRange)
+                                                        @if (!item.SignOutSubmitted)
                                                         {
-                                                            @*@Html.DropDownList($"AttendanceSignOutResult_{item.Id}", selectSignOutList, new { @class = "form-control", required = "required" })*@
+                                                            @if (isSignOutWithinTimeRange)
+                                                            {
+                                                                @*@Html.DropDownList($"AttendanceSignOutResult_{item.Id}", selectSignOutList, new { @class = "form-control", required = "required" })*@
 
-                                                            <div class="form-group">
-                                                                <div class="form-check form-check-inline">
-                                                                    <input class="form-check-input" id="AttendanceSignOutResult_@item.Id" name="AttendanceSignOutResult_@item.Id" required="required" type="radio" value="3" style=" width: 20px; height: 20px;">
-                                                                    <label class="form-check-label" for="AttendanceSignOutResult_@item.Id">Present</label>
+                                                                <div class="form-group">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" id="AttendanceSignOutResult_@item.Id" name="AttendanceSignOutResult_@item.Id" required="required" type="radio" value="3" style=" width: 20px; height: 20px;">
+                                                                        <label class="form-check-label" for="AttendanceSignOutResult_@item.Id">Present</label>
+                                                                    </div>
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" id="AttendanceSignOutResult_@item.Id" name="AttendanceSignOutResult_@item.Id" required="required" type="radio" value="2" style=" width: 20px; height: 20px;">
+                                                                        <label class="form-check-label" for="AttendanceSignOutResult_@item.Id">Absent</label>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="form-check form-check-inline">
-                                                                    <input class="form-check-input" id="AttendanceSignOutResult_@item.Id" name="AttendanceSignOutResult_@item.Id" required="required" type="radio" value="2" style=" width: 20px; height: 20px;">
-                                                                    <label class="form-check-label" for="AttendanceSignOutResult_@item.Id">Absent</label>
-                                                                </div>
-                                                            </div>
+                                                            }
+                                                            else
+                                                            {
+                                                    <span>
+                                                        @if (item.AttendanceSignOutStatus == Domain.Models.EnumStatus.AttendanceSignOutStatus.Present)
+                                                        {
+                                                            <span><i class="fa fa-check"></i></span>
+                                                        }
+                                                        else if (item.AttendanceSignOutStatus == Domain.Models.EnumStatus.AttendanceSignOutStatus.Absent)
+                                                        {
+                                                            <span><i class="fa fa-times"></i></span>
+                                                        }
+                                                        else if (item.AttendanceSignOutStatus == Domain.Models.EnumStatus.AttendanceSignOutStatus.Null)
+                                                        {
+                                                            <span>---</span>
+                                                        }
+
+
+                                                    </span>
+                                                            }
                                                         }
                                                         else
                                                         {
-                                                            <h6>@item.AttendanceSignOutStatus</h6>
-                                                        }
+                                                            <span>
+                                                                @if (item.AttendanceSignOutStatus == Domain.Models.EnumStatus.AttendanceSignOutStatus.Present)
+                                                                {
+                                                                    <span><i class="fa fa-check"></i></span>
+                                                                }
+                                                                else if (item.AttendanceSignOutStatus == Domain.Models.EnumStatus.AttendanceSignOutStatus.Absent)
+                                                                {
+                                                                    <span><i class="fa fa-times"></i></span>
+                                                                }
+                                                                else if (item.AttendanceSignOutStatus == Domain.Models.EnumStatus.AttendanceSignOutStatus.Null)
+                                                                {
+                                                                    <span>---</span>
+                                                                }
 
+
+                                                            </span>
+                                                        }
                                                     </div>
 
                                                 </td>

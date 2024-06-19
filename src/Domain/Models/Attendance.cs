@@ -16,10 +16,11 @@ namespace Domain.Models
         public AppUser User { get; set; }
         [Display(Name = "SignIn Status")]
         public AttendanceSignInStatus AttendanceSignInStatus { get; set; }
+        public bool SignInSubmitted { get; set; }
 
         [Display(Name = "SignOut Status")]
         public AttendanceSignOutStatus AttendanceSignOutStatus { get; set; }
-
+        public bool SignOutSubmitted { get; set; }
 
         [Display(Name = "Dialy Activity")]
         public long DialyActivityId { get; set; }

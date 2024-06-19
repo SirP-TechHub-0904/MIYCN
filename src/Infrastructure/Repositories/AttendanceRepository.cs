@@ -104,6 +104,7 @@ namespace Infrastructure.Repositories
                 {
                     // Update the AttendanceStatus
                     attendance.AttendanceSignInStatus = status;
+                    attendance.SignInSubmitted = true;
                     _context.Attach(attendance).State = EntityState.Modified;
 
                 }
@@ -128,6 +129,7 @@ namespace Infrastructure.Repositories
                 {
                     // Update the AttendanceStatus
                     attendance.AttendanceSignOutStatus = status;
+                    attendance.SignOutSubmitted = true;
                     _context.Attach(attendance).State = EntityState.Modified;
 
                 }

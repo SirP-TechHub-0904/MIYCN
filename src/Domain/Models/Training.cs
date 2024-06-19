@@ -46,7 +46,7 @@ namespace Domain.Models
         public string? EvaluationInstruction { get; set; }
 
 
-        [Display(Name = "SignInStop Start Time")]
+        [Display(Name = "SignIn Start Time")]
         public TimeSpan SignInStartTime { get; set; }
         [Display(Name = "SignIn Stop Time")]
         public TimeSpan SignInStopTime { get; set; }
@@ -54,7 +54,7 @@ namespace Domain.Models
 
 
 
-        [Display(Name = "SignOutStop Start Time")]
+        [Display(Name = "SignOut Start Time")]
         public TimeSpan SignOutStartTime { get; set; }
         [Display(Name = "SignOut Stop Time")]
         public TimeSpan SignOutStopTime { get; set; }

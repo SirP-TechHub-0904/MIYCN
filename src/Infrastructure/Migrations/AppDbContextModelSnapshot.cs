@@ -243,6 +243,12 @@ namespace Infrastructure.Migrations
                     b.Property<long>("DialyActivityId")
                         .HasColumnType("bigint");
 
+                    b.Property<bool>("SignInSubmitted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("SignOutSubmitted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -370,14 +376,14 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Answer")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
                     b.Property<long>("DialyActivityId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("DialyEvaluationQuestionId")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
 
                     b.Property<bool>("Submitted")
                         .HasColumnType("bit");

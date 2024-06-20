@@ -41,6 +41,7 @@ namespace Application.Commands.TrainingParticipantCommand
         {
             try
             {
+                
                 var result = await _trainingParticipantRepository.AddParticipant(request.TrainingParticipant);
                 if (result == true)
                 {

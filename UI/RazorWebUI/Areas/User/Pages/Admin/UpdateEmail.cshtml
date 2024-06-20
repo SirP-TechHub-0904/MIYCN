@@ -28,7 +28,15 @@
 
                     <div class="form-group">
                         <input type="submit" value="Change Email" class="btn btn-primary" />
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("mSuperAdmin"))
+                        {
+                            <a asp-page="./Index" class="btn bg-gradient-warning btn-sm" style="float:right;">Back</a>
+                        }
+                        else
+                        {
+                            <a asp-page="/Admin/Index" asp-area="Dashboard" class="btn bg-gradient-warning btn-sm" style="float:right;">Back to Dashboard</a>
 
+                        }
                     </div>
                 </form>
             </div>

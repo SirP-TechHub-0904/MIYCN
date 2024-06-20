@@ -12,6 +12,7 @@ namespace Domain.Interfaces
     public interface ITrainingParticipantRepository : IRepository<TrainingParticipant>
     {
         Task<ParticipantInTrainingDTo> ParticipantInTraining(long trainingId, string userId);
+        Task<bool> CheckParticipantInTraining(long trainingId, string userId);
         Task<List<ParticipantInTrainingDTo>> ParticipantInTraining(long trainingId);
 
         Task<bool> AddParticipant(TrainingParticipant model);

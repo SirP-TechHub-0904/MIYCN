@@ -32,6 +32,11 @@ namespace Infrastructure.Repositories
             return false;
         }
 
+        public Task<bool> CheckParticipantInTraining(long trainingId, string userId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<ParticipantInTrainingDTo> ParticipantInTraining(long trainingId, string userId)
         {
             var participantDto = await _context.TrainingParticipants

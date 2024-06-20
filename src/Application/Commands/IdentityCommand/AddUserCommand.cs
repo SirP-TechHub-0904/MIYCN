@@ -63,6 +63,9 @@ namespace Application.Commands.IdentityCommand
             {
                 regResponse.UserId = checkUserExist.Id;
                 regResponse.Role = checkUserExist.Role;
+                if(regResponse.Role != null) { 
+                regResponse.Success = true;
+                }
                 return regResponse;
             }
             

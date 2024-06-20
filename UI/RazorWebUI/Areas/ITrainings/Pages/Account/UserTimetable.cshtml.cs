@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.Account
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
     public class UserTimetableModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;

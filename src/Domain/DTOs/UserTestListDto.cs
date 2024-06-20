@@ -11,8 +11,8 @@ namespace Domain.DTOs
     {
         public string UserId { get; set; }
         public AppUser User { get; set; }
-        public double PreTestScore {  get; set; } 
-        public double PostTestScore {  get; set; }
+        public string PreTestScore {  get; set; } 
+        public string PostTestScore {  get; set; }
 
         public bool PreTestTaken { get; set; }
         public bool PostTestTaken { get; set; }

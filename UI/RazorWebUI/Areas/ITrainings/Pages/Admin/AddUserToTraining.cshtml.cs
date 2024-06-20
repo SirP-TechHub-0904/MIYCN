@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
 
     public class AddUserToTrainingModel : PageModel
     {

@@ -15,6 +15,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
     public class EvaluationQuestionModel : PageModel
     {
         private readonly IMediator _mediator;

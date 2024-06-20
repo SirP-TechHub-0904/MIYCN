@@ -8,6 +8,8 @@ using System.Security.Claims;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.Account
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;

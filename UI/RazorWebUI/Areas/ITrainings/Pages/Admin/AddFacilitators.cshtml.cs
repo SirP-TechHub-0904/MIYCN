@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
     public class AddFacilitatorsModel : PageModel
     {
         private readonly IMediator _mediator;

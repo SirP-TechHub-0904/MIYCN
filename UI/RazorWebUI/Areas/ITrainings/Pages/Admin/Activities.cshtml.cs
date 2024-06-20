@@ -12,6 +12,8 @@ using System.Text;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
     public class ActivitiesModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;

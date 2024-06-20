@@ -55,11 +55,13 @@ namespace Infrastructure.Repositories
                 bool PostTestTaken = true;
                 // Calculate pre-test score
                 var preTests = group.Where(x => x.TrainingTest.TrainingTestType == TrainingTestType.PreTest).ToList();
-                var preTestScore = 0.0;
+                var preTestScore = "";
                 if (preTests.Count > 0)
                 {
                     var correctPreAnswers = preTests.Count(x => x.Answer == x.TrainingTest.CorrectAnswer);
-                    preTestScore = (double)correctPreAnswers / preTests.Count * 100;
+                    double _preTestScore = (double)correctPreAnswers / preTests.Count * 100;
+
+                    preTestScore = $"{_preTestScore:F0}%";
                 }
                 else
                 {
@@ -68,11 +70,13 @@ namespace Infrastructure.Repositories
 
                 // Calculate post-test score
                 var postTests = group.Where(x => x.TrainingTest.TrainingTestType == TrainingTestType.PostTest).ToList();
-                var postTestScore = 0.0;
+                var postTestScore = "";
                 if (postTests.Count > 0)
                 {
                     var correctPostAnswers = postTests.Count(x => x.Answer == x.TrainingTest.CorrectAnswer);
-                    postTestScore = (double)correctPostAnswers / postTests.Count * 100;
+                   double _postTestScore = (double)correctPostAnswers / postTests.Count * 100;
+
+                     postTestScore = $"{_postTestScore:F0}%";
                 }
                 else
                 {
@@ -111,8 +115,10 @@ namespace Infrastructure.Repositories
                 int correctAnswers = userresult.Count(x => x.Answer == x.TrainingTest.CorrectAnswer);
 
                 double percentage = (double)correctAnswers / totalQuestions * 100;
+                string scorePercent = $"{percentage:F0}%";
+
                 result.TotalQuestions = totalQuestions;
-                result.PercentageResult = percentage;
+                result.PercentageResult = scorePercent;
             }
 
             

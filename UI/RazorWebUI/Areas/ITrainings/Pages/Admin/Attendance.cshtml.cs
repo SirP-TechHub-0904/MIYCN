@@ -12,6 +12,8 @@ using static Domain.Models.EnumStatus;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
     public class AttendanceModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;

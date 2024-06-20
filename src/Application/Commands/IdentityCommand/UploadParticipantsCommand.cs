@@ -84,7 +84,7 @@ namespace Application.Commands.IdentityCommand
                                         fillregdto.MiddleName = nameParts.Length > 1 ? nameParts[1] : string.Empty;
                                         fillregdto.LastName = nameParts.Length > 2 ? nameParts[2] : string.Empty;
                                         fillregdto.PlaceOfWork = emailList.Office;
-                                        fillregdto.Email = emailList.Email;
+                                        fillregdto.Email = emailList.Email.Replace(" ", "");
                                         fillregdto.Phone = emailList.Phone.Replace(" ", string.Empty);
                                         fillregdto.Position = emailList.Role;
 

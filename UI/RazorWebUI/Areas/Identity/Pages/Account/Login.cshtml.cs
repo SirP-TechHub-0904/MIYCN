@@ -17,21 +17,24 @@ using Microsoft.Extensions.Logging;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using MediatR;
+using Application.Queries.IdentityQueries;
 
 namespace RazorWebUI.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
         private readonly UserManager<AppUser> _userManager;
-
+        private readonly IMediator _mediator;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<AppUser> signInManager, ILogger<LoginModel> logger, UserManager<AppUser> userManager)
+        public LoginModel(SignInManager<AppUser> signInManager, ILogger<LoginModel> logger, UserManager<AppUser> userManager, IMediator mediator)
         {
             _signInManager = signInManager;
             _logger = logger;
             _userManager = userManager;
+            _mediator = mediator;
         }
 
         /// <summary>
@@ -109,8 +112,7 @@ namespace RazorWebUI.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl)
         {
-
-            var user = await _userManager.FindByEmailAsync(Input.Email);
+             var user = await _userManager.FindByEmailAsync(Input.Email);
             if (user != null)
             {
 

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
     //public class  : PageModel
     public class RemoveModel : PageModel
     {

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Domain.Models.EnumStatus;
 
 namespace Application.Queries.IdentityQueries
 {
@@ -30,13 +31,29 @@ namespace Application.Queries.IdentityQueries
 
         public async Task<IEnumerable<ProfileDto>> Handle(GetUserListByRoleDto request, CancellationToken cancellationToken)
         {
-             
+
+
+            //    var UserDatas = _userManager.Users
+            //.Where(x => x.Email != "universaadmin@miycn.ng" && x.Email != "jinmcever@miycn.ng")
+            //.AsEnumerable()
+            //.Where(x => x.Role.Contains(request.Role))
+            //.ToList();
+
+            //    var UserDatasList = UserDatas.Select(x => new ProfileDto
+            //    {
+            //        Fullname = x.FirstName + " " + x.MiddleName + " " + x.LastName,
+            //        Phone = x.PhoneNumber,
+            //        Email = x.Email,
+            //        Status = x.UserStatus,
+            //        Id = x.Id,
+            //        Category = x.Role
+            //    });
 
             var UserDatas = _userManager.Users
-        .Where(x => x.Email != "universaadmin@miycn.ng" && x.Email != "jinmcever@miycn.ng")
-        .AsEnumerable()
-        .Where(x => x.Role.Contains(request.Role))
-        .ToList();
+    .Where(x => x.Email != "universaadmin@miycn.ng" && x.Email != "jinmcever@miycn.ng")
+    .AsEnumerable()
+    .Where(x => x.Role != null && x.Role.Contains(request.Role))
+    .ToList();
 
             var UserDatasList = UserDatas.Select(x => new ProfileDto
             {
@@ -47,6 +64,8 @@ namespace Application.Queries.IdentityQueries
                 Id = x.Id,
                 Category = x.Role
             });
+
+
             return UserDatasList;
         }
     }

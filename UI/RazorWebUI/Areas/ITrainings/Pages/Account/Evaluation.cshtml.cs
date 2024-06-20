@@ -15,6 +15,8 @@ using System.Text;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.Account
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
     public class EvaluationModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;

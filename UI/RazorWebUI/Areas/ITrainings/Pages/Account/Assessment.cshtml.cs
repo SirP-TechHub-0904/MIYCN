@@ -6,6 +6,7 @@ using Domain.DTOs;
 using Domain.Models;
 using Infrastructure.Migrations;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -14,6 +15,7 @@ using System.Text;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.Account
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
     public class AssessmentModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
@@ -107,7 +109,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Account
             await _mediator.Send(command);
 
             TempData["response"] = "Assessment submitted successfully.";
-            return RedirectToPage("./Success", new { exp = Exampath, id = TrainingId });
+            return RedirectToPage("./Result", new { xty = Exampath, tid = TrainingId });
         }
 
     }

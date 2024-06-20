@@ -66,7 +66,21 @@
                                 </td>
 
                                 <td>
-                                    <a asp-page="/Account/Result" class="btn btn-primary" asp-route-tid="@Model.Training.Id" asp-route-userId="@item.UserId" asp-route-xty="0">
+                                    @if (item.PreTestTaken == false)
+                                    {
+                                        <a asp-page="/Account/Result" class="btn btn-warning" asp-route-tid="@Model.Training.Id" asp-route-userId="@item.UserId" asp-route-xty="0">
+
+                                            <span>Not Taken</span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-page="/Account/Result" class="btn btn-primary" asp-route-tid="@Model.Training.Id" asp-route-userId="@item.UserId" asp-route-xty="0">
+
+                                            @item.PreTestScore
+                                        </a>
+                                    }
+                                    @*<a asp-page="/Account/Result" class="btn btn-primary" asp-route-tid="@Model.Training.Id" asp-route-userId="@item.UserId" asp-route-xty="0">
                                         @if (item.PreTestTaken == false)
                                         {
                                             <span>Not Taken</span>
@@ -75,11 +89,11 @@
                                         {
                                             @item.PreTestScore
                                         }
-                                    </a>
+                                    </a>*@
                                 </td>
 
                                 <td>
-                                    <a asp-page="/Account/Result" class="btn btn-primary" asp-route-tid="@Model.Training.Id" asp-route-userId="@item.UserId" asp-route-xty="2">
+                                    @*<a asp-page="/Account/Result" class="btn btn-primary" asp-route-tid="@Model.Training.Id" asp-route-userId="@item.UserId" asp-route-xty="2">
                                         @if (item.PostTestTaken == false)
                                         {
                                             <span>Not Taken</span>
@@ -88,7 +102,25 @@
                                         { @item.PostTestScore
 
                                     }
-                                    </a>
+                                    </a>*@
+
+
+
+
+                                    @if (item.PostTestTaken == false)
+                                    {
+                                        <a asp-page="/Account/Result" class="btn btn-warning" asp-route-tid="@Model.Training.Id" asp-route-userId="@item.UserId" asp-route-xty="2">
+
+                                            <span>Not Taken</span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-page="/Account/Result" class="btn btn-primary" asp-route-tid="@Model.Training.Id" asp-route-userId="@item.UserId" asp-route-xty="2">
+
+                                            @item.PostTestScore
+                                        </a>
+                                    }
                                 </td>
 
 

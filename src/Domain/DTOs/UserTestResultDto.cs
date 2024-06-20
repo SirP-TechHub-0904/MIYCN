@@ -10,7 +10,7 @@ namespace Domain.DTOs
     public class UserTestResultDto
     {
         public List<UserTest> UserTest { get; set; }
-        public double PercentageResult { get; set; }
+        public string PercentageResult { get; set; }
         public int TotalQuestions { get; set; }
     }
 }

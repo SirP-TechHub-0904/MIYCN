@@ -37,7 +37,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
             var query = new GetByIdDialyActivityQuery(aid);
             DialyActivity = await _mediator.Send(query);
 
-            ListDialyUserEvaluationQuery Command = new ListDialyUserEvaluationQuery();
+            ListDialyUserEvaluationQuery Command = new ListDialyUserEvaluationQuery(aid);
             DialyUserEvaluation = await _mediator.Send(Command);
 
             DialyUserEvaluation = DialyUserEvaluation.Where(x=>x.DialyActivity.Date.Date == DialyActivity.Date.Date).ToList();

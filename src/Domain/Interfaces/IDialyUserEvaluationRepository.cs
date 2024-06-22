@@ -19,6 +19,6 @@ namespace Domain.Interfaces
 
         Task<DialyUserEvaluationResultDto> DialyUserEvaluationResult(long dailyId, string userId);
 
-        Task<List<DialyUserEvaluation>> GetAll();
+        Task<List<DialyUserEvaluation>> GetAll(long id);
     }
 }

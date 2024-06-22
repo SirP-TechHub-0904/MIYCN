@@ -105,7 +105,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Account
 
             TempData["success"] = "Evaluation submitted successfully.";
             //return RedirectToPage("./Success", new { exp = 3, id = TrainingId });
-            return RedirectToPage("./DialyActivity", new { id = DialyId });
+            return RedirectToPage("./DialyActivity", new { id = TrainingId });
         }
 
     }

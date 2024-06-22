@@ -24,8 +24,8 @@ namespace Infrastructure.Repositories
 
         public async Task<bool> CheckIfEvaluationHasBeenTaken(long eveluationQuestionId)
         {
-           var result = await _context.DialyUserEvaluations.FirstOrDefaultAsync(x=>x.DialyEvaluationQuestionId == eveluationQuestionId);
-            if(result == null)
+            var result = await _context.DialyUserEvaluations.FirstOrDefaultAsync(x => x.DialyEvaluationQuestionId == eveluationQuestionId);
+            if (result == null)
             {
                 return false;
             }
@@ -52,7 +52,7 @@ namespace Infrastructure.Repositories
 
             result.UserTest = userresult;
 
-             
+
 
 
             return result;
@@ -73,7 +73,8 @@ namespace Infrastructure.Repositories
                         DialyActivityId = dailyId,
                         Answer = answer,
                         DialyEvaluationQuestionId = questionId,
-                        Submitted = true
+                        Submitted = true,
+                        Date = DateTime.UtcNow.AddHours(1)
                     };
                     await _context.DialyUserEvaluations.AddAsync(newEvaluation);
                 }
@@ -102,11 +103,14 @@ namespace Infrastructure.Repositories
             //await _context.SaveChangesAsync();
         }
 
-        public async Task<List<DialyUserEvaluation>> GetAll()
+        public async Task<List<DialyUserEvaluation>> GetAll(long id)
         {
-            var list = await _context.DialyUserEvaluations.Include(x=>x.User)
-                .Include(x=>x.DialyEvaluationQuestion)
-                .Include(x=>x.DialyActivity)
+            var list = await _context.DialyUserEvaluations.Include(x => x.User)
+                .Include(x => x.DialyEvaluationQuestion)
+                .Include(x => x.DialyActivity)
+                .Where(x => x.DialyActivityId == id)
+                .GroupBy(x => x.UserId)
+        .Select(g => g.First())
                 .ToListAsync();
             return list;
         }

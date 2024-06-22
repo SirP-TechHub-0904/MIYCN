@@ -74,7 +74,15 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
             var moduletopics = new ListModuleTopicQuery();
             var listmoduletopics = await _mediator.Send(moduletopics);
 
+            listmoduletopics.Where(x=>x.Module != null).ToList();
+            listmoduletopics.Where(x =>x.Module.Title != null).ToList();
+
+
+
+
             ModuleTopicDropdownDto = listmoduletopics
+                .Where(eq => eq != null && eq.Title != null && eq.Module != null && eq.Module.Title != null)
+
             .Select(eq => new SelectListItem
             {
                 Value = eq.Title.ToString(),

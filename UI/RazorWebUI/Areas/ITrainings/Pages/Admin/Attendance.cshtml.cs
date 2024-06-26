@@ -52,10 +52,10 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 
             GetByIdTrainingQuery Command = new GetByIdTrainingQuery(id);
             Training = await _mediator.Send(Command);
-
+            if(Training.TrainingStatus != TrainingStatus.Completed) {
             ValidateUserToTrainingAttendanceCommand queryAttendance = new ValidateUserToTrainingAttendanceCommand(id);
             await _mediator.Send(queryAttendance);
-
+            }
             var query = new ListAttendanceByActivityIdQuery(aid);
             Datas = await _mediator.Send(query);
 

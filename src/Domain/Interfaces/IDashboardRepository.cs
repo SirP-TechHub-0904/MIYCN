@@ -10,5 +10,6 @@ namespace Domain.Interfaces
     public interface IDashboardRepository  
     {
         Task<AdminDashboardDto> AdminDashboardData(string? state);
+        Task<UserDashboardDto> UserDashboardData(string userId);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Domain.Models.EnumStatus;
 
 namespace Domain.Models
 {
@@ -14,6 +15,7 @@ namespace Domain.Models
 
         public long TrainingId { get; set; }
         public Training Training { get; set; }
+        public FacilitatorTrainingStatus FacilitatorTrainingStatus { get; set; }
 
         public string Position {  get; set; } 
     }

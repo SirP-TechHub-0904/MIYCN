@@ -139,7 +139,7 @@ namespace Infrastructure.Repositories
             SignOutStopTime = x.SignOutStopTime,
             Sponsors = x.Sponsors.Count(),
             TrainingFacilitators = x.TrainingFacilitators.Count(),
-            TrainingParticipants = x.TrainingParticipants.Count(),
+            TrainingParticipants = x.TrainingParticipants.Where(x => x.ParticipantTrainingStatus == EnumStatus.ParticipantTrainingStatus.Active).Count(),
             
             DialyActivities = x.DialyActivities.Count(),
             TestCategory = x.TestCategory.Count()

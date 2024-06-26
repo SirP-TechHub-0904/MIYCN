@@ -13,6 +13,7 @@ namespace Domain.Interfaces
     { 
         Task<FacilitatorInTrainingDTo> FacilitatorInTraining(long trainingId, string userId);
         Task<List<FacilitatorInTrainingDTo>> FacilitatorInTraining(long trainingId);
+        Task<List<FacilitatorInTrainingDTo>> AllFacilitator();
 
         Task<bool> AddFacilitator(TrainingFacilitator model);
 

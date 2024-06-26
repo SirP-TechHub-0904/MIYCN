@@ -11,6 +11,7 @@ namespace Domain.DTOs
 {
     public class ParticipantInTrainingDTo
     {
+        public long ParticipantTrainingId { get; set; }
         public string Id { get; set; }
         [Display(Name = "Unique ID")]
         public string? UniqueId { get; set; }
@@ -36,7 +37,7 @@ namespace Domain.DTOs
 
         [Display(Name = "Gender")]
         public GenderStatus Gender { get; set; }
-
+        public ParticipantTrainingStatus ParticipantTrainingStatus { get; set; }
 
         [Display(Name = "Role")]
         public string? Role { get; set; }

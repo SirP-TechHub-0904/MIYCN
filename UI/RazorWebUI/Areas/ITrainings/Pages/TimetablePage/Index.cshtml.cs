@@ -26,12 +26,14 @@ namespace RazorWebUI.Areas.ITrainings.Pages.TimetablePage
 
         [BindProperty]
         public long TrainingId { get; set; }
+
+        public Training Training { get; set; }
         public async Task<IActionResult> OnGetAsync(long id)
         {
             Id =id;
 
             GetByIdTrainingQuery TCommand = new GetByIdTrainingQuery(id);
-           var Training = await _mediator.Send(TCommand);
+            Training = await _mediator.Send(TCommand);
             if (Training == null)
             {
                 return RedirectToPage("/Admin/Index");

@@ -45,7 +45,7 @@
             @Model.Instruction
         </h6>
         <h4>Questions (@Model.UserTestResultDto.TotalQuestions)</h4>
-        <h4>Result (@Model.UserTestResultDto.PercentageResult%)</h4>
+        <h4>Result (@Model.UserTestResultDto.PercentageResult)</h4>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -88,7 +88,7 @@
 
                                 </td>
                                 <td>
-                                     @if (item.Answer == 1)
+                                    @if (item.Answer == 1)
                                     {
                                         <span>Yes</span>
                                     }
@@ -108,6 +108,22 @@
                                     else
                                     {
                                         <span><i class="fa fa-times" style="color:red;"></i></span>
+
+                                        @if (item.TrainingTest.CorrectAnswer == 1)
+                                        {
+                                            <span>(Yes)</span>
+                                        }
+                                        else if (item.TrainingTest.CorrectAnswer == 2)
+                                        {
+                                            <span>(No)</span>
+                                        }
+                                        else if (item.TrainingTest.CorrectAnswer == 3)
+                                        {
+                                <span>(I Don't know)</span>
+                                        }
+
+
+
                                     }
 
 

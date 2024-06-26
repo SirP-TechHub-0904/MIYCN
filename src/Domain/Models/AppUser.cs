@@ -108,6 +108,12 @@ namespace Domain.Models
         public bool EmailSent { get; set; }
 
         public string? AssignedState { get; set; }
+
+        [Display(Name = "Facilitator Role")]
+        public string? FacilitatorRole { get; set; }
+        [Display(Name = "Describe Facilitator Role")]
+        public string? DescribeFacilitatorRole { get; set; }
+
     }
 
 }

@@ -1,14 +1,12 @@
 ﻿@page
-@model RazorWebUI.Areas.User.Pages.Admin.IndexModel
+@model RazorWebUI.Areas.User.Pages.Admin.ListParticipantsModel
 @{
 }
- 
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">USER MANAGER (@Model.Datas.Count())</h3>
-
-
-        <a asp-page="./Add" class="btn bg-gradient-warning btn-sm" style="float:right;">Register New Account</a> 
+        <h3 class="card-title">
+            PARTICIPANTS (@Model.Datas.Count())
+        </h3>
 
     </div>
     <!-- /.card-header -->
@@ -26,9 +24,7 @@
                         <th>Phone</th>
                         <th>Category</th>
                         <th>Status</th>
-
-                        <th>Action</th>
-
+                        <th></th>
                     </tr>
                 </thead>
 
@@ -36,7 +32,7 @@
                     int sn = 0;
                 }
                 <tbody>
-                    @foreach (var item in Model.Datas.OrderBy(x=>x.Fullname))
+                    @foreach (var item in Model.Datas.OrderBy(x => x.FullnameX))
                     {
                         <tr>
 
@@ -47,8 +43,8 @@
                                 @sn
                             </td>
                             <td>
-                                <a asp-page="./Info" asp-route-id="@item.Id">
-                                    @Html.DisplayFor(modelItem => item.Fullname)
+                                <a asp-page="/Admin/Info" asp-route-area="User" asp-route-id="@item.Id">
+                                    @Html.DisplayFor(modelItem => item.FullnameX)
 
                                 </a>
                             </td>
@@ -56,15 +52,15 @@
                                 @Html.DisplayFor(modelItem => item.Email)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Phone)
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Category)
+                                @Html.DisplayFor(modelItem => item.Role)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Status)
-                            </td>
+                                @Html.DisplayFor(modelItem => item.ParticipantTrainingStatus)
 
+                            </td>
                             <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-success">Action</button>
@@ -74,11 +70,8 @@
                                         </button>
                                         <div class="dropdown-menu" style="">
 
-                                            <a class="dropdown-item" asp-page="./Update" asp-route-id="@item.Id">Edit</a>
-                                            <a class="dropdown-item" asp-page="./UpdateEmail" asp-route-id="@item.Id">Update Email</a>
-                                            <a class="dropdown-item" asp-page="./Reset" asp-route-id="@item.Id">Reset Password</a>
-                                            <a class="dropdown-item" asp-page="./RegistrationStatus" asp-route-id="@item.Id">Registration Status</a>
-                                            <a class="dropdown-item" asp-page="./UpdateUserPermission" asp-route-id="@item.Id">Update User Permission</a>
+                                            <a class="dropdown-item" asp-page="./Index" asp-route-id="@item.Id">Back Work Plan</a>
+                                            <a class="dropdown-item" asp-page="./Index" asp-route-id="@item.Id">Certificate</a>
 
                                         </div>
                                     </div>
@@ -86,7 +79,6 @@
 
 
                             </td>
-
                         </tr>
                     }
                 </tbody>

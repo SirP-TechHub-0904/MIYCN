@@ -4,7 +4,7 @@
 }
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">MANAGE TRAININGS</h3>
+        <h3 class="card-title">MANAGE TRAININGS (@Model.Datas.Count())</h3>
 
         @if (User.IsInRole("Admin") || User.IsInRole("mSuperAdmin"))
         {
@@ -39,7 +39,7 @@
                     int sn = 0;
                 }
                 <tbody>
-                    @foreach (var item in Model.Datas)
+                    @foreach (var item in Model.Datas.OrderByDescending(x => x.StartDate))
                     {
                         <tr>
 
@@ -81,9 +81,12 @@
                                         <button type="button" class="btn btn-success dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
                                         </button>
                                         <div class="dropdown-menu" style="">
-                                           
+                                            @if (User.IsInRole("AdminEditor") || item.TrainingStatus != Domain.Models.EnumStatus.TrainingStatus.Completed)
+                                            {
+
                                                 <a class="dropdown-item" asp-page="./Update" asp-route-id="@item.Id">Edit</a>
-                                            
+
+                                            }
                                             <a class="dropdown-item" asp-page="./Sponsors" asp-route-id="@item.Id">Sponsors</a>
                                             <a class="dropdown-item" asp-page="./Facilitators" asp-route-id="@item.Id">Facilitators</a>
                                             <a class="dropdown-item" asp-page="./Participants" asp-route-id="@item.Id">Participants</a>

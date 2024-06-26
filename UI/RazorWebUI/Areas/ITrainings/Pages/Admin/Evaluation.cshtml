@@ -6,12 +6,14 @@
 <div class="card card-default">
     <div class="card-header">
         <h3 class="card-title text-uppercase">
-           DIALY EVALUATION
+            DIALY EVALUATION
         </h3>
         <a asp-page="./ActivityDetails" asp-route-id="@Model.DialyActivity.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">Bact to Activity</a>
-        <a asp-page="./EvaluationQuestion" asp-route-id="@Model.DialyActivity.Id" class="btn bg-gradient-danger btn-sm" style="float:right;">Evaluation Questions</a>
-
-    </div>
+        @if (User.IsInRole("AdminEditor") || Model.Training.TrainingStatus != Domain.Models.EnumStatus.TrainingStatus.Completed)
+        {
+            <a asp-page="./EvaluationQuestion" asp-route-id="@Model.DialyActivity.Id" class="btn bg-gradient-danger btn-sm" style="float:right;">Evaluation Questions</a>
+        }
+        </div>
     <!-- /.card-header -->
     <div class="card-body">
         <h3 class="text-uppercase">Training Information</h3>
@@ -73,12 +75,12 @@
                                 </td>
 
                                 <td>
-                                    <a asp-page="/Account/Resulttt" class="btn btn-primary" asp-route-tid="@Model.Training.Id" asp-route-userId="@item.UserId" asp-route-xty="0">
+                                    <a asp-page="/Account/EvaluationResult" class="btn btn-primary" asp-route-tid="@Model.Training.Id" asp-route-userId="@item.UserId" asp-route-did="@item.DialyActivityId">
                                         View
                                     </a>
                                 </td>
 
-
+ 
 
                             </tr>
                         }

@@ -59,7 +59,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Account
             if (check)
             {
                 TempData["error"] = "Evaluation Already Taken";
-                return RedirectToPage("DialyActivity", new { id = Training.Id });
+                return RedirectToPage("EvaluationResult", new { did = DialyId, userId = userId, tid = TrainingId });
             }
             return Page();
         }
@@ -75,9 +75,9 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Account
             bool check = await _mediator.Send(checkeval);
             if(check) {
                 TempData["error"] = "Evaluation Already Taken";
-                return RedirectToPage("DialyActivity", new {id = TrainingId});
+                return RedirectToPage("EvaluationResult", new {did = DialyId, userId = userId, tid = TrainingId});
             }
-
+            //long did, string userId, long tid
 
             foreach (var key in Request.Form.Keys)
             {
@@ -105,7 +105,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Account
 
             TempData["success"] = "Evaluation submitted successfully.";
             //return RedirectToPage("./Success", new { exp = 3, id = TrainingId });
-            return RedirectToPage("./DialyActivity", new { id = TrainingId });
+            return RedirectToPage("EvaluationResult", new { did = DialyId, userId = userId, tid = TrainingId });
         }
 
     }

@@ -6,10 +6,11 @@
     <div class="card-header">
         <h3 class="card-title">GALLERY</h3>
 
-
-        <a asp-page="./Add" asp-route-id="@Model.Training.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">New Gallery</a>
-
-    </div> 
+        @if (User.IsInRole("AdminEditor") || Model.Training.TrainingStatus != Domain.Models.EnumStatus.TrainingStatus.Completed)
+        {
+            <a asp-page="./Add" asp-route-id="@Model.Training.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">New Gallery</a>
+        }
+        </div> 
     <div class="card-body">
         <h3 class="text-uppercase">Training Information</h3>
         <h3 class="card-title">
@@ -31,11 +32,12 @@
 
                         <th>Image Description</th>
                         <th>Image</th>
-                        
-                        <th></th>
+                        @if (User.IsInRole("AdminEditor") || Model.Training.TrainingStatus != Domain.Models.EnumStatus.TrainingStatus.Completed)
+                        {
+                            <th></th>
+                        }
 
-
-                    </tr>
+                        </tr>
                 </thead>
 
                 @{
@@ -52,30 +54,46 @@
                                 }
                                 @sn
                             </td>
-                            <td> 
-                                    @Html.DisplayFor(modelItem => item.Title)
-                                 
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.ImageDescription)
                             </td>
                             <td>
-                                <a href="@item.ImageUrl">
-                                    <img src="@item.ImageUrl" class="img-fluid" style="max-height:100px;" />
-                                </a>
+                                @{
+                                    string[] imageExtensions = new string[] { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff" };
+                                }
+                                @if (imageExtensions.Any(ext => item.ImageKey.Contains(ext, StringComparison.OrdinalIgnoreCase)))
+                                {
+                                    <a href="@item.ImageUrl">
+                                        <img src="@item.ImageUrl" class="img-fluid" style="max-height:100px;" />
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@item.ImageUrl">
+                                        <video width="320" height="240" controls>
+                                            <source src="@item.ImageUrl" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </a>
+                                }
                             </td>
-                          
-                            <td>
-                                <form method="post" asp-page-handler="Delete">
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <input type="hidden" asp-for="TrainingId" value="@item.TrainingId" />
-                                    <input type="hidden" asp-for="Id" value="@item.Id" />
-                                    <input type="submit" value="Delete" class="btn btn-danger" />
-                                </form>
-                            </td>
+                            @if (User.IsInRole("AdminEditor") || Model.Training.TrainingStatus != Domain.Models.EnumStatus.TrainingStatus.Completed)
+                            {
+                                <td>
+                                    <form method="post" asp-page-handler="Delete">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <input type="hidden" asp-for="TrainingId" value="@item.TrainingId" />
+                                        <input type="hidden" asp-for="Id" value="@item.Id" />
+                                        <input type="submit" value="Delete" class="btn btn-danger" />
+                                    </form>
+                                </td>
+                            }
 
-
-                        </tr>
+                            </tr>
                     }
                 </tbody>
             </table>

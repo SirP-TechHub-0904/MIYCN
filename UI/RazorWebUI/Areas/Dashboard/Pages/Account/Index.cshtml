@@ -12,80 +12,93 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-         <div class="row">
+        <div class="row">
 
             <div class="col-lg-3 col-6 dashboard-1">
                 <!-- small box -->
-                <div class="small-box bg-primary">
-                    <div class="inner">
-                        <h3>0</h3>
+                <a asp-page="/Account/Index" asp-area="ITrainings">
+                    <div class="small-box bg-primary">
+                        <div class="inner">
+                            <h3>@Model.Datas.Trainings</h3>
 
-                        <p>Total Trainings</p>
+                            <p>Total Trainings</p>
+                        </div>
+
                     </div>
-
-                </div>
+                </a>
             </div>
 
             <div class="col-lg-3 col-6 dashboard-1">
                 <!-- small box -->
-                <div class="small-box bg-dark">
-                    <div class="inner">
-                        <h3>0</h3>
+                <a asp-page="/Account/Index" asp-area="ITrainings">
+                    <div class="small-box bg-dark">
+                        <div class="inner">
+                            <h3>@Model.Datas.ActiveTraining</h3>
 
-                        <p>Active Trainings</p>
+                            <p>Active Trainings</p>
+                        </div>
+
                     </div>
-
-                </div>
+                </a>
             </div>
+
 
 
             <div class="col-lg-3 col-6 dashboard-1">
                 <!-- small box -->
-                <div class="small-box bg-green">
-                    <div class="inner">
-                        <h3>0</h3>
+                <a asp-page="/Account/Index" asp-area="ITrainings">
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>@Model.Datas.CompletedTraining</h3>
 
-                        <p>Completed Trainings</p>
+                            <p>Completed Trainings</p>
+                        </div>
+
                     </div>
-
-                </div>
+                </a>
             </div>
             <div class="col-lg-3 col-6 dashboard-1">
                 <!-- small box -->
-                <div class="small-box bg-danger">
-                    <div class="inner">
-                        <h3>0</h3>
+                <a asp-page="/Account/Index" asp-area="ITrainings">
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>@Model.Datas.CancelledTraining</h3>
 
-                        <p>Cancelled Trainings</p>
+                            <p>Cancelled Trainings</p>
+                        </div>
+
                     </div>
-
-                </div>
+                </a>
             </div>
 
-      
+
 
             <div class="col-lg-3 col-6 dashboard-1">
                 <!-- small box -->
-                <div class="small-box bg-success">
-                    <div class="inner">
-                        <h3>0</h3>
+                <a asp-page="/Account/Index" asp-area="ITrainings">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>@Model.Datas.UpcomingTraining</h3>
 
-                        <p>Total Trainings Attended</p>
+                            <p>Upcoming Trainings</p>
+                        </div>
+
                     </div>
-
-                </div>
+                </a>
             </div>
 
             <div class="col-lg-3 col-6 dashboard-1">
                 <!-- small box -->
-                <div class="small-box bg-dark">
-                    <div class="inner">
-                        <h3>0</h3>
+                <a asp-page="/Account/Index" asp-area="ITrainings">
+                    <div class="small-box bg-dark">
+                        <div class="inner">
+                            <h3>0</h3>
 
-                        <p>Total Attendance In Trainings</p>
+                            <p>Total Attendance In Trainings</p>
+                        </div>
+
                     </div>
-
-                </div>
+                </a>
             </div>
 
 

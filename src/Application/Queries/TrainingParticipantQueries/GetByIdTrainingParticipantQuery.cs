@@ -34,7 +34,7 @@ namespace Application.Queries.TrainingParticipantQueries
                 request.ThrowIfNull(nameof(request));
 
 
-                TrainingParticipant data = await _repository.GetByIdAsync(request.Id);
+                TrainingParticipant data = await _repository.GetParticipantById(request.Id);
 
                 return data;
             }

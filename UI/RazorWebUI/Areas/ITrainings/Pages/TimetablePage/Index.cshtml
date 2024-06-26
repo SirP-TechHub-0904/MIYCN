@@ -6,10 +6,11 @@
     <div class="card-header">
         <h3 class="card-title">MANAGE TIMETABLE</h3>
 
-
-        <a asp-page="./Add" asp-route-id="@Model.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">New Timetable</a>
-
-    </div>
+        @if (User.IsInRole("AdminEditor") || Model.Training.TrainingStatus != Domain.Models.EnumStatus.TrainingStatus.Completed)
+        {
+            <a asp-page="./Add" asp-route-id="@Model.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">New Timetable</a>
+        }
+        </div>
     <!-- /.card-header -->
     <div class="card-body">
 
@@ -26,9 +27,11 @@
                         <th>Module</th>
                         <th>Facilitator</th>
                         <th>Publish</th>
-
-                        <th></th>
-                    </tr>
+                        @if (User.IsInRole("AdminEditor") || Model.Training.TrainingStatus != Domain.Models.EnumStatus.TrainingStatus.Completed)
+                        {
+                            <th></th>
+                        }
+                        </tr>
                 </thead>
 
                 @{
@@ -73,17 +76,19 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Publish)
                             </td>
+                            @if (User.IsInRole("AdminEditor") || Model.Training.TrainingStatus != Domain.Models.EnumStatus.TrainingStatus.Completed)
+                            {
+                                <td>
+                                    <form method="post" enctype="multipart/form-data" asp-page-handler="Delete">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <input asp-for="Id" type="hidden" value="@item.Id" />
+                                        <input asp-for="TrainingId" type="hidden" value="@item.TrainingId" />
+                                        <input type="submit" value="Delete" class="btn btn-primary" />
 
-                            <td>
-                                <form method="post" enctype="multipart/form-data" asp-page-handler="Delete">
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <input asp-for="Id" type="hidden" value="@item.Id" />
-                                    <input asp-for="TrainingId" type="hidden" value="@item.TrainingId" />
-                                    <input type="submit" value="Delete" class="btn btn-primary" />
-
-                                </form>
-                            </td>
-                        </tr>
+                                    </form>
+                                </td>
+                            }
+                            </tr>
                     }
                 </tbody>
             </table>

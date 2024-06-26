@@ -90,7 +90,8 @@ namespace Application.Queries.IdentityQueries
                 UpdateExperience = UserDatas.UpdateExperience,
                 UpdateProfile = UserDatas.UpdateProfile,
                  MaritalStatus = UserDatas.MaritalStatus,
-
+                 FacilitatorRole = UserDatas.FacilitatorRole,
+                 DescribeFacilitatorRole = UserDatas.DescribeFacilitatorRole
             };
 
             Zen.Barcode.CodeQrBarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.CodeQr;

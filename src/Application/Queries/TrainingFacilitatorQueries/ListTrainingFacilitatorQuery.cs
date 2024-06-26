@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces;
+﻿using Domain.DTOs;
+using Domain.Interfaces;
 using Domain.Models;
 using MediatR;
 using System;
@@ -9,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Application.Queries.TrainingFacilitatorQueries
 {
-         public sealed class ListTrainingFacilitatorQuery : IRequest<List<TrainingFacilitator>>
+         public sealed class ListTrainingFacilitatorQuery : IRequest<List<FacilitatorInTrainingDTo>>
     {
-        public class ListTrainingFacilitatorQueryHandler : IRequestHandler<ListTrainingFacilitatorQuery, List<TrainingFacilitator>>
+        public class ListTrainingFacilitatorQueryHandler : IRequestHandler<ListTrainingFacilitatorQuery, List<FacilitatorInTrainingDTo>>
         {
             private readonly ITrainingFacilitatorRepository _repository;
 
@@ -20,9 +21,9 @@ namespace Application.Queries.TrainingFacilitatorQueries
                 _repository = repository;
             }
 
-            public async Task<List<TrainingFacilitator>> Handle(ListTrainingFacilitatorQuery request, CancellationToken cancellationToken)
+            public async Task<List<FacilitatorInTrainingDTo>> Handle(ListTrainingFacilitatorQuery request, CancellationToken cancellationToken)
             {
-                return await _repository.GetAllAsync();
+                return await _repository.AllFacilitator();
 
             }
         }

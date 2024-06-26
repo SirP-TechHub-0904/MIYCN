@@ -85,7 +85,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 
             .Select(eq => new SelectListItem
             {
-                Value = eq.Title.ToString(),
+                Value = $"{eq.Title} ({eq.Module.Title})",
                 Text = $"{eq.Title} ({eq.Module.Title})"
             }).ToList();
 

@@ -44,7 +44,10 @@ namespace Application.Queries.IdentityQueries
         [Display(Name = "Role")]
         public string? Role { get; set; }
 
-
+        [Display(Name = "Facilitator Role")]
+        public string? FacilitatorRole { get; set; }
+        [Display(Name = "Describe Facilitator Role")]
+        public string? DescribeFacilitatorRole { get; set; }
 
         [Display(Name = "Current State")]
         public string? CurrentState { get; set; }

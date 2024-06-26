@@ -46,6 +46,17 @@ namespace Domain.Models
             Female = 1,
             Male = 2,
         }
+
+        public enum ParticipantTrainingStatus
+        {
+            Active = 0,
+            Disabled = 1,
+        }
+        public enum FacilitatorTrainingStatus
+        {
+            Active = 0,
+            Disabled = 1,
+        }
         public enum AttendanceSignInStatus
         {
 
@@ -73,7 +84,8 @@ namespace Domain.Models
             Nill = 0,
             Active = 1,
             Completed = 2,
-            Ongoing = 3,
+            Upcoming = 3,
+            Cancelled = 3,
         }
     }
 }

@@ -9,6 +9,8 @@ using System.Security.Claims;
 
 namespace RazorWebUI.Areas.Dashboard.Pages.Admin
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;

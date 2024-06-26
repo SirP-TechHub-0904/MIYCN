@@ -50,7 +50,7 @@ namespace Infrastructure.Repositories
                .Include(x => x.DialyEvaluationQuestion)
                .Where(x => x.DialyActivityId == dailyId && x.UserId == userId).ToListAsync();
 
-            result.UserTest = userresult;
+            result.DialyUserEvaluation = userresult;
 
 
 

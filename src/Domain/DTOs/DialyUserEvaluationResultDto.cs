@@ -9,7 +9,7 @@ namespace Domain.DTOs
 {
     public class DialyUserEvaluationResultDto
     {
-        public List<DialyUserEvaluation> UserTest { get; set; }
+        public List<DialyUserEvaluation> DialyUserEvaluation { get; set; }
         
     }
 }

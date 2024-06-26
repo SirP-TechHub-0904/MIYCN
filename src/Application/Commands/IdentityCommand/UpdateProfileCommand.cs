@@ -58,7 +58,7 @@ namespace Application.Commands.IdentityCommand
             {
                 var user = await _userManager.FindByIdAsync(request.UserId);
                 var userinfo = await _userManager.FindByIdAsync(request.UserId);
- 
+
                 //  code for handling image upload:
                 if (request.ImageFile != null)
                 {
@@ -87,7 +87,7 @@ namespace Application.Commands.IdentityCommand
 
                         var xresult = await _storageService.UploadFileReturnUrlAsync(s3Obj, cred, request.Input.PassportFilePathKey);
                         // 
-                       
+
 
 
 
@@ -100,7 +100,7 @@ namespace Application.Commands.IdentityCommand
                     }
                     catch (Exception c)
                     {
-                        
+
                     }
                 }
                 if (request.ImageIdCard != null)
@@ -130,7 +130,7 @@ namespace Application.Commands.IdentityCommand
 
                         var xresult = await _storageService.UploadFileReturnUrlAsync(s3Obj, cred, request.Input.IdCardKey);
                         //
-                        
+
                         if (xresult.Message.Contains("200"))
                         {
                             userinfo.IdCardUrl = xresult.Url;
@@ -140,7 +140,7 @@ namespace Application.Commands.IdentityCommand
                     }
                     catch (Exception c)
                     {
-                        
+
                     }
                 }
                 // Your remaining logic for updating profile...
@@ -181,7 +181,9 @@ namespace Application.Commands.IdentityCommand
                 userinfo.UpdateEducation = request.Input.UpdateEducation;
                 userinfo.UpdateExperience = request.Input.UpdateExperience;
 
-                
+
+                userinfo.FacilitatorRole = request.Input.FacilitatorRole;
+                userinfo.DescribeFacilitatorRole = request.Input.DescribeFacilitatorRole;
 
                 // Save changes to database
                 await _userManager.UpdateAsync(userinfo);

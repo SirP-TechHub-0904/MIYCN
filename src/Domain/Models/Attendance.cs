@@ -27,5 +27,7 @@ namespace Domain.Models
         [Display(Name = "Dialy Activity")]
         public DialyActivity DialyActivity { get; set; }
 
+
+        public int AccountType { get; set; }
     }
 }

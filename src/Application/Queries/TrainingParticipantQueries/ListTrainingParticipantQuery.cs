@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces;
+﻿using Domain.DTOs;
+using Domain.Interfaces;
 using Domain.Models;
 using MediatR;
 using System;
@@ -9,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Application.Queries.TrainingParticipantQueries
 {
-       public sealed class ListTrainingParticipantQuery : IRequest<List<TrainingParticipant>>
+    public sealed class ListTrainingParticipantQuery : IRequest<List<ParticipantInTrainingDTo>>
     {
-        public class ListTrainingParticipantQueryHandler : IRequestHandler<ListTrainingParticipantQuery, List<TrainingParticipant>>
+        public class ListTrainingParticipantQueryHandler : IRequestHandler<ListTrainingParticipantQuery, List<ParticipantInTrainingDTo>>
         {
             private readonly ITrainingParticipantRepository _repository;
 
@@ -20,9 +21,9 @@ namespace Application.Queries.TrainingParticipantQueries
                 _repository = repository;
             }
 
-            public async Task<List<TrainingParticipant>> Handle(ListTrainingParticipantQuery request, CancellationToken cancellationToken)
+            public async Task<List<ParticipantInTrainingDTo>> Handle(ListTrainingParticipantQuery request, CancellationToken cancellationToken)
             {
-                return await _repository.GetAllAsync();
+                return await _repository.AllParticipants();
 
             }
         }

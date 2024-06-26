@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Domain.Models.EnumStatus;
 
 namespace Infrastructure.Repositories
 {
@@ -28,7 +29,7 @@ namespace Infrastructure.Repositories
             {
                 adminDashboardDto.Trainings = await _context.Trainings.CountAsync();
                 adminDashboardDto.Facilitator = await _context.TrainingFacilitators.CountAsync();
-                adminDashboardDto.Participants = await _context.TrainingParticipants.CountAsync();
+                adminDashboardDto.Participants = await _context.TrainingParticipants.Where(x => x.ParticipantTrainingStatus == ParticipantTrainingStatus.Active).CountAsync();
                 adminDashboardDto.Sponsors = await _context.Sponsors.CountAsync();
             }
             else
@@ -37,7 +38,7 @@ namespace Infrastructure.Repositories
                 {
                     adminDashboardDto.Trainings = await _context.Trainings.Where(x => x.State.ToLower() == state.ToLower()).CountAsync();
                     adminDashboardDto.Facilitator = await _context.TrainingFacilitators.Include(x=>x.Training).Where(x => x.Training.State.ToLower() == state.ToLower()).CountAsync();
-                    adminDashboardDto.Participants = await _context.TrainingParticipants.Include(x => x.Training).Where(x => x.Training.State.ToLower() == state.ToLower()).CountAsync();
+                    adminDashboardDto.Participants = await _context.TrainingParticipants.Include(x => x.Training).Where(x => x.Training.State.ToLower() == state.ToLower() && x.ParticipantTrainingStatus == ParticipantTrainingStatus.Active).CountAsync();
                     adminDashboardDto.Sponsors = await _context.Sponsors.Include(x => x.Training).Where(x => x.Training.State.ToLower() == state.ToLower()).CountAsync();
                      
                 }
@@ -55,6 +56,22 @@ namespace Infrastructure.Repositories
 
 
             return adminDashboardDto;
+        }
+
+        public async Task<UserDashboardDto> UserDashboardData(string userId)
+        {
+            UserDashboardDto UserDashboardDto = new UserDashboardDto();
+            var ptraining = await _context.TrainingParticipants.Include(x=>x.Training).Where(x=>x.UserId == userId).ToListAsync();
+            UserDashboardDto.Trainings = ptraining.Count();
+            UserDashboardDto.ActiveTraining = ptraining.Where(x=>x.Training.TrainingStatus == TrainingStatus.Active).Count();
+            UserDashboardDto.CompletedTraining = ptraining.Where(x=>x.Training.TrainingStatus == TrainingStatus.Completed).Count();
+            UserDashboardDto.CancelledTraining = ptraining.Where(x=>x.Training.TrainingStatus == TrainingStatus.Cancelled).Count();
+            UserDashboardDto.UpcomingTraining = ptraining.Where(x=>x.Training.TrainingStatus == TrainingStatus.Upcoming).Count();
+
+            //var attendance =  _context.Attendances.Where(x=>x.UserId==userId).AsQueryable();
+            //int signinPresent = attendance.Where(x=>x.AttendanceSignInStatus == AttendanceSignInStatus.Absent).Count();
+            //int signinAbsent = attendance.Where(x=>x.AttendanceSignInStatus == AttendanceSignInStatus.Absent).Count();
+            return UserDashboardDto;
         }
     }
 }

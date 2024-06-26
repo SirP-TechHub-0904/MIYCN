@@ -16,7 +16,7 @@
 
             <div class="col-lg-3 col-6 dashboard-1">
                 <!-- small box -->
-                <a asp-page="" asp-area="">
+                <a asp-page="/Admin/Index" asp-area="ITrainings">
                     <div class="small-box bg-primary">
                         <div class="inner">
                             <h3>@Model.Datas.Trainings</h3>
@@ -32,7 +32,7 @@
 
             <div class="col-lg-3 col-6 dashboard-1">
                 <!-- small box -->
-                <a asp-page="" asp-area="">
+                <a asp-page="/Admin/AllFacilitators" asp-area="User">
                     <div class="small-box bg-green">
                         <div class="inner">
                             <h3>@Model.Datas.Facilitator</h3>
@@ -46,7 +46,7 @@
 
             <div class="col-lg-3 col-6 dashboard-1">
                 <!-- small box -->
-                <a asp-page="" asp-area="">
+                <a asp-page="/Admin/ListParticipants" asp-area="User">
                     <div class="small-box bg-danger">
                         <div class="inner">
                             <h3>@Model.Datas.Participants</h3>
@@ -73,7 +73,7 @@
             </div>
             <div class="col-lg-3 col-6 dashboard-1">
                 <!-- small box -->
-                <a asp-page="" asp-area="">
+                <a asp-page="/Admin/AllFacilitators" asp-area="User" asp-route-name="Staff">
                     <div class="small-box bg-primary">
                         <div class="inner">
                             <h3>0</h3>
@@ -87,12 +87,12 @@
 
             <div class="col-lg-3 col-6 dashboard-1">
                 <!-- small box -->
-                <a asp-page="" asp-area="">
+                <a asp-page="/Admin/AllFacilitators" asp-area="User" asp-route-name="StateAdmin">
                     <div class="small-box bg-fuchsia">
                         <div class="inner">
                             <h3>0</h3>
 
-                            <p>Total State Cordinator</p>
+                            <p>Total State Admin</p>
                         </div>
 
                     </div>

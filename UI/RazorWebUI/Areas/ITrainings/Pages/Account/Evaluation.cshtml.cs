@@ -59,7 +59,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Account
             if (check)
             {
                 TempData["error"] = "Evaluation Already Taken";
-                return RedirectToPage("EvaluationResult", new { did = DialyId, userId = userId, tid = TrainingId });
+                return RedirectToPage("EvaluationResult", new { did = DialyActivity.Id, userId = userId, tid = Training.Id });
             }
             return Page();
         }

@@ -10,12 +10,12 @@ namespace Application.Commands.AttendanceCommand
 {
     public sealed class DeleteAttendanceCommand : IRequest
     {
-        public DeleteAttendanceCommand(long id)
+        public DeleteAttendanceCommand(long activityId)
         {
-            Id = id;
+            ActivityId = activityId;
         }
 
-        public long Id { get; set; }
+        public long ActivityId { get; set; }
 
     }
 
@@ -31,9 +31,8 @@ namespace Application.Commands.AttendanceCommand
         public async Task Handle(DeleteAttendanceCommand request, CancellationToken cancellationToken)
         {
 
-            var movie = await _repository.GetByIdAsync(request.Id);
-
-            await _repository.RemoveAsync(movie);
+            await _repository.DeleteAttendanceByActivityId(request.ActivityId);
+             
 
         }
     }

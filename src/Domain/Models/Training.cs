@@ -30,7 +30,7 @@ namespace Domain.Models
         public ICollection<Sponsor> Sponsors { get; set; }
         public ICollection<TrainingFacilitator> TrainingFacilitators { get; set; }
         public ICollection<TrainingParticipant> TrainingParticipants { get; set; }
-        public ICollection<DialyActivity> DialyActivities {  get; set; }
+        public ICollection<DialyActivity> DialyActivities { get; set; }
         public ICollection<TestCategory> TestCategory { get; set; }
         [Display(Name = "Enable Post Test")]
         public bool EnablePostTest { get; set; }
@@ -58,5 +58,62 @@ namespace Domain.Models
         public TimeSpan SignOutStartTime { get; set; }
         [Display(Name = "SignOut Stop Time")]
         public TimeSpan SignOutStopTime { get; set; }
+
+
+        [Display(Name = "Post Test Start Time")]
+        public TimeSpan PostTestStartTime { get; set; }
+
+        //
+        [Display(Name = "Certificate Use Right Side Physical Signature")]
+        public bool CertificateUseRightSidePhysicalSignature { get; set; }
+        [Display(Name = "Certificate Right Side Signature Url")]
+
+        public string? CertificateRightSideSignatureUrl { get; set; }
+        [Display(Name = "Certificate Right Side Signature Key")]
+
+        public string? CertificateRightSideSignatureKey { get; set; }
+        [Display(Name = "Certificate Right Side Name")]
+
+        public string? CertificateRightSideName { get; set; }
+        [Display(Name = "Certificate Right Side Office Position")]
+
+        public string? CertificateRightSideOfficePosition { get; set; }
+        [Display(Name = "Certificate Right Side Office Title")]
+
+        public string? CertificateRightSideOfficeTitle { get; set; }
+
+        //
+        [Display(Name = "Certificate Use Left Side Physical Signature")]
+        public bool CertificateUseLeftSidePhysicalSignature { get; set; }
+        [Display(Name = "Certificate Left Side Signature Url")]
+
+        public string? CertificateLeftSideSignatureUrl { get; set; }
+        [Display(Name = "Certificate Left Side Signature Key")]
+
+        public string? CertificateLeftSideSignatureKey { get; set; }
+        [Display(Name = "Certificate Left Side Name")]
+
+        public string? CertificateLeftSideName { get; set; }
+        [Display(Name = "Certificate Left Side Office Position")]
+
+        public string? CertificateLeftSideOfficePosition { get; set; }
+
+        [Display(Name = "Certificate Left Side Office Title")]
+        public string? CertificateLeftSideOfficeTitle { get; set; }
+        //
+
+        [Display(Name = "Certificate Course Title")]
+        public string? CertificateCourseTitle { get; set; }
+
+        [Display(Name = "Certificate Title")]
+        public string? CertificateTitle { get; set; }
+
+
+        [Display(Name = "Certificate Address")]
+        public string? CertificateAddress { get; set; }
+
+
+        [Display(Name = "Certificate Date")]
+        public string? CertificateDate { get; set; }
     }
 }

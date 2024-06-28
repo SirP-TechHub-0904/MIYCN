@@ -27,7 +27,7 @@ namespace Infrastructure.Repositories
             var list = await _context.Attendances
                 .Include(x => x.User)
                 .Where(x => x.DialyActivityId == activityId).ToListAsync();
-            return list.Where(x=>x.User != null).ToList();
+            return list.Where(x => x.User != null).ToList();
         }
 
         public async Task<List<Attendance>> GetAttendanceByTraining(long trainingId)
@@ -59,8 +59,8 @@ namespace Infrastructure.Repositories
                 .ToListAsync();
 
             //check null
-            participants = participants.Where(x=>x.User != null).ToList();
-            facilitators = facilitators.Where(x=>x.User != null).ToList();
+            participants = participants.Where(x => x.User != null).ToList();
+            facilitators = facilitators.Where(x => x.User != null).ToList();
 
 
 
@@ -87,6 +87,14 @@ namespace Infrastructure.Repositories
                         AccountType = accountType
                     });
                 }
+                //else
+                //{
+                //    if (accountType == 2)
+                //    {
+                //        existingAttendance.AccountType = accountType;
+                //        _context.Attach(existingAttendance).State = EntityState.Modified;
+                //    }
+                //}
             }
 
             // Iterate over each participant and add attendance
@@ -222,6 +230,24 @@ namespace Infrastructure.Repositories
 
             // Save changes to the database
             await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAttendanceByActivityId(long activityId)
+        {
+            try
+            {
+                var attendance = await _context.Attendances
+                    .Where(da => da.DialyActivityId == activityId)
+                    .ToListAsync();
+
+                foreach (var item in attendance)
+                {
+                    _context.Attendances.Remove(item);
+
+                }
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception c) { }
         }
     }
 }

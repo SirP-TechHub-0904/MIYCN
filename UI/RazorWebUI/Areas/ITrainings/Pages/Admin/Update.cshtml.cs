@@ -20,10 +20,13 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 
         [BindProperty]
         public Training Training { get; set; }
-
+        [BindProperty]
+        public IFormFile? leftsignaturefile { get; set; }
+        [BindProperty]
+        public IFormFile? rightsignaturefile { get; set; }
         public async Task<IActionResult> OnGetAsync(long id)
         {
-            if(id < 0)
+            if (id < 0)
             {
                 return NotFound();
             }
@@ -35,7 +38,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
         {
             try
             {
-                UpdateTrainingCommand Command = new UpdateTrainingCommand(Training);
+                UpdateTrainingCommand Command = new UpdateTrainingCommand(Training, leftsignaturefile, rightsignaturefile);
                 await _mediator.Send(Command);
                 TempData["success"] = "Success";
                 return RedirectToPage("./Index");

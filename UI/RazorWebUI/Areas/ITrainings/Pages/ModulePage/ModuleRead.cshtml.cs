@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.ModulePage
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
     public class ModuleReadModel : PageModel
     {
         private readonly IMediator _mediator;

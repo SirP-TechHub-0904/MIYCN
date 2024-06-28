@@ -52,16 +52,17 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 
             GetByIdTrainingQuery Command = new GetByIdTrainingQuery(id);
             Training = await _mediator.Send(Command);
-            if(Training.TrainingStatus != TrainingStatus.Completed) {
-            ValidateUserToTrainingAttendanceCommand queryAttendance = new ValidateUserToTrainingAttendanceCommand(id);
-            await _mediator.Send(queryAttendance);
+            if (Training.TrainingStatus != TrainingStatus.Completed)
+            {
+                ValidateUserToTrainingAttendanceCommand queryAttendance = new ValidateUserToTrainingAttendanceCommand(id);
+                await _mediator.Send(queryAttendance);
             }
             var query = new ListAttendanceByActivityIdQuery(aid);
             Datas = await _mediator.Send(query);
 
             return Page();
         }
-         
+
 
 
         public async Task<IActionResult> OnPostSignInAsync()
@@ -71,7 +72,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
             // Initialize counters for each status
             int presentCount = 0;
             int absentCount = 0;
-            
+
             foreach (var key in Request.Form.Keys)
             {
                 string value = Request.Form[key];
@@ -97,7 +98,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
                                 case AttendanceSignInStatus.Absent:
                                     absentCount++;
                                     break;
-                                
+
                             }
                         }
                         else
@@ -123,7 +124,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 
             // Store the message in TempData
             TempData["response"] = message;
-            return RedirectToPage("./Attendance", new {id= TrainingId, aid = DialyActivityId });
+            return RedirectToPage("./Attendance", new { id = TrainingId, aid = DialyActivityId });
             // Your existing code continues here...
         }
 
@@ -191,5 +192,17 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
             // Your existing code continues here...
         }
 
+
+        public async Task<IActionResult> OnPostDeleteAttendanceAsync()
+        {
+            try
+            {
+                DeleteAttendanceCommand ACommand = new DeleteAttendanceCommand(DialyActivityId);
+                await _mediator.Send(ACommand);
+            }
+            catch (Exception c) { }
+            return RedirectToPage("./Attendance", new { id = TrainingId, aid = DialyActivityId });
+
+        }
     }
 }

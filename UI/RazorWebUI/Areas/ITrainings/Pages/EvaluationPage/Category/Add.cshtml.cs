@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.EvaluationPage.Category
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
     public class AddModel : PageModel
     {
         private readonly IMediator _mediator;

@@ -23,7 +23,7 @@ namespace Domain.Models
         public string? PassportKey { get; set; }
         [Display(Name = "Certificate")]
 
-        public string? CerificateId { get; set; }
+        public string? CerificateNumber { get; set; }
         [Display(Name = "Type of Certificate")]
         public CertificateType CertificateType { get; set; }
         [Display(Name = "Issuer Date")]
@@ -34,5 +34,7 @@ namespace Domain.Models
         public long? TrainingId { get; set; }
         [Display(Name = "Training")]
         public Training Training { get; set; }
+
+        public CertificateStatus CertificateStatus { get; set; }
     }
 }

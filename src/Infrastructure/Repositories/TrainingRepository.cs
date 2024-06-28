@@ -126,6 +126,7 @@ namespace Infrastructure.Repositories
             Ward = x.Ward,
             EnablePostTest = x.EnablePostTest,
             EnablePreTest = x.EnablePreTest,
+            PostTestStartTime = x.PostTestStartTime,
             StartDate = x.StartDate,
             PreTestInstruction = x.PreTestInstruction,
             PostTestInstruction = x.PostTestInstruction,
@@ -142,7 +143,24 @@ namespace Infrastructure.Repositories
             TrainingParticipants = x.TrainingParticipants.Where(x => x.ParticipantTrainingStatus == EnumStatus.ParticipantTrainingStatus.Active).Count(),
             
             DialyActivities = x.DialyActivities.Count(),
-            TestCategory = x.TestCategory.Count()
+            TestCategory = x.TestCategory.Count(),
+
+            CertificateUseRightSidePhysicalSignature = x.CertificateUseRightSidePhysicalSignature,
+            CertificateRightSideSignatureUrl = x.CertificateRightSideSignatureUrl,
+            CertificateRightSideSignatureKey = x.CertificateRightSideSignatureKey,
+            CertificateRightSideName = x.CertificateRightSideName,
+            CertificateRightSideOfficePosition = x.CertificateRightSideOfficePosition,
+            CertificateRightSideOfficeTitle = x.CertificateRightSideOfficeTitle,
+            CertificateUseLeftSidePhysicalSignature = x.CertificateUseLeftSidePhysicalSignature,
+            CertificateLeftSideSignatureUrl = x.CertificateLeftSideSignatureUrl,
+            CertificateLeftSideSignatureKey = x.CertificateLeftSideSignatureKey,
+            CertificateLeftSideName = x.CertificateLeftSideName,
+            CertificateLeftSideOfficePosition = x.CertificateLeftSideOfficePosition,
+            CertificateLeftSideOfficeTitle = x.CertificateLeftSideOfficeTitle,
+            CertificateTitle = x.CertificateTitle,
+            CertificateCourseTitle = x.CertificateCourseTitle,
+            CertificateAddress = x.CertificateAddress,
+            CertificateDate = x.CertificateDate 
         })
         .FirstOrDefaultAsync();
             if (trainingDto != null)

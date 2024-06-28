@@ -85,7 +85,7 @@ namespace Application.Commands.IdentityCommand
                             SecretKey = _config["AwsConfiguration:AWSSecretKey"]
                         };
 
-                        var xresult = await _storageService.UploadFileReturnUrlAsync(s3Obj, cred, request.Input.PassportFilePathKey);
+                        var xresult = await _storageService.UploadFileReturnUrlAsync(s3Obj, cred, "");
                         // 
 
 

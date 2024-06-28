@@ -122,7 +122,11 @@
                         <input asp-for="Training.SignOutStopTime" class="form-control" type="time" />
                         <span asp-validation-for="Training.SignOutStopTime" class="text-danger"></span>
                     </div>
-
+                    <div class="form-group">
+                        <label asp-for="Training.PostTestStartTime" class="control-label"></label>
+                        <input asp-for="Training.PostTestStartTime" class="form-control" type="time" />
+                        <span asp-validation-for="Training.PostTestStartTime" class="text-danger"></span>
+                    </div>
 
                     <div class="form-group">
                         <input type="submit" value="Add" class="btn btn-primary" />

@@ -18,11 +18,12 @@ namespace Infrastructure.Repositories
     {
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _userManager;
-
-        public TrainingParticipantRepository(AppDbContext context, UserManager<AppUser> userManager) : base(context)
+        private readonly IUserTestRepository _userTestRepository;
+        public TrainingParticipantRepository(AppDbContext context, UserManager<AppUser> userManager, IUserTestRepository userTestRepository) : base(context)
         {
             _context = context;
             _userManager = userManager;
+            _userTestRepository = userTestRepository;
         }
 
         public async Task<bool> AddParticipant(TrainingParticipant model)
@@ -95,6 +96,11 @@ namespace Infrastructure.Repositories
                 .FirstOrDefaultAsync(x => x.Id == id);
             return data;
         }
+
+
+
+
+
 
         public async Task<ParticipantInTrainingDTo> ParticipantInTraining(long trainingId, string userId)
         {
@@ -208,7 +214,7 @@ namespace Infrastructure.Repositories
                         await _userManager.RemoveFromRoleAsync(user, "Participant");
                     }
 
-                  
+
 
                 }
                 catch (Exception ex)
@@ -216,7 +222,7 @@ namespace Infrastructure.Repositories
                 }
 
 
-                
+
 
             }
         }

@@ -193,11 +193,18 @@
                                     <h3 style="font-weight:900;">POST TEST</h3>
                                     @if (Model.Training.EnablePostTest == true)
                                     {
+                                        var currentTime = DateTime.UtcNow.AddHours(1).TimeOfDay; // Adjusting to your specific timezone if needed
+                                        var postTestStartTime = Model.Training.PostTestStartTime; // Example: new TimeSpan(14, 0, 0) for 2:00 PM
 
+                                        var isPostTestStartTimeReached = currentTime >= postTestStartTime;
+
+                                        if (isPostTestStartTimeReached)
+                                        {
                                         <div class="row">
                                             <div class="col-sm-6"><a class="btn btn-default" style="width:100%;" asp-page="./Assessment" asp-route-xty="2" asp-route-tid="@Model.Training.Id">Start Post Test</a></div>
                                             <div class="col-sm-6"><a class="btn btn-default" style="width:100%;" asp-page="./Result" asp-route-tid="@Model.Training.Id" asp-route-xty="2">View Result (0%)</a></div>
                                         </div>
+                                        }
                                     }
                                     else
                                     {

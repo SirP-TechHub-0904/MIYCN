@@ -29,6 +29,12 @@ namespace Domain.Models
             Options = 0,
             Typing = 2
         }
+        public enum CertificateStatus
+        {
+            Preview = 0,
+            Active = 2,
+            Expired = 1,
+        }
         public enum CertificateType
         {
             Nill = 0,

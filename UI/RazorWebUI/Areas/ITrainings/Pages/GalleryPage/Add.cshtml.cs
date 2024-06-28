@@ -8,6 +8,8 @@ using Application.Queries.TrainingQueries;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.GalleryPage
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
     public class AddModel : PageModel
     {
         private readonly IMediator _mediator;

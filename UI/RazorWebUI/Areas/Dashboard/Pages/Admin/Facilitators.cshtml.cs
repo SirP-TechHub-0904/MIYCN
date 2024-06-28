@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorWebUI.Areas.Dashboard.Pages.Admin
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
     public class ParticipantsModel : PageModel
     {
         public List<DataDto> DataListDto { get; set; }

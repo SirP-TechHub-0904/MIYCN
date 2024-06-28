@@ -87,6 +87,9 @@
                             <input asp-for="TrainingId" type="hidden" value="@Model.Training.Id" />
                             <input asp-for="DialyActivityId" type="hidden" value="@Model.DialyActivity.Id" />
                             <div class="table-responsive">
+                                <div>
+                                    <h5 colspan="5" class="text-center bg-primary"><strong>Participants</strong></h5>
+                                </div>
                                 <table id="" class="example-table table table-bordered table-striped">
                                     <thead>
                                         <tr>
@@ -96,6 +99,7 @@
                                                 Email
                                             </th>
                                             <th>Phone</th>
+                                            <th>Role</th>
 
                                             <th>Sign In</th>
 
@@ -108,9 +112,7 @@
 
 
                                     <tbody>
-                                        <tr>
-                                            <td colspan="5" class="text-center bg-primary"><strong>Participants</strong></td>
-                                        </tr>
+
                                         @foreach (var item in Model.Datas.OrderBy(x => x.User.FirstName).Where(x => x.AccountType == 1))
                                         {
                                             <tr>
@@ -133,7 +135,9 @@
                                                 <td>
                                                     @item.User.PhoneNumber
                                                 </td>
-
+                                                <td>
+                                                   Participant
+                                                </td>
                                                 <td>
                                                     <div class="form-group">
 
@@ -202,18 +206,43 @@
                                             </tr>
                                         }
 
+                                    </tbody>
+                                </table>
+
+                                <div>
+                                    <h5 colspan="5" class="text-center bg-primary" style="margin-top:30px;"><strong>Faciliators</strong></h5>
+                                </div>
+
+                                <table id="" class="example-table table table-bordered table-striped">
+                                    <thead>
                                         <tr>
-                                            <td colspan="5" class="text-center bg-primary"><strong>Faciliators</strong></td>
+                                            <th>S/N</th>
+                                            <th>Name</th>
+                                            <th>
+                                                Email
+                                            </th>
+                                            <th>Phone</th>
+                                            <th>Role</th>
+
+                                            <th>Sign In</th>
+
                                         </tr>
+                                    </thead>
+
+                                    @{
+                                        int ssn = 0;
+                                    }
+                                    <tbody>
+                                      
                                         @foreach (var item in Model.Datas.OrderBy(x => x.User.FirstName).Where(x => x.AccountType == 2))
                                         {
                                             <tr>
 
                                                 <td>
                                                     @{
-                                                        sn++;
+                                                        ssn++;
                                                     }
-                                                    @sn
+                                                    @ssn
                                                 </td>
                                                 <td>
                                                     <a asp-page="/Admin/Info" asp-route-area="User" asp-route-id="@item.Id">
@@ -226,6 +255,9 @@
                                                 </td>
                                                 <td>
                                                     @item.User.PhoneNumber
+                                                </td>
+                                                <td>
+                                                   Facilitator
                                                 </td>
 
                                                 <td>
@@ -414,25 +446,25 @@
                                                         }
 
                                                         @*}
-                                        else
-                                        {
-                                            <span>
-                                                @if (item.AttendanceSignOutStatus == Domain.Models.EnumStatus.AttendanceSignOutStatus.Present)
-                                                {
-                                                    <span>present</span>
-                                                }
-                                                else if (item.AttendanceSignOutStatus == Domain.Models.EnumStatus.AttendanceSignOutStatus.Absent)
-                                                {
-                                                    <span>absent</span>
-                                                }
-                                                else if (item.AttendanceSignOutStatus == Domain.Models.EnumStatus.AttendanceSignOutStatus.Null)
-                                                {
-                                                    <span>---</span>
-                                                }
+                                                            else
+                                                            {
+                                                                <span>
+                                                                    @if (item.AttendanceSignOutStatus == Domain.Models.EnumStatus.AttendanceSignOutStatus.Present)
+                                                                    {
+                                                                        <span>present</span>
+                                                                    }
+                                                                    else if (item.AttendanceSignOutStatus == Domain.Models.EnumStatus.AttendanceSignOutStatus.Absent)
+                                                                    {
+                                                                        <span>absent</span>
+                                                                    }
+                                                                    else if (item.AttendanceSignOutStatus == Domain.Models.EnumStatus.AttendanceSignOutStatus.Null)
+                                                                    {
+                                                                        <span>---</span>
+                                                                    }
 
 
-                                            </span>
-                                        }*@
+                                                                </span>
+                                                            }*@
                                                     </div>
 
                                                 </td>
@@ -441,6 +473,28 @@
                                             </tr>
                                         }
 
+
+                                    </tbody>
+                                </table>
+                                <table id="" class="example-table table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>S/N</th>
+                                            <th>Name</th>
+                                            <th>
+                                                Email
+                                            </th>
+                                            <th>Phone</th>
+
+                                            <th>Sign Out</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    @{
+                                        int xsnn = 0;
+                                    }
+                                    <tbody>
                                         <tr>
                                             <td colspan="5" class="text-center bg-primary"><strong>Facilitators</strong></td>
                                         </tr>
@@ -450,9 +504,9 @@
 
                                                 <td>
                                                     @{
-                                                        snn++;
+                                                        xsnn++;
                                                     }
-                                                    @snn
+                                                    @xsnn
                                                 </td>
                                                 <td>
                                                     <a asp-page="/Admin/Info" asp-route-area="User" asp-route-id="@item.Id">
@@ -545,7 +599,14 @@
 
 
 </div>
-
+@if (User.IsInRole("ManageAttendance"))
+    {
+<form method="post" asp-page-handler="DeleteAttendance">
+    <input type="hidden" asp-for="DialyActivityId" value="@Model.DialyActivity.Id" />
+    <input type="hidden" asp-for="TrainingId" value="@Model.DialyActivity.TrainingId" />
+    <input type="submit" value="Remove Attence for Activity @Model.DialyActivity.Date" class="btn btn-danger" />
+</form>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

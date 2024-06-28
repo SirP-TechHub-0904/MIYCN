@@ -12,7 +12,9 @@ using System.Security.Claims;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.Account
 {
-        public class EvaluationResultModel : PageModel
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
+    public class EvaluationResultModel : PageModel
     {
         private readonly IMediator _mediator;
 

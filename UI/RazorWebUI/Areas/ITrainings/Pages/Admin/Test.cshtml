@@ -1,6 +1,8 @@
 ﻿@page
 @model RazorWebUI.Areas.ITrainings.Pages.Admin.TestModel
 @{
+    ViewData["Title"] = $"PRETEST AND POSTTEST FOR {Model.Training.Title}({Model.Training.StartDate.ToString("ddd dd MMM, yyyy")} - {Model.Training.EndDate.ToString("ddd dd MMM, yyyy")})";
+
 }
 
 <div class="card card-default">
@@ -23,7 +25,7 @@
     <div class="card-body">
         <div class="card-body">
             <div class="table-responsive">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="" class="example-table table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>S/N</th>

@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.ModulePage
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
     public class UpdateModuleTopicModel : PageModel
     {
         private readonly IMediator _mediator;

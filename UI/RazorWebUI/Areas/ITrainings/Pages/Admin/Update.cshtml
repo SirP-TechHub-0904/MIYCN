@@ -119,6 +119,102 @@
                             <input asp-for="Training.SignOutStopTime" class="form-control" type="time" />
                             <span asp-validation-for="Training.SignOutStopTime" class="text-danger"></span>
                         </div>
+
+                        <div class="form-group">
+                            <label asp-for="Training.PostTestStartTime" class="control-label"></label>
+                            <input asp-for="Training.PostTestStartTime" class="form-control" type="time" />
+                            <span asp-validation-for="Training.PostTestStartTime" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label asp-for="Training.CertificateUseRightSidePhysicalSignature" class="control-label"></label>
+                            <input asp-for="Training.CertificateUseRightSidePhysicalSignature" />
+                            <span asp-validation-for="Training.CertificateUseRightSidePhysicalSignature" class="text-danger"></span>
+                        </div>
+
+                        @if (!String.IsNullOrEmpty(Model.Training.CertificateRightSideSignatureUrl))
+                        {
+                            <div class="form-group">
+                                <label class="control-label">Certificate Right Side Signature Image</label><br />
+                                <img src="@Model.Training.CertificateRightSideSignatureUrl" style="max-height:200px;" />
+                            </div>
+                        }
+                        <div class="form-group">
+                            <label class="control-label">Upload/Change Certificate Right Side Signature Image</label><br />
+                            <input type="file" class="control-label" asp-for="rightsignaturefile" accept="image/*" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Training.CertificateRightSideName" class="control-label"></label>
+                            <input asp-for="Training.CertificateRightSideName" class="form-control" />
+                            <span asp-validation-for="Training.CertificateRightSideName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Training.CertificateRightSideOfficePosition" class="control-label"></label>
+                            <input asp-for="Training.CertificateRightSideOfficePosition" class="form-control" />
+                            <span asp-validation-for="Training.CertificateRightSideOfficePosition" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Training.CertificateRightSideOfficeTitle" class="control-label"></label>
+                            <input asp-for="Training.CertificateRightSideOfficeTitle" class="form-control" />
+                            <span asp-validation-for="Training.CertificateRightSideOfficeTitle" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Training.CertificateUseLeftSidePhysicalSignature" class="control-label"></label>
+                            <input asp-for="Training.CertificateUseLeftSidePhysicalSignature" />
+                            <span asp-validation-for="Training.CertificateUseLeftSidePhysicalSignature" class="text-danger"></span>
+                        </div>
+
+                        @if (!String.IsNullOrEmpty(Model.Training.CertificateLeftSideSignatureUrl))
+                        {
+                            <div class="form-group">
+                                <label class="control-label">Certificate Left Side Signature Image</label><br />
+                                <img src="@Model.Training.CertificateLeftSideSignatureUrl" style="max-height:200px;" />
+                            </div>
+                        }
+                        <div class="form-group">
+                            <label class="control-label">Upload/Change Certificate Left Side Signature Image</label><br />
+                            <input type="file" class="control-label" asp-for="leftsignaturefile" accept="image/*" />
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Training.CertificateLeftSideName" class="control-label"></label>
+                            <input asp-for="Training.CertificateLeftSideName" class="form-control" />
+                            <span asp-validation-for="Training.CertificateLeftSideName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Training.CertificateLeftSideOfficePosition" class="control-label"></label>
+                            <input asp-for="Training.CertificateLeftSideOfficePosition" class="form-control" />
+                            <span asp-validation-for="Training.CertificateLeftSideOfficePosition" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Training.CertificateLeftSideOfficeTitle" class="control-label"></label>
+                            <input asp-for="Training.CertificateLeftSideOfficeTitle" class="form-control" />
+                            <span asp-validation-for="Training.CertificateLeftSideOfficeTitle" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Training.CertificateTitle" class="control-label"></label>
+                            <input asp-for="Training.CertificateTitle" class="form-control" />
+                            <span asp-validation-for="Training.CertificateTitle" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Training.CertificateCourseTitle" class="control-label"></label>
+                            <input asp-for="Training.CertificateCourseTitle" class="form-control" />
+                            <span asp-validation-for="Training.CertificateCourseTitle" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Training.CertificateAddress" class="control-label"></label>
+                            <input asp-for="Training.CertificateAddress" class="form-control" />
+                            <span asp-validation-for="Training.CertificateAddress" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Training.CertificateDate" class="control-label"></label>
+                            <input asp-for="Training.CertificateDate" class="form-control" placeholder="5th to 12th March, 2024" />
+                            <span asp-validation-for="Training.CertificateDate" class="text-danger"></span>
+                        </div>
+
+
                     }
                     else
                     {
@@ -126,7 +222,26 @@
                         <input type="hidden" asp-for="Training.SignInStopTime" />
                         <input type="hidden" asp-for="Training.SignOutStartTime" />
                         <input type="hidden" asp-for="Training.SignOutStopTime" />
+                        <input type="hidden" asp-for="Training.PostTestStartTime" />
+
+
+                        <input type="hidden" asp-for="Training.CertificateUseRightSidePhysicalSignature" />
+                        <input type="hidden" asp-for="Training.CertificateRightSideName" />
+                        <input type="hidden" asp-for="Training.CertificateRightSideOfficePosition" />
+                        <input type="hidden" asp-for="Training.CertificateRightSideOfficeTitle" />
+                        <input type="hidden" asp-for="Training.CertificateUseLeftSidePhysicalSignature" />
+                        <input type="hidden" asp-for="Training.CertificateLeftSideName" />
+                        <input type="hidden" asp-for="Training.CertificateLeftSideOfficePosition" />
+                        <input type="hidden" asp-for="Training.CertificateLeftSideOfficeTitle" />
+                        <input type="hidden" asp-for="Training.CertificateTitle" />
+                        <input type="hidden" asp-for="Training.CertificateCourseTitle" />
+                        <input type="hidden" asp-for="Training.CertificateAddress" />
+                        <input type="hidden" asp-for="Training.CertificateDate" />
                     }
+                    <input type="hidden" asp-for="Training.CertificateRightSideSignatureUrl" />
+                    <input type="hidden" asp-for="Training.CertificateRightSideSignatureKey" />
+                    <input type="hidden" asp-for="Training.CertificateLeftSideSignatureUrl" />
+                    <input type="hidden" asp-for="Training.CertificateLeftSideSignatureKey" />
 
                     <div class="form-group">
                         <input type="submit" value="Update" class="btn btn-primary" />

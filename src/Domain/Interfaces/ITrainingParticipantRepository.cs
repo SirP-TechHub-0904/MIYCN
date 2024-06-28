@@ -16,6 +16,7 @@ namespace Domain.Interfaces
         Task<bool> CheckParticipantInTraining(long trainingId, string userId);
         Task UpdateParticipantInTrainingStatus(long trainingId, long participantId, ParticipantTrainingStatus status, string reason);
         Task<List<ParticipantInTrainingDTo>> ParticipantInTraining(long trainingId);
+ 
         Task<List<ParticipantInTrainingDTo>> AllParticipants();
         Task<TrainingParticipant> GetParticipantById(long id);
         Task<bool> AddParticipant(TrainingParticipant model);

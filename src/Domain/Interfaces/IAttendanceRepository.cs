@@ -16,5 +16,7 @@ namespace Domain.Interfaces
         Task ValidateUserToTrainingAttendance(long trainingId);
         Task UpdateSignInAttendanceStatus(List<(long attendanceId, AttendanceSignInStatus status)> attendanceData);
         Task UpdateSignOutAttendanceStatus(List<(long attendanceId, AttendanceSignOutStatus status)> attendanceData);
+
+        Task DeleteAttendanceByActivityId(long activityId);
     }
 }

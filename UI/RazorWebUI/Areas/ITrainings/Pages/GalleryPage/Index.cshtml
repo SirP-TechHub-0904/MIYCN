@@ -10,7 +10,7 @@
         {
             <a asp-page="./Add" asp-route-id="@Model.Training.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">New Gallery</a>
         }
-        </div> 
+    </div>
     <div class="card-body">
         <h3 class="text-uppercase">Training Information</h3>
         <h3 class="card-title">
@@ -37,7 +37,7 @@
                             <th></th>
                         }
 
-                        </tr>
+                    </tr>
                 </thead>
 
                 @{
@@ -62,23 +62,28 @@
                                 @Html.DisplayFor(modelItem => item.ImageDescription)
                             </td>
                             <td>
-                                @{
-                                    string[] imageExtensions = new string[] { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff" };
-                                }
-                                @if (imageExtensions.Any(ext => item.ImageKey.Contains(ext, StringComparison.OrdinalIgnoreCase)))
+                                @if (item.ImageKey != null)
                                 {
-                                    <a href="@item.ImageUrl">
-                                        <img src="@item.ImageUrl" class="img-fluid" style="max-height:100px;" />
-                                    </a>
-                                }
-                                else
-                                {
-                                    <a href="@item.ImageUrl">
-                                        <video width="320" height="240" controls>
-                                            <source src="@item.ImageUrl" type="video/mp4">
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    </a>
+                                    <span>
+                                        @{
+                                            string[] imageExtensions = new string[] { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff" };
+                                        }
+                                        @if (imageExtensions.Any(ext => item.ImageKey.Contains(ext, StringComparison.OrdinalIgnoreCase)))
+                                        {
+                                            <a href="@item.ImageUrl">
+                                                <img src="@item.ImageUrl" class="img-fluid" style="max-height:100px;" />
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@item.ImageUrl">
+                                                <video width="320" height="240" controls>
+                                                    <source src="@item.ImageUrl" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            </a>
+                                        }
+                                    </span>
                                 }
                             </td>
                             @if (User.IsInRole("AdminEditor") || Model.Training.TrainingStatus != Domain.Models.EnumStatus.TrainingStatus.Completed)
@@ -93,7 +98,7 @@
                                 </td>
                             }
 
-                            </tr>
+                        </tr>
                     }
                 </tbody>
             </table>

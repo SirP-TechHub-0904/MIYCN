@@ -11,6 +11,8 @@ using System.Security.Cryptography;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.Account
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
     public class ResultModel : PageModel
     {
         private readonly IMediator _mediator;

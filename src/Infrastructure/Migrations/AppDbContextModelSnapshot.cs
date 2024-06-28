@@ -278,8 +278,11 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("CerificateId")
+                    b.Property<string>("CerificateNumber")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CertificateStatus")
+                        .HasColumnType("int");
 
                     b.Property<int>("CertificateType")
                         .HasColumnType("int");
@@ -884,6 +887,54 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CertificateAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CertificateCourseTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CertificateDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CertificateLeftSideName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CertificateLeftSideOfficePosition")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CertificateLeftSideOfficeTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CertificateLeftSideSignatureKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CertificateLeftSideSignatureUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CertificateRightSideName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CertificateRightSideOfficePosition")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CertificateRightSideOfficeTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CertificateRightSideSignatureKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CertificateRightSideSignatureUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CertificateTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("CertificateUseLeftSidePhysicalSignature")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("CertificateUseRightSidePhysicalSignature")
+                        .HasColumnType("bit");
+
                     b.Property<string>("DialyEndTime")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -909,6 +960,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("PostTestInstruction")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeSpan>("PostTestStartTime")
+                        .HasColumnType("time");
 
                     b.Property<string>("PreTestInstruction")
                         .HasColumnType("nvarchar(max)");

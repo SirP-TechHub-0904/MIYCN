@@ -11,6 +11,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RazorWebUI.Areas.Identity.Pages.Account.Manage
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
     public class ChangePasswordModel : PageModel
     {
         private readonly IMediator _mediator;

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorWebUI.Areas.Dashboard.Pages.Admin
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
 
     public class DataDto
     {
@@ -23,7 +24,7 @@ namespace RazorWebUI.Areas.Dashboard.Pages.Admin
     {
         new DataDto { DataColor = "bg-primary", DataCount = 0, DataTitle = "Abia" },
         new DataDto { DataColor = "bg-success", DataCount = 0, DataTitle = "Adamawa" },
-        new DataDto { DataColor = "bg-warning", DataCount = 0, DataTitle = "Akwa Ibom" },
+        new DataDto { DataColor = "bg-warning", DataCount = 0, DataTitle = "AkwaIbom" },
         new DataDto { DataColor = "bg-info", DataCount = 0, DataTitle = "Anambra" },
         new DataDto { DataColor = "bg-danger", DataCount = 0, DataTitle = "Bauchi" },
         new DataDto { DataColor = "bg-primary", DataCount = 0, DataTitle = "Bayelsa" },
@@ -35,6 +36,7 @@ namespace RazorWebUI.Areas.Dashboard.Pages.Admin
         new DataDto { DataColor = "bg-success", DataCount = 0, DataTitle = "Edo" },
         new DataDto { DataColor = "bg-warning", DataCount = 0, DataTitle = "Ekiti" },
         new DataDto { DataColor = "bg-info", DataCount = 0, DataTitle = "Enugu" },
+        new DataDto { DataColor = "bg-success", DataCount = 0, DataTitle = "FCT" },
         new DataDto { DataColor = "bg-danger", DataCount = 0, DataTitle = "Gombe" },
         new DataDto { DataColor = "bg-primary", DataCount = 0, DataTitle = "Imo" },
         new DataDto { DataColor = "bg-success", DataCount = 0, DataTitle = "Jigawa" },

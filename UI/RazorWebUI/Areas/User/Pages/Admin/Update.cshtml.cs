@@ -59,6 +59,9 @@ namespace RazorWebUI.Areas.User.Pages.Admin
                 userupdate.PhoneNumber = UserDatas.PhoneNumber; 
                  
                     userupdate.UserStatus = UserDatas.UserStatus;
+                    userupdate.BankAccount = UserDatas.BankAccount;
+                    userupdate.BankName = UserDatas.BankName;
+                    userupdate.AccountNumber = UserDatas.AccountNumber;
                 
 
                 await _userManager.UpdateAsync(userupdate);

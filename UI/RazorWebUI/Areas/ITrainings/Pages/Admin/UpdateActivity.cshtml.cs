@@ -33,7 +33,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
             var query = new GetByIdDialyActivityQuery(id);
             DialyActivity = await _mediator.Send(query);
 
-            GetByIdTrainingQuery Command = new GetByIdTrainingQuery(id);
+            GetByIdTrainingQuery Command = new GetByIdTrainingQuery(DialyActivity.TrainingId);
             Training = await _mediator.Send(Command);
             return Page();
         }

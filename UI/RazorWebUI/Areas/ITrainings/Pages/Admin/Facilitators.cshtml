@@ -14,9 +14,12 @@
 
             <a asp-page="./AddFacilitators" asp-route-id="@Model.Training.Id" asp-route-rx="Facilitator" class="btn bg-gradient-warning btn-sm" style="float:right;">Register New Facilitators</a>
         }
-       
-        <a asp-page="./Info" asp-route-id="@Model.Training.Id" class="btn bg-gradient-primary btn-sm" style="float:right;">Back</a>
+        <a asp-page="./DisabledFacilitators" asp-route-id="@Model.Training.Id" class="btn btn-danger btn-sm" style="float: right;">Disabled Facilitators (@Model.Disabled)</a>
 
+        <a asp-page="./Info" asp-route-id="@Model.Training.Id" class="btn bg-gradient-primary btn-sm" style="float:right;">Back</a>
+        <button class="btn btn-primary">
+            Total (@Model.Datas.Count())
+        </button>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -74,7 +77,15 @@
                                 @Html.DisplayFor(modelItem => item.Role)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.UserStatus)
+                                @Html.DisplayFor(modelItem => item.FacilitatorTrainingStatus)
+                                @if (User.IsInRole("AdminEditor") || Model.Training.TrainingStatus != Domain.Models.EnumStatus.TrainingStatus.Completed)
+                                {
+                                    <br />
+                                    <a asp-page="./UpdateFacilitator" asp-route-id="@item.FacilitatorTrainingId" class="text-danger" style="font-size:12px;">
+                                        <span><i class="fas fa-times"></i> Disable</span>
+                                    </a>
+
+                                }
                             </td>
                             @if (User.IsInRole("AdminEditor") || Model.Training.TrainingStatus != Domain.Models.EnumStatus.TrainingStatus.Completed)
                             {

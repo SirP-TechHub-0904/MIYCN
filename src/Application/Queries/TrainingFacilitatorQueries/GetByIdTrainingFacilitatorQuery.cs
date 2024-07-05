@@ -34,7 +34,7 @@ namespace Application.Queries.TrainingFacilitatorQueries
                 request.ThrowIfNull(nameof(request));
 
 
-                TrainingFacilitator data = await _repository.GetByIdAsync(request.Id);
+                TrainingFacilitator data = await _repository.GetFacilitatorById(request.Id);
 
                 return data;
             }

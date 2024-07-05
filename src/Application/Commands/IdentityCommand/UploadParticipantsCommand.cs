@@ -76,6 +76,7 @@ namespace Application.Commands.IdentityCommand
                                     {
                                         if (emailList.Role != null)
                                         {
+                                            if(emailList.Role == "Participant" || emailList.Role == "Facilitator") { 
                                             string cleanFullName = Regex.Replace(emailList.Name, @"[^\w\s]", "");
 
                                             // Split the cleaned full name into words
@@ -91,6 +92,7 @@ namespace Application.Commands.IdentityCommand
                                             fillregdto.Position = emailList.Role;
 
                                             registerDto.Add(fillregdto);
+                                            }
                                         }
                                     }
                                 }

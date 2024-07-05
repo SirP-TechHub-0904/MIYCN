@@ -11,9 +11,27 @@
 
     </div>
     <!-- /.card-header -->
-     
+    <div class="card-body">
+        <h5 class="text-uppercase">Training Information</h5>
+        <h5 class="card-title">
+            @Model.Training.Title ( @Model.Training.StartDate.ToString("ddd dd MMM, yyyy") -
+            @Model.Training.EndDate.ToString("ddd dd MMM, yyyy"))
+            <br /><span style="font-size:13px;">
+                @Model.Training.Address
+            </span>
+        </h5>
+    </div>
+    <div class="card-body">
+        <h5 class="text-uppercase">Dialy Activity Information</h5>
+        <h5 class="">
+            Date:  @Model.DialyActivity.Date.ToString("dddd dd/MM/yyyy") (@Model.DialyActivity.StartTime - @Model.DialyActivity.FinishTime))
+            <br />Title: @Model.DialyActivity.Title
+        </h5>
+    </div>
+
+
     <!-- /.card-header -->
-     
+
     <div class="card-body">
         <div class="row">
 

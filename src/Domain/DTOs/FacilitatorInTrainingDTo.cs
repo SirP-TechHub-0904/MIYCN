@@ -10,6 +10,8 @@ namespace Domain.DTOs
 {
         public class FacilitatorInTrainingDTo
     {
+        public long FacilitatorTrainingId { get; set; }
+
         public string Id { get; set; }
         [Display(Name = "Unique ID")]
         public string? UniqueId { get; set; }
@@ -96,6 +98,9 @@ namespace Domain.DTOs
         public string? Position { get; set; }
         public string? State { get; set; }
         public string? LGA { get; set; }
+        public FacilitatorTrainingStatus FacilitatorTrainingStatus { get; set; }
+
+        public string? Reasons { get; set; }
     }
 
 }

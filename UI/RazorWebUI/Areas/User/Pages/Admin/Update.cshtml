@@ -15,7 +15,7 @@
             <div class="col-md-12">
                 <form method="post" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="UserDatas.Id" /> 
+                    <input type="hidden" asp-for="UserDatas.Id" />
 
 
                     <div class="form-group">
@@ -41,7 +41,7 @@
                         <input asp-for="UserDatas.PhoneNumber" class="form-control" />
                         <span asp-validation-for="UserDatas.PhoneNumber" class="text-danger"></span>
                     </div>
-                 
+
 
                     <div class="form-group">
                         <label asp-for="UserDatas.UserStatus" class="control-label"></label>
@@ -49,7 +49,25 @@
                         <span asp-validation-for="UserDatas.UserStatus" class="text-danger"></span>
                     </div>
 
-                  
+                    <h4>BANK ACCOUNT INFORMATION</h4>
+                    <div class="form-group">
+                        <label asp-for="UserDatas.BankName" class="control-label"></label>
+                        <input asp-for="UserDatas.BankName" required="required" class="form-control" />
+                        <span asp-validation-for="UserDatas.BankName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserDatas.AccountNumber" class="control-label"></label>
+                        <input asp-for="UserDatas.AccountNumber" required="required" class="form-control" />
+                        <span asp-validation-for="UserDatas.AccountNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="UserDatas.BankAccount" class="control-label">Account Name</label>
+                        <input asp-for="UserDatas.BankAccount" required="required" class="form-control" />
+                        <span asp-validation-for="UserDatas.BankAccount" class="text-danger"></span>
+                    </div>
+
+
 
                     <div class="form-group">
                         <input type="submit" value="Submit" class="btn btn-primary" />

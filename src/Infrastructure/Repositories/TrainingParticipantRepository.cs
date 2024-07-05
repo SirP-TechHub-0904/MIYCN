@@ -209,9 +209,26 @@ namespace Infrastructure.Repositories
                     var user = await _userManager.FindByIdAsync(gettrainingupdate.UserId);
                     if (user != null)
                     {
-                        user.Role = user.Role.Replace("Participant", "");
-                        await _userManager.UpdateAsync(user);
-                        await _userManager.RemoveFromRoleAsync(user, "Participant");
+                         
+                        if (gettrainingupdate.ParticipantTrainingStatus == EnumStatus.ParticipantTrainingStatus.Disabled)
+                        {
+                            user.Role = user.Role.Replace("Participant", "");
+                            await _userManager.UpdateAsync(user);
+                            await _userManager.RemoveFromRoleAsync(user, "Participant");
+                        }
+                        else
+                        {
+                            if (string.IsNullOrEmpty(user.Role))
+                            {
+                                user.Role = "Participant";
+                            }
+                            else
+                            {
+                                user.Role = user.Role + ", Participant";
+                            }
+                            await _userManager.UpdateAsync(user);
+                            await _userManager.AddToRoleAsync(user, "Participant");
+                        }
                     }
 
 

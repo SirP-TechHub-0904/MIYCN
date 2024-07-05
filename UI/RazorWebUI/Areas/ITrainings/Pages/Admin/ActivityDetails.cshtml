@@ -10,7 +10,7 @@
         <a asp-page="./Activities" asp-route-id="@Model.Training.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">Activities</a>
         @if (User.IsInRole("AdminEditor") || Model.Training.TrainingStatus != Domain.Models.EnumStatus.TrainingStatus.Completed)
         {
-            <a asp-page="./UpdateActivity" asp-route-id="@Model.Training.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">
+            <a asp-page="./UpdateActivity" asp-route-id="@Model.DialyActivity.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">
                 Update
             </a>
         }

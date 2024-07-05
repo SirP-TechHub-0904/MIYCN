@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Domain.Models.EnumStatus;
 
 namespace Domain.Interfaces
 {
@@ -16,6 +17,9 @@ namespace Domain.Interfaces
         Task<List<FacilitatorInTrainingDTo>> AllFacilitator();
 
         Task<bool> AddFacilitator(TrainingFacilitator model);
+        Task<TrainingFacilitator> GetFacilitatorById(long id);
+
+        Task UpdateFacilitatorInTrainingStatus(long trainingId, long facilitatorId, FacilitatorTrainingStatus status, string reason);
 
     }
 }

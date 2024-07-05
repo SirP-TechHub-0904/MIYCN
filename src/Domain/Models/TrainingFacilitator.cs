@@ -16,7 +16,7 @@ namespace Domain.Models
         public long TrainingId { get; set; }
         public Training Training { get; set; }
         public FacilitatorTrainingStatus FacilitatorTrainingStatus { get; set; }
-
+        public string? Reasons { get; set; }
         public string Position {  get; set; } 
     }
 }

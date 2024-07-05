@@ -1,5 +1,5 @@
 ﻿@page
-@model RazorWebUI.Areas.ITrainings.Pages.Admin.DisabledParticipantsModel
+@model RazorWebUI.Areas.ITrainings.Pages.Admin.DisabledFacilitatorsModel
 @{
 }
 <div class="card">
@@ -15,7 +15,7 @@
         </h3>
 
 
-        <a asp-page="./Participants" asp-route-id="@Model.Training.Id" class="btn bg-gradient-primary btn-sm" style="float:right;">Back</a>
+        <a asp-page="./Facilitators" asp-route-id="@Model.Training.Id" class="btn bg-gradient-primary btn-sm" style="float:right;">Back</a>
         <button class="btn btn-primary">
             Total (@Model.Datas.Count())
         </button>
@@ -69,15 +69,15 @@
                                 @Html.DisplayFor(modelItem => item.Role)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.ParticipantTrainingStatus)
+                                @Html.DisplayFor(modelItem => item.FacilitatorTrainingStatus)
                                 @if (User.IsInRole("AdminEditor") || Model.Training.TrainingStatus != Domain.Models.EnumStatus.TrainingStatus.Completed)
-                                    {
-                                        <br />
-                                        <a asp-page="./UpdateStatus" asp-route-id="@item.ParticipantTrainingId" class="text-success" style="font-size:12px;">
-                                            <span><i class="fas fa-times"></i> Restore</span>
-                                        </a>
+                                {
+                                    <br />
+                                    <a asp-page="./UpdateFacilitator" asp-route-id="@item.FacilitatorTrainingId" class="text-success" style="font-size:12px;">
+                                        <span><i class="fas fa-times"></i> Restore</span>
+                                    </a>
 
-                                    }
+                                }
                             </td>
 
                         </tr>

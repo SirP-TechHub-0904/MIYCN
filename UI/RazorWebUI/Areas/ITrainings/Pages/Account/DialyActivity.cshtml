@@ -76,7 +76,7 @@
                                         @if (item.Attendances.Count() > 0)
                                         {
                                             var presentCount = item.Attendances.FirstOrDefault(x => x.UserId == Model.UserId);
-
+                                            if(presentCount != null) { 
                                             <span>
                                                 @if (presentCount.AttendanceSignInStatus == Domain.Models.EnumStatus.AttendanceSignInStatus.Present)
                                                 {
@@ -93,10 +93,11 @@
 
 
                                             </span>
+                                                }
+                                            }
                                         }
-                                    }
-                                    else
-                                    {
+                                        else
+                                        {
                                         <span>0/0/0</span>
                                     }
                                 </td>
@@ -107,7 +108,8 @@
                                         @if (item.Attendances.Count() > 0)
                                         {
                                             var presentCount = item.Attendances.FirstOrDefault(x => x.UserId == Model.UserId);
-
+                                            if (presentCount != null)
+                                            {
                                             <span>
                                                 @if (presentCount.AttendanceSignOutStatus == Domain.Models.EnumStatus.AttendanceSignOutStatus.Present)
                                                 {
@@ -123,10 +125,11 @@
                                                 }
 
                                             </span>
+                                                }
+                                            }
                                         }
-                                    }
-                                    else
-                                    {
+                                        else
+                                        {
                                         <span>0/0/0</span>
                                     }
                                 </td>

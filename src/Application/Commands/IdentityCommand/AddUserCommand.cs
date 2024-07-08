@@ -73,8 +73,8 @@ namespace Application.Commands.IdentityCommand
             {
                 var user = new AppUser
                 {
-                    UserName = request.RegisterDto.Email,
-                    Email = request.RegisterDto.Email,
+                    UserName = request.RegisterDto.Email.Replace(" ", ""),
+                    Email = request.RegisterDto.Email.Replace(" ", ""),
                     PhoneNumber = request.RegisterDto.Phone,
                     FirstName = request.RegisterDto.FirstName,
                     LastName = request.RegisterDto.LastName,

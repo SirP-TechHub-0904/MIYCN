@@ -187,7 +187,8 @@ namespace Infrastructure.Repositories
                        Title = tp.Training.Title,
                        State = tp.Training.State,
                        LGA = tp.Training.LGA,
-                       ParticipantTrainingStatus = tp.ParticipantTrainingStatus
+                       ParticipantTrainingStatus = tp.ParticipantTrainingStatus,
+                       SmsSent = tp.User.SmsSent
                    })
                    .ToListAsync();
 

@@ -8,13 +8,18 @@
             PARTICIPANTS ON @Model.Training.Title ( @Model.Training.StartDate.ToString("ddd dd MMM, yyyy") -
             @Model.Training.EndDate.ToString("ddd dd MMM, yyyy"))
         </h3>
-        @if (User.IsInRole("Admin")) { 
-        
-        @if (User.IsInRole("AdminEditor") || Model.Training.TrainingStatus != Domain.Models.EnumStatus.TrainingStatus.Completed)
+        @if (User.IsInRole("Admin"))
         {
-            <a asp-page="./AddUserToTraining" asp-route-id="@Model.Training.Id" asp-route-rx="Participant" class="btn bg-gradient-warning btn-sm" style="float:right;">Register New Participant</a>
 
-        }
+            @if (User.IsInRole("AdminEditor") || Model.Training.TrainingStatus != Domain.Models.EnumStatus.TrainingStatus.Completed)
+            {
+                <a asp-page="./AddUserToTraining" asp-route-id="@Model.Training.Id" asp-route-rx="Participant" class="btn bg-gradient-warning btn-sm" style="float:right;">Register New Participant</a>
+
+            }
+    <form method="post">
+        <input type="hidden" name="id" value="@Model.Training.Id" />
+        <button type="submit" class="btn btn-primary btn-xs">Resend SMS</button>
+    </form>
         }
         <a asp-page="./DisabledParticipants" asp-route-id="@Model.Training.Id" class="btn btn-danger btn-sm" style="float: right;">Disabled Participants (@Model.Disabled)</a>
 

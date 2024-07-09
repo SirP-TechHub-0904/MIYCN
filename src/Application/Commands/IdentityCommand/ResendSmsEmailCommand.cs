@@ -94,7 +94,10 @@ namespace Application.Commands.IdentityCommand
             {
                 try
                 {
-                    SendSmsCommand smscommand = new SendSmsCommand(UserDatas.PhoneNumber, "Kindly check your email to complete your registration.");
+
+                    string smsm = $"Email: {UserDatas.Email} \nPasswd: {UserDatas.TempPass} \nLink: www.miycnportal.ng";
+                    //SendSmsCommand smscommand = new SendSmsCommand(UserDatas.PhoneNumber, "Kindly check your email to complete your registration.");
+                    SendSmsCommand smscommand = new SendSmsCommand(UserDatas.PhoneNumber, smsm);
                     var smsresponse = await _mediator.Send(smscommand);
                     UserDatas.SmsSent = true;
                     await _userManager.UpdateAsync(UserDatas);

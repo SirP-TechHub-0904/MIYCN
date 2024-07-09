@@ -97,5 +97,7 @@ namespace Domain.DTOs
         public string? Title { get; set; }
         public string? State { get; set; }
         public string? LGA { get; set; }
+
+        public bool SmsSent { get; set; }
     }
 }

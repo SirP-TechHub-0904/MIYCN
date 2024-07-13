@@ -9,6 +9,7 @@
         @if (User.IsInRole("Admin") || User.IsInRole("mSuperAdmin"))
         {
             <a asp-page="./Add" class="btn bg-gradient-warning btn-sm" style="float:right;">Register New Training</a>
+            <a asp-page="./TrainingReport" class="btn bg-gradient-warning btn-sm" style="float:right;">Training Report</a>
         }
     </div>
     <!-- /.card-header -->

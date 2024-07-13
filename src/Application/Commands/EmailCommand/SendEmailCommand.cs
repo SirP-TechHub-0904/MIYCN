@@ -67,7 +67,7 @@ namespace Application.Commands.EmailCommand
 </body>
 </html>
 ";
-            emailTemplate = emailTemplate.Replace("//CompanyName//", "MIYCN PORTAL");
+            emailTemplate = emailTemplate.Replace("//CompanyName//", "MIYCN Training");
             emailTemplate = emailTemplate.Replace("//YOUR_LOGO_URL//", "https://miycnportal.ng/img/miycn-logo-x2.png");
             emailTemplate = emailTemplate.Replace("//Subject//", request.Message.Subject.Replace("\r\n", ""));
             emailTemplate = emailTemplate.Replace("//Body//", request.Message.Message);

@@ -1,15 +1,13 @@
-﻿using Domain.Interfaces;
-using Domain.Models;
+﻿using AWS.Services;
+using Domain.Interfaces;
 using Infrastructure.Context;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-using XYZSMS.Services;
 using PostmarkEmailService;
-using AWS.Services;
+using XYZSMS.Services;
 
 
 namespace Application.Extensions
@@ -25,6 +23,8 @@ namespace Application.Extensions
             //
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceCollectionExtensions).Assembly));
 
+
+            //services.AddMediatR(typeof(ListTrainingWithDetailsQueryHandler).Assembly);
             services.AddTransient<PostmarkClient>(_ => new PostmarkClient(configuration.GetSection("PostmarkSettings")["ServerToken"]));
             // Register StorageService
             services.AddTransient<IStorageService, StorageService>();

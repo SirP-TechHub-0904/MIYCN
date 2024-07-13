@@ -20,10 +20,22 @@ namespace Infrastructure.Repositories
         {
             _context = context;
         }
+        public async Task<IQueryable<Training>> GetAllTrainingWithDetails()
+        {
+            var trainings = _context.Trainings
+                .Include(x=>x.TrainingFacilitators).ThenInclude(x=>x.User)
+                .Include(x=>x.TrainingParticipants).ThenInclude(x => x.User).OrderBy(x=>x.State) 
+                .AsQueryable();
+
+            
+            return trainings;
+        }
+
 
         public async Task<List<Training>> GetAll(string? state)
         {
-            var trainings = await _context.Trainings.ToListAsync();
+            var trainings = await _context.Trainings
+                .ToListAsync();
  
             if (state == "all") {
                 

@@ -9,7 +9,9 @@
         @if (User.IsInRole("Admin") || User.IsInRole("mSuperAdmin"))
         {
             <a asp-page="./Add" class="btn bg-gradient-warning btn-sm" style="float:right;">Register New Training</a>
-            <a asp-page="./TrainingReport" class="btn bg-gradient-warning btn-sm" style="float:right;">Training Report</a>
+            <a asp-page="./TrainingReport" class="btn bg-gradient-warning btn-sm" style="float:right;">Participant and Facilitators By State</a>
+            <a asp-page="./FacilitatorPrint" class="btn bg-gradient-warning btn-sm" style="float:right;">All Facilitators</a>
+            <a asp-page="./PrintParticipants" class="btn bg-gradient-warning btn-sm" style="float:right;">All Participants</a>
         }
     </div>
     <!-- /.card-header -->

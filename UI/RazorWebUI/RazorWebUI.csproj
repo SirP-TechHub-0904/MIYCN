@@ -11,6 +11,7 @@
   <ItemGroup>
     <Content Remove="Areas\Identity\Pages\Account\Locked.cshtml" />
     <Content Remove="Areas\ITrainings\Pages\Account\UserModulePage.cshtml" />
+    <Content Remove="Areas\ITrainings\Pages\Admin\PrintFacilitators.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +32,7 @@
     <None Include="Areas\ITrainings\Pages\Admin\Facilitators.cshtml" />
     <None Include="Areas\ITrainings\Pages\Admin\Info.cshtml" />
     <None Include="Areas\ITrainings\Pages\Admin\Participants.cshtml" />
+    <None Include="Areas\ITrainings\Pages\Admin\PrintFacilitators.cshtml" />
     <None Include="Areas\ITrainings\Pages\Admin\Sponsors.cshtml" />
     <None Include="Areas\ITrainings\Pages\Admin\Test.cshtml" />
     <None Include="wwwroot\AgileVendor\bootstrap.min.js" />
@@ -1716,11 +1718,16 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Locked.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\ITrainings\Pages\Admin\PrintFacilitators.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\User\Pages\Admin\UpdateUserPermission.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\User\Pages\Admin\UpdateUserPermission.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\ITrainings\Pages\Admin\PrintFacilitators.cshtml" />
   </ItemGroup>
 
 </Project>

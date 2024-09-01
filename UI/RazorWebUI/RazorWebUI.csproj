@@ -12,6 +12,7 @@
     <Content Remove="Areas\Identity\Pages\Account\Locked.cshtml" />
     <Content Remove="Areas\ITrainings\Pages\Account\UserModulePage.cshtml" />
     <Content Remove="Areas\ITrainings\Pages\Admin\PrintFacilitators.cshtml" />
+    <Content Remove="Areas\ITrainings\Pages\Category\Info.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +36,7 @@
     <None Include="Areas\ITrainings\Pages\Admin\PrintFacilitators.cshtml" />
     <None Include="Areas\ITrainings\Pages\Admin\Sponsors.cshtml" />
     <None Include="Areas\ITrainings\Pages\Admin\Test.cshtml" />
+    <None Include="Areas\ITrainings\Pages\Category\Info.cshtml" />
     <None Include="wwwroot\AgileVendor\bootstrap.min.js" />
     <None Include="wwwroot\AgileVendor\jquery-2.2.0.min.js" />
     <None Include="wwwroot\AgileVendor\popper.min.js" />
@@ -1710,6 +1712,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
+    <PackageReference Include="Rotativa.AspNetCore" Version="1.3.2" />
   </ItemGroup>
 
   <ItemGroup>

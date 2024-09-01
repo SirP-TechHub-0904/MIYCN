@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,7 +39,21 @@ namespace Application.Queries.IdentityQueries
             {
                 throw new ArgumentNullException(nameof(request.UserId));
             }
+            //
+            try
+            {
+                AppRole xRole = new AppRole("AdminEditor");
+                var checkrole = await _roleManager.FindByNameAsync("AdminEditor");
+                if (checkrole == null)
+                {
+                    await _roleManager.CreateAsync(xRole);
 
+                }
+            }
+            catch(Exception c)
+            {
+
+            }
             var roles = await _roleManager.Roles
                 .Where(x => x.Name != "mSuperAdmin")
                 .Select(x => x.Name)
@@ -57,7 +72,9 @@ namespace Application.Queries.IdentityQueries
             // var profile = await _userManager.FindByIdAsync(request.UserId);
             // var rolesList = string.Join(", ", userRoles);
             // profile. // Assign rolesList to the appropriate property
-            // await _userManager.UpdateAsync(profile);
+            // await _userManager.UpdateAsync(profile);AdminEditor
+
+
 
             return new UserRolesDto
             {

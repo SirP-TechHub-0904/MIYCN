@@ -1,12 +1,11 @@
 using Application.Commands.IdentityCommand;
-using Application.Commands.TrainingCommand;
-using Application.Queries.TrainingCategoryQueries;
+using Application.Commands.TrainingCategoryCommand;
 using Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace RazorWebUI.Areas.ITrainings.Pages.Admin
+namespace RazorWebUI.Areas.ITrainingCategorys.Pages.Category
 {
     [Microsoft.AspNetCore.Authorization.Authorize]
 
@@ -20,24 +19,18 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
         }
 
         [BindProperty]
-        public Training Training { get; set; }
+        public TrainingCategory TrainingCategory { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(long id)
+        public async Task<IActionResult> OnGetAsync()
         {
-            
-            var getTrainingCategory = new GetByIdTrainingCategoryQuery(id);
-            var result = await _mediator.Send(getTrainingCategory);
-            if(result == null)
-            {
-                return RedirectToPage("./Index");
-            }
+
             return Page();
         }
         public async Task<IActionResult> OnPostAsync()
         {
             try
             {
-                AddTrainingCommand Command = new AddTrainingCommand(Training);
+                AddTrainingCategoryCommand Command = new AddTrainingCategoryCommand(TrainingCategory);
                 await _mediator.Send(Command);
                 TempData["success"] = "Success";
                 return RedirectToPage("./Index");

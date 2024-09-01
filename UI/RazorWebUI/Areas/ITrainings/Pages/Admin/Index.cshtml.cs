@@ -1,4 +1,5 @@
 using Application.Queries.IdentityQueries;
+using Application.Queries.TrainingCategoryQueries;
 using Application.Queries.TrainingQueries;
 using Domain.Models;
 using MediatR;
@@ -21,11 +22,21 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
             _logger = logger;
             _mediator = mediator;
         }
-
+        public TrainingCategory TrainingCategory { get; set; }
         public IEnumerable<Training> Datas { get; private set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(long id)
         {
+            var getTrainingCategory = new GetByIdTrainingCategoryQuery(id);
+            var result = await _mediator.Send(getTrainingCategory);
+            if (result == null)
+            {
+                id = 0;
+            }
+            else
+            {
+                TrainingCategory = result;
+            }
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             string state = "";
@@ -39,7 +50,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
             {
                 state = "all";
             }
-            var query = new ListTrainingQuery(state);
+            var query = new ListTrainingByCategoryQuery(state, id);
             Datas = await _mediator.Send(query);
         }
 

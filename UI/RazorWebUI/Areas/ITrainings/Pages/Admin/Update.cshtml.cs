@@ -1,9 +1,11 @@
 using Application.Commands.TrainingCommand;
+using Application.Queries.TrainingCategoryQueries;
 using Application.Queries.TrainingQueries;
 using Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 {
@@ -32,6 +34,11 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
             }
             GetByIdTrainingQuery Command = new GetByIdTrainingQuery(id);
             Training = await _mediator.Send(Command);
+
+            ListTrainingCategoryQuery ListCommand = new ListTrainingCategoryQuery();
+           var CategoryTraining = await _mediator.Send(ListCommand);
+
+            ViewData["TrainingCategoryId"] = new SelectList(CategoryTraining, "Id", "Title");
             return Page();
         }
         public async Task<IActionResult> OnPostAsync()

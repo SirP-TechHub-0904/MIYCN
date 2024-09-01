@@ -1,43 +1,42 @@
-using Application.Commands.IdentityCommand;
-using Application.Commands.TrainingCommand;
+using Application.Commands.TrainingCategoryCommand;
 using Application.Queries.TrainingCategoryQueries;
 using Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace RazorWebUI.Areas.ITrainings.Pages.Admin
+namespace RazorWebUI.Areas.ITrainingCategorys.Pages.Category
 {
     [Microsoft.AspNetCore.Authorization.Authorize]
 
-    public class AddModel : PageModel
+    //public class  : PageModel
+    public class RemoveModel : PageModel
     {
         private readonly IMediator _mediator;
 
-        public AddModel(IMediator mediator)
+        public RemoveModel(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [BindProperty]
-        public Training Training { get; set; }
+        public TrainingCategory TrainingCategory { get; set; }
 
         public async Task<IActionResult> OnGetAsync(long id)
         {
-            
-            var getTrainingCategory = new GetByIdTrainingCategoryQuery(id);
-            var result = await _mediator.Send(getTrainingCategory);
-            if(result == null)
+            if (id < 0)
             {
-                return RedirectToPage("./Index");
+                return NotFound();
             }
+            GetByIdTrainingCategoryQuery Command = new GetByIdTrainingCategoryQuery(id);
+            TrainingCategory = await _mediator.Send(Command);
             return Page();
         }
         public async Task<IActionResult> OnPostAsync()
         {
             try
             {
-                AddTrainingCommand Command = new AddTrainingCommand(Training);
+                DeleteTrainingCategoryCommand Command = new DeleteTrainingCategoryCommand(TrainingCategory.Id);
                 await _mediator.Send(Command);
                 TempData["success"] = "Success";
                 return RedirectToPage("./Index");
@@ -48,7 +47,5 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 
             }
         }
-
     }
-
 }

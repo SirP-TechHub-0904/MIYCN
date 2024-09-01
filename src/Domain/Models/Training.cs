@@ -27,6 +27,9 @@ namespace Domain.Models
         [Display(Name = "Dialy End Time")]
         public string DialyEndTime { get; set; }
 
+        public long? TrainingCategoryId  { get; set; }
+        public TrainingCategory TrainingCategory { get; set; }
+
         public ICollection<Sponsor> Sponsors { get; set; }
         public ICollection<TrainingFacilitator> TrainingFacilitators { get; set; }
         public ICollection<TrainingParticipant> TrainingParticipants { get; set; }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-     public sealed class EducationRepository : Repository<Education>, IEducationRepository
+    public sealed class EducationRepository : Repository<Education>, IEducationRepository
     {
         private readonly AppDbContext _context;
 

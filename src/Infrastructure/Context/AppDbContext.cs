@@ -27,6 +27,7 @@ namespace Infrastructure.Context
         public DbSet<TestCategory> TestCategories { get; set; }
         public DbSet<TestSheet> TestSheets { get; set; }
         public DbSet<Training> Trainings { get; set; }
+        public DbSet<TrainingCategory> TrainingCategories { get; set; }
         public DbSet<TrainingFacilitator> TrainingFacilitators { get; set; }
         public DbSet<TrainingParticipant> TrainingParticipants { get; set; }
         public DbSet<Setting> Settings { get; set; }

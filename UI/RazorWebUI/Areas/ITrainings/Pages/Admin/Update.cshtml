@@ -15,7 +15,13 @@
                 <form method="post" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Training.Id" />
+                    <div class="form-group">
+                        <label class="control-label">Update Category</label>
+                        <select asp-for="Training.TrainingCategoryId" class="form-control select2 select2-primary js-example-basic-single" data-dropdown-css-class="select2-primary" asp-items="ViewBag.TrainingCategoryId">
+                            <option value="">Choose</option>
+                        </select>
 
+                    </div>
                     <div class="form-group">
                         <label asp-for="Training.Title" class="control-label"></label>
                         <input asp-for="Training.Title" class="form-control" id="upper1" oninput="myUppercase('upper1')" />

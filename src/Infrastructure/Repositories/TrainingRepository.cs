@@ -23,27 +23,55 @@ namespace Infrastructure.Repositories
         public async Task<IQueryable<Training>> GetAllTrainingWithDetails()
         {
             var trainings = _context.Trainings
-                .Include(x=>x.TrainingFacilitators).ThenInclude(x=>x.User)
-                .Include(x=>x.TrainingParticipants).ThenInclude(x => x.User).OrderBy(x=>x.State) 
+                .Include(x => x.TrainingFacilitators).ThenInclude(x => x.User)
+                .Include(x => x.TrainingParticipants).ThenInclude(x => x.User).OrderBy(x => x.State)
                 .AsQueryable();
 
-            
+
             return trainings;
         }
+        public async Task<List<Training>> GetAllByCategoryId(string? state, long id = 0)
+        {
+            var trainings = await _context.Trainings
+                .Include(x => x.TrainingCategory)
 
+                .ToListAsync();
+            if (id > 0)
+            {
+                trainings = trainings.Where(x => x.TrainingCategoryId == id).ToList();
+            }
+            if (state == "all")
+            {
+
+            }
+            else
+            {
+                if (state != null)
+                {
+                    trainings = trainings.Where(x => x.State.ToLower() == state.ToLower()).ToList();
+                }
+                else
+                {
+                    trainings = trainings.Where(x => x.State.ToLower() == "").ToList();
+                }
+            }
+            return trainings;
+        }
 
         public async Task<List<Training>> GetAll(string? state)
         {
             var trainings = await _context.Trainings
                 .ToListAsync();
- 
-            if (state == "all") {
-                
+
+            if (state == "all")
+            {
+
             }
             else
             {
-                if(state != null) { 
-                trainings = trainings.Where(x => x.State.ToLower() == state.ToLower()).ToList();
+                if (state != null)
+                {
+                    trainings = trainings.Where(x => x.State.ToLower() == state.ToLower()).ToList();
                 }
                 else
                 {
@@ -153,7 +181,7 @@ namespace Infrastructure.Repositories
             Sponsors = x.Sponsors.Count(),
             TrainingFacilitators = x.TrainingFacilitators.Count(),
             TrainingParticipants = x.TrainingParticipants.Where(x => x.ParticipantTrainingStatus == EnumStatus.ParticipantTrainingStatus.Active).Count(),
-            
+
             DialyActivities = x.DialyActivities.Count(),
             TestCategory = x.TestCategory.Count(),
 
@@ -172,7 +200,7 @@ namespace Infrastructure.Repositories
             CertificateTitle = x.CertificateTitle,
             CertificateCourseTitle = x.CertificateCourseTitle,
             CertificateAddress = x.CertificateAddress,
-            CertificateDate = x.CertificateDate 
+            CertificateDate = x.CertificateDate
         })
         .FirstOrDefaultAsync();
             if (trainingDto != null)
@@ -189,12 +217,12 @@ namespace Infrastructure.Repositories
         {
             try
             {
-                var data = await _context.Certificates.Where(x=>x.TrainingId == id).ToListAsync();
-                foreach(var entity in data)
+                var data = await _context.Certificates.Where(x => x.TrainingId == id).ToListAsync();
+                foreach (var entity in data)
                 {
                     _context.Certificates.Remove(entity);
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -307,8 +335,77 @@ namespace Infrastructure.Repositories
             }
 
 
-             
+
             await _context.SaveChangesAsync();
         }
+
+        public async Task<TrainingDto> GetTrainingByIdReport(long id)
+        {
+            var trainingDto = await _context.Trainings
+                .Include(x=>x.TrainingCategory)
+                .Include(x=>x.TrainingFacilitators).ThenInclude(x=>x.User)
+                .Include(x=>x.TrainingParticipants).ThenInclude(x => x.User)
+                .Include(x=>x.Sponsors)
+        .Where(x => x.Id == id)
+        .Select(x => new TrainingDto
+        {
+            Id = x.Id,
+            Title = x.Title,
+            Address = x.Address,
+            State = x.State,
+            LGA = x.LGA,
+            Category = x.TrainingCategory.Title,
+            Ward = x.Ward,
+            EnablePostTest = x.EnablePostTest,
+            EnablePreTest = x.EnablePreTest,
+            PostTestStartTime = x.PostTestStartTime,
+            StartDate = x.StartDate,
+            PreTestInstruction = x.PreTestInstruction,
+            PostTestInstruction = x.PostTestInstruction,
+            EndDate = x.EndDate,
+            TrainingStatus = x.TrainingStatus,
+            DialyStartTime = x.DialyStartTime,
+            DialyEndTime = x.DialyEndTime,
+            SignInStartTime = x.SignInStartTime,
+            SignInStopTime = x.SignInStopTime,
+            SignOutStartTime = x.SignOutStartTime,
+            SignOutStopTime = x.SignOutStopTime,
+            Sponsors = x.Sponsors.Count(),
+            TrainingFacilitators = x.TrainingFacilitators.Count(),
+            TrainingParticipants = x.TrainingParticipants.Where(x => x.ParticipantTrainingStatus == EnumStatus.ParticipantTrainingStatus.Active).Count(),
+            TrainingFacilitatorsList = x.TrainingFacilitators.ToList(),
+            TrainingParticipantsList = x.TrainingParticipants.Where(x => x.ParticipantTrainingStatus == EnumStatus.ParticipantTrainingStatus.Active).ToList(),
+            SponsorsList = x.Sponsors.ToList(),
+            DialyActivities = x.DialyActivities.Count(),
+            TestCategory = x.TestCategory.Count(),
+
+            CertificateUseRightSidePhysicalSignature = x.CertificateUseRightSidePhysicalSignature,
+            CertificateRightSideSignatureUrl = x.CertificateRightSideSignatureUrl,
+            CertificateRightSideSignatureKey = x.CertificateRightSideSignatureKey,
+            CertificateRightSideName = x.CertificateRightSideName,
+            CertificateRightSideOfficePosition = x.CertificateRightSideOfficePosition,
+            CertificateRightSideOfficeTitle = x.CertificateRightSideOfficeTitle,
+            CertificateUseLeftSidePhysicalSignature = x.CertificateUseLeftSidePhysicalSignature,
+            CertificateLeftSideSignatureUrl = x.CertificateLeftSideSignatureUrl,
+            CertificateLeftSideSignatureKey = x.CertificateLeftSideSignatureKey,
+            CertificateLeftSideName = x.CertificateLeftSideName,
+            CertificateLeftSideOfficePosition = x.CertificateLeftSideOfficePosition,
+            CertificateLeftSideOfficeTitle = x.CertificateLeftSideOfficeTitle,
+            CertificateTitle = x.CertificateTitle,
+            CertificateCourseTitle = x.CertificateCourseTitle,
+            CertificateAddress = x.CertificateAddress,
+            CertificateDate = x.CertificateDate
+        })
+        .FirstOrDefaultAsync();
+            if (trainingDto != null)
+            {
+                return trainingDto;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }

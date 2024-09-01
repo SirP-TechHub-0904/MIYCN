@@ -13,6 +13,7 @@ namespace Domain.DTOs
     {
         public long Id { get; set; }
         public string? Title { get; set; }
+        public string? Category { get; set; }
         public string? Address { get; set; }
         public string? State { get; set; }
         public string? LGA { get; set; }
@@ -115,5 +116,9 @@ namespace Domain.DTOs
 
         [Display(Name = "Certificate Date")]
         public string? CertificateDate { get; set; }
+
+        public ICollection<Sponsor> SponsorsList { get; set; }
+        public ICollection<TrainingFacilitator> TrainingFacilitatorsList { get; set; }
+        public ICollection<TrainingParticipant> TrainingParticipantsList { get; set; }
     }
 }

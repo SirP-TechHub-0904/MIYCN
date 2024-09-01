@@ -56,6 +56,7 @@ namespace Application.Extensions
             services.AddTransient<ITimeTableRepository, TimeTableRepository>();
             services.AddTransient<IGalleryRepository, GalleryRepository>();
             services.AddTransient<IDashboardRepository, DashboardRepository>();
+            services.AddTransient<ITrainingCategoryRepository, TrainingCategoryRepository>();
 
             services.Configure<IdentityOptions>(options =>
             {

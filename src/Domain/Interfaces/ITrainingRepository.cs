@@ -12,9 +12,11 @@ namespace Domain.Interfaces
     public interface ITrainingRepository : IRepository<Training>
     {
         Task<TrainingDto> GetTrainingByIdAndCounts(long id);
+        Task<TrainingDto> GetTrainingByIdReport(long id);
         Task<List<TrainingByUserDto>> GetAllTrainingsByUserId(string userId);
         Task<List<Training>> GetAll(string? state);
         Task<IQueryable<Training>> GetAllTrainingWithDetails();
         Task RemoveTraining(long id);
+        Task<List<Training>> GetAllByCategoryId(string? state, long id = 0);
     }
 }

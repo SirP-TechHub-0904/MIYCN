@@ -10,6 +10,7 @@ namespace Domain.Models
     {
         public long Id { get; set; }
         public string Title { get; set; }
+        public string Abbreviation { get; set; }
         public string Description { get; set; }
 
         public ICollection<Training> Training { get; set; }

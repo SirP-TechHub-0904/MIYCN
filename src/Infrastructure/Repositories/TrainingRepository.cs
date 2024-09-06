@@ -406,6 +406,73 @@ namespace Infrastructure.Repositories
                 return null;
             }
         }
+        public async Task<List<TrainingDto>> GetTrainingByReportList()
+        {
+            var trainingDtoList = await _context.Trainings
+                .Include(x => x.TrainingCategory)
+                .Include(x => x.TrainingFacilitators).ThenInclude(x => x.User)
+                .Include(x => x.TrainingParticipants).ThenInclude(x => x.User)
+                .Include(x => x.Sponsors)
+                .Where(x => x.TrainingStatus != EnumStatus.TrainingStatus.Nill) // You can modify the condition if necessary to fetch multiple trainings.
+                .Select(x => new TrainingDto
+                {
+                    Id = x.Id,
+                    CategoryId = x.TrainingCategoryId,
+                    Title = x.Title,
+                    Address = x.Address,
+                    State = x.State,
+                    LGA = x.LGA,
+                    Category = x.TrainingCategory.Title,
+                    CategoryAbbreviation = x.TrainingCategory.Abbreviation,
+                    Ward = x.Ward,
+                    EnablePostTest = x.EnablePostTest,
+                    EnablePreTest = x.EnablePreTest,
+                    PostTestStartTime = x.PostTestStartTime,
+                    StartDate = x.StartDate,
+                    PreTestInstruction = x.PreTestInstruction,
+                    PostTestInstruction = x.PostTestInstruction,
+                    EndDate = x.EndDate,
+                    TrainingStatus = x.TrainingStatus,
+                    DialyStartTime = x.DialyStartTime,
+                    DialyEndTime = x.DialyEndTime,
+                    SignInStartTime = x.SignInStartTime,
+                    SignInStopTime = x.SignInStopTime,
+                    SignOutStartTime = x.SignOutStartTime,
+                    SignOutStopTime = x.SignOutStopTime,
+                    Sponsors = x.Sponsors.Count(),
+                    TrainingFacilitators = x.TrainingFacilitators.Count(),
+                    TrainingParticipants = x.TrainingParticipants
+                        .Where(p => p.ParticipantTrainingStatus == EnumStatus.ParticipantTrainingStatus.Active).Count(),
+                    TrainingFacilitatorsList = x.TrainingFacilitators.ToList(),
+                    TrainingParticipantsList = x.TrainingParticipants
+                        .Where(p => p.ParticipantTrainingStatus == EnumStatus.ParticipantTrainingStatus.Active).ToList(),
+                    SponsorsList = x.Sponsors.ToList(),
+                    DialyActivities = x.DialyActivities.Count(),
+                    TestCategory = x.TestCategory.Count(),
+
+                    CertificateUseRightSidePhysicalSignature = x.CertificateUseRightSidePhysicalSignature,
+                    CertificateRightSideSignatureUrl = x.CertificateRightSideSignatureUrl,
+                    CertificateRightSideSignatureKey = x.CertificateRightSideSignatureKey,
+                    CertificateRightSideName = x.CertificateRightSideName,
+                    CertificateRightSideOfficePosition = x.CertificateRightSideOfficePosition,
+                    CertificateRightSideOfficeTitle = x.CertificateRightSideOfficeTitle,
+                    CertificateUseLeftSidePhysicalSignature = x.CertificateUseLeftSidePhysicalSignature,
+                    CertificateLeftSideSignatureUrl = x.CertificateLeftSideSignatureUrl,
+                    CertificateLeftSideSignatureKey = x.CertificateLeftSideSignatureKey,
+                    CertificateLeftSideName = x.CertificateLeftSideName,
+                    CertificateLeftSideOfficePosition = x.CertificateLeftSideOfficePosition,
+                    CertificateLeftSideOfficeTitle = x.CertificateLeftSideOfficeTitle,
+                    CertificateTitle = x.CertificateTitle,
+                    CertificateCourseTitle = x.CertificateCourseTitle,
+                    CertificateAddress = x.CertificateAddress,
+                    CertificateDate = x.CertificateDate
+                })
+                .OrderByDescending(x=>x.StartDate)
+                //.Take(3)
+                .ToListAsync();
+
+            return trainingDtoList;
+        }
 
     }
 }

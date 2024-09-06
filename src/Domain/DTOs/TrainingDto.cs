@@ -12,8 +12,10 @@ namespace Domain.DTOs
     public class TrainingDto
     {
         public long Id { get; set; }
+        public long? CategoryId { get; set; }
         public string? Title { get; set; }
         public string? Category { get; set; }
+        public string? CategoryAbbreviation { get; set; }
         public string? Address { get; set; }
         public string? State { get; set; }
         public string? LGA { get; set; }

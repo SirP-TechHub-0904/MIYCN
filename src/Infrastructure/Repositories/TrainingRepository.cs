@@ -440,10 +440,10 @@ namespace Infrastructure.Repositories
                     SignOutStartTime = x.SignOutStartTime,
                     SignOutStopTime = x.SignOutStopTime,
                     Sponsors = x.Sponsors.Count(),
-                    TrainingFacilitators = x.TrainingFacilitators.Count(),
+                    TrainingFacilitators = x.TrainingFacilitators.Where(p => p.FacilitatorTrainingStatus == EnumStatus.FacilitatorTrainingStatus.Active).Count(),
                     TrainingParticipants = x.TrainingParticipants
                         .Where(p => p.ParticipantTrainingStatus == EnumStatus.ParticipantTrainingStatus.Active).Count(),
-                    TrainingFacilitatorsList = x.TrainingFacilitators.ToList(),
+                    TrainingFacilitatorsList = x.TrainingFacilitators.Where(p => p.FacilitatorTrainingStatus == EnumStatus.FacilitatorTrainingStatus.Active).ToList(),
                     TrainingParticipantsList = x.TrainingParticipants
                         .Where(p => p.ParticipantTrainingStatus == EnumStatus.ParticipantTrainingStatus.Active).ToList(),
                     SponsorsList = x.Sponsors.ToList(),

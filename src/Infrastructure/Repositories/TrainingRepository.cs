@@ -474,5 +474,11 @@ namespace Infrastructure.Repositories
             return trainingDtoList;
         }
 
+        public async Task<Training> GetTrainingById(long id)
+        {
+            var data = await _context.Trainings
+                .Include(x=>x.TrainingCategory).FirstOrDefaultAsync(x=>x.Id == id);
+            return data;
+        }
     }
 }

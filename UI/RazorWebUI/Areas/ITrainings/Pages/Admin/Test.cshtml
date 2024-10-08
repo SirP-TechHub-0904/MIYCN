@@ -91,7 +91,7 @@
 
                             <thead>
                                 <tr>
-                                    <th colspan="6" style="text-transform:uppercase;">@title</th>
+                                    <th colspan="7" style="text-transform:uppercase;">@title</th>
                                      
                                 </tr>
                             </thead>
@@ -103,6 +103,7 @@
                                     <th>PLACE OF WORK</th>
                                     <th>PRETEST</th>
                                     <th>POSTTEST</th>
+                                    <th>REMARK</th>
                                 </tr>
                             </thead>
 
@@ -144,6 +145,9 @@ string.IsNullOrEmpty(x.PostTestScore) ? 0 : Convert.ToInt32(x.PostTestScore.Repl
                                         <td style="text-transform:uppercase;">
                                             @Html.DisplayFor(modelItem => item.User.PlaceOfWork)
                                         </td>
+                                        @{ 
+                                            string remark = "";
+                                        }
                                         <td>
                                             @if (item.PreTestTaken == false)
                                             {
@@ -158,10 +162,12 @@ string.IsNullOrEmpty(x.PostTestScore) ? 0 : Convert.ToInt32(x.PostTestScore.Repl
                                                 if (preTestScore > 69)
                                                 {
                                                     preTestOver70++;
+                                                     
                                                 }
                                                 else
                                                 {
                                                     preTestBelow70++;
+                                                    
                                                 }
                                                 @item.PreTestScore
                                                 <a asp-page="/Account/Result" class="btn btn-primary" asp-route-tid="@Model.Training.Id" asp-route-userId="@item.UserId" asp-route-xty="0">
@@ -184,10 +190,12 @@ string.IsNullOrEmpty(x.PostTestScore) ? 0 : Convert.ToInt32(x.PostTestScore.Repl
                                                 if (postTestScore > 69)
                                                 {
                                                     postTestOver70++;
+                                                    remark = "Qualified";
                                                 }
                                                 else
                                                 {
                                                     postTestBelow70++;
+                                                    remark = "Not Qualified";
                                                 }
                                                 @item.PostTestScore
                                                 <a asp-page="/Account/Result" class="btn btn-primary" asp-route-tid="@Model.Training.Id" asp-route-userId="@item.UserId" asp-route-xty="2">
@@ -195,13 +203,16 @@ string.IsNullOrEmpty(x.PostTestScore) ? 0 : Convert.ToInt32(x.PostTestScore.Repl
                                                 </a>
                                             }
                                         </td>
+                                        <td style="text-transform:uppercase;">
+                                            @remark
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
                             <tbody>
 
                                 <tr>
-                                    <td colspan="4">
+                                    <td colspan="5">
                                         TOTAL
                                     </td>
                                     <td style="text-transform:uppercase;">

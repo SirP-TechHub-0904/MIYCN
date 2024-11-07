@@ -66,7 +66,28 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
             {
                 AddUserByTrainingIdCommand regCommand = new AddUserByTrainingIdCommand(RegisterDto, Role, TrainingId, ExistingUserId);
                 var response = await _mediator.Send(regCommand);
+                if (!response.Success)
+                {
+                    GetByIdTrainingQuery Command = new GetByIdTrainingQuery(TrainingId);
+                    Training = await _mediator.Send(Command);
+                    RX = RX;
 
+                    //
+                    GetUserListByRoleDto getflist = new GetUserListByRoleDto("Participant");
+                    var listfacilitators = await _mediator.Send(getflist);
+
+                    var dropdownlist = listfacilitators
+            .Select(x => new DropdownUserDto
+            {
+                Id = x.Id,
+                Name = $"{x.Fullname} - {x.Email} - {x.Phone}" // Concatenate full name
+            })
+            .ToList();
+
+                    ViewData["UserId"] = new SelectList(dropdownlist, "Id", "Name");
+                    TempData["error"] = response.Message;
+                    return Page();
+                }
                 return RedirectToPage("/Admin/RegistrationStatus", new { id = response.UserId, rx = response.Role, txid = response.TrainingId, area = "User" });
             }
             catch (Exception ex)

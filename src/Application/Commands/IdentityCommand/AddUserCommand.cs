@@ -204,6 +204,9 @@ namespace Application.Commands.IdentityCommand
                    
                     return regResponse;
                 }
+            
+                regResponse.Message = string.Join("; ", result.Errors.Select(e => e.Description));
+
             }
             catch (Exception e)
             {

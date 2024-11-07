@@ -85,9 +85,9 @@ namespace Application.Commands.EmailCommand
                 Subject = request.Message.Subject,
                 HtmlBody = emailTemplate
             };
-            return null;
+            //return null;
 
-            //return await _postmarkService.SendMessageAsync(message);
+            return await _postmarkService.SendMessageAsync(message);
         }
     }
 }

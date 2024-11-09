@@ -63,7 +63,10 @@
                     <div class="col-md-4 m-border">
                         <a asp-page="/GalleryPage/Index" asp-route-id="@Model.Training.Id" class="btn btn-warning" style="width:100%;">Gallery</a>
                     </div>
-
+                    <div class="col-md-4 m-border">
+                        <a asp-page="./SupervisorReportAdmin" asp-route-id="@Model.Training.Id" class="btn btn-primary" style="width:100%;">Supervisor Report</a>
+                    </div>
+                    
                 </div>
             </div>
             <div class="card-body">

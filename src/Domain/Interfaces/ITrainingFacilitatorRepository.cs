@@ -18,7 +18,7 @@ namespace Domain.Interfaces
 
         Task<bool> AddFacilitator(TrainingFacilitator model);
         Task<TrainingFacilitator> GetFacilitatorById(long id);
-
+        Task<TrainingFacilitator> GetFacilitatorByIdAndUserId(long id, string userId);
         Task UpdateFacilitatorInTrainingStatus(long trainingId, long facilitatorId, FacilitatorTrainingStatus status, string reason);
 
     }

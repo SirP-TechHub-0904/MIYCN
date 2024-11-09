@@ -233,7 +233,20 @@ namespace Infrastructure.Repositories
 
             return participants;
         }
+        public async Task<TrainingFacilitator> GetFacilitatorByIdAndUserId(long id, string userId)
+        {
 
+            //var xdata = await _context.TrainingFacilitators
+            //    .Include(x => x.Training)
+            //    .Include(x => x.User)
+            //    .Where(x => x.Id == id && x.UserId == userId).ToListAsync();
+
+            var data = await _context.TrainingFacilitators
+                .Include(x => x.Training)
+                .Include(x => x.User)
+                .FirstOrDefaultAsync(x => x.TrainingId == id && x.UserId == userId);
+            return data;
+        }
         public async Task<TrainingFacilitator> GetFacilitatorById(long id)
         {
             var data = await _context.TrainingFacilitators

@@ -57,6 +57,9 @@ namespace Application.Extensions
             services.AddTransient<IGalleryRepository, GalleryRepository>();
             services.AddTransient<IDashboardRepository, DashboardRepository>();
             services.AddTransient<ITrainingCategoryRepository, TrainingCategoryRepository>();
+            services.AddTransient<ISupervisorSectionRepository, SupervisorSectionRepository>();
+            services.AddTransient<ISupervisorSectionQuestionRepository, SupervisorSectionQuestionRepository>();
+            services.AddTransient<ISupervisorTrainingFormRepository, SupervisorTrainingFormRepository>();
 
             services.Configure<IdentityOptions>(options =>
             {

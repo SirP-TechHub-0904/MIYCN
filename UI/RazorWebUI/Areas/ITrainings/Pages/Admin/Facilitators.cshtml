@@ -101,11 +101,12 @@
                                             </button>
                                             <div class="dropdown-menu" style="">
 
+                                                <a class="dropdown-item" asp-page="./UpdateFacilitatorAccount" asp-route-id="@item.FacilitatorTrainingId">Update</a>
                                                 <a class="dropdown-item" asp-page="./ParticipantTest" asp-route-id="@item.Id">Participant Test Result</a>
                                                 <a class="dropdown-item" asp-page="./Index" asp-route-id="@item.Id">Back Work Plan</a>
                                                 <a class="dropdown-item" asp-page="./Index" asp-route-id="@item.Id">Certificate</a>
                                                 <a class="dropdown-item" asp-page="/Admin/RegistrationStatus" asp-area="User" asp-route-id="@item.Id">Registration Status</a>
-
+                                                <a class="dropdown-item" asp-page="/Admin/UpdateUserPermission" asp-area="User" asp-route-id="@item.Id">Update User Permission</a>
                                             </div>
                                         </div>
                                     </div>

@@ -1,0 +1,64 @@
+﻿@page
+@model RazorWebUI.Areas.ITrainings.Pages.Admin.UpdateFacilitatorAccountModel
+@{
+}
+
+<div class="card card-default">
+    <div class="card-header">
+        <h3 class="card-title">UPDATE FACILITATOR IN TRAINING FOR @Model.TrainingFacilitator.User.FullnameX</h3>
+
+    </div>
+    <div class="card-header">
+        <h4>Email: @Model.TrainingFacilitator.User.Email</h4>
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="TrainingFacilitator.Id" />
+                    <input type="hidden" asp-for="TrainingFacilitator.TrainingId" />
+                    <input type="hidden" asp-for="TrainingFacilitator.UserId" />
+
+
+                    <div class="form-group">
+                        <label asp-for="TrainingFacilitator.Position" class="control-label"></label>
+                        <select asp-for="TrainingFacilitator.Position" class="form-control" required="required">
+                            <option value="">Choose</option>
+                            <option value="National Admin">National Admin</option>
+                            <option value="State Admin">State Admin</option>
+                            <option value="Support Staff">Support Staff</option>
+                            <option value="Team Lead">Team Lead</option>
+                            <option value="Assistant Team Lead">Assistant Team Lead</option>
+                            <option value="Trainner">Trainner</option>
+                            <option value="Supervisor">Supervisor</option>
+                            <option value="Monitor">Monitor</option>
+                            <option value="MIYCN Portal IT Support Manager">MIYCN Portal IT Support Manager</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-primary" />
+                        <a asp-page="./Index" class="btn bg-gradient-warning btn-sm" style="float:right;">Back</a>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- /.row -->
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

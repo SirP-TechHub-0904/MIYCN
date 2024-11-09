@@ -1,0 +1,111 @@
+﻿@page
+@model RazorWebUI.Areas.ITrainings.Pages.Supervisor.ISection.UpdateModel
+@{
+}
+
+<div class="card card-default">
+    <div class="card-header">
+        <h3 class="card-title">UPDATE NEW SUPERVISOR SECTION</h3>
+
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="SupervisorSection.Id" />
+                    <div class="form-group">
+                        <label asp-for="SupervisorSection.Title" class="control-label"></label>
+                        <textarea asp-for="SupervisorSection.Title" class="form-control"></textarea>
+                        <span asp-validation-for="SupervisorSection.Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="SupervisorSection.Instruction" class="control-label"></label>
+                        <textarea asp-for="SupervisorSection.Instruction" class="form-control"></textarea>
+                        <span asp-validation-for="SupervisorSection.Instruction" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SupervisorSection.QuestionTitle" class="control-label"></label>
+                        <input asp-for="SupervisorSection.QuestionTitle" class="form-control" />
+                        <span asp-validation-for="SupervisorSection.QuestionTitle" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="SupervisorSection.AnswerType" class="control-label"></label>
+                        @Html.DropDownListFor(model => model.SupervisorSection.AnswerType, new SelectList(Enum.GetValues(typeof(Domain.Models.EnumStatus.EvaluationAnswerType))), new { @class = "form-control" })
+                        <span asp-validation-for="SupervisorSection.AnswerType" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SupervisorSection.AnswerTypeTitle" class="control-label"></label>
+                        <input asp-for="SupervisorSection.AnswerTypeTitle" class="form-control" />
+                        <span asp-validation-for="SupervisorSection.AnswerTypeTitle" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="SupervisorSection.EnableRemark" class="control-label"></label>
+                        <input asp-for="SupervisorSection.EnableRemark" />
+                        <span asp-validation-for="SupervisorSection.EnableRemark" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SupervisorSection.RemarkTitle" class="control-label"></label>
+                        <input asp-for="SupervisorSection.RemarkTitle" class="form-control" />
+                        <span asp-validation-for="SupervisorSection.RemarkTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SupervisorSection.SortOrder" class="control-label"></label>
+                        <input asp-for="SupervisorSection.SortOrder" class="form-control" />
+                        <span asp-validation-for="SupervisorSection.SortOrder" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SupervisorSection.EnableNames" class="control-label"></label>
+                        <input asp-for="SupervisorSection.EnableNames" />
+                        <span asp-validation-for="SupervisorSection.EnableNames" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="SupervisorSection.ColumnOne" class="control-label"></label>
+                        <input asp-for="SupervisorSection.ColumnOne" class="form-control" />
+                        <span asp-validation-for="SupervisorSection.ColumnOne" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SupervisorSection.ColumnTwo" class="control-label"></label>
+                        <input asp-for="SupervisorSection.ColumnTwo" class="form-control" />
+                        <span asp-validation-for="SupervisorSection.ColumnTwo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SupervisorSection.ColumnThree" class="control-label"></label>
+                        <input asp-for="SupervisorSection.ColumnThree" class="form-control" />
+                        <span asp-validation-for="SupervisorSection.ColumnThree" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SupervisorSection.ColumnFour" class="control-label"></label>
+                        <input asp-for="SupervisorSection.ColumnFour" class="form-control" />
+                        <span asp-validation-for="SupervisorSection.ColumnFour" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-primary" />
+                        <a asp-page="./Index" class="btn bg-gradient-warning btn-sm" style="float:right;">Back</a>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- /.row -->
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script src="~/js/lga.js"></script>
+}

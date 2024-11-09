@@ -1,0 +1,90 @@
+﻿@page
+@model RazorWebUI.Areas.ITrainings.Pages.Supervisor.ISection.IndexModel
+@{
+    ViewData["Title"] = $"TEST QUESTIONS";
+
+}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">MANAGE SUPERVISOR SECTION</h3>
+
+
+        <a asp-page="./Add" class="btn bg-gradient-warning btn-sm" style="float:right;">New Section</a>
+
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="" class="example-table table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>
+                            Title
+                        </th>
+                        <th>Instruction</th>
+                        <th>Question Title</th>
+
+                        <th>Answer Type</th>
+                        <th>Answer Type Title</th>
+                        <th>Enable Remark</th>
+                        <th>Remark Title</th>
+                        <th>SortOrder</th>
+                        <th>Enable List</th>
+
+                    </tr>
+                </thead>
+
+                @{
+                    int sn = 0;
+                }
+                <tbody>
+                    @foreach (var item in Model.Datas)
+                    {
+                        <tr>
+
+                            <td>
+                                @{
+                                    sn++;
+                                }
+                                @sn
+                            </td>
+                            <td>
+                                <a asp-page="./Update" asp-route-id="@item.Id">
+                                    @Html.DisplayFor(modelItem => item.Title)
+
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Instruction)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.QuestionTitle)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AnswerType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AnswerTypeTitle)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EnableRemark)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RemarkTitle)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SortOrder)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EnableNames)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>

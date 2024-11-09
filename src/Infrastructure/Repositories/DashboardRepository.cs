@@ -14,10 +14,11 @@ namespace Infrastructure.Repositories
     public class DashboardRepository : IDashboardRepository
     {
         private readonly AppDbContext _context;
-
-        public DashboardRepository(AppDbContext context)
+        private readonly ITrainingRepository _repository;
+        public DashboardRepository(AppDbContext context, ITrainingRepository repository)
         {
             _context = context;
+            _repository = repository;
         }
         public async Task<AdminDashboardDto> AdminDashboardData(string? state)
         {
@@ -61,16 +62,18 @@ namespace Infrastructure.Repositories
         public async Task<UserDashboardDto> UserDashboardData(string userId)
         {
             UserDashboardDto UserDashboardDto = new UserDashboardDto();
-            var ptraining = await _context.TrainingParticipants.Include(x=>x.Training).Where(x=>x.UserId == userId).ToListAsync();
-            UserDashboardDto.Trainings = ptraining.Count();
-            UserDashboardDto.ActiveTraining = ptraining.Where(x=>x.Training.TrainingStatus == TrainingStatus.Active).Count();
-            UserDashboardDto.CompletedTraining = ptraining.Where(x=>x.Training.TrainingStatus == TrainingStatus.Completed).Count();
-            UserDashboardDto.CancelledTraining = ptraining.Where(x=>x.Training.TrainingStatus == TrainingStatus.Cancelled).Count();
-            UserDashboardDto.UpcomingTraining = ptraining.Where(x=>x.Training.TrainingStatus == TrainingStatus.Upcoming).Count();
 
-            //var attendance =  _context.Attendances.Where(x=>x.UserId==userId).AsQueryable();
-            //int signinPresent = attendance.Where(x=>x.AttendanceSignInStatus == AttendanceSignInStatus.Absent).Count();
-            //int signinAbsent = attendance.Where(x=>x.AttendanceSignInStatus == AttendanceSignInStatus.Absent).Count();
+           List<TrainingByUserDto> ptraining = await _repository.GetAllTrainingsByUserId(userId);
+
+
+ 
+            UserDashboardDto.Trainings = ptraining.Count();
+            UserDashboardDto.ActiveTraining = ptraining.Where(x=>x.TrainingStatus == TrainingStatus.Active).Count();
+            UserDashboardDto.CompletedTraining = ptraining.Where(x=>x.TrainingStatus == TrainingStatus.Completed).Count();
+            UserDashboardDto.CancelledTraining = ptraining.Where(x=>x.TrainingStatus == TrainingStatus.Cancelled).Count();
+            UserDashboardDto.UpcomingTraining = ptraining.Where(x=>x.TrainingStatus == TrainingStatus.Upcoming).Count();
+
+
             return UserDashboardDto;
         }
     }

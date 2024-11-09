@@ -40,5 +40,8 @@ namespace Infrastructure.Context
         public DbSet<DialyEvaluationQuestion> DialyEvaluationQuestions { get; set; }
         public DbSet<TimeTable> TimeTables { get; set; }
         public DbSet<Gallery> Galleries { get; set; }
+        public DbSet<SupervisorSectionQuestion> SupervisorSectionQuestions { get; set; }
+        public DbSet<SupervisorSection> SupervisorSections { get; set; }
+        public DbSet<SupervisorTrainingForm> SupervisorTrainingForms { get; set; }
     }
 }

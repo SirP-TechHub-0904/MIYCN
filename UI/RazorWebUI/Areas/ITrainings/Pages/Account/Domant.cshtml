@@ -1,0 +1,480 @@
+﻿@page
+@model RazorWebUI.Areas.ITrainings.Pages.Account.DomantModel
+@{
+}
+<div class="container mt-5">
+    <form>
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>FEDERAL MINISTRY OF HEALTH AND SOCIAL WELFARE</h4>
+                <h5>Supervisory Checklist on Maternal, Infant, and Young Child Nutrition (MIYCN) Training of Secondary Health Facility Workers</h5>
+            </div>
+            <div class="card-body">
+                <!-- Section A: Supervisor Information -->
+                <div class="mb-4">
+                    <h6>SECTION A: SUPERVISOR INFORMATION</h6>
+                    <div class="mb-3">
+                        <label for="supervisorName" class="form-label">Name of Supervisor:</label>
+                        <input type="text" class="form-control" id="supervisorName" name="supervisorName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phoneNo" class="form-label">Phone No:</label>
+                        <input type="tel" class="form-control" id="phoneNo" name="phoneNo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="signature" class="form-label">Signature:</label>
+                        <input type="text" class="form-control" id="signature" name="signature">
+                    </div>
+                </div>
+
+                <!-- Section B: State Information -->
+                <div class="mb-4">
+                    <h6>SECTION B: STATE INFORMATION</h6>
+                    <div class="mb-3">
+                        <label for="stateVisited" class="form-label">State Visited:</label>
+                        <input type="text" class="form-control" id="stateVisited" name="stateVisited">
+                    </div>
+                    <div class="mb-3">
+                        <label for="venue" class="form-label">Venue:</label>
+                        <input type="text" class="form-control" id="venue" name="venue">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dateOfImplementation" class="form-label">Date of Implementation:</label>
+                        <input type="date" class="form-control" id="dateOfImplementation" name="dateOfImplementation">
+                    </div>
+                </div>
+                <!-- Section C: Venue and Logistics -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6>SECTION C: VENUE AND LOGISTICS</h6>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>SN</th>
+                                    <th>Questions</th>
+                                    <th>Yes</th>
+                                    <th>No</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Is the venue appropriate to accommodate all participants?</td>
+                                    <td><input type="radio" name="venueAppropriate" value="yes"></td>
+                                    <td><input type="radio" name="venueAppropriate" value="no"></td>
+                                    <td><textarea class="form-control" name="venueAppropriateRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Is the venue clean and safe for participants?</td>
+                                    <td><input type="radio" name="venueCleanSafe" value="yes"></td>
+                                    <td><input type="radio" name="venueCleanSafe" value="no"></td>
+                                    <td><textarea class="form-control" name="venueCleanSafeRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Are the meals served Nutritionally adequate?</td>
+                                    <td><input type="radio" name="mealsAdequate" value="yes"></td>
+                                    <td><input type="radio" name="mealsAdequate" value="no"></td>
+                                    <td><textarea class="form-control" name="mealsAdequateRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Do participants have comfortable and organized seating arrangement?</td>
+                                    <td><input type="radio" name="seatingArrangement" value="yes"></td>
+                                    <td><input type="radio" name="seatingArrangement" value="no"></td>
+                                    <td><textarea class="form-control" name="seatingArrangementRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Is the public address system functional (sound system)?</td>
+                                    <td><input type="radio" name="soundSystemFunctional" value="yes"></td>
+                                    <td><input type="radio" name="soundSystemFunctional" value="no"></td>
+                                    <td><textarea class="form-control" name="soundSystemFunctionalRemarks"></textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Section D: Training Materials -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6>SECTION D: TRAINING MATERIALS</h6>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>SN</th>
+                                    <th>Materials</th>
+                                    <th>Yes</th>
+                                    <th>No</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Participant Manuals (Module 1-10)</td>
+                                    <td><input type="checkbox" name="participantManuals" value="yes"></td>
+                                    <td><input type="checkbox" name="participantManuals" value="no"></td>
+                                    <td><textarea class="form-control" name="participantManualsRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Facilitators Guide (Module 1-10)</td>
+                                    <td><input type="checkbox" name="facilitatorsGuide" value="yes"></td>
+                                    <td><input type="checkbox" name="facilitatorsGuide" value="no"></td>
+                                    <td><textarea class="form-control" name="facilitatorsGuideRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Counseling Cards</td>
+                                    <td><input type="checkbox" name="counselingCards" value="yes"></td>
+                                    <td><input type="checkbox" name="counselingCards" value="no"></td>
+                                    <td><textarea class="form-control" name="counselingCardsRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Key Message Booklets</td>
+                                    <td><input type="checkbox" name="keyMessageBooklets" value="yes"></td>
+                                    <td><input type="checkbox" name="keyMessageBooklets" value="no"></td>
+                                    <td><textarea class="form-control" name="keyMessageBookletsRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Flip Chart & Markers</td>
+                                    <td><input type="checkbox" name="flipChartMarkers" value="yes"></td>
+                                    <td><input type="checkbox" name="flipChartMarkers" value="no"></td>
+                                    <td><textarea class="form-control" name="flipChartMarkersRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Projector & Slides</td>
+                                    <td><input type="checkbox" name="projectorSlides" value="yes"></td>
+                                    <td><input type="checkbox" name="projectorSlides" value="no"></td>
+                                    <td><textarea class="form-control" name="projectorSlidesRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Mats</td>
+                                    <td><input type="checkbox" name="mats" value="yes"></td>
+                                    <td><input type="checkbox" name="mats" value="no"></td>
+                                    <td><textarea class="form-control" name="matsRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Sticky note</td>
+                                    <td><input type="checkbox" name="stickyNote" value="yes"></td>
+                                    <td><input type="checkbox" name="stickyNote" value="no"></td>
+                                    <td><textarea class="form-control" name="stickyNoteRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Samples of at least 5 food items used for demonstration</td>
+                                    <td><input type="checkbox" name="foodSamples" value="yes"></td>
+                                    <td><input type="checkbox" name="foodSamples" value="no"></td>
+                                    <td><textarea class="form-control" name="foodSamplesRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Functional Printer</td>
+                                    <td><input type="checkbox" name="printer" value="yes"></td>
+                                    <td><input type="checkbox" name="printer" value="no"></td>
+                                    <td><textarea class="form-control" name="printerRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td>Others (specify)</td>
+                                    <td colspan="2"><input type="text" class="form-control" name="otherMaterials"></td>
+                                    <td><textarea class="form-control" name="otherMaterialsRemarks"></textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <!-- Section E: Facilitators Information -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6>SECTION E: FACILITATORS INFORMATION</h6>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>SN</th>
+                                    <th>Names</th>
+                                    <th>Designation</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><input type="text" class="form-control" name="facilitatorName1"></td>
+                                    <td><input type="text" class="form-control" name="facilitatorDesignation1"></td>
+                                    <td><input type="tel" class="form-control" name="facilitatorPhone1"></td>
+                                    <td><input type="email" class="form-control" name="facilitatorEmail1"></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><input type="text" class="form-control" name="facilitatorName2"></td>
+                                    <td><input type="text" class="form-control" name="facilitatorDesignation2"></td>
+                                    <td><input type="tel" class="form-control" name="facilitatorPhone2"></td>
+                                    <td><input type="email" class="form-control" name="facilitatorEmail2"></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><input type="text" class="form-control" name="facilitatorName3"></td>
+                                    <td><input type="text" class="form-control" name="facilitatorDesignation3"></td>
+                                    <td><input type="tel" class="form-control" name="facilitatorPhone3"></td>
+                                    <td><input type="email" class="form-control" name="facilitatorEmail3"></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td><input type="text" class="form-control" name="facilitatorName4"></td>
+                                    <td><input type="text" class="form-control" name="facilitatorDesignation4"></td>
+                                    <td><input type="tel" class="form-control" name="facilitatorPhone4"></td>
+                                    <td><input type="email" class="form-control" name="facilitatorEmail4"></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td><input type="text" class="form-control" name="facilitatorName5"></td>
+                                    <td><input type="text" class="form-control" name="facilitatorDesignation5"></td>
+                                    <td><input type="tel" class="form-control" name="facilitatorPhone5"></td>
+                                    <td><input type="email" class="form-control" name="facilitatorEmail5"></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td><input type="text" class="form-control" name="facilitatorName6"></td>
+                                    <td><input type="text" class="form-control" name="facilitatorDesignation6"></td>
+                                    <td><input type="tel" class="form-control" name="facilitatorPhone6"></td>
+                                    <td><input type="email" class="form-control" name="facilitatorEmail6"></td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td><input type="text" class="form-control" name="facilitatorName7"></td>
+                                    <td><input type="text" class="form-control" name="facilitatorDesignation7"></td>
+                                    <td><input type="tel" class="form-control" name="facilitatorPhone7"></td>
+                                    <td><input type="email" class="form-control" name="facilitatorEmail7"></td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td><input type="text" class="form-control" name="facilitatorName8"></td>
+                                    <td><input type="text" class="form-control" name="facilitatorDesignation8"></td>
+                                    <td><input type="tel" class="form-control" name="facilitatorPhone8"></td>
+                                    <td><input type="email" class="form-control" name="facilitatorEmail8"></td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td><input type="text" class="form-control" name="facilitatorName9"></td>
+                                    <td><input type="text" class="form-control" name="facilitatorDesignation9"></td>
+                                    <td><input type="tel" class="form-control" name="facilitatorPhone9"></td>
+                                    <td><input type="email" class="form-control" name="facilitatorEmail9"></td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td><input type="text" class="form-control" name="facilitatorName10"></td>
+                                    <td><input type="text" class="form-control" name="facilitatorDesignation10"></td>
+                                    <td><input type="tel" class="form-control" name="facilitatorPhone10"></td>
+                                    <td><input type="email" class="form-control" name="facilitatorEmail10"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Section F: Training Execution -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6>SECTION F: TRAINING EXECUTION</h6>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>SN</th>
+                                    <th>Questions</th>
+                                    <th>Yes</th>
+                                    <th>No</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Was there a pre-planning meeting?</td>
+                                    <td><input type="radio" name="prePlanningMeeting" value="yes"></td>
+                                    <td><input type="radio" name="prePlanningMeeting" value="no"></td>
+                                    <td><textarea class="form-control" name="prePlanningMeetingRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Was the objective of the training clearly communicated to participants?</td>
+                                    <td><input type="radio" name="objectiveCommunicated" value="yes"></td>
+                                    <td><input type="radio" name="objectiveCommunicated" value="no"></td>
+                                    <td><textarea class="form-control" name="objectiveCommunicatedRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Was the right set of facilitators selected for the training?</td>
+                                    <td><input type="radio" name="rightFacilitators" value="yes"></td>
+                                    <td><input type="radio" name="rightFacilitators" value="no"></td>
+                                    <td><textarea class="form-control" name="rightFacilitatorsRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Was there a field/clinical visit conducted?</td>
+                                    <td><input type="radio" name="fieldVisitConducted" value="yes"></td>
+                                    <td><input type="radio" name="fieldVisitConducted" value="no"></td>
+                                    <td><textarea class="form-control" name="fieldVisitConductedRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Was there a practical food demonstration done at the training venue?</td>
+                                    <td><input type="radio" name="foodDemoVenue" value="yes"></td>
+                                    <td><input type="radio" name="foodDemoVenue" value="no"></td>
+                                    <td><textarea class="form-control" name="foodDemoVenueRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Was there a practical food demonstration done at the health facility during the visit?</td>
+                                    <td><input type="radio" name="foodDemoFacility" value="yes"></td>
+                                    <td><input type="radio" name="foodDemoFacility" value="no"></td>
+                                    <td><textarea class="form-control" name="foodDemoFacilityRemarks"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Did the facilitators cover the course content (Modules 1-10)?</td>
+                                    <td><input type="radio" name="courseContentCovered" value="yes"></td>
+                                    <td><input type="radio" name="courseContentCovered" value="no"></td>
+                                    <td><textarea class="form-control" name="courseContentCoveredRemarks"></textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Section G: Facilitators Performance -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6>SECTION G: FACILITATORS PERFORMANCE</h6>
+                    </div>
+                    <div class="card-body">
+                        <p>Rate the facilitators' performance on a scale of 1-5, with 5 being the highest.</p>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Questionnaire</th>
+                                    <th>Rating Score (1-5)</th>
+                                    <th>Comments</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Adherence to the protocol</td>
+                                    <td><input type="number" class="form-control" name="adherenceProtocol" min="1" max="5"></td>
+                                    <td><textarea class="form-control" name="adherenceProtocolComments"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>Team Spirit</td>
+                                    <td><input type="number" class="form-control" name="teamSpirit" min="1" max="5"></td>
+                                    <td><textarea class="form-control" name="teamSpiritComments"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>Course content mastery</td>
+                                    <td><input type="number" class="form-control" name="contentMastery" min="1" max="5"></td>
+                                    <td><textarea class="form-control" name="contentMasteryComments"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>Good communication skills</td>
+                                    <td><input type="number" class="form-control" name="communicationSkills" min="1" max="5"></td>
+                                    <td><textarea class="form-control" name="communicationSkillsComments"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>Participatory facilitation</td>
+                                    <td><input type="number" class="form-control" name="participatoryFacilitation" min="1" max="5"></td>
+                                    <td><textarea class="form-control" name="participatoryFacilitationComments"></textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Section H: Challenges -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6>SECTION H: CHALLENGES</h6>
+                    </div>
+                    <div class="card-body">
+                        <textarea class="form-control" name="challenges" rows="5" placeholder="State the challenges faced..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Section I: Recommendation -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6>SECTION I: RECOMMENDATION</h6>
+                    </div>
+                    <div class="card-body">
+                        <textarea class="form-control" name="recommendations" rows="5" placeholder="Provide your recommendations..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Section J: Any Other Information -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6>SECTION J: ANY OTHER INFORMATION</h6>
+                    </div>
+                    <div class="card-body">
+                        <textarea class="form-control" name="otherInformation" rows="5" placeholder="Include any additional information..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Section K: Total Number of Participants Trained -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6>SECTION K: TOTAL NUMBER OF PARTICIPANTS TRAINED</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="totalParticipants" class="form-label">Total Number of Participants Trained:</label>
+                            <input type="number" class="form-control" id="totalParticipants" name="totalParticipants" min="0">
+                        </div>
+                        <div class="mb-3">
+                            <label for="supervisorSignature" class="form-label">Supervisor’s Name, Signature & Date:</label>
+                            <textarea class="form-control" id="supervisorSignature" name="supervisorSignature" rows="2" placeholder="Enter name, signature, and date..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!-- Section M: Final Review and Submission -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6>SECTION M: FINAL REVIEW AND SUBMISSION</h6>
+                    </div>
+                    <div class="card-body">
+                        <p>Please review all the sections before submission.</p>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="reviewConfirmation" name="reviewConfirmation">
+                            <label class="form-check-label" for="reviewConfirmation">I confirm that all the information provided is accurate and complete.</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+</div>

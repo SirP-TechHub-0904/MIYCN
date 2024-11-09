@@ -792,6 +792,134 @@ namespace Infrastructure.Migrations
                     b.ToTable("Sponsors");
                 });
 
+            modelBuilder.Entity("Domain.Models.SupervisorSection", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<int>("AnswerType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AnswerTypeTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ColumnFour")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ColumnOne")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ColumnThree")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ColumnTwo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EnableNames")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("EnableRemark")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Instruction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QuestionTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RemarkTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SupervisorSections");
+                });
+
+            modelBuilder.Entity("Domain.Models.SupervisorSectionQuestion", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Question")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<long>("SupervisorSectionId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SupervisorSectionId");
+
+                    b.ToTable("SupervisorSectionQuestions");
+                });
+
+            modelBuilder.Entity("Domain.Models.SupervisorTrainingForm", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Answer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ColumnFour")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ColumnOne")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ColumnThree")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ColumnTwo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastUpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Remark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("SupervisorSectionQuestionId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("TrainingId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SupervisorSectionQuestionId");
+
+                    b.HasIndex("TrainingId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("SupervisorTrainingForms");
+                });
+
             modelBuilder.Entity("Domain.Models.TestCategory", b =>
                 {
                     b.Property<long>("Id")
@@ -1425,6 +1553,40 @@ namespace Infrastructure.Migrations
                     b.Navigation("Training");
                 });
 
+            modelBuilder.Entity("Domain.Models.SupervisorSectionQuestion", b =>
+                {
+                    b.HasOne("Domain.Models.SupervisorSection", "SupervisorSection")
+                        .WithMany("SupervisorSectionQuestion")
+                        .HasForeignKey("SupervisorSectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SupervisorSection");
+                });
+
+            modelBuilder.Entity("Domain.Models.SupervisorTrainingForm", b =>
+                {
+                    b.HasOne("Domain.Models.SupervisorSectionQuestion", "SupervisorSectionQuestion")
+                        .WithMany()
+                        .HasForeignKey("SupervisorSectionQuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Models.Training", "Training")
+                        .WithMany()
+                        .HasForeignKey("TrainingId");
+
+                    b.HasOne("Domain.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("SupervisorSectionQuestion");
+
+                    b.Navigation("Training");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Domain.Models.TestCategory", b =>
                 {
                     b.HasOne("Domain.Models.Training", "Training")
@@ -1608,6 +1770,11 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Models.ProfileCategory", b =>
                 {
                     b.Navigation("ProfileCategoryLists");
+                });
+
+            modelBuilder.Entity("Domain.Models.SupervisorSection", b =>
+                {
+                    b.Navigation("SupervisorSectionQuestion");
                 });
 
             modelBuilder.Entity("Domain.Models.TestCategory", b =>

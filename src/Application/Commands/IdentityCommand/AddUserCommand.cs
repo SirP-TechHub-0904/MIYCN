@@ -120,12 +120,12 @@ namespace Application.Commands.IdentityCommand
                         Name = request.Role,
                         Description = "Description for the new role" // You can set this to any value you want
                     };
-                    //var checkManagerf = await _role.FindByNameAsync(request.Role);
+                    var checkManagerf = await _role.FindByNameAsync(request.Role);
 
-                    //if (checkManagerf == null)
-                    //{
-                    //   // await _role.CreateAsync(Managerf);
-                    //}
+                    if (checkManagerf == null)
+                    {
+                        await _role.CreateAsync(Managerf);
+                    }
 
                     var addrole = await _userManager.AddToRoleAsync(user, request.Role);
                     if (addrole.Succeeded)

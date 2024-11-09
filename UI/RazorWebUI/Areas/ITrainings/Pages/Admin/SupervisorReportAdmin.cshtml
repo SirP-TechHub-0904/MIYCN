@@ -1,0 +1,65 @@
+﻿@page
+@model RazorWebUI.Areas.ITrainings.Pages.Admin.SupervisorReportAdminModel
+@{
+}
+<div class="card">
+
+    <div class="card-header">
+        <h3 class="card-title" style="margin-bottom:10px;border-bottom:1px solid black;">
+            SUPERVISORS WITH REPORT
+        </h3>
+        <h3 class="card-title">
+            @Model.Training.Title ( @Model.Training.StartDate.ToString("ddd dd MMM, yyyy") -
+            @Model.Training.EndDate.ToString("ddd dd MMM, yyyy"))
+        </h3>
+
+
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>
+                            Name
+                        </th>
+
+                        <th>Email</th>
+                         
+                    </tr>
+                </thead>
+
+                @{
+                    int sn = 0;
+                }
+                <tbody>
+                    @foreach (var item in Model.Datas)
+                    {
+                        <tr>
+
+                            <td>
+                                @{
+                                    sn++;
+                                }
+                                @sn
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FullName)
+                                <a asp-page="./ViewSuperisorReport" asp-route-id="@item.TrainingId" asp-route-userId="@item.UserId" class="btn btn-primary">
+                                    view report
+
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                           
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

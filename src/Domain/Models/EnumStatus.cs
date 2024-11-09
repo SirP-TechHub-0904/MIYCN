@@ -27,7 +27,8 @@ namespace Domain.Models
         public enum EvaluationAnswerType
         {
             Options = 0,
-            Typing = 2
+            Typing = 2,
+            BigTypingBox = 3,
         }
         public enum CertificateStatus
         {

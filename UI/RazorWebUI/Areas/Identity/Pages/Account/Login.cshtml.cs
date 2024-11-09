@@ -176,6 +176,7 @@ namespace RazorWebUI.Areas.Identity.Pages.Account
                     var useracc = await _userManager.IsInRoleAsync(user, "Facilitator");
                     var Participant = await _userManager.IsInRoleAsync(user, "Participant");
                     var training = await _userManager.IsInRoleAsync(user, "StateAdmin");
+                    var supervisor = await _userManager.IsInRoleAsync(user, "Supervisor");
 
 
                     var Staff = await _userManager.IsInRoleAsync(user, "Staff");
@@ -210,7 +211,7 @@ namespace RazorWebUI.Areas.Identity.Pages.Account
                     {
                         return RedirectToPage("/Admin/Index", new { area = "Dashboard" });
                     }
-                    else if (useracc.Equals(true) || Participant.Equals(true))
+                    else if (useracc.Equals(true) || Participant.Equals(true) || supervisor.Equals(true))
                     {
                         return RedirectToPage("/Account/Index", new { area = "Dashboard" });
                     }

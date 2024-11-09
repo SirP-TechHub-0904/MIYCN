@@ -21,7 +21,7 @@
                             <th>
                                 Training
                             </th>
-
+                            <th>Role</th>
                             <th>Date</th>
                             <th>State</th>
                             <th>LGA</th>
@@ -52,6 +52,9 @@
                                     </a>
                                 </td>
                                 <td>
+                                    @Html.DisplayFor(modelItem => item.Type)
+                                </td>
+                                <td>
                                     @item.TrainingDate.ToString("ddd dd MMM, yyyy")
                                 </td>
                                 <td>
@@ -63,7 +66,7 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.TrainingStatus)
                                 </td>
-                                 
+
                             </tr>
                         }
                     </tbody>

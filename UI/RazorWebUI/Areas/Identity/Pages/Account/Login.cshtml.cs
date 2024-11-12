@@ -112,10 +112,31 @@ namespace RazorWebUI.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl)
         {
-            //var alluser = await _userManager.Users.ToListAsync();
-            //var YYYalluser = await _userManager.Users.FirstOrDefaultAsync(x => x.Email.Contains(Input.Email));
-            //var getuser = alluser.Where(x=>x.Email.Contains(Input.Email));
-            //var xgetuser = alluser.Where(x=>x.Email == Input.Email);
+       //     var usersWithSpaceInEmail = _userManager.Users
+       //.Where(u => u.Email.Contains(" "))
+       //.ToList();
+
+       //     var usersWithSpaceInUserName = _userManager.Users
+       //         .Where(u => u.UserName.Contains(" "))
+       //         .ToList();
+
+       //     var usersWithSpaceInNormalizedEmail = _userManager.Users
+       //         .Where(u => u.NormalizedEmail.Contains(" "))
+       //         .ToList();
+
+       //     var usersWithSpaceInNormalizedUserName = _userManager.Users
+       //         .Where(u => u.NormalizedUserName.Contains(" "))
+       //         .ToList();
+       //     var usersWithSpaces = _userManager.Users
+       // .Where(u => u.Email.Contains(" ") ||
+       //             u.UserName.Contains(" ") ||
+       //             u.NormalizedEmail.Contains(" ") ||
+       //             u.NormalizedUserName.Contains(" "))
+       // .ToList();
+       //     var alluser = await _userManager.Users.ToListAsync();
+       //     var YYYalluser = await _userManager.Users.FirstOrDefaultAsync(x => x.Email.Contains(Input.Email));
+       //     var getuser = alluser.Where(x => x.Email.Contains(Input.Email));
+       //     var xgetuser = alluser.Where(x => x.Email == Input.Email);
             var user = await _userManager.FindByEmailAsync(Input.Email);
             if (user != null)
             {

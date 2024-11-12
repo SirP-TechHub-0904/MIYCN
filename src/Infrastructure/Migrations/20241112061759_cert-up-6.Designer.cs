@@ -4,6 +4,7 @@ using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241112061759_cert-up-6")]
+    partial class certup6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -701,46 +704,63 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("CertificateLeftSideName")
+                    b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CertificateLeftSideOfficePosition")
+                    b.Property<string>("CertificateAttendanceTitle")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CertificateLeftSideOfficeTitle")
+                    b.Property<string>("CourseTitle")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CertificateLeftSideSignatureKey")
+                    b.Property<string>("Date")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CertificateLeftSideSignatureUrl")
+                    b.Property<string>("LeftOccupation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CertificateRightSideName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CertificateRightSideOfficePosition")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CertificateRightSideOfficeTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CertificateRightSideSignatureKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CertificateRightSideSignatureUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CertificateTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("CertificateUseLeftSidePhysicalSignature")
+                    b.Property<bool>("LeftOffSignature")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("CertificateUseRightSidePhysicalSignature")
+                    b.Property<string>("LeftPosition")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LeftSignatureKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LeftSignatureUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LeftTitleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RightOccupation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("RightOffSignature")
                         .HasColumnType("bit");
+
+                    b.Property<string>("RightPosition")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RightSignatureKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RightSignatureUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RightTitleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("TrainingId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TrainingTitle")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TrainingId");
 
                     b.ToTable("Settings");
                 });
@@ -1113,9 +1133,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("TrainingStatus")
                         .HasColumnType("int");
-
-                    b.Property<bool>("UseStateCertificateInformation")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Ward")
                         .HasColumnType("nvarchar(max)");
@@ -1527,6 +1544,17 @@ namespace Infrastructure.Migrations
                     b.Navigation("AppUser");
 
                     b.Navigation("ProfileCategory");
+                });
+
+            modelBuilder.Entity("Domain.Models.Setting", b =>
+                {
+                    b.HasOne("Domain.Models.Training", "Training")
+                        .WithMany()
+                        .HasForeignKey("TrainingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Training");
                 });
 
             modelBuilder.Entity("Domain.Models.Sponsor", b =>

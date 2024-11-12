@@ -32,10 +32,7 @@ namespace Application.Commands.SettingCommand
 
         public async Task Handle(AddSettingCommand request, CancellationToken cancellationToken)
         {
-
             await _settingRepository.AddAsync(request.Setting);
-
-
         }
     }
 }

@@ -9,6 +9,8 @@ using Application.Queries.CertificationQueries;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
     public class TrainingCertificateModel : PageModel
     {
         private readonly IMediator _mediator;

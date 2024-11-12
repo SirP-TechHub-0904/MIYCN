@@ -243,21 +243,7 @@ namespace Infrastructure.Repositories
 
             }
 
-            try
-            {
-                var data = await _context.Settings.Where(x => x.TrainingId == id).ToListAsync();
-                foreach (var entity in data)
-                {
-                    _context.Settings.Remove(entity);
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-
+             
             try
             {
                 var data = await _context.Sponsors.Where(x => x.TrainingId == id).ToListAsync();

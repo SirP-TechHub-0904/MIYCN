@@ -11,7 +11,7 @@ namespace Domain.Interfaces
 {
     public interface ISettingRepository : IRepository<Setting>
     {
-        Task<Setting> GetSetting(long trainingId);
+        Task<Setting> GetSetting();
         //Task<bool> UpdateSetting(Setting setting, IFormFile signatureRight, IFormFile signatureLeft);
     }
 }

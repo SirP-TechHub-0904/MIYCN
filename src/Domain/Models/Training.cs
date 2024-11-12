@@ -66,6 +66,7 @@ namespace Domain.Models
         [Display(Name = "Post Test Start Time")]
         public TimeSpan PostTestStartTime { get; set; }
 
+        public bool UseStateCertificateInformation { get; set; }
         //
         [Display(Name = "Certificate Use Right Side Physical Signature")]
         public bool CertificateUseRightSidePhysicalSignature { get; set; }
@@ -118,5 +119,7 @@ namespace Domain.Models
 
         [Display(Name = "Certificate Date")]
         public string? CertificateDate { get; set; }
+
+        
     }
 }

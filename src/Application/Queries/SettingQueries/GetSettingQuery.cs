@@ -12,12 +12,7 @@ namespace Application.Queries.SettingQueries
 {
     public sealed class GetSettingQuery : IRequest<Setting>
     {
-        public long TrainingId { get; set; }
-
-        public GetSettingQuery(long trainingId)
-        {
-            TrainingId = trainingId;
-        }
+        
 
         // Handler
         public class GetSettingQueryHandler : IRequestHandler<GetSettingQuery, Setting>
@@ -34,7 +29,7 @@ namespace Application.Queries.SettingQueries
                 request.ThrowIfNull(nameof(request));
 
 
-                Setting data = await _repository.GetSetting(request.TrainingId);
+                Setting data = await _repository.GetSetting();
 
                 return data;
             }

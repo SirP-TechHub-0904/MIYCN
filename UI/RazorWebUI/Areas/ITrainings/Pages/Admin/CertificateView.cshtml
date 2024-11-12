@@ -76,10 +76,7 @@
             width: 100%;
         }
 
-        body {
-            padding: 20px 0;
-            background: #ccc;
-        }
+       
 
         .pm-certificate-container {
             /*position: relative;
@@ -87,7 +84,7 @@
             height: 600px;
             background-color: #618597;
             padding: 30px;
-            color: #333;
+            color: #000000;
             font-family: 'Open Sans', sans-serif;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);*/
             /*background: -webkit-repeating-linear-gradient(
@@ -133,7 +130,7 @@
                 width: 720px;
                 height: 520px;
                 padding: 0;
-                border: 1px solid #E1E5F0;
+                border: 1px solid #248000;
                 background-color: #ffffff;
                 background-image: none;
                 left: 50%;
@@ -144,11 +141,20 @@
 
                 .pm-certificate-container .pm-certificate-border .pm-certificate-block {
                     width: 650px;
-                    height: 200px;
+                    height: 120px;
                     position: relative;
                     left: 50%;
                     margin-left: -325px;
-                    top: 70px;
+                    top: 20px;
+                    margin-top: 0;
+                }
+
+                .pm-certificate-container .pm-certificate-border .pm-certificate-block-2 {
+                    width: 100%;
+                    height: 120px;
+                    position: relative;
+                    left: auto;
+                    top: 20px;
                     margin-top: 0;
                 }
 
@@ -174,7 +180,7 @@
                     }
 
                 .pm-certificate-container .pm-certificate-border .pm-earned {
-                    margin: 15px 0 20px;
+                    /*margin: 15px 0 20px;*/
                 }
 
                     .pm-certificate-container .pm-certificate-border .pm-earned .pm-earned-text {
@@ -222,9 +228,9 @@
             position: relative;
             width: 1400px;
             height: 960px;
-            background-color: #248000;
+            background-color: transparent;
             padding: 30px;
-            color: #333;
+            color: #000000;
             font-family: 'Open Sans', sans-serif;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         }
@@ -234,7 +240,7 @@
                 width: 1340px;
                 height: 900px;
                 padding: 0;
-                border: 1px solid #E1E5F0;
+                border: 1px solid #248000;
                 background-color: #ffffff;
                 background-image: none;
                 /* left: 50%; */
@@ -242,183 +248,250 @@
                 /* top: 50%; */
                 /* margin-top: -260px; */
             }
+
+        .pm-certificate-container {
+            width: 297mm;
+            height: 210mm;
+            background-color: transparent !important;
+            padding: 30px;
+            color: #000000;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+        }
+
+            .pm-certificate-container .outer-border {
+                width: 100%;
+                height: 100%;
+                border: 2px solid #fff !important;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .pm-certificate-container .inner-border {
+                width: calc(100% - 20px);
+                height: calc(100% - 20px);
+                border: 2px solid #fff !important;
+                position: absolute;
+                top: 10px;
+                left: 10px;
+            }
+
+            .pm-certificate-container .pm-certificate-border {
+                width: calc(100% - 20px);
+                height: calc(100% - 20px);
+                padding: 20px;
+                border: 1px solid #248000 !important;
+                background-color: #248000 !important;
+                position: absolute;
+                top: 10px;
+                left: 10px;
+            }
+        .pm-certificate-border-2 {
+            width: calc(100% - 40px);
+            height: calc(100% - 40px);
+            padding: 20px;
+            border: 6px solid #248000 !important;
+            background-color: #ffffff !important;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        /* Ensure images and lines are styled properly */
+        img.signature {
+            height: 50px !important;
+            margin-bottom: 10px !important;
+            border: none !important;
+        }
+
+        .underline {
+            border-bottom: 1px solid #777 !important;
+            padding: 5px;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
+    <!-- Use stable versions of html2canvas and jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pinyon+Script&display=swap">
+
 </head>
 <body>
     <div id="certificateContent" class="container pm-certificate-container">
-        <div class="outer-border"></div>
-        <div class="inner-border"></div>
+        @*<div class="outer-border"></div>
+        <div class="inner-border"></div>*@
 
         <div class="pm-certificate-border col-xs-12">
-            <div class="row pm-certificate-header">
-                <div class="pm-certificate-title cursive col-xs-12 text-center">
-                    <img src="~/img/arm.png" style="height:150px;" />
-                    <h4 style="font-family:'Times New Roman', Times, serif;font-weight:700;font-size:32px;">Federal Ministry of Health and Social Welfare</h4>
+            <div class="pm-certificate-border-2">
+                <div class="row pm-certificate-header">
+                    <div class="pm-certificate-title cursive col-xs-12 text-center">
+                        <img src="~/img/arm.png" style="height:90px;" />
+                        <h4 style="font-family:'Times New Roman', Times, serif;font-weight:800;font-size:28px;">Federal Ministry of Health and Social Welfare</h4>
+                    </div>
                 </div>
-            </div>
-            <img src="@Model.Certificate.PassportUrl" style="height: 170px; float: right !important; margin-right: 106px; border: 2px solid black;" class="img-fluid" />
+                @*<img src="@Model.Certificate.PassportUrl" style="height: 170px; float: right !important; margin-right: 106px; border: 2px solid black;" class="img-fluid" />*@
+                <img src="data:image/jpeg;base64,@Model.PassportBase" style="height: 150px; float: right !important; margin-right: 40px; border: 2px solid black;" class="img-fluid" />
 
-            <div class="row pm-certificate-body" style="margin:0;">
+                <div class="row pm-certificate-body" style="margin:40px;">
 
-                <div class="pm-certificate-block">
-                    <div class="">
+                    <div class="pm-certificate-block">
                         <div class="">
-                            <div class=""><!-- LEAVE EMPTY --></div>
-                            <div class="pm-certificate-name margin-0 text-center">
-                                <span class="pm-name-text bold" style="font-size: 59px; font-family: math;">Certificate of Attendance</span>
-                                <br />
-                                <span style="text-align:center;">This is to certify that</span>
-                            </div>
-                            <div class=""><!-- LEAVE EMPTY --></div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="">
-                            <div class=""><!-- LEAVE EMPTY --></div>
-                            <div class="pm-earned text-center">
-
-                                <span class="pm-credits-text block bold sans" style="font-size: 35px; font-weight: 900; font-family: 'Berlin Sans', sans-serif;">@Model.Certificate.FullName</span>
-                            </div>
-                            <div class=""><!-- LEAVE EMPTY --></div>
-                            <div class="col-xs-12"></div>
-                        </div>
-                    </div>
-
-                    <div class="">
-                        <div class="" style="margin-top:40px;">
-                            <div class="text-center">
-                                <span class="pm-earned-text block" style="font-family: auto; font-size: 18px; ">
-                                    has successfully completed the full <span style="font-weight:800;color:green;">
-                                        @Model.Training.CertificateCourseTitle
-                                    </span> on <span style="font-weight:800;color:green;">
-                                        @Model.Training.CertificateTitle
-                                    </span>
-                                </span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="  text-center" style=" margin-top: 30px;">
-                        <div class="row text-center">
-                            <div class="pm-course-title   text-center" style="margin-bottom: 20px;">
-                                <span class="pm-credits-text block bold sans">
-                                    <span style="border-bottom:none;">held at </span>
-                                    <span style="border-bottom: 1px dotted black; padding-left: 100px; padding-right: 100px; ">@Model.Training.CertificateAddress</span>
-                                </span>
-
+                            <div class="">
+                                <div class=""><!-- LEAVE EMPTY font-family: math;--></div>
+                                <div class="pm-certificate-name margin-0 text-center">
+                                    <span class="pm-name-text bold" style="font-size: 30px; font-weight: 900; font-family: 'Berlin Sans', sans-serif; text-transform: uppercase; ">Certificate of Participation</span>
+                                    <br />
+                                    <span style="text-align:center;">This is to certify that</span>
+                                </div>
+                                <div class=""><!-- LEAVE EMPTY --></div>
                             </div>
                         </div>
-
-                        <span style="margin-top:15px;">
-                            from @Model.Training.CertificateDate
-                        </span>
-                    </div>
-                    <div class="row">
                         <div class="col-xs-12">
-                            .
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-xs-12" style="margin-top: 70px;">
-                    <div class="row">
-                        <div class="pm-certificate-footer" style="margin-top: 50px;">
-                            <div class="col-xs-4 pm-certified col-xs-4 text-center">
-                                <span class="underline">
-                                    @if (Model.Training.CertificateUseLeftSidePhysicalSignature == true)
-                                    {
-                                        <!-- Left Signature -->
-                                        <img src="~/img/blanksignature.png" alt="Left Signature" class="signature" style="height:50px;margin-bottom:10px;">
-                                        <!-- Line -->
-                                    }
-                                    else
-                                    {
-                                        <!-- Left Signature -->
-                                        <img src="@Model.Training.CertificateLeftSideSignatureUrl" alt="Left Signature" class="signature" style="height:50px;margin-bottom:10px;">
-                                        <!-- Line -->
-                                    }
-                                </span>
-                                <span class="bold block" style="font-size:15px;">@Model.Training.CertificateLeftSideName</span>
-                                <span class="block" style="font-weight:700;">@Model.Training.CertificateLeftSideOfficePosition</span>
-                                <span class="block">@Model.Training.CertificateLeftSideOfficeTitle</span>
-                            </div>
-                            <div class="col-xs-4">
-                                <div style="margin:20px auto 0 auto;text-align:center;">
+                            <div class="">
+                                <div class=""><!-- LEAVE EMPTY --></div>
+                                <div class="pm-earned text-center">
 
-                                    <img class="" style="height: 70px; margin: 0 auto; text-align: center;" src="data:image/jpg;base64,@(Convert.ToBase64String(Model.BarcodeImage))">
-                                    <h6 style="margin-top:5px;font-weight:900;">@Model.Certificate.CerificateNumber</h6>
+                                    <span class="pm-credits-text block bold sans"
+                                          style="font-size: 30px; font-weight: 700; font-family: 'Pacifico', cursive;text-transform:capitalize !important; ">
+                                        @Model.Certificate.FullName.ToLower()
+                                    </span>
+                                </div>
+                                <div class=""><!-- LEAVE EMPTY --></div>
+                                <div class="col-xs-12"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="pm-certificate-block-2">
+
+
+                        <div class="">
+                            <div class="" style="margin-top:30px;">
+                                <div class="text-center">
+                                    <span class="pm-earned-text block" style="font-family: auto; font-size: 18px; ">
+                                        has successfully completed the full <span style="font-weight:800;color:green;">
+                                            @Model.Training.CertificateCourseTitle
+                                        </span> on <span style="font-weight:800;color:green;">
+                                            @Model.Setting.CertificateTitle
+                                        </span>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="  text-center" style=" margin-top: 5px;">
+                            <div class="row text-center">
+                                <div class="pm-course-title   text-center" style="margin-bottom: 20px;">
+                                    <h6><span style="border-bottom:none;font-size:17px;">held at </span></h6>
+                                    <span class="pm-credits-text block bold sans">
+
+                                        <span style="padding-left: 100px; padding-right: 100px;font-weight:600; ">@Model.Training.CertificateAddress</span>
+                                    </span>
+
                                 </div>
                             </div>
-                            <div class="col-xs-4 pm-certified col-xs-4 text-center">
-                                <span class="underline">
-                                    <!-- Right Signature -->
-                                    @if (Model.Training.CertificateUseRightSidePhysicalSignature == true)
-                                    {
-                                        <!-- Right Signature -->
-                                        <img src="~/img/blanksignature.png" alt="Right Signature" class="signature" style="height:50px;margin-bottom:10px;">
-                                        <!-- Line -->
-                                    }
-                                    else
-                                    {
-                                        <!-- Right Signature -->
-                                        <img src="@Model.Training.CertificateRightSideSignatureUrl" alt="Right Signature" class="signature" style="height:50px;margin-bottom:10px;">
-                                        <!-- Line -->
-                                    }
- 
-                                </span>
-                                <span class="bold block" style="font-size:15px;">@Model.Training.CertificateRightSideName</span>
-                                <span class="bold block" style="font-weight:700;">@Model.Training.CertificateRightSideOfficePosition</span>
-                                <span class="block">@Model.Training.CertificateRightSideOfficeTitle</span>
+
+                            <span style="margin-top:15px;">
+                                @Model.Training.CertificateDate
+                            </span>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                .
                             </div>
                         </div>
                     </div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-xs-12" style="margin-top: 10px;">
+                        <div class="row">
+                            <div class="pm-certificate-footer" style="margin-top: 40px;">
+                                <div class="col-xs-4 pm-certified col-xs-4 text-center">
+                                    <span class="underline">
+                                        @if (Model.Setting.CertificateUseLeftSidePhysicalSignature == true)
+                                        {
+                                            <!-- Left Signature -->
+                                            <img src="~/img/blanksignature.png" alt="Left Signature" class="signature" style="height:50px;margin-bottom:10px;">
+                                            <!-- Line -->
+                                        }
+                                        else
+                                        {
+                                            <!-- Left Signature -->
+                                            <img src="data:image/jpeg;base64,@Model.LeftSignature" alt="Left Signature" class="signature" style="height:50px;margin-bottom:10px;">
+                                            <!-- Line -->
+                                        }
+                                    </span>
+                                    <span class="bold block" style="font-size:15px;">@Model.Setting.CertificateLeftSideName</span>
+                                    <span class="block" style="font-weight:700;">@Model.Setting.CertificateLeftSideOfficePosition</span>
+                                    <span class="block">@Model.Setting.CertificateLeftSideOfficeTitle</span>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div style="margin:0px auto 0 auto;text-align:center;">
+
+                                        <img class="" style="height: 100px; margin: 0 auto; text-align: center;" src="data:image/jpg;base64,@(Convert.ToBase64String(Model.BarcodeImage))">
+                                        <h6 style="margin-top:5px;font-weight:900;">@Model.Certificate.CerificateNumber</h6>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 pm-certified col-xs-4 text-center">
+                                    <span class="underline">
+                                        <!-- Right Signature -->
+                                        @if (Model.Setting.CertificateUseRightSidePhysicalSignature == true)
+                                        {
+                                            <!-- Right Signature -->
+                                            <img src="~/img/blanksignature.png" alt="Right Signature" class="signature" style="height:50px;margin-bottom:10px;">
+                                            <!-- Line -->
+                                        }
+                                        else
+                                        {
+                                            <!-- Right Signature -->
+                                            <img src="data:image/jpeg;base64,@Model.RightSignature" alt="Right Signature" class="signature" style="height:50px;margin-bottom:10px;">
+                                            <!-- Line -->
+                                        }
+
+                                    </span>
+                                    <span class="bold block" style="font-size:15px;">@Model.Setting.CertificateRightSideName</span>
+                                    <span class="bold block" style="font-weight:700;">@Model.Setting.CertificateRightSideOfficePosition</span>
+                                    <span class="block">@Model.Setting.CertificateRightSideOfficeTitle</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
-
         </div>
     </div>
+    <!-- Download Button -->
+    <div style="text-align:center;margin:20px auto;">
+        <button class="btn btn-primary" style="text-align:center;margin:0 auto;" onclick="downloadPDF('Certificate_@Model.Certificate.FullName')">Download as PDF</button>
 
+    </div>
 
-    <!-- Buttons to trigger download -->
-    <!--<button onclick="downloadPDF('Buffalo_Public_Schools_Certificate_of_Completion')">Download as PDF</button>
-    <button onclick="downloadPNG('Buffalo_Public_Schools_Certificate_of_Completion')">Download as PNG</button>-->
-    <!-- JavaScript for downloading the certificate -->
     <script>
         function downloadPDF(filename) {
-            // Get the certificate content
+            // Ensure that html2canvas is available before proceeding
+            if (typeof html2canvas === 'undefined' || typeof window.jspdf === 'undefined') {
+                console.error("html2canvas or jsPDF is not loaded correctly.");
+                return;
+            }
+
             var certificateContent = document.getElementById('certificateContent');
-
-            // Convert certificate content to PDF
             html2canvas(certificateContent, {
-                onrendered: function (canvas) {
-                    var imgData = canvas.toDataURL('image/png');
-                    var pdf = new jsPDF();
-                    pdf.addImage(imgData, 'PNG', 0, 0);
-                    pdf.save(filename + '.pdf');
-                }
-            });
+                scale: 3,
+                useCORS: true,            // Allows cross-origin images
+                allowTaint: false         // Prevents tainted canvas issues
+            }).then(canvas => {
+                const { jsPDF } = window.jspdf; // Get jsPDF from the global scope
+                const pdf = new jsPDF('l', 'mm', 'a4'); // Landscape, A4
+                const imgData = canvas.toDataURL('image/png');
 
-        }
-
-        function downloadPNG(filename) {
-            // Get the certificate content
-            var certificateContent = document.getElementById('certificateContent');
-
-            // Convert certificate content to PNG
-            html2canvas(certificateContent, {
-                /*scale:6,*/
-                onrendered: function (canvas) {
-                    var imgData = canvas.toDataURL('image/png');
-                    var a = document.createElement('a');
-                    a.href = imgData;
-                    a.download = filename + '.png';
-                    a.click();
-                }
+                pdf.addImage(imgData, 'PNG', 0, 0, 297, 210);
+                pdf.save(filename + '.pdf');
+            }).catch(error => {
+                console.error("Error generating PDF:", error);
             });
         }
     </script>
@@ -514,7 +587,7 @@
             height: 600px;
             background-color: #618597;
             padding: 30px;
-            color: #333;
+            color: #000000;
             font-family: 'Open Sans', sans-serif;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);*/
                 /*background: -webkit-repeating-linear-gradient(
@@ -560,7 +633,7 @@
                 width: 720px;
                 height: 520px;
                 padding: 0;
-                border: 1px solid #E1E5F0;
+                border: 1px solid #248000;
                 background-color: #ffffff;
                 background-image: none;
                 left: 50%;
@@ -571,11 +644,20 @@
 
                     .pm-certificate-container .pm-certificate-border .pm-certificate-block {
                         width: 650px;
-                        height: 200px;
+                        height: 120px;
                         position: relative;
                         left: 50%;
                         margin-left: -325px;
-                        top: 70px;
+                        top: 20px;
+                        margin-top: 0;
+                    }
+
+                    .pm-certificate-container .pm-certificate-border .pm-certificate-block-2 {
+                        width: 100%;
+                        height: 120px;
+                        position: relative;
+                        left: auto;
+                        top: 20px;
                         margin-top: 0;
                     }
 
@@ -601,7 +683,7 @@
                         }
 
                     .pm-certificate-container .pm-certificate-border .pm-earned {
-                        margin: 15px 0 20px;
+                        /*margin: 15px 0 20px;*/
                     }
 
                         .pm-certificate-container .pm-certificate-border .pm-earned .pm-earned-text {
@@ -648,9 +730,9 @@
                 position: relative;
                 width: 1400px;
                 height: 960px;
-                background-color: #248000 !important;
+                background-color: transparent !important;
                 padding: 30px;
-                color: #333;
+                color: #000000;
                 font-family: 'Open Sans', sans-serif;
                 box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important;
             }
@@ -660,8 +742,8 @@
                     width: 1340px;
                     height: 900px;
                     padding: 0;
-                    border: 1px solid #E1E5F0 !important;
-                    background-color: #ffffff !important;
+                    border: 1px solid #248000 !important;
+                    background-color: #248000 !important;
                     background-image: none !important;
                     /* left: 50%; */
                     /* margin-left: -360px; */
@@ -670,7 +752,66 @@
                 }
         }
 
+        .pm-certificate-container {
+            width: 297mm;
+            height: 210mm;
+            background-color: transparent !important;
+            padding: 30px;
+            color: #000000;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+        }
 
+            .pm-certificate-container .outer-border {
+                width: 100%;
+                height: 100%;
+                border: 2px solid #fff !important;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .pm-certificate-container .inner-border {
+                width: calc(100% - 20px);
+                height: calc(100% - 20px);
+                border: 2px solid #fff !important;
+                position: absolute;
+                top: 10px;
+                left: 10px;
+            }
+
+            .pm-certificate-container .pm-certificate-border {
+                width: calc(100% - 20px);
+                height: calc(100% - 20px);
+                padding: 20px;
+                border: 1px solid #248000 !important;
+                background-color: #248000 !important;
+                position: absolute;
+                top: 10px;
+                left: 10px;
+            }
+
+        /* Ensure images and lines are styled properly */
+        img.signature {
+            height: 50px !important;
+            margin-bottom: 10px !important;
+            border: none !important;
+        }
+
+        .underline {
+            border-bottom: 1px solid #777 !important;
+            padding: 5px;
+        }
+        .pm-certificate-border-2 {
+            width: calc(100% - 40px);
+            height: calc(100% - 40px);
+            padding: 20px;
+            border: 6px solid #248000 !important;
+            background-color: #ffffff !important;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
         @@media print {
             .pm-certificate-container {
                 background-color: #248000 !important; /* Use !important to override any conflicting styles */

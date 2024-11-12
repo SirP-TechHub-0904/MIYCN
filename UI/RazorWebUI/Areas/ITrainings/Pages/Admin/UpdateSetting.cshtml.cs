@@ -26,9 +26,9 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
         [BindProperty]
         public IFormFile? SignatureRight { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(long trainingId)
+        public async Task<IActionResult> OnGetAsync()
         {
-            GetSettingQuery Command = new GetSettingQuery(trainingId);
+            GetSettingQuery Command = new GetSettingQuery();
             Setting = await _mediator.Send(Command);
             return Page();
         }
@@ -41,7 +41,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
                 UpdateSettingCommand Command = new UpdateSettingCommand(Setting, SignatureRight, SignatureLeft);
                 await _mediator.Send(Command);
                 TempData["success"] = "Success";
-                return RedirectToPage("./Info", new {id = Setting.TrainingId});
+                return RedirectToPage("./UpdateSetting");
             }
             catch (Exception ex)
             {

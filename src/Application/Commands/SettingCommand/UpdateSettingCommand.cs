@@ -68,12 +68,12 @@ namespace Application.Commands.SettingCommand
                         SecretKey = _config["AwsConfiguration:AWSSecretKey"]
                     };
 
-                    var xresult = await _storageService.UploadFileReturnUrlAsync(s3Obj, cred, request.Setting.RightSignatureKey);
+                    var xresult = await _storageService.UploadFileReturnUrlAsync(s3Obj, cred, request.Setting.CertificateRightSideSignatureKey);
                     // 
                     if (xresult.Message.Contains("200"))
                     {
-                        request.Setting.RightSignatureUrl = xresult.Url;
-                        request.Setting.RightSignatureKey = xresult.Key;
+                        request.Setting.CertificateRightSideSignatureUrl = xresult.Url;
+                        request.Setting.CertificateRightSideSignatureKey = xresult.Key;
                     }
 
                 }
@@ -107,12 +107,12 @@ namespace Application.Commands.SettingCommand
                         SecretKey = _config["AwsConfiguration:AWSSecretKey"]
                     };
 
-                    var xresult = await _storageService.UploadFileReturnUrlAsync(s3Obj, cred, request.Setting.LeftSignatureKey);
+                    var xresult = await _storageService.UploadFileReturnUrlAsync(s3Obj, cred, request.Setting.CertificateLeftSideSignatureKey);
                     // 
                     if (xresult.Message.Contains("200"))
                     {
-                        request.Setting.LeftSignatureUrl = xresult.Url;
-                        request.Setting.LeftSignatureKey = xresult.Key;
+                        request.Setting.CertificateLeftSideSignatureUrl = xresult.Url;
+                        request.Setting.CertificateLeftSideSignatureKey = xresult.Key;
                     }
 
                 }

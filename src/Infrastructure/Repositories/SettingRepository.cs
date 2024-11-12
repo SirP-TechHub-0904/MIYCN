@@ -22,16 +22,15 @@ namespace Infrastructure.Repositories
            
         }
 
-        public async Task<Setting> GetSetting(long trainingId)
+        public async Task<Setting> GetSetting()
         {
-           var getSetting = await _context.Settings.FirstOrDefaultAsync(x=>x.TrainingId == trainingId);
+           var getSetting = await _context.Settings.FirstOrDefaultAsync();
             if(getSetting == null)
             {
-                Setting setting = new Setting();
-                setting.TrainingId = trainingId;
+                Setting setting = new Setting();  
                 await _context.Settings.AddAsync(setting);
                 await _context.SaveChangesAsync();
-               return await _context.Settings.FirstOrDefaultAsync(x => x.TrainingId == trainingId);
+               return await _context.Settings.FirstOrDefaultAsync();
             }
             else
             {

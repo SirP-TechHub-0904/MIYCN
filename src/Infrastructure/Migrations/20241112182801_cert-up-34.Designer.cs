@@ -4,6 +4,7 @@ using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241112182801_cert-up-34")]
+    partial class certup34
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -701,6 +704,12 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CertificateAttendanceTitle")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CertificateLeftSideName")
                         .HasColumnType("nvarchar(max)");
 
@@ -731,14 +740,20 @@ namespace Infrastructure.Migrations
                     b.Property<string>("CertificateRightSideSignatureUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CertificateTitle")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("CertificateUseLeftSidePhysicalSignature")
                         .HasColumnType("bit");
 
                     b.Property<bool>("CertificateUseRightSidePhysicalSignature")
                         .HasColumnType("bit");
+
+                    b.Property<string>("CourseTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrainingTitle")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

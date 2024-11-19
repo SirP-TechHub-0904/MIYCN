@@ -45,21 +45,37 @@ namespace Infrastructure.Repositories
             foreach (var (trainingId, certificateType, userId) in certificateData)
             {
                 //
-                string CategoryNumberOnCertificate = "";
+                //string CategoryNumberOnCertificate = "";
                 string Year = "";
-                var getTrainingCategory = await _context.TrainingParticipants.Include(x => x.Training).FirstOrDefaultAsync(x => x.TrainingId == trainingId && x.UserId == userId);
-                if (getTrainingCategory != null)
+                var getTraining = await _context.TrainingParticipants.Include(x => x.Training).FirstOrDefaultAsync(x => x.TrainingId == trainingId && x.UserId == userId);
+                if (getTraining != null)
                 {
 
-                    Year = getTrainingCategory.Training.StartDate.ToString("yy");
-                    var categoryNumber = await _context.TrainingCategories.FirstOrDefaultAsync(x => x.Id == getTrainingCategory.Training.TrainingCategoryId);
-                    if (categoryNumber != null)
-                    {
-                        CategoryNumberOnCertificate = categoryNumber.CertificateInitial;
-                    }
+                    Year = getTraining.Training.StartDate.ToString("yyyy");
+                    //var categoryNumber = await _context.TrainingCategories.FirstOrDefaultAsync(x => x.Id == getTrainingCategory.Training.TrainingCategoryId);
+                    //if (categoryNumber != null)
+                    //{
+                    //    CategoryNumberOnCertificate = categoryNumber.CertificateInitial;
+                    //}
                 }
-
-
+                string FederalorState = "";
+                if(getTraining.Training.IsFederal == true)
+                {
+                    FederalorState = "F";
+                }
+                else
+                {
+                    FederalorState = getTraining.Training.StateCode;
+                }
+                string MasterOrProvider = "";
+                if (getTraining.Training.IsMaster == true)
+                {
+                    MasterOrProvider = "M";
+                }
+                else
+                {
+                    MasterOrProvider = "P";
+                }
                 GenTrainingId = trainingId;
                 int CategoryNumber = 0;
                 int GeneralNumber = 0;
@@ -77,25 +93,25 @@ namespace Infrastructure.Repositories
 
                         // Update SectionNumber
                         int lastSectionNumber = 0;
-                        if (!string.IsNullOrEmpty(CategoryNumberOnCertificate))
-                        {
-                            if (!lastSectionNumbers.ContainsKey(CategoryNumberOnCertificate))
-                            {
-                                // Get the last SectionNumber for this CategoryNumberOnCertificate
-                                var lastCertInCategory = await _context.Certificates
-                                    .Where(c => c.CategoryNumberOnCertificate == CategoryNumberOnCertificate)
-                                    .OrderByDescending(c => c.SectionNumber)
-                                    .FirstOrDefaultAsync();
-                                if (lastCertInCategory != null)
-                                {
-                                    lastSectionNumber = lastCertInCategory.SectionNumber;
-                                }
-                                lastSectionNumbers[CategoryNumberOnCertificate] = lastSectionNumber;
-                            }
+                        //if (!string.IsNullOrEmpty(CategoryNumberOnCertificate))
+                        //{
+                        //    if (!lastSectionNumbers.ContainsKey(CategoryNumberOnCertificate))
+                        //    {
+                        //        // Get the last SectionNumber for this CategoryNumberOnCertificate
+                        //        var lastCertInCategory = await _context.Certificates
+                        //            .Where(c => c.CategoryNumberOnCertificate == CategoryNumberOnCertificate)
+                        //            .OrderByDescending(c => c.SectionNumber)
+                        //            .FirstOrDefaultAsync();
+                        //        if (lastCertInCategory != null)
+                        //        {
+                        //            lastSectionNumber = lastCertInCategory.SectionNumber;
+                        //        }
+                        //        lastSectionNumbers[CategoryNumberOnCertificate] = lastSectionNumber;
+                        //    }
 
-                            // Increment SectionNumber for this category
-                            lastSectionNumbers[CategoryNumberOnCertificate]++;
-                            CategoryNumber = lastSectionNumbers[CategoryNumberOnCertificate];
+                        //    // Increment SectionNumber for this category
+                        //    lastSectionNumbers[CategoryNumberOnCertificate]++;
+                        //    CategoryNumber = lastSectionNumbers[CategoryNumberOnCertificate];
 
 
                             // add the Certificates
@@ -109,10 +125,10 @@ namespace Infrastructure.Repositories
                             cert.CertificateType = certificateType;
                             cert.SectionNumber = CategoryNumber;
                             cert.GeneralNumber = GeneralNumber;
-                            cert.CategoryNumberOnCertificate = CategoryNumberOnCertificate;
-                            cert.CerificateNumber = $"{CategoryNumberOnCertificate}P{CategoryNumber.ToString("D4")}{GeneralNumber.ToString("D6")}/MIYCN{Year}";
+                            cert.CategoryNumberOnCertificate = "";
+                            cert.CerificateNumber = $"{FederalorState}MIYCN{MasterOrProvider}{getTraining.TrainingId.ToString("D3")}{Year}/{GeneralNumber.ToString("D6")}";
                             _context.Certificates.Add(cert);
-                        }
+                        
                     }
                 }
                 else

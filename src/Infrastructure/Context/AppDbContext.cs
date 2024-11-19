@@ -43,5 +43,6 @@ namespace Infrastructure.Context
         public DbSet<SupervisorSectionQuestion> SupervisorSectionQuestions { get; set; }
         public DbSet<SupervisorSection> SupervisorSections { get; set; }
         public DbSet<SupervisorTrainingForm> SupervisorTrainingForms { get; set; }
+        public DbSet<StatesAndAbbreviation> StatesAndAbbreviations { get; set; }
     }
 }

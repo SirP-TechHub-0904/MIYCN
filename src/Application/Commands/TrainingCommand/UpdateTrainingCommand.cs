@@ -133,7 +133,7 @@ namespace Application.Commands.TrainingCommand
             }
 
 
-            await _repository.UpdateAsync(request.Training);
+            await _repository.UpdateTraning(request.Training);
         }
     }
 }

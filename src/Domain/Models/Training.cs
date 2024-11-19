@@ -120,6 +120,11 @@ namespace Domain.Models
         [Display(Name = "Certificate Date")]
         public string? CertificateDate { get; set; }
 
-        
+        [Display(Name = "State Code")]
+        public string? StateCode { get; set; }
+
+        public bool IsFederal { get; set; } = false;
+        public bool IsMaster { get; set; } = false;
+
     }
 }

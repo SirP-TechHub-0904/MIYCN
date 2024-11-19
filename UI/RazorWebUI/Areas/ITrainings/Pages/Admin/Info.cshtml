@@ -66,7 +66,7 @@
                     <div class="col-md-4 m-border">
                         <a asp-page="./SupervisorReportAdmin" asp-route-id="@Model.Training.Id" class="btn btn-primary" style="width:100%;">Supervisor Report</a>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="card-body">
@@ -85,6 +85,36 @@
                                             @Html.DisplayFor(model => model.Training.Title)
                                         </dd>
                                         <dt class="col-sm-2">
+                                            Federal Traning
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            @if (Model.Training.IsFederal == true)
+                                            {
+
+
+                                                <span>Yes</span>
+                                            }
+                                            else
+                                            {
+                                                <span>No</span>
+                                            }
+                                        </dd>
+                                        <dt class="col-sm-2">
+                                            Master/Provider
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            @if (Model.Training.IsMaster == true)
+                                            {
+
+
+                                                <span>Master</span>
+                                            }
+                                            else
+                                            {
+                                                <span>Provider</span>
+                                            }
+                                        </dd>
+                                        <dt class="col-sm-2">
                                             @Html.DisplayNameFor(model => model.Training.Address)
                                         </dt>
                                         <dd class="col-sm-10">
@@ -97,7 +127,7 @@
                                             @Html.DisplayNameFor(model => model.Training.State)
                                         </dt>
                                         <dd class="col-sm-10">
-                                            @Html.DisplayFor(model => model.Training.State)
+                                            @Html.DisplayFor(model => model.Training.State) (@Model.Training.StateCode)
                                         </dd>
 
                                         <dt class="col-sm-2">
@@ -205,84 +235,84 @@
                                             ////
 
                                             @*<dt class="col-sm-2">
-                                                @Html.DisplayNameFor(model => model.Training.CertificateUseRightSidePhysicalSignature)
-                                            </dt>
-                                            <dd class="col-sm-10">
-                                                @Html.DisplayFor(model => model.Training.CertificateUseRightSidePhysicalSignature)
-                                            </dd>
+                                                    @Html.DisplayNameFor(model => model.Training.CertificateUseRightSidePhysicalSignature)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.Training.CertificateUseRightSidePhysicalSignature)
+                                                </dd>
 
-                                            <dt class="col-sm-2">
-                                                @Html.DisplayNameFor(model => model.Training.CertificateRightSideSignatureUrl)
-                                            </dt>
-                                            <dd class="col-sm-10">
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.Training.CertificateRightSideSignatureUrl)
+                                                </dt>
+                                                <dd class="col-sm-10">
 
-                                                <img src="@Model.Training.CertificateRightSideSignatureUrl" style="max-height:200px;" />
+                                                    <img src="@Model.Training.CertificateRightSideSignatureUrl" style="max-height:200px;" />
 
-                                            </dd>
-
-
-
-                                            <dt class="col-sm-2">
-                                                @Html.DisplayNameFor(model => model.Training.CertificateRightSideName)
-                                            </dt>
-                                            <dd class="col-sm-10">
-                                                @Html.DisplayFor(model => model.Training.CertificateRightSideName)
-                                            </dd>
-
-                                            <dt class="col-sm-2">
-                                                @Html.DisplayNameFor(model => model.Training.CertificateRightSideOfficePosition)
-                                            </dt>
-                                            <dd class="col-sm-10">
-                                                @Html.DisplayFor(model => model.Training.CertificateRightSideOfficePosition)
-                                            </dd>
-
-                                            <dt class="col-sm-2">
-                                                @Html.DisplayNameFor(model => model.Training.CertificateRightSideOfficeTitle)
-                                            </dt>
-                                            <dd class="col-sm-10">
-                                                @Html.DisplayFor(model => model.Training.CertificateRightSideOfficeTitle)
-                                            </dd>
-
-                                            <dt class="col-sm-2">
-                                                @Html.DisplayNameFor(model => model.Training.CertificateUseLeftSidePhysicalSignature)
-                                            </dt>
-                                            <dd class="col-sm-10">
-                                                @Html.DisplayFor(model => model.Training.CertificateUseLeftSidePhysicalSignature)
-                                            </dd>
-
-                                            <dt class="col-sm-2">
-                                                @Html.DisplayNameFor(model => model.Training.CertificateLeftSideSignatureUrl)
-                                            </dt>
-                                            <dd class="col-sm-10">
-
-                                                <img src="@Model.Training.CertificateLeftSideSignatureUrl" style="max-height:200px;" />
-
-                                            </dd>
+                                                </dd>
 
 
 
-                                            <dt class="col-sm-2">
-                                                @Html.DisplayNameFor(model => model.Training.CertificateLeftSideName)
-                                            </dt>
-                                            <dd class="col-sm-10">
-                                                @Html.DisplayFor(model => model.Training.CertificateLeftSideName)
-                                            </dd>
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.Training.CertificateRightSideName)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.Training.CertificateRightSideName)
+                                                </dd>
 
-                                            <dt class="col-sm-2">
-                                                @Html.DisplayNameFor(model => model.Training.CertificateLeftSideOfficePosition)
-                                            </dt>
-                                            <dd class="col-sm-10">
-                                                @Html.DisplayFor(model => model.Training.CertificateLeftSideOfficePosition)
-                                            </dd>
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.Training.CertificateRightSideOfficePosition)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.Training.CertificateRightSideOfficePosition)
+                                                </dd>
 
-                                            <dt class="col-sm-2">
-                                                @Html.DisplayNameFor(model => model.Training.CertificateLeftSideOfficeTitle)
-                                            </dt>
-                                            <dd class="col-sm-10">
-                                                @Html.DisplayFor(model => model.Training.CertificateLeftSideOfficeTitle)
-                                            </dd>*@
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.Training.CertificateRightSideOfficeTitle)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.Training.CertificateRightSideOfficeTitle)
+                                                </dd>
 
-                                           
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.Training.CertificateUseLeftSidePhysicalSignature)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.Training.CertificateUseLeftSidePhysicalSignature)
+                                                </dd>
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.Training.CertificateLeftSideSignatureUrl)
+                                                </dt>
+                                                <dd class="col-sm-10">
+
+                                                    <img src="@Model.Training.CertificateLeftSideSignatureUrl" style="max-height:200px;" />
+
+                                                </dd>
+
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.Training.CertificateLeftSideName)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.Training.CertificateLeftSideName)
+                                                </dd>
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.Training.CertificateLeftSideOfficePosition)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.Training.CertificateLeftSideOfficePosition)
+                                                </dd>
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.Training.CertificateLeftSideOfficeTitle)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.Training.CertificateLeftSideOfficeTitle)
+                                                </dd>*@
+
+
                                             <dt class="col-sm-2">
                                                 @Html.DisplayNameFor(model => model.Training.CertificateCourseTitle)
                                             </dt>

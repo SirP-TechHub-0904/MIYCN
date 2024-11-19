@@ -13,7 +13,7 @@ namespace Domain.Models
         public string Title { get; set; }
         public string Abbreviation { get; set; }
         public string Description { get; set; }
-
+        
 
         [Display(Name = "Certificate Initial")]
         public string? CertificateInitial { get; set; }

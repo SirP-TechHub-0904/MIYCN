@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -181,7 +182,9 @@ namespace Infrastructure.Repositories
             Sponsors = x.Sponsors.Count(),
             TrainingFacilitators = x.TrainingFacilitators.Count(),
             TrainingParticipants = x.TrainingParticipants.Where(x => x.ParticipantTrainingStatus == EnumStatus.ParticipantTrainingStatus.Active).Count(),
-
+            StateCode = x.StateCode,
+            IsFederal = x.IsFederal,
+            IsMaster = x.IsMaster,
             DialyActivities = x.DialyActivities.Count(),
             TestCategory = x.TestCategory.Count(),
 
@@ -466,5 +469,68 @@ namespace Infrastructure.Repositories
                 .Include(x=>x.TrainingCategory).FirstOrDefaultAsync(x=>x.Id == id);
             return data;
         }
+
+        public async Task AddTraning(Training model)
+        {
+            var getstates = await _context.StatesAndAbbreviations.FirstOrDefaultAsync(x=>x.State.ToLower() == model.State.ToLower());
+            if (getstates != null) {
+                model.StateCode = getstates.Abbreviation;
+            }
+
+
+            _context.Trainings.Add(model);
+            await _context.SaveChangesAsync(); 
+        }
+
+        public async Task UpdateTraning(Training model)
+        {
+
+            
+
+
+            var getstates = await _context.StatesAndAbbreviations.FirstOrDefaultAsync(x => x.State.ToLower() == model.State.ToLower());
+            if (getstates != null)
+            {
+                model.StateCode = getstates.Abbreviation;
+            }
+
+
+            _context.Trainings.Update(model);
+            await _context.SaveChangesAsync();
+
+            await UpdateAllTrainings();
+        }
+
+        public async Task UpdateAllTrainings()
+        {
+            // Fetch all trainings where StateCode is null or empty
+            var trainings = await _context.Trainings
+                .Where(t => string.IsNullOrEmpty(t.StateCode))
+                .ToListAsync();
+
+            if (trainings.Any())
+            {
+                // Fetch all states and abbreviations for reference
+                var statesAndAbbreviations = await _context.StatesAndAbbreviations.ToListAsync();
+
+                foreach (var training in trainings)
+                {
+                    // Find the corresponding abbreviation for the state
+                    var stateInfo = statesAndAbbreviations
+                        .FirstOrDefault(s => s.State.ToLower() == training.State.ToLower());
+
+                    if (stateInfo != null)
+                    {
+                        // Update the StateCode
+                        training.StateCode = stateInfo.Abbreviation;
+                    }
+                }
+
+                // Save all changes at once
+                _context.Trainings.UpdateRange(trainings);
+                await _context.SaveChangesAsync();
+            }
+        }
+
     }
 }

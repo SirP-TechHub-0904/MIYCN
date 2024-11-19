@@ -33,7 +33,7 @@ namespace Application.Commands.TrainingCommand
         public async Task Handle(AddTrainingCommand request, CancellationToken cancellationToken)
         {
 
-            await _trainingRepository.AddAsync(request.Training);
+            await _trainingRepository.AddTraning(request.Training);
 
 
         }

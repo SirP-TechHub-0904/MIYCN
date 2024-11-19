@@ -20,5 +20,9 @@ namespace Domain.Interfaces
         Task RemoveTraining(long id);
         Task<List<Training>> GetAllByCategoryId(string? state, long id = 0);
         Task<List<TrainingDto>> GetTrainingByReportList();
+
+
+        Task AddTraning(Training model);
+        Task UpdateTraning(Training model);
     }
 }

@@ -23,6 +23,16 @@
 
                     </div>
                     <div class="form-group">
+                        <label asp-for="Training.IsFederal" class="control-label"></label>
+                        <input asp-for="Training.IsFederal" />
+                        <span asp-validation-for="Training.IsFederal" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Training.IsMaster" class="control-label"></label>
+                        <input asp-for="Training.IsMaster" />
+                        <span asp-validation-for="Training.IsMaster" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
                         <label asp-for="Training.Title" class="control-label"></label>
                         <input asp-for="Training.Title" class="form-control" id="upper1" oninput="myUppercase('upper1')" />
                         <span asp-validation-for="Training.Title" class="text-danger"></span>
@@ -36,13 +46,53 @@
 
                     <div class="form-group">
                         <label asp-for="Training.State" class="control-label"></label>
-                        <input asp-for="Training.State" class="form-control" />
+                        <select asp-for="Training.State" class="form-control" id="state1" onchange="handleStateLGASelection(this, 'state1', 'lga1')">
+                            <option value="" selected disabled>Select State...</option>
+                            <option value="Abia">Abia</option>
+                            <option value="Adamawa">Adamawa</option>
+                            <option value="AkwaIbom">AkwaIbom</option>
+                            <option value="Anambra">Anambra</option>
+                            <option value="Bauchi">Bauchi</option>
+                            <option value="Bayelsa">Bayelsa</option>
+                            <option value="Benue">Benue</option>
+                            <option value="Borno">Borno</option>
+                            <option value="Cross River">Cross River</option>
+                            <option value="Delta">Delta</option>
+                            <option value="Ebonyi">Ebonyi</option>
+                            <option value="Edo">Edo</option>
+                            <option value="Ekiti">Ekiti</option>
+                            <option value="Enugu">Enugu</option>
+                            <option value="FCT">FCT</option>
+                            <option value="Gombe">Gombe</option>
+                            <option value="Imo">Imo</option>
+                            <option value="Jigawa">Jigawa</option>
+                            <option value="Kaduna">Kaduna</option>
+                            <option value="Kano">Kano</option>
+                            <option value="Katsina">Katsina</option>
+                            <option value="Kebbi">Kebbi</option>
+                            <option value="Kogi">Kogi</option>
+                            <option value="Kwara">Kwara</option>
+                            <option value="Lagos">Lagos</option>
+                            <option value="Nasarawa">Nasarawa</option>
+                            <option value="Niger">Niger</option>
+                            <option value="Ogun">Ogun</option>
+                            <option value="Ondo">Ondo</option>
+                            <option value="Osun">Osun</option>
+                            <option value="Oyo">Oyo</option>
+                            <option value="Plateau">Plateau</option>
+                            <option value="Rivers">Rivers</option>
+                            <option value="Sokoto">Sokoto</option>
+                            <option value="Taraba">Taraba</option>
+                            <option value="Yobe">Yobe</option>
+                            <option value="Zamfara">Zamafara</option>
+                        </select>
                         <span asp-validation-for="Training.State" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Training.LGA" class="control-label"></label>
-                        <input asp-for="Training.LGA" class="form-control" />
-                        <span asp-validation-for="Training.LGA" class="text-danger"></span>
+                        <label asp-for="Training.LGA" class="control-label">LGA (Model.Training.LGA)</label>
+                        <select asp-for="Training.LGA" class="form-control" id="lga1">
+                            <option value="" selected disabled>Select LGA...</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label asp-for="Training.Ward" class="control-label"></label>
@@ -134,71 +184,71 @@
 
 
                         @*<div class="form-group">
-                            <label asp-for="Training.CertificateUseRightSidePhysicalSignature" class="control-label"></label>
-                            <input asp-for="Training.CertificateUseRightSidePhysicalSignature" />
-                            <span asp-validation-for="Training.CertificateUseRightSidePhysicalSignature" class="text-danger"></span>
-                        </div>
-
-                        @if (!String.IsNullOrEmpty(Model.Training.CertificateRightSideSignatureUrl))
-                        {
-                            <div class="form-group">
-                                <label class="control-label">Certificate Right Side Signature Image</label><br />
-                                <img src="@Model.Training.CertificateRightSideSignatureUrl" style="max-height:200px;" />
+                                <label asp-for="Training.CertificateUseRightSidePhysicalSignature" class="control-label"></label>
+                                <input asp-for="Training.CertificateUseRightSidePhysicalSignature" />
+                                <span asp-validation-for="Training.CertificateUseRightSidePhysicalSignature" class="text-danger"></span>
                             </div>
-                        }
-                        <div class="form-group">
-                            <label class="control-label">Upload/Change Certificate Right Side Signature Image</label><br />
-                            <input type="file" class="control-label" asp-for="rightsignaturefile" accept="image/*" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Training.CertificateRightSideName" class="control-label"></label>
-                            <input asp-for="Training.CertificateRightSideName" class="form-control" />
-                            <span asp-validation-for="Training.CertificateRightSideName" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Training.CertificateRightSideOfficePosition" class="control-label"></label>
-                            <input asp-for="Training.CertificateRightSideOfficePosition" class="form-control" />
-                            <span asp-validation-for="Training.CertificateRightSideOfficePosition" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Training.CertificateRightSideOfficeTitle" class="control-label"></label>
-                            <input asp-for="Training.CertificateRightSideOfficeTitle" class="form-control" />
-                            <span asp-validation-for="Training.CertificateRightSideOfficeTitle" class="text-danger"></span>
-                        </div>
 
-                        <div class="form-group">
-                            <label asp-for="Training.CertificateUseLeftSidePhysicalSignature" class="control-label"></label>
-                            <input asp-for="Training.CertificateUseLeftSidePhysicalSignature" />
-                            <span asp-validation-for="Training.CertificateUseLeftSidePhysicalSignature" class="text-danger"></span>
-                        </div>
-
-                        @if (!String.IsNullOrEmpty(Model.Training.CertificateLeftSideSignatureUrl))
-                        {
+                            @if (!String.IsNullOrEmpty(Model.Training.CertificateRightSideSignatureUrl))
+                            {
+                                <div class="form-group">
+                                    <label class="control-label">Certificate Right Side Signature Image</label><br />
+                                    <img src="@Model.Training.CertificateRightSideSignatureUrl" style="max-height:200px;" />
+                                </div>
+                            }
                             <div class="form-group">
-                                <label class="control-label">Certificate Left Side Signature Image</label><br />
-                                <img src="@Model.Training.CertificateLeftSideSignatureUrl" style="max-height:200px;" />
+                                <label class="control-label">Upload/Change Certificate Right Side Signature Image</label><br />
+                                <input type="file" class="control-label" asp-for="rightsignaturefile" accept="image/*" />
                             </div>
-                        }
-                        <div class="form-group">
-                            <label class="control-label">Upload/Change Certificate Left Side Signature Image</label><br />
-                            <input type="file" class="control-label" asp-for="leftsignaturefile" accept="image/*" />
-                        </div>
+                            <div class="form-group">
+                                <label asp-for="Training.CertificateRightSideName" class="control-label"></label>
+                                <input asp-for="Training.CertificateRightSideName" class="form-control" />
+                                <span asp-validation-for="Training.CertificateRightSideName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Training.CertificateRightSideOfficePosition" class="control-label"></label>
+                                <input asp-for="Training.CertificateRightSideOfficePosition" class="form-control" />
+                                <span asp-validation-for="Training.CertificateRightSideOfficePosition" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Training.CertificateRightSideOfficeTitle" class="control-label"></label>
+                                <input asp-for="Training.CertificateRightSideOfficeTitle" class="form-control" />
+                                <span asp-validation-for="Training.CertificateRightSideOfficeTitle" class="text-danger"></span>
+                            </div>
 
-                        <div class="form-group">
-                            <label asp-for="Training.CertificateLeftSideName" class="control-label"></label>
-                            <input asp-for="Training.CertificateLeftSideName" class="form-control" />
-                            <span asp-validation-for="Training.CertificateLeftSideName" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Training.CertificateLeftSideOfficePosition" class="control-label"></label>
-                            <input asp-for="Training.CertificateLeftSideOfficePosition" class="form-control" />
-                            <span asp-validation-for="Training.CertificateLeftSideOfficePosition" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Training.CertificateLeftSideOfficeTitle" class="control-label"></label>
-                            <input asp-for="Training.CertificateLeftSideOfficeTitle" class="form-control" />
-                            <span asp-validation-for="Training.CertificateLeftSideOfficeTitle" class="text-danger"></span>
-                        </div>*@
+                            <div class="form-group">
+                                <label asp-for="Training.CertificateUseLeftSidePhysicalSignature" class="control-label"></label>
+                                <input asp-for="Training.CertificateUseLeftSidePhysicalSignature" />
+                                <span asp-validation-for="Training.CertificateUseLeftSidePhysicalSignature" class="text-danger"></span>
+                            </div>
+
+                            @if (!String.IsNullOrEmpty(Model.Training.CertificateLeftSideSignatureUrl))
+                            {
+                                <div class="form-group">
+                                    <label class="control-label">Certificate Left Side Signature Image</label><br />
+                                    <img src="@Model.Training.CertificateLeftSideSignatureUrl" style="max-height:200px;" />
+                                </div>
+                            }
+                            <div class="form-group">
+                                <label class="control-label">Upload/Change Certificate Left Side Signature Image</label><br />
+                                <input type="file" class="control-label" asp-for="leftsignaturefile" accept="image/*" />
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Training.CertificateLeftSideName" class="control-label"></label>
+                                <input asp-for="Training.CertificateLeftSideName" class="form-control" />
+                                <span asp-validation-for="Training.CertificateLeftSideName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Training.CertificateLeftSideOfficePosition" class="control-label"></label>
+                                <input asp-for="Training.CertificateLeftSideOfficePosition" class="form-control" />
+                                <span asp-validation-for="Training.CertificateLeftSideOfficePosition" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Training.CertificateLeftSideOfficeTitle" class="control-label"></label>
+                                <input asp-for="Training.CertificateLeftSideOfficeTitle" class="form-control" />
+                                <span asp-validation-for="Training.CertificateLeftSideOfficeTitle" class="text-danger"></span>
+                            </div>*@
                         <div class="form-group">
                             <label asp-for="Training.CertificateTitle" class="control-label"></label>
                             <input asp-for="Training.CertificateTitle" class="form-control" />
@@ -271,4 +321,6 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
+    <script src="~/js/lga.js"></script>
 }

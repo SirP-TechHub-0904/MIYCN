@@ -122,5 +122,12 @@ namespace Domain.DTOs
         public ICollection<Sponsor> SponsorsList { get; set; }
         public ICollection<TrainingFacilitator> TrainingFacilitatorsList { get; set; }
         public ICollection<TrainingParticipant> TrainingParticipantsList { get; set; }
+
+        [Display(Name = "State Code")]
+
+        public string? StateCode { get; set; }
+        public bool IsFederal { get; set; } = false;
+        public bool IsMaster { get; set; } = false;
+
     }
 }

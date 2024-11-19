@@ -48,7 +48,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
                 UpdateTrainingCommand Command = new UpdateTrainingCommand(Training, leftsignaturefile, rightsignaturefile);
                 await _mediator.Send(Command);
                 TempData["success"] = "Success";
-                return RedirectToPage("./Index", new { Training.TrainingCategoryId });
+                return RedirectToPage("./Info", new { Training.Id });
             }
             catch (Exception ex)
             {

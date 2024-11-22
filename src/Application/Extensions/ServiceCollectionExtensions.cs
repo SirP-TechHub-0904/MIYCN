@@ -60,6 +60,8 @@ namespace Application.Extensions
             services.AddTransient<ISupervisorSectionRepository, SupervisorSectionRepository>();
             services.AddTransient<ISupervisorSectionQuestionRepository, SupervisorSectionQuestionRepository>();
             services.AddTransient<ISupervisorTrainingFormRepository, SupervisorTrainingFormRepository>();
+            services.AddTransient<IProviderRepository, ProviderRepository>();
+            services.AddTransient<IBatchRepository, BatchRepository>();
 
             services.Configure<IdentityOptions>(options =>
             {

@@ -1,4 +1,6 @@
 using Application.Commands.TrainingCommand;
+using Application.Queries.BatchQueries;
+using Application.Queries.ProviderQueries;
 using Application.Queries.TrainingCategoryQueries;
 using Application.Queries.TrainingQueries;
 using Domain.Models;
@@ -39,6 +41,18 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
            var CategoryTraining = await _mediator.Send(ListCommand);
 
             ViewData["TrainingCategoryId"] = new SelectList(CategoryTraining, "Id", "Title");
+
+
+            ListBatchQuery ListBatchCommand = new ListBatchQuery();
+            var Batches = await _mediator.Send(ListBatchCommand);
+
+            ViewData["BatchId"] = new SelectList(Batches, "Id", "Title");
+
+
+            ListProviderQuery ListProviderCommand = new ListProviderQuery();
+            var Providers = await _mediator.Send(ListProviderCommand);
+
+            ViewData["ProviderId"] = new SelectList(Providers, "Id", "Title");
             return Page();
         }
         public async Task<IActionResult> OnPostAsync()

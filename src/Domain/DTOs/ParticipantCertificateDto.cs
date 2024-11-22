@@ -20,6 +20,8 @@ namespace Domain.DTOs
         public string SignOutAttendancePresent { get; set; }
         public string SignOutAttendanceAbsent { get; set; }
 
+        public bool PretestPass { get; set; }
+        public bool PosttestPass { get; set; }
         public bool AddedToCertificate { get; set; }
     }
 }

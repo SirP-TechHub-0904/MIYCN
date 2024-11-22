@@ -17,7 +17,7 @@
     <!-- Add any additional meta tags, stylesheets, or scripts here -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
-        @@font-face {
+    /*    @@font-face {
             font-family: 'Open Sans';
             font-style: normal;
             font-weight: 400;
@@ -40,7 +40,7 @@
         }
 
         @@import url('https://fonts.googleapis.com/css2?family=Berlin+Sans&display=swap');
-
+*/
         .cursive {
             font-family: 'Pinyon Script', cursive;
         }
@@ -76,7 +76,7 @@
             width: 100%;
         }
 
-       
+
 
         .pm-certificate-container {
             /*position: relative;
@@ -287,6 +287,7 @@
                 top: 10px;
                 left: 10px;
             }
+
         .pm-certificate-border-2 {
             width: calc(100% - 40px);
             height: calc(100% - 40px);
@@ -313,13 +314,22 @@
     <!-- Use stable versions of html2canvas and jsPDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pinyon+Script&display=swap">
+  
+    <style>
+
+        .dancing-script-1 {
+            font-family: "Allura", cursive;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
+
 
 </head>
 <body>
     <div id="certificateContent" class="container pm-certificate-container">
         @*<div class="outer-border"></div>
-        <div class="inner-border"></div>*@
+            <div class="inner-border"></div>*@
 
         <div class="pm-certificate-border col-xs-12">
             <div class="pm-certificate-border-2">
@@ -332,14 +342,16 @@
                 @*<img src="@Model.Certificate.PassportUrl" style="height: 170px; float: right !important; margin-right: 106px; border: 2px solid black;" class="img-fluid" />*@
                 <img src="data:image/jpeg;base64,@Model.PassportBase" style="height: 150px; float: right !important; margin-right: 40px; border: 2px solid black;" class="img-fluid" />
 
-                <div class="row pm-certificate-body" style="margin:40px;">
+                <div class="row pm-certificate-body" style="margin:0px;">
 
                     <div class="pm-certificate-block">
                         <div class="">
                             <div class="">
                                 <div class=""><!-- LEAVE EMPTY font-family: math;--></div>
                                 <div class="pm-certificate-name margin-0 text-center">
-                                    <span class="pm-name-text bold" style="font-size: 30px; font-weight: 900; font-family: 'Berlin Sans', sans-serif; text-transform: uppercase; ">Certificate of Participation</span>
+                                    <img src="data:image/jpeg;base64,@Model.CertificateUrl" style="height: 100px; margin-bottom: 20px;" />
+
+                                    @*<span class="pm-name-text bold dancing-script-1" style="text-transform: uppercase; ">Certificate</span>*@
                                     <br />
                                     <span style="text-align:center;">This is to certify that</span>
                                 </div>
@@ -367,15 +379,17 @@
 
 
                         <div class="">
-                            <div class="" style="margin-top:30px;">
+                            <div class="" style="margin-top:80px;">
                                 <div class="text-center">
-                                    <span class="pm-earned-text block" style="font-family: auto; font-size: 18px; ">
-                                        has successfully completed the full <span style="font-weight:800;color:green;">
+                                    <span class="pm-earned-text block" style="font-family: auto; font-size: 18px;">
+                                        has successfully completed the full
+                                        <span style="font-weight:800;color:green;">
                                             @Model.Training.CertificateCourseTitle
-                                        </span> on <span style="font-weight:800;color:green;">
-                                            @Model.Setting.CertificateTitle
                                         </span>
                                     </span>
+                                    <div style="font-family: auto; font-size: 18px;  margin-top: 4px;">
+                                        on <span style=" color: green;font-weight:800;">@Model.Setting.CertificateTitle</span> 
+                                    </div>
                                 </div>
 
                             </div>
@@ -383,7 +397,7 @@
 
                         <div class="  text-center" style=" margin-top: 5px;">
                             <div class="row text-center">
-                                <div class="pm-course-title   text-center" style="margin-bottom: 20px;">
+                                <div class="pm-course-title   text-center" style="margin-bottom: 0px;">
                                     <h6><span style="border-bottom:none;font-size:17px;">held at </span></h6>
                                     <span class="pm-credits-text block bold sans">
 
@@ -393,21 +407,21 @@
                                 </div>
                             </div>
 
-                            <span style="margin-top:15px;">
+                            <span style="margin-top: 15px; font-size: 13px;">
                                 @Model.Training.CertificateDate
                             </span>
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                .
+                                
                             </div>
                         </div>
                     </div>
 
                     <div class="clearfix"></div>
-                    <div class="col-xs-12" style="margin-top: 10px;">
+                    <div class="col-xs-12" style="margin-top: 5px;">
                         <div class="row">
-                            <div class="pm-certificate-footer" style="margin-top: 40px;">
+                            <div class="pm-certificate-footer" style="margin-top: 30px;">
                                 <div class="col-xs-4 pm-certified col-xs-4 text-center">
                                     <span class="underline">
                                         @if (Model.Setting.CertificateUseLeftSidePhysicalSignature == true)
@@ -802,6 +816,7 @@
             border-bottom: 1px solid #777 !important;
             padding: 5px;
         }
+
         .pm-certificate-border-2 {
             width: calc(100% - 40px);
             height: calc(100% - 40px);
@@ -812,6 +827,7 @@
             top: 20px;
             left: 20px;
         }
+
         @@media print {
             .pm-certificate-container {
                 background-color: #248000 !important; /* Use !important to override any conflicting styles */

@@ -30,6 +30,10 @@ namespace Domain.Models
         public long? TrainingCategoryId  { get; set; }
         public TrainingCategory TrainingCategory { get; set; }
 
+        public long? BatchId { get; set; }
+        public Batch Batch { get; set; }
+        public long? ProviderId { get; set; }
+        public Provider Provider { get; set; }
         public ICollection<Sponsor> Sponsors { get; set; }
         public ICollection<TrainingFacilitator> TrainingFacilitators { get; set; }
         public ICollection<TrainingParticipant> TrainingParticipants { get; set; }

@@ -36,9 +36,9 @@ namespace Domain.Models
         public Training Training { get; set; }
 
         public CertificateStatus CertificateStatus { get; set; }
-
+        public string? FederalorState { get; set; }
         public int SectionNumber { get; set; }
         public int GeneralNumber { get; set; }
-        public string? CategoryNumberOnCertificate { get; set; }
+        public int CategoryNumberOnCertificate { get; set; }
     }
 }

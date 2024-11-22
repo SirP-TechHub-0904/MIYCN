@@ -1,10 +1,13 @@
 using Application.Commands.IdentityCommand;
 using Application.Commands.TrainingCommand;
+using Application.Queries.BatchQueries;
+using Application.Queries.ProviderQueries;
 using Application.Queries.TrainingCategoryQueries;
 using Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RazorWebUI.Areas.ITrainings.Pages.Admin
 {
@@ -33,6 +36,18 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
                 return RedirectToPage("./Index");
             }
            CategoryId = result.Id;
+
+            ListBatchQuery ListBatchCommand = new ListBatchQuery();
+            var Batches = await _mediator.Send(ListBatchCommand);
+
+            ViewData["BatchId"] = new SelectList(Batches, "Id", "Title");
+
+
+
+            ListProviderQuery ListProviderCommand = new ListProviderQuery();
+            var Providers = await _mediator.Send(ListProviderCommand);
+
+            ViewData["ProviderId"] = new SelectList(Providers, "Id", "Title");
             return Page();
         }
         public async Task<IActionResult> OnPostAsync()

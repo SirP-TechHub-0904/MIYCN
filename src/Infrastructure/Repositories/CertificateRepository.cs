@@ -41,43 +41,55 @@ namespace Infrastructure.Repositories
             }
 
             // A dictionary to keep track of last SectionNumbers per CategoryNumberOnCertificate
-            Dictionary<string, int> lastSectionNumbers = new Dictionary<string, int>();
+            Dictionary<string, int> lastRegNumbers = new Dictionary<string, int>();
             foreach (var (trainingId, certificateType, userId) in certificateData)
             {
                 //
                 //string CategoryNumberOnCertificate = "";
                 string Year = "";
-                var getTraining = await _context.TrainingParticipants.Include(x => x.Training).FirstOrDefaultAsync(x => x.TrainingId == trainingId && x.UserId == userId);
+                var getTraining = await _context.TrainingParticipants
+                    .Include(x => x.Training).ThenInclude(x => x.Provider)
+                    .Include(x => x.Training).ThenInclude(x => x.Batch)
+
+
+                    .FirstOrDefaultAsync(x => x.TrainingId == trainingId && x.UserId == userId);
                 if (getTraining != null)
                 {
 
-                    Year = getTraining.Training.StartDate.ToString("yyyy");
+                    Year = getTraining.Training.StartDate.ToString("yy");
                     //var categoryNumber = await _context.TrainingCategories.FirstOrDefaultAsync(x => x.Id == getTrainingCategory.Training.TrainingCategoryId);
                     //if (categoryNumber != null)
                     //{
                     //    CategoryNumberOnCertificate = categoryNumber.CertificateInitial;
                     //}
                 }
-                string FederalorState = "";
-                if(getTraining.Training.IsFederal == true)
-                {
-                    FederalorState = "F";
-                }
-                else
-                {
-                    FederalorState = getTraining.Training.StateCode;
-                }
-                string MasterOrProvider = "";
-                if (getTraining.Training.IsMaster == true)
-                {
-                    MasterOrProvider = "M";
-                }
-                else
-                {
-                    MasterOrProvider = "P";
-                }
+                //string FederalorState = "";
+                //if(getTraining.Training.IsFederal == true)
+                //{
+                //    FederalorState = "F";
+                //}
+                //else
+                //{
+                //    FederalorState = getTraining.Training.StateCode;
+                //}
+                //string MasterOrProvider = "";
+                //if (getTraining.Training.Provider != null)
+                //{
+                //     MasterOrProvider = getTraining.Training.Provider.Abbreviation ?? "";
+
+                //}
+                //string BatchNumber = "";
+                //if (getTraining.Training.Batch != null)
+                //{
+                //      BatchNumber = getTraining.Training.Batch.Title ?? "00";
+                //}
+
+                string FederalorState = getTraining.Training.IsFederal ? "F" : getTraining.Training.StateCode;
+                string MasterOrProvider = getTraining.Training.Provider?.Abbreviation ?? "";
+                string BatchNumber = getTraining.Training.Batch?.Title ?? "00";
+
+
                 GenTrainingId = trainingId;
-                int CategoryNumber = 0;
                 int GeneralNumber = 0;
                 // Retrieve the Certificates record by its ID
                 var usercert = await _context.Certificates.FirstOrDefaultAsync(x => x.TrainingId == trainingId && x.UserId == userId && x.CertificateType == certificateType);
@@ -90,45 +102,43 @@ namespace Infrastructure.Repositories
                         // Update GeneralNumber
                         lastGeneralNumber++;
                         GeneralNumber = lastGeneralNumber;
-
+                        //int CategoryNumberOnCertificate = 0;
                         // Update SectionNumber
-                        int lastSectionNumber = 0;
-                        //if (!string.IsNullOrEmpty(CategoryNumberOnCertificate))
-                        //{
-                        //    if (!lastSectionNumbers.ContainsKey(CategoryNumberOnCertificate))
-                        //    {
-                        //        // Get the last SectionNumber for this CategoryNumberOnCertificate
-                        //        var lastCertInCategory = await _context.Certificates
-                        //            .Where(c => c.CategoryNumberOnCertificate == CategoryNumberOnCertificate)
-                        //            .OrderByDescending(c => c.SectionNumber)
-                        //            .FirstOrDefaultAsync();
-                        //        if (lastCertInCategory != null)
-                        //        {
-                        //            lastSectionNumber = lastCertInCategory.SectionNumber;
-                        //        }
-                        //        lastSectionNumbers[CategoryNumberOnCertificate] = lastSectionNumber;
-                        //    }
 
-                        //    // Increment SectionNumber for this category
-                        //    lastSectionNumbers[CategoryNumberOnCertificate]++;
-                        //    CategoryNumber = lastSectionNumbers[CategoryNumberOnCertificate];
+                        int regNumber = 0;
+                        if (!lastRegNumbers.ContainsKey(FederalorState))
+                        {
+                            // Get the last RegNumber for this FederalorState category
+                            var lastCertInCategory = await _context.Certificates
+                                .Where(c => c.FederalorState == FederalorState)
+                                .OrderByDescending(c => c.SectionNumber)
+                                .FirstOrDefaultAsync();
 
-
-                            // add the Certificates
-                            Certificate cert = new Certificate();
-                            cert.TrainingId = trainingId;
-                            cert.UserId = userId;
-                            cert.FullName = user.FullnameX;
-                            cert.PassportUrl = user.PassportFilePathUrl;
-                            cert.IssuerDate = DateTime.UtcNow.AddHours(1);
-                            cert.CertificateStatus = CertificateStatus.Preview;
-                            cert.CertificateType = certificateType;
-                            cert.SectionNumber = CategoryNumber;
-                            cert.GeneralNumber = GeneralNumber;
-                            cert.CategoryNumberOnCertificate = "";
-                            cert.CerificateNumber = $"{FederalorState}MIYCN{MasterOrProvider}{getTraining.TrainingId.ToString("D3")}{Year}/{GeneralNumber.ToString("D6")}";
-                            _context.Certificates.Add(cert);
+                            regNumber = lastCertInCategory?.SectionNumber ?? 0;
+                            lastRegNumbers[FederalorState] = regNumber;
+                        }
                         
+                        // Increment RegNumber for this FederalorState
+                        lastRegNumbers[FederalorState]++;
+                        regNumber = lastRegNumbers[FederalorState];
+
+
+
+                        // add the Certificates
+                        Certificate cert = new Certificate();
+                        cert.TrainingId = trainingId;
+                        cert.UserId = userId;
+                        cert.FullName = user.FullnameX;
+                        cert.PassportUrl = user.PassportFilePathUrl;
+                        cert.IssuerDate = DateTime.UtcNow.AddHours(1);
+                        cert.CertificateStatus = CertificateStatus.Preview;
+                        cert.CertificateType = certificateType;
+                        cert.SectionNumber = regNumber;
+                        cert.FederalorState = FederalorState;
+                        cert.GeneralNumber = GeneralNumber;
+                        cert.CerificateNumber = $"{FederalorState}MIYCN{MasterOrProvider}{BatchNumber}{regNumber.ToString("D4")}{GeneralNumber.ToString("D7")}{Year}";
+                        _context.Certificates.Add(cert);
+
                     }
                 }
                 else
@@ -171,7 +181,8 @@ namespace Infrastructure.Repositories
         {
             var participants = await _context.TrainingParticipants
                 .Include(p => p.User)
-                .Where(p => p.TrainingId == trainingId).Where(tp => tp.ParticipantTrainingStatus == EnumStatus.ParticipantTrainingStatus.Active)
+                .Where(p => p.TrainingId == trainingId)
+                .Where(tp => tp.ParticipantTrainingStatus == EnumStatus.ParticipantTrainingStatus.Active)
                 .ToListAsync();
 
             var participantCertificates = new List<ParticipantCertificateDto>();
@@ -185,16 +196,25 @@ namespace Infrastructure.Repositories
                     .Include(x => x.DialyActivity)
                     .Where(a => a.UserId == participant.UserId && a.DialyActivity.TrainingId == trainingId)
                     .ToListAsync();
-                bool AddedForCert = false;
-                var usercert = await _context.Certificates.FirstOrDefaultAsync(x => x.TrainingId == trainingId && x.UserId == participant.UserId && x.CertificateType == CertificateType.Participant);
-                if (usercert != null)
-                {
-                    AddedForCert = true;
-                }
-                var signInPresent = attendance.Where(x => x.AttendanceSignInStatus == AttendanceSignInStatus.Present).Count();
-                var signInAbsent = attendance.Where(x => x.AttendanceSignInStatus == AttendanceSignInStatus.Absent).Count();
-                var signOutPresent = attendance.Where(x => x.AttendanceSignOutStatus == AttendanceSignOutStatus.Present).Count();
-                var signOutAbsent = attendance.Where(x => x.AttendanceSignOutStatus == AttendanceSignOutStatus.Present).Count();
+
+                bool addedForCert = await _context.Certificates
+                    .AnyAsync(x => x.TrainingId == trainingId && x.UserId == participant.UserId && x.CertificateType == CertificateType.Participant);
+
+                var signInPresent = attendance.Count(x => x.AttendanceSignInStatus == AttendanceSignInStatus.Present);
+                var signInAbsent = attendance.Count(x => x.AttendanceSignInStatus == AttendanceSignInStatus.Absent);
+                var signOutPresent = attendance.Count(x => x.AttendanceSignOutStatus == AttendanceSignOutStatus.Present);
+                var signOutAbsent = attendance.Count(x => x.AttendanceSignOutStatus == AttendanceSignOutStatus.Absent);
+
+                // Determine if Pre-Test and Post-Test scores are a pass
+                bool pretestPass = pretestResult != null &&
+                                   !string.IsNullOrEmpty(pretestResult.PercentageResult) &&
+                                   int.TryParse(pretestResult.PercentageResult.Replace("%", ""), out var preScore) &&
+                                   preScore >= 70;
+
+                bool posttestPass = posttestResult != null &&
+                                    !string.IsNullOrEmpty(posttestResult.PercentageResult) &&
+                                    int.TryParse(posttestResult.PercentageResult.Replace("%", ""), out var postScore) &&
+                                    postScore >= 70;
 
                 var certificateDto = new ParticipantCertificateDto
                 {
@@ -203,19 +223,26 @@ namespace Infrastructure.Repositories
                     Email = participant.User.Email,
                     Fullname = participant.User.FullnameX,
                     Phone = participant.User.PhoneNumber,
-                    PretestScore = pretestResult != null ? pretestResult.PercentageResult : "0%",
-                    PostestScore = posttestResult != null ? posttestResult.PercentageResult : "0%",
+                    PretestScore = pretestResult?.PercentageResult ?? "0%",
+                    PostestScore = posttestResult?.PercentageResult ?? "0%",
                     SignInAttendancePresent = signInPresent.ToString(),
                     SignInAttendanceAbsent = signInAbsent.ToString(),
                     SignOutAttendancePresent = signOutPresent.ToString(),
                     SignOutAttendanceAbsent = signOutAbsent.ToString(),
-                    AddedToCertificate = AddedForCert
+                    AddedToCertificate = addedForCert,
+                    PretestPass = pretestPass,
+                    PosttestPass = posttestPass
                 };
 
                 participantCertificates.Add(certificateDto);
             }
 
-            return participantCertificates;
+            // Sort participants by PosttestScore in descending order, handling numeric scores properly
+            var sortedCertificates = participantCertificates
+                .OrderByDescending(c => int.TryParse(c.PostestScore.Replace("%", ""), out var score) ? score : 0)
+                .ToList();
+
+            return sortedCertificates;
         }
 
     }

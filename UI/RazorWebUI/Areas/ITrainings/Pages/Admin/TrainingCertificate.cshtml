@@ -10,6 +10,7 @@
         </h3>
 
         <a asp-page="./ParticipantCertificate" asp-route-id="@Model.Training.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">Comfirm Participants for Certificate</a>
+        <a class="btn bg-gradient-success btn-sm" style="float:right;">Total Certifiicate (@Model.Certificate.Count())</a>
 
     </div>
     @if (TempData["response"] != null)

@@ -39,6 +39,12 @@
                                 Category
                             </th>
                             <th>
+                                Batch
+                            </th>
+                            <th>
+                                Provider
+                            </th>
+                            <th>
                                 Title
                             </th>
 
@@ -71,6 +77,12 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.TrainingCategory.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Batch.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Provider.Title)
                                 </td>
                                 <td>
                                     <a asp-page="./Info" asp-route-id="@item.Id">

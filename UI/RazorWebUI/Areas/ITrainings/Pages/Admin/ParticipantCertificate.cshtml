@@ -9,6 +9,9 @@
             @Model.Training.EndDate.ToString("ddd dd MMM, yyyy"))
         </h3>
 
+        <a class="btn bg-gradient-danger btn-sm" style="float:right;">Fail (@Model.Datas.Where(x => x.PosttestPass == false).Count())</a>
+        <a class="btn bg-gradient-success btn-sm" style="float:right;">Pass (@Model.Datas.Where(x=>x.PosttestPass == true).Count())</a>
+        <a class="btn bg-gradient-primary btn-sm" style="float:right;">All (@Model.Datas.Count())</a>
 
     </div>
     <!-- /.card-header -->
@@ -29,7 +32,12 @@
                             <th>SignIn (Present/Absent)</th>
                             <th>SignOut (Present/Absent)</th>
 
-                            <th>Activate Certificate</th>
+                            <th>
+                                Activate Certificate
+
+                                <input type="checkbox" id="selectAll" style="width: 20px; height: 20px;" onclick="toggleCheckboxes(this)" /> Select All
+
+                            </th>
 
                         </tr>
                     </thead>
@@ -71,6 +79,8 @@
                                     @Html.DisplayFor(modelItem => item.SignOutAttendanceAbsent)
                                 </td>
                                 <td>
+                                    @if (item.PosttestPass == true)
+                                        {
                                     @if (item.AddedToCertificate == true)
                                     {
 
@@ -79,9 +89,17 @@
                                     }
                                     else
                                     {
-                                        <input type="checkbox" id="@($"CertificateStatus_{item.UserId}")" name="@($"CertificateStatus_{item.UserId}")" class="" style=" width: 20px; height: 20px;" />
+                                        <input type="checkbox" id="@($"CertificateStatus_{item.UserId}")" name="@($"CertificateStatus_{item.UserId}")" class="certificate-checkbox" style=" width: 20px; height: 20px;" />
 
                                     }
+
+
+
+                                    }
+                                        else
+                                        {
+                                            <span>Not Qualified</span>
+                                        }
                                 </td>
 
 
@@ -96,3 +114,19 @@
 
     </form>
 </div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Function to toggle all checkboxes
+        function toggleCheckboxes(source) {
+            const checkboxes = document.querySelectorAll('.certificate-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = source.checked;
+            });
+        }</script>
+}
+

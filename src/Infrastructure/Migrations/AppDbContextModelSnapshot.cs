@@ -270,6 +270,23 @@ namespace Infrastructure.Migrations
                     b.ToTable("Attendances");
                 });
 
+            modelBuilder.Entity("Domain.Models.Batch", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Batches");
+                });
+
             modelBuilder.Entity("Domain.Models.Certificate", b =>
                 {
                     b.Property<long>("Id")
@@ -278,8 +295,8 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("CategoryNumberOnCertificate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CategoryNumberOnCertificate")
+                        .HasColumnType("int");
 
                     b.Property<string>("CerificateNumber")
                         .HasColumnType("nvarchar(max)");
@@ -289,6 +306,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("CertificateType")
                         .HasColumnType("int");
+
+                    b.Property<string>("FederalorState")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
@@ -693,6 +713,27 @@ namespace Infrastructure.Migrations
                     b.ToTable("ProfileCategoryLists");
                 });
 
+            modelBuilder.Entity("Domain.Models.Provider", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Abbreviation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Providers");
+                });
+
             modelBuilder.Entity("Domain.Models.Setting", b =>
                 {
                     b.Property<long>("Id")
@@ -1026,6 +1067,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long?>("BatchId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("CertificateAddress")
                         .HasColumnType("nvarchar(max)");
 
@@ -1112,6 +1156,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("PreTestInstruction")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long?>("ProviderId")
+                        .HasColumnType("bigint");
+
                     b.Property<TimeSpan>("SignInStartTime")
                         .HasColumnType("time");
 
@@ -1149,6 +1196,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BatchId");
+
+                    b.HasIndex("ProviderId");
 
                     b.HasIndex("TrainingCategoryId");
 
@@ -1655,9 +1706,21 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Models.Training", b =>
                 {
+                    b.HasOne("Domain.Models.Batch", "Batch")
+                        .WithMany("Training")
+                        .HasForeignKey("BatchId");
+
+                    b.HasOne("Domain.Models.Provider", "Provider")
+                        .WithMany("Training")
+                        .HasForeignKey("ProviderId");
+
                     b.HasOne("Domain.Models.TrainingCategory", "TrainingCategory")
                         .WithMany("Training")
                         .HasForeignKey("TrainingCategoryId");
+
+                    b.Navigation("Batch");
+
+                    b.Navigation("Provider");
 
                     b.Navigation("TrainingCategory");
                 });
@@ -1772,6 +1835,11 @@ namespace Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.Models.Batch", b =>
+                {
+                    b.Navigation("Training");
+                });
+
             modelBuilder.Entity("Domain.Models.DialyActivity", b =>
                 {
                     b.Navigation("Attendances");
@@ -1785,6 +1853,11 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Models.ProfileCategory", b =>
                 {
                     b.Navigation("ProfileCategoryLists");
+                });
+
+            modelBuilder.Entity("Domain.Models.Provider", b =>
+                {
+                    b.Navigation("Training");
                 });
 
             modelBuilder.Entity("Domain.Models.SupervisorSection", b =>

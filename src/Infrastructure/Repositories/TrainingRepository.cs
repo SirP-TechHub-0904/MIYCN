@@ -35,6 +35,8 @@ namespace Infrastructure.Repositories
         {
             var trainings = await _context.Trainings
                 .Include(x => x.TrainingCategory)
+                .Include(x => x.Batch)
+                .Include(x => x.Provider)
 
                 .ToListAsync();
             if (id > 0)
@@ -156,6 +158,9 @@ namespace Infrastructure.Repositories
         public async Task<TrainingDto> GetTrainingByIdAndCounts(long id)
         {
             var trainingDto = await _context.Trainings
+                .Include(x=>x.TrainingCategory)
+                .Include(x=>x.Batch)
+                .Include(x=>x.Provider)
         .Where(x => x.Id == id)
         .Select(x => new TrainingDto
         {
@@ -163,6 +168,12 @@ namespace Infrastructure.Repositories
             Title = x.Title,
             Address = x.Address,
             State = x.State,
+            Category = x.TrainingCategory.Title ?? "",
+            CategoryId = x.TrainingCategory.Id,
+            Batch = x.Batch.Title ?? "",
+            BatchId = x.BatchId,
+            Provider = x.Provider.Title ?? "",
+            ProviderId = x.ProviderId,
             LGA = x.LGA,
             Ward = x.Ward,
             EnablePostTest = x.EnablePostTest,

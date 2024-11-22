@@ -12,10 +12,11 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
     public class CertificateViewModel : PageModel
     {
         private readonly IMediator _mediator;
-
-        public CertificateViewModel(IMediator mediator)
+        private IWebHostEnvironment _webHostEnvironment;
+        public CertificateViewModel(IMediator mediator, IWebHostEnvironment webHostEnvironment)
         {
             _mediator = mediator;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [BindProperty]
@@ -27,6 +28,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
         public string LeftSignature { get; set; }
         public string RightSignature { get; set; }
         public string BlankUrl { get; set; }
+        public string CertificateUrl { get; set; }
         public async Task<IActionResult> OnGetAsync(long id)
         {
             if (id < 0)
@@ -112,9 +114,30 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
                 // Convert Passport URL to Base64
                 using (var httpClient = new HttpClient())
                 {
-                    var rightUrl = "https://miycnportal.com/img/blanksignature.png"; // Ensure PassportUrl is a valid URL
-                    var imageBytes = await httpClient.GetByteArrayAsync(rightUrl);
+                    var rightUrl = "img/blanksignature.png";
+                    string wwwRootPath = _webHostEnvironment.WebRootPath;
+                    string fullPath = Path.Combine(wwwRootPath, rightUrl);
+                    byte[] imageBytes = await System.IO.File.ReadAllBytesAsync(fullPath);
+                    // Ensure PassportUrl is a valid URL 
                     BlankUrl = Convert.ToBase64String(imageBytes); // Save as Base64 string
+                 }
+            }
+            catch (Exception c)
+            {
+
+            }
+
+            //
+            try
+            {
+                // Convert Passport URL to Base64
+                using (var httpClient = new HttpClient())
+                {
+                     var rightUrl = "img/certgreen.png";
+                    string wwwRootPath = _webHostEnvironment.WebRootPath;
+                    string fullPath = Path.Combine(wwwRootPath, rightUrl);
+                    byte[] imageBytes = await System.IO.File.ReadAllBytesAsync(fullPath);
+                    CertificateUrl = Convert.ToBase64String(imageBytes); // Save as Base64 string
                 }
             }
             catch (Exception c)

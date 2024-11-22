@@ -13,8 +13,12 @@ namespace Domain.DTOs
     {
         public long Id { get; set; }
         public long? CategoryId { get; set; }
+        public long? BatchId { get; set; }
+        public long? ProviderId { get; set; }
         public string? Title { get; set; }
         public string? Category { get; set; }
+        public string? Provider { get; set; }
+        public string? Batch { get; set; }
         public string? CategoryAbbreviation { get; set; }
         public string? Address { get; set; }
         public string? State { get; set; }

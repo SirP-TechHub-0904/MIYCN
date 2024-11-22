@@ -44,5 +44,7 @@ namespace Infrastructure.Context
         public DbSet<SupervisorSection> SupervisorSections { get; set; }
         public DbSet<SupervisorTrainingForm> SupervisorTrainingForms { get; set; }
         public DbSet<StatesAndAbbreviation> StatesAndAbbreviations { get; set; }
+        public DbSet<Batch> Batches { get; set; }
+        public DbSet<Provider> Providers { get; set; }
     }
 }

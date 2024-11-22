@@ -18,15 +18,24 @@
 
                     <input type="hidden" asp-for="Training.TrainingCategoryId" value="@Model.CategoryId" />
                     <div class="form-group">
+                        <label class="control-label">Batch</label>
+                        <select asp-for="Training.BatchId" class="form-control select2 select2-primary js-example-basic-single" data-dropdown-css-class="select2-primary" asp-items="ViewBag.BatchId">
+                            <option value="">Choose</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Update Provider</label>
+                        <select asp-for="Training.ProviderId" class="form-control select2 select2-primary js-example-basic-single" data-dropdown-css-class="select2-primary" asp-items="ViewBag.ProviderId">
+                            <option value="">Choose</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label asp-for="Training.IsFederal" class="control-label"></label>
                         <input asp-for="Training.IsFederal" />
                         <span asp-validation-for="Training.IsFederal" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Training.IsMaster" class="control-label"></label>
-                        <input asp-for="Training.IsMaster" />
-                        <span asp-validation-for="Training.IsMaster" class="text-danger"></span>
-                    </div>
+                   
                     <div class="form-group">
                         <label asp-for="Training.Title" class="control-label"></label>
                         <input asp-for="Training.Title" class="form-control" id="upper1" oninput="myUppercase('upper1')" />

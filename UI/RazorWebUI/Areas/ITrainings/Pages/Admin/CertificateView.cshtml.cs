@@ -29,6 +29,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
         public string RightSignature { get; set; }
         public string BlankUrl { get; set; }
         public string CertificateUrl { get; set; }
+ public string TrainingDate { get; set; }
         public async Task<IActionResult> OnGetAsync(long id)
         {
             if (id < 0)
@@ -41,6 +42,8 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
             {
                 return NotFound();
             }
+
+
             GetSettingQuery yxCommand = new GetSettingQuery();
             Setting = await _mediator.Send(yxCommand);
             //
@@ -144,7 +147,48 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
             {
 
             }
+
+           TrainingDate = FormatDateRangeWithOrdinalSuffixInHtml(Training.StartDate, Training.EndDate);
+
             return Page();
+        }
+
+
+        public static string FormatDateRangeWithOrdinalSuffixInHtml(DateTime start, DateTime end)
+        {
+            // Generate the ordinal suffix with <sup> tags
+            string GetOrdinalSup(int day)
+            {
+                if (day % 100 >= 11 && day % 100 <= 13)
+                    return "<sup>th</sup>";
+                else if (day % 10 == 1)
+                    return "<sup>st</sup>";
+                else if (day % 10 == 2)
+                    return "<sup>nd</sup>";
+                else if (day % 10 == 3)
+                    return "<sup>rd</sup>";
+                else
+                    return "<sup>th</sup>";
+            }
+
+            string startDayFormatted = $"{start.Day}{GetOrdinalSup(start.Day)}";
+            string endDayFormatted = $"{end.Day}{GetOrdinalSup(end.Day)}";
+
+            if (start.Year == end.Year && start.Month == end.Month)
+            {
+                // Same month and year
+                return $"{startDayFormatted} to {endDayFormatted} {start:MMMM}, {start:yyyy}";
+            }
+            else if (start.Year == end.Year)
+            {
+                // Same year, different months
+                return $"{startDayFormatted} {start:MMMM} to {endDayFormatted} {end:MMMM}, {start:yyyy}";
+            }
+            else
+            {
+                // Different years
+                return $"{startDayFormatted} {start:MMMM} {start:yyyy} to {endDayFormatted} {end:MMMM} {end:yyyy}";
+            }
         }
     }
 }

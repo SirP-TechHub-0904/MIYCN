@@ -388,7 +388,7 @@
                                         </span>
                                     </span>
                                     <div style="font-family: auto; font-size: 18px;  margin-top: 4px;">
-                                        on <span style=" color: green;font-weight:800;">@Model.Setting.CertificateTitle</span> 
+                                        on <span style=" color: green;font-weight:800;">@Model.Setting.CertificateTitle</span> held at
                                     </div>
                                 </div>
 
@@ -398,18 +398,15 @@
                         <div class="  text-center" style=" margin-top: 5px;">
                             <div class="row text-center">
                                 <div class="pm-course-title   text-center" style="margin-bottom: 0px;">
-                                    <h6><span style="border-bottom:none;font-size:17px;">held at </span></h6>
+                                    
                                     <span class="pm-credits-text block bold sans">
 
-                                        <span style="padding-left: 100px; padding-right: 100px;font-weight:600; ">@Model.Training.CertificateAddress</span>
+                                        <span style="padding-left: 100px; padding-right: 100px;font-weight:600; ">@Model.Training.CertificateAddress (@Html.Raw(Model.TrainingDate))</span>
                                     </span>
 
                                 </div>
                             </div>
-
-                            <span style="margin-top: 15px; font-size: 13px;">
-                                @Model.Training.CertificateDate
-                            </span>
+                             
                         </div>
                         <div class="row">
                             <div class="col-xs-12">

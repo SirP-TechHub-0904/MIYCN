@@ -84,7 +84,7 @@ namespace Domain.Models
         {
             get
             {
-                return  LastName + " " + MiddleName + " " + FirstName;
+                return FirstName + " " + MiddleName + " " + LastName;
             }
         }
         [Display(Name = "Logs")]

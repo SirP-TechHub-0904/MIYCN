@@ -36,7 +36,8 @@ namespace Application.Queries.IdentityQueries
                 Email = x.Email,
                 Status = x.UserStatus,
                 Id = x.Id,
-                Category = x.Role
+                Category = x.Role,
+                Username = x.UserName,
             });
             return UserDatasList;
         }

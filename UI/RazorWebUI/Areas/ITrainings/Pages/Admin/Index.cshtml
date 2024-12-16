@@ -65,7 +65,7 @@
                         int sn = 0;
                     }
                     <tbody>
-                        @foreach (var item in Model.Datas.OrderByDescending(x => x.StartDate))
+                        @foreach (var item in Model.Datas.OrderBy(x => x.BatchId).OrderByDescending(x=>x.StartDate))
                         {
                             <tr>
 

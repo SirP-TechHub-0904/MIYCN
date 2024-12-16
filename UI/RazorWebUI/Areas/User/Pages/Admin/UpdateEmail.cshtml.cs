@@ -69,6 +69,7 @@ namespace RazorWebUI.Areas.User.Pages.Admin
                 if (cheangeemail.Succeeded)
                 {
                     user.UserName = user.Email;
+                    await _userManager.UpdateAsync(user);
                     TempData["success"] = "Email updated successful";
 
 

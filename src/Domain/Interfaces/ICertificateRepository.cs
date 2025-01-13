@@ -18,5 +18,7 @@ namespace Domain.Interfaces
         Task AddParticipantForCertificate(List<(long trainingId, CertificateType certificateType, string userId)> certificateData);
 
         Task<Certificate> GetCertificateByNumber(string number);
+
+        Task<List<Certificate>> GetAllCert ();
     }
 }

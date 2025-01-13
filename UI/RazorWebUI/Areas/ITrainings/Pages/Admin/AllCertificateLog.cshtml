@@ -1,0 +1,156 @@
+﻿@page
+@model RazorWebUI.Areas.ITrainings.Pages.Admin.AllCertificateLogModel
+@{
+    string title = "";
+    if (!String.IsNullOrEmpty(Model.StatsName))
+    {
+        title = $"FOR {Model.StatsName.ToUpper()} STATE";
+    }
+    ViewData["Title"] = $"COMPREHENSIVE LIST OF PARTICIPANTS CERTIFICATE {title}";
+    ViewBag.isTitle = "yes";
+}
+<div class="card">
+    <div class="card-header no-export">
+        <h3 class="card-title">
+            @if (!String.IsNullOrEmpty(Model.StatsName))
+            {
+                title = $"FOR {Model.StatsName.ToUpper()} STATE";
+            }
+            COMPREHENSIVE LIST OF PARTICIPANTS CERTIFICATE @title
+
+        </h3>
+
+
+    </div>
+    <div class="no-export card-body">
+        <form method="get">
+            <h4>List Certificate By State</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+
+                        <select name="state" class="form-control">
+                            <option value="">Select State...</option>
+                            <option value="Abia">Abia</option>
+                            <option value="Adamawa">Adamawa</option>
+                            <option value="AkwaIbom">AkwaIbom</option>
+                            <option value="Anambra">Anambra</option>
+                            <option value="Bauchi">Bauchi</option>
+                            <option value="Bayelsa">Bayelsa</option>
+                            <option value="Benue">Benue</option>
+                            <option value="Borno">Borno</option>
+                            <option value="Cross River">Cross River</option>
+                            <option value="Delta">Delta</option>
+                            <option value="Ebonyi">Ebonyi</option>
+                            <option value="Edo">Edo</option>
+                            <option value="Ekiti">Ekiti</option>
+                            <option value="Enugu">Enugu</option>
+                            <option value="FCT">FCT</option>
+                            <option value="Gombe">Gombe</option>
+                            <option value="Imo">Imo</option>
+                            <option value="Jigawa">Jigawa</option>
+                            <option value="Kaduna">Kaduna</option>
+                            <option value="Kano">Kano</option>
+                            <option value="Katsina">Katsina</option>
+                            <option value="Kebbi">Kebbi</option>
+                            <option value="Kogi">Kogi</option>
+                            <option value="Kwara">Kwara</option>
+                            <option value="Lagos">Lagos</option>
+                            <option value="Nasarawa">Nasarawa</option>
+                            <option value="Niger">Niger</option>
+                            <option value="Ogun">Ogun</option>
+                            <option value="Ondo">Ondo</option>
+                            <option value="Osun">Osun</option>
+                            <option value="Oyo">Oyo</option>
+                            <option value="Plateau">Plateau</option>
+                            <option value="Rivers">Rivers</option>
+                            <option value="Sokoto">Sokoto</option>
+                            <option value="Taraba">Taraba</option>
+                            <option value="Yobe">Yobe</option>
+                            <option value="Zamfara">Zamafara</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="submit" value="Search" class="btn btn-primary" />
+
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="example-table table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>
+                            Participant Name
+                        </th>
+
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Certificate Number</th>
+                        <th>Status</th>
+                        <th>Sign</th>
+
+                        <th>Date</th>
+                        <th class="no-export"></th>
+
+                    </tr>
+                </thead>
+
+                @{
+                    int sn = 0;
+                }
+                <tbody>
+                    @foreach (var item in Model.Certificate)
+                    {
+                        <tr>
+
+                            <td>
+                                @{
+                                    sn++;
+                                }
+                                @sn
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FullName)
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.PhoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CerificateNumber)
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+
+                            <td>
+                            </td>
+                            <td class="no-export">
+                                <a class="btn btn-primary" asp-page="./CertificateView" asp-route-id="@item.Id">View Certificate</a>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="margin-left: 20px;">Close the Certificate Modification</button>
+
+</div>

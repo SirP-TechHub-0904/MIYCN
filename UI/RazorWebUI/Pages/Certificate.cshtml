@@ -4,5 +4,97 @@
     Layout = null;
 }
 
-<h4>@Model.Certificate.FullName</h4>
-<h6>Valid</h6>
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Verification</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .authentic-badge {
+            color: white;
+            background-color: green;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .certificate-info {
+            /*border: 1px solid #ccc;*/
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+            .certificate-info h5 {
+                font-weight: bold;
+            }
+        .pm-certificate-container .pm-certificate-border .pm-certificate-header {
+            margin-bottom: 10px;
+        }
+
+        .pm-certificate-container .pm-certificate-border .pm-certificate-title {
+            position: relative;
+            top: 40px;
+        }
+
+            .pm-certificate-container .pm-certificate-border .pm-certificate-title h2 {
+                font-size: 34px !important;
+            }
+        .disclaimer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: gray;
+        }
+
+            .disclaimer a {
+                color: red;
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+    <div class="container" style="margin-top:50px;margin-bottom:50px;">
+        <div class="row pm-certificate-header">
+            <div class="pm-certificate-title cursive col-xs-12 text-center" style="margin: 0 auto; text-align: center;">
+                <img src="~/img/arm.png" style="height: 90px; margin: 0 auto; text-align: center;" />
+                <h4 style="font-family: 'Times New Roman', Times, serif; font-weight: 800; font-size: 28px; margin: 0 auto; text-align: center;">Federal Ministry of Health and Social Welfare</h4>
+            </div>
+        </div>
+        <div class="text-center" style="margin:30px;">
+
+            <h2 style="font-weight:900;">Certificate Verification</h2>
+        </div>
+        <div style="margin-top: 20px; box-shadow: 2px 2px 2px 2px #0f421a; border-radius: 10px; border: 1px solid #0f421a; ">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="certificate-info" style="padding-left:50px;">
+                        <h5>Name:</h5>
+                        <p>@Model.Certificate.FullName</p>
+                        <h5>Certificate Number:</h5>
+                        <p>@Model.Certificate.CerificateNumber</p>
+
+                        <h5>Issued Date:</h5>
+                        <p>@Model.Certificate.IssuerDate.ToString("MMMM dd, yyyy")</p>
+
+                        <h5>Passport:</h5>
+                        <img src="@Model.Certificate.PassportUrl" style="height:150px;width:auto;" />
+                    </div>
+                </div>
+                <div class="col-md-4" style="">
+                    <img src="~/img/certbadge.png" style="margin-top:20px;" />
+                </div>
+            </div>
+            <div class="disclaimer text-center">
+                <p>If the details on this page do not align with the certificate in question, please report it as a potential forgery.</p>
+                <p>Contact us at <a href="mailto:miycn@health.gov.ng">miycn@health.gov.ng</a> for assistance.</p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

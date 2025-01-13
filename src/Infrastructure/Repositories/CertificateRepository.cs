@@ -57,32 +57,9 @@ namespace Infrastructure.Repositories
                 {
 
                     Year = getTraining.Training.StartDate.ToString("yy");
-                    //var categoryNumber = await _context.TrainingCategories.FirstOrDefaultAsync(x => x.Id == getTrainingCategory.Training.TrainingCategoryId);
-                    //if (categoryNumber != null)
-                    //{
-                    //    CategoryNumberOnCertificate = categoryNumber.CertificateInitial;
-                    //}
+                  
                 }
-                //string FederalorState = "";
-                //if(getTraining.Training.IsFederal == true)
-                //{
-                //    FederalorState = "F";
-                //}
-                //else
-                //{
-                //    FederalorState = getTraining.Training.StateCode;
-                //}
-                //string MasterOrProvider = "";
-                //if (getTraining.Training.Provider != null)
-                //{
-                //     MasterOrProvider = getTraining.Training.Provider.Abbreviation ?? "";
-
-                //}
-                //string BatchNumber = "";
-                //if (getTraining.Training.Batch != null)
-                //{
-                //      BatchNumber = getTraining.Training.Batch.Title ?? "00";
-                //}
+                
 
                 string FederalorState = getTraining.Training.IsFederal ? "F" : getTraining.Training.StateCode;
                 string MasterOrProvider = getTraining.Training.Provider?.Abbreviation ?? "";
@@ -158,6 +135,15 @@ namespace Infrastructure.Repositories
                 _context.Attach(cert).State = EntityState.Modified;
             }
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Certificate>> GetAllCert()
+        {
+            var list = await _context.Certificates
+                .Include(x=>x.User)
+                .Include(x=>x.Training)
+                .ToListAsync();
+            return list;
         }
 
         public async Task<Certificate> GetCertificateByNumber(string number)

@@ -22,7 +22,7 @@ namespace Application.Queries.CertificationQueries
 
             public async Task<List<Certificate>> Handle(ListCertificateQuery request, CancellationToken cancellationToken)
             {
-                return await _repository.GetAllAsync();
+                return await _repository.GetAllCert();
 
             }
         }

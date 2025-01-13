@@ -44,6 +44,7 @@
                             <th>
                                 Provider
                             </th>
+                            <th>Location</th>
                             <th>
                                 Title
                             </th>
@@ -83,6 +84,18 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Provider.Title)
+                                </td>
+                                <td>
+                                    @if(item.IsFederal == true)
+                {
+
+
+<span>Federal</span>
+}
+else
+                {
+                    <span>State</span>
+                }
                                 </td>
                                 <td>
                                     <a asp-page="./Info" asp-route-id="@item.Id">

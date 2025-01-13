@@ -71,7 +71,7 @@ namespace RazorWebUI.Areas.ITrainings.Pages.Admin
             string userinfo = "";
             try
             {
-               var CertificateLink = "https://miycnportal.com/certificate/" + Certificate.CerificateNumber;
+               var CertificateLink = "https://miycnportal.ng/certificate/" + Certificate.CerificateNumber;
                 System.Drawing.Image img = barcode.Draw(CertificateLink, 100);
 
                 BarcodeImage = AppServices.TurnImageToByteArray(img);
